@@ -6,13 +6,13 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"check": "astro check",
-		"format": "prettier --write .",
+		"types": "astro check",
+		"format:fix": "prettier --write .",
 		"format:check": "prettier --check .",
-		"lint": "pnpm dlx eslint \"src/**\"",
+		"lint:check": "pnpm dlx eslint \"src/**\"",
 		"prepare": "husky",
-		"fix": "pnpm check && pnpm format && pnpm lint",
-		"pre-commit": "pnpm check && pnpm format:check && pnpm lint"
+		"fix": "pnpm types && pnpm format:fix && pnpm lint:check",
+		"check": "pnpm types && pnpm format:check && pnpm lint:check"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
