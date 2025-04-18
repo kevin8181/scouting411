@@ -38,7 +38,6 @@ https://x.com/boyscouts
 https://www.facebook.com/oalodgemaster
 https://x.com/oalodgemaster
 
-
 ## marketing / landing pages
 
 https://www.scouting.org/
