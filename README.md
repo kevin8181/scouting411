@@ -5,8 +5,18 @@ an aggregator of official scouting news, resources, and online tools
 ## scaffolding todo
 
 - github actions ci for linting and formatting
-- precommit hook for linting and formatting
 - frontend framework
+- metadata scraper (https://github.com/BetaHuhn/metadata-scraper, https://github.com/laurengarcia/url-metadata)
+- link quality checker - check for non-200 status codes, redirects, non http, zod string check
+
+link path
+
+1. check if the text is actually a URL (using zod? or a regex)
+2. check if the link passes normalization rules (no http or throw a warning? no query params, %, #? trailing slash? look into link normalization libs)
+3. attempt to fetch the link
+4. throw if a fetch fails or the status code is not 200
+5. parse the page contents with the metadata scraper
+6. combine the scraped tags with the rest of the link object
 
 ## blogs/magazines/feeds
 
@@ -109,6 +119,13 @@ dimensions
   - marketing / landing page
   - reference and guidance
   - tools
+  - email newsletter
 - topic
   - scout shop
   - philmont
+- feed types
+  - rss
+  - facebook
+  - instagram
+  - twitter
+  - youtube
