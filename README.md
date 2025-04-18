@@ -4,11 +4,9 @@ an aggregator of official scouting news, resources, and online tools
 
 ## scaffolding todo
 
-- prettier config file, add prettier script, add CI step
-- eslint, CI
-- tailwind, tailwind prettier
+- github actions ci for linting and formatting
+- precommit hook for linting and formatting
 - frontend framework
-- get dev site up on vercel
 
 ## blogs/magazines/feeds
 
