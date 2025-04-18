@@ -1,7 +1,15 @@
 ---
 import UiLayout from "@/layouts/UiLayout.astro";
+
+import { linksConfig } from "@/lib/links/data/links";
 ---
 
 <UiLayout>
-	<h1>Hello, world!</h1>
+	<div class="flex flex-col gap-2">
+		{
+			linksConfig.map((linkConfig) => {
+				return <a href={linkConfig.url}>{linkConfig.url}</a>;
+			})
+		}
+	</div>
 </UiLayout>
