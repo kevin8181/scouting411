@@ -6,7 +6,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"types": "astro check",
+		"types": "astro check --minimumFailingSeverity hint",
 		"format:fix": "prettier --write .",
 		"format:check": "prettier --check .",
 		"lint:check": "pnpm dlx eslint \"src/**\"",
