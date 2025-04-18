@@ -6,10 +6,11 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
+		"check": "astro check",
 		"format": "prettier --write .",
 		"lint": "pnpm dlx eslint \"src/**\"",
-		"check": "astro check",
-		"prepare": "husky"
+		"prepare": "husky",
+		"pre-commit": "pnpm check && pnpm format && pnpm lint"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
