@@ -1,7 +1,17 @@
 # Scouters Online
+
 an aggregator of official scouting news, resources, and online tools
 
+## scaffolding todo
+
+- prettier config file, add prettier script, add CI step
+- eslint, CI
+- tailwind, tailwind prettier
+- frontend framework
+- get dev site up on vercel
+
 ## blogs/magazines/feeds
+
 https://scoutlife.org/
 https://scoutingwire.org/feed/
 https://blog.scoutingmagazine.org/feed/
@@ -15,13 +25,16 @@ https://seascout.org/news/
 https://scoutingamericafoundation.org/foundation-news/
 
 ## email newsletters
+
 https://seascout.org/mailing-list/
 
 ## social feeds- facebook, instagra, twitter, youtube, tiktok, etc
+
 https://www.facebook.com/theboyscoutsofamerica
 https://x.com/boyscouts
 
 ## marketing / landing pages
+
 https://www.scouting.org/
 https://stg.scouting.org/
 https://www.exploring.org/
@@ -36,12 +49,14 @@ https://scoutingamericafoundation.org/
 https://scoutingamericalegacy.org/
 
 ## reference and guidance
+
 https://scoutingwire.org/marketing-and-membership-hub/
 https://help.scoutbook.scouting.org/
 https://troopleader.scouting.org/
 https://tap.scouting.org/
 
 ## tools
+
 https://beascout.scouting.org/
 https://joinexploring.org/
 https://scoutbook.scouting.org/
@@ -52,8 +67,8 @@ https://training.scouting.org/
 https://directory.scouting.org/alumni-dashboard
 https://discussions.scouting.org/
 
-
 ## other
+
 https://www.scoutshop.org/
 https://www.myscoutshop.org/
 https://scoutingalumni.org/
@@ -63,6 +78,7 @@ https://store.ntier.org/
 https://store.summitbsa.org/
 
 ## high adventure bases
+
 https://www.philmontscoutranch.org/
 https://seabaseha.org/
 https://www.summitbsa.org/
@@ -71,14 +87,14 @@ https://summiteventswv.com/
 https://jamboreg.scouting.org/
 https://jamboree.scouting.org/
 
-
 dimensions
+
 - type
-	- blog
-	- social
-	- marketing / landing page
-	- reference and guidance
-	- tools
+  - blog
+  - social
+  - marketing / landing page
+  - reference and guidance
+  - tools
 - topic
-	- scout shop
-	- philmont
+  - scout shop
+  - philmont
