@@ -8,9 +8,11 @@
 		"astro": "astro",
 		"check": "astro check",
 		"format": "prettier --write .",
+		"format:check": "prettier --check .",
 		"lint": "pnpm dlx eslint \"src/**\"",
 		"prepare": "husky",
-		"pre-commit": "pnpm check && pnpm format && pnpm lint"
+		"fix": "pnpm check && pnpm format && pnpm lint",
+		"pre-commit": "pnpm check && pnpm format:check && pnpm lint"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
