@@ -2,6 +2,25 @@
 
 an aggregator of official scouting news, resources, and online tools
 
+## Project Scope
+
+Scouters Online aims to be the central aggregator of all official Scouting America resources and news for volunteers.
+
+## Adding a Link
+
+### Inclusion Criteria
+
+To be elligible for inclusion, a link must meet the following criteria:
+
+- it's an official publication of Scouting America at the national level (council/district/unit publications, no third-party publications)
+- it's a useful/noteworthy resource for Scouting volunteers, and not primarily intended for Scouting professionals
+- it's not part of a larger set of pages (for example, one blog post part of a series, or one article in a collection of resources)
+- it's not an old version of a resource that has been updated
+
+### Process
+
+You can request a new link be added by creating a PR with the changes. The link data is located in `src/lib/links/data/links.ts`.
+
 ## scaffolding todo
 
 - github actions ci for linting and formatting

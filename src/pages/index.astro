@@ -1,13 +1,14 @@
 ---
 import UiLayout from "@/layouts/UiLayout.astro";
-
 import { linksConfig } from "@/lib/links/data/links";
+
+import { checkAll } from "@/lib/links/logic/checkAll";
 ---
 
 <UiLayout>
 	<div class="flex flex-col gap-2">
 		{
-			linksConfig.map((linkConfig) => {
+			(await checkAll(linksConfig)).map((linkConfig) => {
 				return <a href={linkConfig.url}>{linkConfig.url}</a>;
 			})
 		}
