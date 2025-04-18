@@ -23,6 +23,9 @@ https://troopleader.scouting.org/updates-blog/
 https://podcast.scouting.org/
 https://seascout.org/news/
 https://scoutingamericafoundation.org/foundation-news/
+https://oa-scouting.org/news/
+https://status.oa-scouting.org/history.rss //atom feed and email also available
+https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
 
 ## email newsletters
 
@@ -32,6 +35,9 @@ https://seascout.org/mailing-list/
 
 https://www.facebook.com/theboyscoutsofamerica
 https://x.com/boyscouts
+https://www.facebook.com/oalodgemaster
+https://x.com/oalodgemaster
+
 
 ## marketing / landing pages
 
@@ -47,6 +53,7 @@ https://ar2018.scouting.org
 https://ar2019.scouting.org/
 https://scoutingamericafoundation.org/
 https://scoutingamericalegacy.org/
+https://oa-scouting.org/
 
 ## reference and guidance
 
@@ -54,6 +61,7 @@ https://scoutingwire.org/marketing-and-membership-hub/
 https://help.scoutbook.scouting.org/
 https://troopleader.scouting.org/
 https://tap.scouting.org/
+https://confluence.oa-scouting.org/
 
 ## tools
 
@@ -66,6 +74,14 @@ https://scouting.webdamdb.com/ - https://assets.scouting.org/
 https://training.scouting.org/
 https://directory.scouting.org/alumni-dashboard
 https://discussions.scouting.org/
+https://id.oa-scouting.org/
+https://registration.oa-scouting.org/
+https://members.oa-scouting.org/
+https://portal.oa-scouting.org/
+https://lodgemaster.oa-scouting.org/
+https://status.oa-scouting.org/
+https://jira.oa-scouting.org/
+https://oalodgemaster.featureupvote.com/
 
 ## other
 
@@ -76,6 +92,7 @@ https://nesa.org/
 https://store.philmontscoutranch.org/
 https://store.ntier.org/
 https://store.summitbsa.org/
+https://tradingpost.oa-scouting.org/
 
 ## high adventure bases
 
