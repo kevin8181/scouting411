@@ -1,0 +1,19 @@
+name: ✏️ Update Resource
+description: Suggest changes to an existing link or feed
+title: "[UPDATE RESOURCE]: "
+assignees:
+  - kevin8181
+body:
+  - type: input
+    id: link
+    attributes:
+      label: URL
+      description: The URL of the resource to be changed (should match the existing link exactly)
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: textarea
+    id: comment
+    attributes:
+      label: Comment
+      description: Explain what changes are suggested and why
