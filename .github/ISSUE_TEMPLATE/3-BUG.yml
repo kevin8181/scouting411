@@ -1,6 +1,6 @@
 name: 🐞 Bug
-description: Submit a new link or feed to be added
-title: "[NEW RESOURCE]: "
+description: Report a bug in the site
+title: "[BUG]: "
 assignees:
   - kevin8181
 body:

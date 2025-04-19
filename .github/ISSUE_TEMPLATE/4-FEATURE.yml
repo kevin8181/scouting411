@@ -1,0 +1,11 @@
+name: 💡 Feature / Idea
+description: Submit a new link or feed to be added
+title: "[FEAT]: "
+assignees:
+  - kevin8181
+body:
+  - type: textarea
+    id: comment
+    attributes:
+      label: Comment
+      description: Describe the idea/feature
