@@ -63,6 +63,7 @@ https://www.scouting.org/program-updates/
 
 https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/advancement-news/
 https://www.philmontscoutranch.org/resources/philnews/
+https://www.scouting.org/commissioners/newsletter-eblast/
 
 ## email newsletters
 
