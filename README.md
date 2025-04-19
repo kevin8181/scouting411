@@ -1,6 +1,6 @@
 # Scouters Online
 
-an aggregator of official scouting news, resources, and online tools
+the unofficial aggregator for official scouting news, resources, and online tools
 
 ## Project Scope
 
@@ -37,28 +37,39 @@ link processing
 4. parse the page contents with the metadata scraper
 5. combine the scraped tags with the rest of the link object
 
-## blogs/magazines/feeds
+## blogs feeds
 
 https://scoutlife.org/
+https://www.scouting.org/feed
 https://scoutingwire.org/feed/
 https://blog.scoutingmagazine.org/feed/
 https://www.scoutingnewsroom.org/
-https://www.scouting.org/outdoor-programs/trail-to-adventure/
 https://www.scoutshop.org/blog
 https://www.summitbsa.org/blog/
-https://troopleader.scouting.org/updates-blog/
-https://podcast.scouting.org/
-https://seascout.org/news/
+https://ablescouts.org/
 https://scoutingamericafoundation.org/foundation-news/
-https://oa-scouting.org/news/
 https://status.oa-scouting.org/history.rss //atom feed and email also available
 https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
 
+https://www.scouting.org/outdoor-programs/trail-to-adventure/
+https://troopleader.scouting.org/updates-blog/
+https://podcast.scouting.org/
+https://seascout.org/news/
+https://oa-scouting.org/news/
+https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/
+https://www.scouting.org/program-updates/
+
+## periodicals
+
+https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/advancement-news/
+https://www.philmontscoutranch.org/resources/philnews/
+
 ## email newsletters
 
+https://www.ntier.org/resources/newsletter-signup/
 https://seascout.org/mailing-list/
 
-## social feeds- facebook, instagra, twitter, youtube, tiktok, etc
+## social
 
 https://www.facebook.com/theboyscoutsofamerica
 https://x.com/boyscouts
@@ -80,6 +91,7 @@ https://ar2019.scouting.org/
 https://scoutingamericafoundation.org/
 https://scoutingamericalegacy.org/
 https://oa-scouting.org/
+https://www.bsarestructuring.org/
 
 ## reference and guidance
 
@@ -88,6 +100,9 @@ https://help.scoutbook.scouting.org/
 https://troopleader.scouting.org/
 https://tap.scouting.org/
 https://confluence.oa-scouting.org/
+https://scene.zeplin.io/project/59b6b6554fc4d8840a822300
+https://ablescouts.org/toolbox/
+https://www.scouting.org/awards/awards-central/
 
 ## tools
 
@@ -108,6 +123,7 @@ https://lodgemaster.oa-scouting.org/
 https://status.oa-scouting.org/
 https://jira.oa-scouting.org/
 https://oalodgemaster.featureupvote.com/
+https://www.scouting.org/awards/scholarships/
 
 ## other
 

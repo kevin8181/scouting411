@@ -1,16 +1,17 @@
 ---
-import UiLayout from "@/layouts/UiLayout.astro";
-import { linksConfig } from "@/lib/links/data/links";
-
-import { checkAll } from "@/lib/links/logic/checkAll";
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { links } from "@/features/links";
+import { Link } from "@/features/links/components/Link";
 ---
 
 <UiLayout>
-	<div class="flex flex-col gap-2">
-		{
-			(await checkAll(linksConfig)).map((linkConfig) => {
-				return <a href={linkConfig.url}>{linkConfig.url}</a>;
-			})
-		}
+	<div class="p-6">
+		<div class="flex flex-col gap-5">
+			{
+				(await links()).map((link) => {
+					return <Link link={link} />;
+				})
+			}
+		</div>
 	</div>
 </UiLayout>

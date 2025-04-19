@@ -1,0 +1,16 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import Header from "@/components/layout/Header.astro";
+---
+
+<Layout>
+	<body>
+		<div class="bg-brand-gray-1 min-h-screen">
+			<Header />
+
+			<main>
+				<slot />
+			</main>
+		</div>
+	</body>
+</Layout>
