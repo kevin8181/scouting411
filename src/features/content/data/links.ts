@@ -14,6 +14,10 @@ export const linksConfig: LinkConfig[] = [
 			title: "Scouting Wire",
 			description: "The Official Blog of the Scouting Movement",
 		},
+		feed: {
+			type: "rss",
+			url: "https://scoutingwire.org/feed/",
+		},
 	},
 	{
 		url: "https://oa-bsa.org",
