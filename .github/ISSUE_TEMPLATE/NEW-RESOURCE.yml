@@ -6,14 +6,14 @@ assignees:
 body:
   - type: input
     id: link
+    label: URL
     attributes:
-      - label: URL
-        description: The URL of the resource to be added
+      - description: The URL of the resource to be added
         placeholder: https://example.com
         validations:
           required: true
   - type: textarea
     id: comment
+    label: Commment
     attributes:
-      - label: Comment
-        description: Any additional comments or notes you want to include
+      - description: Any additional comments or notes you want to include
