@@ -136,6 +136,8 @@ https://store.philmontscoutranch.org/
 https://store.ntier.org/
 https://store.summitbsa.org/
 https://tradingpost.oa-scouting.org/
+https://licensingbsa.org/
+https://open.spotify.com/show/57YZ4Fu74WkSHE5qyVkQS2
 
 ## high adventure bases
 
