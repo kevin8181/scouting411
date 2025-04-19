@@ -10,8 +10,8 @@ body:
         label: URL
         description: The URL of the resource to be added
         placeholder: https://example.com
-        validations:
-          required: true
+    validations:
+      required: true
   - type: textarea
     id: comment
     attributes:
