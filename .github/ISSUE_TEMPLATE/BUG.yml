@@ -1,0 +1,11 @@
+name: 🐞 Bug
+description: Submit a new link or feed to be added
+title: "[NEW RESOURCE]: "
+assignees:
+  - kevin8181
+body:
+  - type: textarea
+    id: comment
+    attributes:
+      label: Comment
+      description: Describe the bug
