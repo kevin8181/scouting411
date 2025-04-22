@@ -1,10 +1,10 @@
-# Scouters Online
+# Scouting411
 
 the unofficial aggregator for official scouting news, resources, and online tools
 
 ## Project Scope
 
-Scouters Online aims to be the central aggregator of all official Scouting America resources and news for volunteers.
+Scouting411 aims to be the central aggregator of all official Scouting America resources and news for volunteers.
 
 ## Adding a Link
 

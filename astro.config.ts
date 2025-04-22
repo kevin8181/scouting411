@@ -7,7 +7,7 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://scouters-online.vercel.app/",
+	site: "https://scouting411.org/",
 	devToolbar: { enabled: false },
 
 	experimental: {

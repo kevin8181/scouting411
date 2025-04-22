@@ -5,7 +5,7 @@ export function Link({ link }: { link: Link }) {
 		<div className="shadow-card flex justify-between rounded bg-white p-6">
 			<div>
 				<a
-					href={link.url + "?utm_source=scouters-online"}
+					href={link.url + "?utm_source=scouting411"}
 					rel="noopener noreferrer"
 					target="_blank"
 					className="text-brand-blue font-serif text-xl font-bold hover:underline"

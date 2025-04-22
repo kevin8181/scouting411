@@ -7,6 +7,9 @@ export const linksConfig: LinkConfig[] = [
 			title: "Scouting America Homepage",
 			description: "The front page of Scouting America",
 		},
+		tags: {
+			resourceType: [],
+		},
 	},
 	{
 		url: "https://scoutingwire.org",
@@ -18,12 +21,18 @@ export const linksConfig: LinkConfig[] = [
 			type: "rss",
 			url: "https://scoutingwire.org/feed/",
 		},
+		tags: {
+			resourceType: [],
+		},
 	},
 	{
 		url: "https://oa-bsa.org",
 		metadata: {
 			title: "Order of the Arrow Homepage",
 			description: "The front page of Order of the Arrow",
+		},
+		tags: {
+			resourceType: [],
 		},
 	},
 ];
