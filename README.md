@@ -6,11 +6,11 @@ the unofficial aggregator for official scouting news, resources, and online tool
 
 Scouting411 aims to be the central aggregator of all official Scouting America resources and news for volunteers.
 
-## Adding a Link
+## Adding a Resource
 
 ### Inclusion Criteria
 
-To be elligible for inclusion, a link must meet the following criteria:
+To be elligible for inclusion, a resource must meet the following criteria:
 
 - it's an official publication of Scouting America at the national level (council/district/unit publications, no third-party publications)
 - it's a useful/noteworthy resource for Scouting volunteers, and not primarily intended for Scouting professionals
@@ -19,23 +19,7 @@ To be elligible for inclusion, a link must meet the following criteria:
 
 ### Process
 
-You can request a new link be added by creating a PR with the changes. The link data is located in `src/lib/links/data/links.ts`.
-
-## scaffolding todo
-
-- github actions ci for linting and formatting
-- eslint react
-- metadata scraper (https://github.com/BetaHuhn/metadata-scraper, https://github.com/laurengarcia/url-metadata)
-
-link processing
-
-1. normalization check
-   - for each link, check if valid url, check if passes normalization rules https://www.npmjs.com/package/normalize-url
-   - check if all the links are different
-2. fetch all the links
-3. throw if a fetch fails or the status code is not 200
-4. parse the page contents with the metadata scraper
-5. combine the scraped tags with the rest of the link object
+You can request a new resource be added by creating an issue on this Github repo.
 
 ## blogs feeds
 

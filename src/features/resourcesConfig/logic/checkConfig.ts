@@ -1,12 +1,12 @@
-import type { LinkConfig } from "@/features/content/types";
-import { validateUrl } from "@/features/content/logic/validateUrl";
+import type { Resource } from "@/features/resourcesConfig/types";
+import { validateUrl } from "@/features/resourcesConfig/logic/validateUrl";
 import { arrayHasDupes } from "@/util/arrayDupeCheck";
 
 /**
  * verifies the links config is valid and normalized
  * @throws
  * */
-export async function checkLinksConfig(input: LinkConfig[]) {
+export async function checkResourcesConfig(input: Resource[]) {
 	// check that all urls are valid and normalized
 	for (const link of input) {
 		await validateUrl(link.url);
