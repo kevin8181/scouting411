@@ -8,8 +8,6 @@ Scouting411 aims to be the central aggregator of all official Scouting America r
 
 ## Adding a Resource
 
-### Inclusion Criteria
-
 To be elligible for inclusion, a resource must meet the following criteria:
 
 - it's an official publication of Scouting America at the national level (no council/district/unit/third-party publications)
@@ -17,7 +15,5 @@ To be elligible for inclusion, a resource must meet the following criteria:
 - it's not part of a larger set of pages (for example, one blog post part of a series, or one article in a collection of resources)
 - it's not an old version of a resource that has been updated
 - it's not an individual document such as a merit badge booklet or award application form
-
-### Process
 
 You can request a new resource be added by creating an issue on this Github repo.
