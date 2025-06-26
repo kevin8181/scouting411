@@ -1,6 +1,6 @@
 # Scouting411
 
-the unofficial aggregator for official scouting news, resources, and online tools
+the unofficial aggregator for official Scouting America news and resources
 
 ## Project Scope
 

@@ -8,13 +8,15 @@ const { post } = Astro.props;
 ---
 
 <div class="shadow-card rounded bg-white p-6">
-	<div class="mb-3 flex items-center justify-between gap-3">
+	<div class="mb-3 flex flex-col justify-between gap-3 md:flex-row md:gap-5">
 		<a
-			href={post.url}
+			href={post.url + "?utm_source=scouting411"}
+			rel="noopener noreferrer"
+			target="_blank"
 			class="text-brand-blue font-serif text-lg font-bold hover:underline"
 			>{post.title}</a
 		>
-		<span class="text-sm"
+		<span class="text-sm text-nowrap whitespace-nowrap"
 			>{
 				post.date?.toLocaleDateString("en-US", {
 					year: "numeric",
