@@ -5,8 +5,8 @@ import { resources } from "@/features/resources/data";
 ---
 
 <UiLayout>
-	<div class="p-6">
-		<div class="flex flex-col gap-5">
+	<div class="flex justify-center p-6">
+		<div class="flex max-w-5xl flex-col justify-stretch gap-5">
 			{resources.map((resource) => <Link resource={resource} />)}
 		</div>
 	</div>

@@ -1,4 +1,3 @@
-
 ## blogs feeds
 
 - https://scoutlife.org/

@@ -1,5 +1,18 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
+import Post from "@/features/feeds/posts/post.astro";
+
+import { rssProvider } from "@/features/feeds/providers/rss";
+
+const feed = await rssProvider({
+	feedUrl: "https://scouting.org/feed/",
+});
 ---
 
-<UiLayout> feed </UiLayout>
+<UiLayout>
+	<div class="flex justify-center p-5">
+		<div class="flex max-w-5xl flex-col justify-stretch gap-5">
+			{feed.map((item) => <Post post={item} />)}
+		</div>
+	</div>
+</UiLayout>

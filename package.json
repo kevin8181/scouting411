@@ -22,6 +22,7 @@
 		"normalize-url": "^8.0.2",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
+		"rss-parser": "^3.13.0",
 		"tailwindcss": "^4.1.10",
 		"typescript": "^5.8.3",
 		"zod": "4.0.0-beta.20250417T043022"

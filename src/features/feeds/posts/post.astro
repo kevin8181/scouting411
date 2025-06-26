@@ -1,0 +1,28 @@
+---
+import type { Post } from "@/features/feeds/posts/types";
+type Props = {
+	post: Post;
+};
+
+const { post } = Astro.props;
+---
+
+<div class="shadow-card rounded bg-white p-6">
+	<div class="mb-3 flex items-center justify-between gap-3">
+		<a
+			href={post.url}
+			class="text-brand-blue font-serif text-lg font-bold hover:underline"
+			>{post.title}</a
+		>
+		<span class="text-sm"
+			>{
+				post.date?.toLocaleDateString("en-US", {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				})
+			}
+		</span>
+	</div>
+	<p class="text-sm text-gray-800">{post.description}</p>
+</div>
