@@ -4,10 +4,8 @@ import type { TagOf } from "@/features/tagsConfig/types";
 
 export interface Resource {
 	url: UrlShaped;
-	metadata: {
-		title: string;
-		description: string;
-	};
+	title: string;
+	description: string;
 	tags: {
 		resourceType: TagOf<typeof ResourceTypeTags>[];
 		topic: TagOf<typeof TopicTags>[];

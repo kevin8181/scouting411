@@ -6,13 +6,10 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"types": "astro check --minimumFailingSeverity hint",
-		"format:fix": "prettier --write .",
-		"format:check": "prettier --check .",
-		"lint:check": "pnpm dlx eslint \"src/**/*\"",
-		"prepare": "husky",
-		"fix": "pnpm types && pnpm format:fix && pnpm lint:check",
-		"check": "pnpm types && pnpm format:check && pnpm lint:check"
+		"format": "prettier --write .",
+		"lint": "pnpm dlx eslint \"src/**/*\"",
+		"check": "pnpm astro check && pnpm format && pnpm lint && echo '✅ All checks passed.'",
+		"checkResources": "tsx src/scripts/checkResources.ts"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",

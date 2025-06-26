@@ -1,17 +1,13 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
-import { getResources } from "@/features/resources";
 import { Link } from "@/features/resources/components/Link";
+import { resources } from "@/features/resources/data";
 ---
 
 <UiLayout>
 	<div class="p-6">
 		<div class="flex flex-col gap-5">
-			{
-				(await getResources()).map((resource) => {
-					return <Link resource={resource} />;
-				})
-			}
+			{resources.map((resource) => <Link resource={resource} />)}
 		</div>
 	</div>
 </UiLayout>

@@ -1,4 +1,4 @@
-import type { Resource } from "@/features/resourcesConfig/types";
+import type { Resource } from "@/features/resources/types";
 
 export function Link({ resource }: { resource: Resource }) {
 	return (
@@ -10,10 +10,10 @@ export function Link({ resource }: { resource: Resource }) {
 					target="_blank"
 					className="text-brand-blue font-serif text-xl font-bold hover:underline"
 				>
-					{resource.metadata.title}
+					{resource.title}
 				</a>
 
-				<p className="text-sm">{resource.metadata.description}</p>
+				<p className="text-sm">{resource.description}</p>
 			</div>
 			<div className="flex flex-col gap-3">
 				<div className="flex items-center gap-3 md:justify-end">
