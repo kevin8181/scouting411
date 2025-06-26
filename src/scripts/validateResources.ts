@@ -14,7 +14,6 @@ export async function processAll(input: Resource[]) {
 	await Promise.all(input.map((config) => processResource(config)));
 }
 
-
 /**
  * verifies the links config is valid and normalized
  * @throws
