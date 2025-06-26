@@ -19,7 +19,8 @@ export const TopicTags = {
 	ScoutShop: {
 		id: "scoutshop",
 		displayName: "Scout Shop",
-	},
+	} /** a parsed post object returned by one of the feed adapters */,
+
 	Philmont: {
 		id: "philmont",
 		displayName: "Philmont",
