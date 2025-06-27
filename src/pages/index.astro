@@ -2,10 +2,10 @@
 import UiLayout from "@/components/layout/UiLayout.astro";
 import Post from "@/features/feeds/posts/components/post.astro";
 
-import { rssProvider } from "@/features/feeds/providers/rss";
+import { wordpressProvider } from "@/features/feeds/providers/wordpress";
 
-const feed = await rssProvider({
-	feedUrl: "https://scouting.org/feed/",
+const feed = await wordpressProvider({
+	baseUrl: "https://scouting.org",
 });
 ---
 

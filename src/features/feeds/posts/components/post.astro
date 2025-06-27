@@ -13,8 +13,8 @@ const { post } = Astro.props;
 		rel="noopener noreferrer"
 		target="_blank"
 		class="text-brand-blue font-serif text-xl font-bold hover:underline"
-		>{post.title}</a
-	>
+		set:html={post.title}
+	/>
 	<span class="flex items-center gap-2 text-xs text-gray-700">
 		<span class="underline">Scouts BSA Program Updates</span>
 		<span class="font-bold">&middot;</span>
@@ -28,5 +28,5 @@ const { post } = Astro.props;
 			}
 		</span>
 	</span>
-	<p class="text-sm ">{post.description}</p>
+	<span class="text-sm" set:html={post.description} />
 </div>
