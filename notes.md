@@ -16,7 +16,7 @@
 - https://podcast.scouting.org/
 - https://seascout.org/news/
 - https://oa-scouting.org/news/
-- https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/
+- https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/ (cubs category id 15053, sbsa category id 15054)
 - https://www.scouting.org/program-updates/
 
 ## periodicals
