@@ -10,8 +10,8 @@ const feed = await rssProvider({
 ---
 
 <UiLayout>
-	<div class="flex justify-center p-5">
-		<div class="flex max-w-5xl flex-col justify-stretch gap-5">
+	<div class="flex justify-center p-8">
+		<div class="flex max-w-5xl flex-col justify-stretch gap-5 w-full">
 			{feed.map((item) => <Post post={item} />)}
 		</div>
 	</div>

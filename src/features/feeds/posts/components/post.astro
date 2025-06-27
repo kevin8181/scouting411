@@ -7,7 +7,7 @@ type Props = {
 const { post } = Astro.props;
 ---
 
-<div class="shadow-card flex flex-col gap-3 rounded bg-white p-6">
+<div class="shadow-card flex flex-col items-start gap-3 rounded bg-white p-6">
 	<a
 		href={post.url + "?utm_source=scouting411"}
 		rel="noopener noreferrer"
@@ -15,10 +15,10 @@ const { post } = Astro.props;
 		class="text-brand-blue font-serif text-xl font-bold hover:underline"
 		>{post.title}</a
 	>
-	<span class="flex items-center gap-2 text-xs">
-		<span class="hover:underline">Scouts BSA Program Updates</span>
+	<span class="flex items-center gap-2 text-xs text-gray-700">
+		<span class="underline">Scouts BSA Program Updates</span>
 		<span class="font-bold">&middot;</span>
-		<span
+		<span class="whitespace-nowrap"
 			>{
 				post.date?.toLocaleDateString("en-US", {
 					year: "numeric",
@@ -28,5 +28,5 @@ const { post } = Astro.props;
 			}
 		</span>
 	</span>
-	<p class="text-sm text-gray-800">{post.description}</p>
+	<p class="text-sm ">{post.description}</p>
 </div>
