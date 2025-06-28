@@ -1,23 +1,26 @@
-name: Validate Resources
+name: CI Checks
 
 on:
   push:
   pull_request:
 
 jobs:
-  run-npm-script:
+  Testing:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run script
+      - name: Linting, Formatting, and Type Checking
+        run: npm run check
+
+      - name: Check Resource Links
         run: npm run checkResources
