@@ -19,8 +19,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Linting, Formatting, and Type Checking
-        run: npm run check
+      - name: Formatting Check
+        run: npm run format
 
-      - name: Check Resource Links
+      - name: Type Checking
+        run: npm run astro check
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Validate Resource Links
         run: npm run checkResources
