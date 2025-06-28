@@ -36,6 +36,7 @@
 		"prettier": "3.5.3",
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "^0.6.13",
+		"tsx": "^4.20.3",
 		"typescript-eslint": "^8.35.0"
 	}
 }
