@@ -1,6 +1,6 @@
 import type { Resource } from "@/features/resources/types";
 
-export function Link({ resource }: { resource: Resource }) {
+export function Resource({ resource }: { resource: Resource }) {
 	return (
 		<div className="shadow-card flex flex-col justify-between gap-3 rounded bg-white p-6 md:flex-row">
 			<div className="flex flex-col gap-3">

@@ -1,5 +1,5 @@
 import { CardList } from "@/components/react/cardList";
-import { Post } from "@/features/feeds/posts/components/post";
+import { Post } from "@/components/react/post";
 
 //todo
 import { wordpressProvider } from "@/features/feeds/providers/wordpress";
@@ -12,9 +12,8 @@ export function IndexPage() {
 	return (
 		<CardList>
 			{feed.map((item) => (
-					<Post post={item} />
-				))}
+				<Post post={item} key={item.url} />
+			))}
 		</CardList>
-		
 	);
 }
