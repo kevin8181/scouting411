@@ -1,5 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
+import { getAllPosts } from "@/features/feeds/getAllPosts";
 
 export const GET: APIRoute = async (context) => {
 	return rss({
@@ -14,14 +15,13 @@ export const GET: APIRoute = async (context) => {
 		// Array of `<item>`s in output xml
 		// See "Generating items" section for examples using content collections and glob imports
 		//todo
-		items: [
-			{
-				title: "hello world",
-				description: "this is a test",
-				pubDate: new Date(),
-				link: "https://scouting411.com/test",
-			},
-		],
+		items: (await getAllPosts()).map((item) => ({
+			title: item.post.title,
+			description: item.post.description,
+			pubDate: item.post.date,
+			link: item.post.url,
+			categories: [item.feedMeta.name],
+		})),
 		// (optional) inject custom xml
 		customData: `<language>en-us</language>`,
 		stylesheet: "/rss.xsl",
