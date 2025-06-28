@@ -1,7 +1,7 @@
 import { feeds } from "@/features/feeds/data";
 import type { PostWithFeedMeta } from "@/features/feeds/types";
 
-export async function getAllPosts() {
+export function getAllPosts() {
 	const returnPosts: PostWithFeedMeta[] = [];
 
 	for (const feed of feeds) {
@@ -10,7 +10,10 @@ export async function getAllPosts() {
 		}
 	}
 
+	//sort by date descending
 	returnPosts.sort((a, b) => b.post.date.getTime() - a.post.date.getTime());
+
+	console.log("get all posts", returnPosts.length);
 
 	return returnPosts;
 }

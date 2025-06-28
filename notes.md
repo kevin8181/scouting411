@@ -1,23 +1,24 @@
 ## blogs feeds
 
 - https://scoutlife.org/
-- https://www.scouting.org/feed
-- https://scoutingwire.org/feed/
-- https://blog.scoutingmagazine.org/feed/
+- https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/ (cubs category id 15053, sbsa category id 15054)
+- https://scoutingwire.org/
+- https://blog.scoutingmagazine.org/
 - https://www.scoutingnewsroom.org/
-- https://www.scoutshop.org/blog
+- https://www.scoutshop.org/blog //not wordpress. can't find rss feed
 - https://www.summitbsa.org/blog/
 - https://ablescouts.org/
 - https://scoutingamericafoundation.org/foundation-news/
+- https://nesa.org
+- https://scoutingalumni.org
+- https://oa-scouting.org/news/
+- https://seascout.org/news/
+- https://troopleader.scouting.org/updates-blog/
+
+- https://podcast.scouting.org/
 - https://status.oa-scouting.org/history.rss //atom feed and email also available
 - https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
 - https://www.scouting.org/outdoor-programs/trail-to-adventure/ //https://www.scouting.org/wp-json/wp/v2/tta-post
-- https://troopleader.scouting.org/updates-blog/
-- https://podcast.scouting.org/
-- https://seascout.org/news/
-- https://oa-scouting.org/news/
-- https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/ (cubs category id 15053, sbsa category id 15054)
-- https://www.scouting.org/program-updates/
 - https://www.scouting.org/about/executive-communications/ //https://www.scouting.org/wp-json/wp/v2/ec-post
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
@@ -29,11 +30,15 @@
 - https://www.philmontscoutranch.org/resources/philnews/
 - https://www.scouting.org/commissioners/newsletter-eblast/
 - https://www.scouting.org/international/resources/
+- https://seascout.org/program-updates/
 
 ## email newsletters
 
 - https://www.ntier.org/resources/newsletter-signup/
 - https://seascout.org/mailing-list/
+- https://scoutingamericafoundation.org/infinite-pathways-newsletterarchive/
+- https://scoutingalumni.org/resources/monthly-alumni-association-newsletters/
+- https://t.email.scouting.org/lp/LP171 //for troopleader updates
 
 ## social
 
@@ -41,6 +46,7 @@
 - https://x.com/boyscouts
 - https://www.facebook.com/oalodgemaster
 - https://x.com/oalodgemaster
+- https://www.youtube.com/channel/UCRtvk_XdyZHqDOYkBW04uZg
 
 ## marketing / landing pages
 
@@ -110,6 +116,7 @@
 - https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast https://www.youtube.com/playlist?list=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
 - https://www.youtube.com/playlist?list=PLuxQzUzGg-5y2JBj7x0n9GjjEC3n0SrDs troop talk live series
 https://www.youtube.com/feeds/videos.xml?playlist_id=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
+- https://feeds.buzzsprout.com/983503.rss
 rssbridge
 rsshub
 

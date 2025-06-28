@@ -57,6 +57,86 @@ export const feeds: Feed[] = [
 			baseUrl: "https://blog.scoutingmagazine.org/",
 			categoryFilter: undefined,
 		}),
-	}
-
+	},
+	{
+		meta: {
+			name: "Scouting Newsroom",
+		},
+		posts: await rssProvider({
+			feedUrl: "https://scoutingnewsroom.org/feed",
+			//for some reason the wordpress posts api doesn't return any results on this site
+		}),
+	},
+	{
+		meta: {
+			name: "Summit Blog",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://summitbsa.org",
+			categoryFilter: undefined,
+		}),
+	},
+	{
+		meta: {
+			name: "Scout Life",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://scoutlife.org",
+			categoryFilter: undefined,
+		}),
+	},
+	{
+		meta: {
+			name: "Scouting Alumni",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://scoutingalumni.org",
+			categoryFilter: undefined,
+		}),
+	},
+	{
+		meta: {
+			name: "National Eagle Scout Association",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://nesa.org",
+			categoryFilter: undefined,
+		}),
+	},
+	{
+		meta: {
+			name: "Scouting America Foundation",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://scoutingamericafoundation.org",
+			categoryFilter: undefined,
+		}),
+	},
+	{
+		meta: {
+			name: "OA News",
+		},
+		posts: await rssProvider({
+			feedUrl: "https://oa-scouting.org/rss.xml",
+			//not wordpress. might be bespoke. find out about if there's an api or a better feed to use
+		}),
+	},
+	{
+		meta: {
+			name: "Sea Scouts News",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://seascout.org/",
+			categoryFilter: undefined,
+		}),
+	},
+	{
+		meta: {
+			name: "Troop Leader Resource Updates",
+		},
+		posts: await wordpressProvider({
+			baseUrl: "https://troopleader.scouting.org",
+			categoryFilter: undefined,
+		}),
+	},
 ];
