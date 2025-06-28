@@ -1,5 +1,5 @@
 import RssParser from "rss-parser";
-import type { Post } from "@/features/feeds/posts/types";
+import type { Post } from "@/features/feeds/types";
 
 export async function rssProvider(opts: rssProviderOpts): Promise<Post[]> {
 	const rssParser = new RssParser();

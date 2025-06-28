@@ -1,4 +1,4 @@
-import type { Post } from "@/features/feeds/posts/types";
+import type { Post } from "@/features/feeds/types";
 
 export async function wordpressProvider(
 	opts: wordpressProviderOpts,
