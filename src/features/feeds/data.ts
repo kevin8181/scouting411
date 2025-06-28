@@ -1,6 +1,7 @@
 import type { Feed } from "@/features/feeds/types";
 import { wordpressProvider } from "@/features/feeds/providers/wordpress";
 import { rssProvider } from "@/features/feeds/providers/rss";
+import { ttaProvider } from "@/features/feeds/providers/trailToAdventure";
 
 export const feeds: Feed[] = [
 	{
@@ -56,15 +57,6 @@ export const feeds: Feed[] = [
 		posts: await wordpressProvider({
 			baseUrl: "https://blog.scoutingmagazine.org/",
 			categoryFilter: undefined,
-		}),
-	},
-	{
-		meta: {
-			name: "Scouting Newsroom",
-		},
-		posts: await rssProvider({
-			feedUrl: "https://scoutingnewsroom.org/feed",
-			//for some reason the wordpress posts api doesn't return any results on this site
 		}),
 	},
 	{
@@ -139,4 +131,26 @@ export const feeds: Feed[] = [
 			categoryFilter: undefined,
 		}),
 	},
+	{
+		meta: {
+			name: "ScoutCast",
+		},
+		posts: await rssProvider({
+			feedUrl: "https://podcast.scouting.org/category/scoutcast/feed/",
+		}),
+	},
+	{
+		meta: {
+			name: "CubCast",
+		},
+		posts: await rssProvider({
+			feedUrl: "https://podcast.scouting.org/category/cubcast/feed/",
+		}),
+	},
+	{
+		meta: {
+			name: "Trail to Adventure",
+		},
+		posts: await ttaProvider(),
+	}
 ];

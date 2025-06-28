@@ -14,8 +14,8 @@
 - https://oa-scouting.org/news/
 - https://seascout.org/news/
 - https://troopleader.scouting.org/updates-blog/
-
 - https://podcast.scouting.org/
+
 - https://status.oa-scouting.org/history.rss //atom feed and email also available
 - https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
 - https://www.scouting.org/outdoor-programs/trail-to-adventure/ //https://www.scouting.org/wp-json/wp/v2/tta-post
@@ -23,6 +23,8 @@
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
 // find new/edited pages at https://www.scouting.org/wp-json/wp/v2/pages
+
+//todo add podcast rss feed provider?
 
 ## periodicals
 
@@ -39,6 +41,7 @@
 - https://scoutingamericafoundation.org/infinite-pathways-newsletterarchive/
 - https://scoutingalumni.org/resources/monthly-alumni-association-newsletters/
 - https://t.email.scouting.org/lp/LP171 //for troopleader updates
+- https://ablescouts.org/subscribe/
 
 ## social
 
