@@ -6,10 +6,10 @@ export async function rssProvider(opts: rssProviderOpts): Promise<Post[]> {
 	const feed = await rssParser.parseURL(opts.feedUrl);
 
 	return feed.items.map((item) => ({
-		url: item.link,
-		title: item.title,
-		description: item.contentSnippet,
-		date: item.isoDate ? new Date(item.isoDate) : undefined,
+		url: item.link!,
+		title: item.title!,
+		description: item.contentSnippet ?? "",
+		date: new Date(item.isoDate!),
 	}));
 }
 

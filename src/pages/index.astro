@@ -1,18 +1,8 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
-import { Post } from "@/features/feeds/posts/components/post";
-import { wordpressProvider } from "@/features/feeds/providers/wordpress";
-
-const feed = await wordpressProvider({
-	baseUrl: "https://scouting.org",
-	categoryFilter: 15054,
-});
+import { IndexPage } from "@/pages/_index/page";
 ---
 
 <UiLayout>
-	<div class="flex justify-center p-8">
-		<div class="flex w-full max-w-5xl flex-col justify-stretch gap-5">
-			{feed.map((item) => <Post post={item} />)}
-		</div>
-	</div>
+	<IndexPage />
 </UiLayout>
