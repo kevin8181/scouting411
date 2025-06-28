@@ -9,39 +9,44 @@ import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://scouting411.org/",
-  devToolbar: { enabled: false },
+    adapter: vercel({
+        isr: {
+            expiration: 60 * 60 * 24, // static regeneration happens every 24 hours
+        }
+    }),
+    
+	site: "https://scouting411.org/",
+	devToolbar: { enabled: false },
 
-  experimental: {
-      fonts: [
-          {
-              name: "Roboto Slab",
-              provider: fontProviders.fontsource(),
-              cssVariable: "--font-roboto-slab",
-              weights: [400, 700],
-              fallbacks: ["serif"],
-          },
-          {
-              name: "Roboto",
-              provider: fontProviders.fontsource(),
-              cssVariable: "--font-roboto",
-              weights: [100, 400, 700],
-              fallbacks: ["sans-serif"],
-          },
-          {
-              name: "Montserrat",
-              provider: fontProviders.fontsource(),
-              cssVariable: "--font-montserrat",
-              weights: [800],
-              fallbacks: ["sans-serif"],
-          },
-      ],
+	experimental: {
+		fonts: [
+			{
+				name: "Roboto Slab",
+				provider: fontProviders.fontsource(),
+				cssVariable: "--font-roboto-slab",
+				weights: [400, 700],
+				fallbacks: ["serif"],
+			},
+			{
+				name: "Roboto",
+				provider: fontProviders.fontsource(),
+				cssVariable: "--font-roboto",
+				weights: [100, 400, 700],
+				fallbacks: ["sans-serif"],
+			},
+			{
+				name: "Montserrat",
+				provider: fontProviders.fontsource(),
+				cssVariable: "--font-montserrat",
+				weights: [800],
+				fallbacks: ["sans-serif"],
+			},
+		],
 	},
 
-  vite: {
-      plugins: [tailwindcss()],
+	vite: {
+		plugins: [tailwindcss()],
 	},
 
-  integrations: [sitemap(), react()],
-  adapter: vercel(),
+	integrations: [sitemap(), react()],
 });
