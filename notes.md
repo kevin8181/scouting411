@@ -11,19 +11,24 @@
 - https://scoutingamericafoundation.org/foundation-news/
 - https://status.oa-scouting.org/history.rss //atom feed and email also available
 - https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
-- https://www.scouting.org/outdoor-programs/trail-to-adventure/
+- https://www.scouting.org/outdoor-programs/trail-to-adventure/ //https://www.scouting.org/wp-json/wp/v2/tta-post
 - https://troopleader.scouting.org/updates-blog/
 - https://podcast.scouting.org/
 - https://seascout.org/news/
 - https://oa-scouting.org/news/
 - https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/ (cubs category id 15053, sbsa category id 15054)
 - https://www.scouting.org/program-updates/
+- https://www.scouting.org/about/executive-communications/ //https://www.scouting.org/wp-json/wp/v2/ec-post
+
+// find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
+// find new/edited pages at https://www.scouting.org/wp-json/wp/v2/pages
 
 ## periodicals
 
 - https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/advancement-news/
 - https://www.philmontscoutranch.org/resources/philnews/
 - https://www.scouting.org/commissioners/newsletter-eblast/
+- https://www.scouting.org/international/resources/
 
 ## email newsletters
 
@@ -53,6 +58,7 @@
 - https://scoutingamericalegacy.org/
 - https://oa-scouting.org/
 - https://www.bsarestructuring.org/
+- https://www.scouting.org/international/
 
 ## reference and guidance
 
@@ -85,6 +91,7 @@
 - https://jira.oa-scouting.org/
 - https://oalodgemaster.featureupvote.com/
 - https://www.scouting.org/awards/scholarships/
+- https://api.scouting.org/organizations/v2/zip/12345/council
 
 ## other
 
@@ -98,6 +105,7 @@
 - https://tradingpost.oa-scouting.org/
 - https://licensingbsa.org/
 - https://open.spotify.com/show/57YZ4Fu74WkSHE5qyVkQS2
+- https://filestore.scouting.org/filestore ... figure out how to list everything or see updates?
 
 ## high adventure bases
 

@@ -3,24 +3,15 @@ import type { Post } from "@/features/feeds/posts/types";
 export async function wordpressProvider(
 	opts: wordpressProviderOpts,
 ): Promise<Post[]> {
-	const response = await fetch(
-		new URL("/wp-json/wp/v2/posts?per_page=100", opts.baseUrl).toString(),
-	);
+	const url = new URL(
+		`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
+		opts.baseUrl,
+	).toString();
+
+	const response = await fetch(url);
 
 	const posts: wordpressApiPost[] = await response.json();
 
-	if (!opts.categoryFilter) {
-		return formatPosts(posts);
-	}
-
-	const filtered = posts.filter((post) => {
-		return post.categories.includes(opts.categoryFilter!);
-	});
-
-	return formatPosts(filtered);
-}
-
-function formatPosts(posts: wordpressApiPost[]) {
 	return posts.map((post) => ({
 		url: post.link,
 		title: post.title.rendered,
