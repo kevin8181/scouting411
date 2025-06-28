@@ -107,7 +107,11 @@
 - https://open.spotify.com/show/57YZ4Fu74WkSHE5qyVkQS2
 - https://filestore.scouting.org/filestore ... figure out how to list everything or see updates?
 
-- https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast
+- https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast https://www.youtube.com/playlist?list=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
+- https://www.youtube.com/playlist?list=PLuxQzUzGg-5y2JBj7x0n9GjjEC3n0SrDs troop talk live series
+https://www.youtube.com/feeds/videos.xml?playlist_id=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
+rssbridge
+rsshub
 
 ## high adventure bases
 
