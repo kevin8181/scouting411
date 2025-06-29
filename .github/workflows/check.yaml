@@ -24,6 +24,7 @@ jobs:
 
       - name: Type Checking
         run: npm run astro check
+        # todo fix this step failing
 
       - name: Linting
         run: npm run lint

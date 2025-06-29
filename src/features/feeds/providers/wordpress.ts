@@ -1,30 +1,32 @@
-import type { Post } from "@/features/feeds/types";
+import type { FeedProvider } from "@/features/feeds/types";
 
-export async function wordpressProvider(
-	opts: wordpressProviderOpts,
-): Promise<Post[]> {
-	const url = new URL(
-		`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
-		opts.baseUrl,
-	).toString();
+//todo figure out how to fetch older/paginated data
 
-	const response = await fetch(url);
+export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
+	return async () => {
+		const url = new URL(
+			`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
+			opts.baseUrl,
+		).toString();
 
-	const posts: wordpressApiPost[] = await response.json();
+		const response = await fetch(url);
 
-	return posts.map((post) => ({
-		url: post.link,
-		title: post.title.rendered,
-		description: post.excerpt.rendered,
-		date: new Date(post.date_gmt),
-	}));
+		const posts: wordpressApiPost[] = await response.json();
+
+		return posts.map((post) => ({
+			url: post.link,
+			title: post.title.rendered,
+			description: post.excerpt.rendered,
+			date: new Date(post.date_gmt),
+		}));
+	};
 }
 
 type wordpressProviderOpts = {
 	/** the base url of the wordpress site */
 	baseUrl: string;
 	/** return only posts which have this category id */
-	categoryFilter: number | undefined;
+	categoryFilter?: number;
 };
 
 type wordpressApiPost = {

@@ -15,6 +15,8 @@ export function Resource({ resource }: { resource: Resource }) {
 
 				<p className="text-sm">{resource.description}</p>
 			</div>
+			{/* todo display all tags as one list */}
+			{/* todo display resource type using an icon or something */}
 			<div className="flex flex-col gap-3">
 				<div className="flex items-center gap-3 md:justify-end">
 					{resource.tags.resourceType.map((tag) => (

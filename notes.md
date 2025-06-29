@@ -118,10 +118,10 @@
 
 - https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast https://www.youtube.com/playlist?list=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
 - https://www.youtube.com/playlist?list=PLuxQzUzGg-5y2JBj7x0n9GjjEC3n0SrDs troop talk live series
-https://www.youtube.com/feeds/videos.xml?playlist_id=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
+  https://www.youtube.com/feeds/videos.xml?playlist_id=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
 - https://feeds.buzzsprout.com/983503.rss
-rssbridge
-rsshub
+  rssbridge
+  rsshub
 
 ## high adventure bases
 

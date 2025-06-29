@@ -15,6 +15,7 @@ export type PostWithFeedMeta = {
 	feedMeta: FeedMeta;
 };
 
+// todo add more metadata to feeds or link it up to a resource object
 /** a feed configuration object */
 export type FeedMeta = {
 	/** the name of the feed */
@@ -24,6 +25,8 @@ export type FeedMeta = {
 export type Feed = {
 	/** metadata about this feed */
 	meta: FeedMeta;
-	/** the posts returned by the feed */
-	posts: Post[];
+	/** the feed provider function */
+	fetch: FeedProvider;
 };
+
+export type FeedProvider = () => Promise<Post[]>;

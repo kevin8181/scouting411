@@ -1,18 +1,20 @@
-import type { Post } from "@/features/feeds/types";
+import type { FeedProvider } from "@/features/feeds/types";
 
 //todo figure out how to get full post history
 
-export async function ttaProvider(): Promise<Post[]> {
-	const response = await fetch("https://scouting.org/wp-json/wp/v2/tta-post");
+export function ttaProvider(): FeedProvider {
+	return async () => {
+		const response = await fetch("https://scouting.org/wp-json/wp/v2/tta-post");
 
-	const posts: ttaApiPost[] = await response.json();
+		const posts: ttaApiPost[] = await response.json();
 
-	return posts.map((post) => ({
-		url: post.link,
-		title: post.title.rendered,
-		description: post.yoast_head_json.description,
-		date: new Date(post.date_gmt),
-	}));
+		return posts.map((post) => ({
+			url: post.link,
+			title: post.title.rendered,
+			description: post.yoast_head_json.description,
+			date: new Date(post.date_gmt),
+		}));
+	};
 }
 
 type ttaApiPost = {

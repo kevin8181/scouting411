@@ -1,16 +1,20 @@
 import RssParser from "rss-parser";
-import type { Post } from "@/features/feeds/types";
+import type { FeedProvider } from "@/features/feeds/types";
 
-export async function rssProvider(opts: rssProviderOpts): Promise<Post[]> {
-	const rssParser = new RssParser();
-	const feed = await rssParser.parseURL(opts.feedUrl);
+//todo figure out how to fetch older/paginated data
 
-	return feed.items.map((item) => ({
-		url: item.link!,
-		title: item.title!,
-		description: item.contentSnippet ?? "",
-		date: new Date(item.isoDate!),
-	}));
+export function rssProvider(opts: rssProviderOpts): FeedProvider {
+	return async () => {
+		const rssParser = new RssParser();
+		const feed = await rssParser.parseURL(opts.feedUrl);
+
+		return feed.items.map((item) => ({
+			url: item.link!,
+			title: item.title!,
+			description: item.contentSnippet ?? "",
+			date: new Date(item.isoDate!),
+		}));
+	};
 }
 
 type rssProviderOpts = {

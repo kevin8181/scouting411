@@ -11,7 +11,9 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 				dangerouslySetInnerHTML={{ __html: post.post.title }}
 			/>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
+				{/* todo make this a link/button that does something */}
 				<span className="underline">{post.feedMeta.name}</span>
+
 				<span className="font-bold">&middot;</span>
 				<span className="whitespace-nowrap">
 					{post.post.date?.toLocaleDateString("en-US", {

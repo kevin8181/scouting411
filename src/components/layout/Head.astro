@@ -5,6 +5,7 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 
 <head>
 	<meta charset="utf-8" />
+	<!-- todo add favicon -->
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<meta name="viewport" content="width=device-width" />
 	<meta name="generator" content={Astro.generator} />
@@ -13,10 +14,15 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 		rel="alternate"
 		type="application/rss+xml"
 		title="Scouting411"
-		href={new URL("rss.xml", Astro.site)}
+		href={new URL("/feeds/rss.xml", Astro.site)}
 	/>
+
+	<!-- todo remove this before production -->
 	<meta name="robots" content="noindex" />
+
 	<title>Scouting411</title>
+
+	<!-- todo add opengraph tags and meta description -->
 
 	<Font cssVariable="--font-roboto-slab" preload />
 	<Font cssVariable="--font-roboto" preload />

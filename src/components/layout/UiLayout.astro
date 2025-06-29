@@ -7,13 +7,14 @@ import Sidebar from "@/components/layout/sidebar";
 <Layout>
 	<body>
 		<!-- header main column -->
-		<div class="h-dvh w-dvw flex flex-col">
+		<div class="flex h-dvh w-dvw flex-col">
 			<Header />
 
-			 <!-- sidebar beside main row-->
+			<!-- sidebar beside main row-->
 			<div class="flex h-full">
 				<Sidebar />
 
+				<!-- todo make it so the content of main always fills the content area, and if it overflows, there's an internal scroll rather than page-level -->
 				<main class="grow">
 					<slot />
 				</main>

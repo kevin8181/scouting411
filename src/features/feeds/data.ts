@@ -8,7 +8,7 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Scouts BSA Program Updates",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://scouting.org",
 			categoryFilter: 15054,
 		}),
@@ -17,7 +17,7 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Cub Scouts Program Updates",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15053,
 		}),
@@ -26,9 +26,8 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Scouting Wire",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://scoutingwire.org",
-			categoryFilter: undefined,
 			//todo split by categories?
 		}),
 	},
@@ -36,7 +35,7 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Scouting Newsroom",
 		},
-		posts: await rssProvider({
+		fetch: rssProvider({
 			feedUrl: "https://scoutingnewsroom.org/feed",
 			//for some reason the wordpress posts api doesn't return any results on this site
 		}),
@@ -45,7 +44,7 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Abilities Digest",
 		},
-		posts: await rssProvider({
+		fetch: rssProvider({
 			feedUrl: "https://ablescouts.org/feed/",
 			//wordpress api comes back 404
 		}),
@@ -54,61 +53,55 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Scouting Magazine",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://blog.scoutingmagazine.org/",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "Summit Blog",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://summitbsa.org",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "Scout Life",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://scoutlife.org",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "Scouting Alumni",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://scoutingalumni.org",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "National Eagle Scout Association",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://nesa.org",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "Scouting America Foundation",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://scoutingamericafoundation.org",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "OA News",
 		},
-		posts: await rssProvider({
+		fetch: rssProvider({
 			feedUrl: "https://oa-scouting.org/rss.xml",
 			//not wordpress. might be bespoke. find out about if there's an api or a better feed to use
 		}),
@@ -117,25 +110,23 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Sea Scouts News",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://seascout.org/",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "Troop Leader Resource Updates",
 		},
-		posts: await wordpressProvider({
+		fetch: wordpressProvider({
 			baseUrl: "https://troopleader.scouting.org",
-			categoryFilter: undefined,
 		}),
 	},
 	{
 		meta: {
 			name: "ScoutCast",
 		},
-		posts: await rssProvider({
+		fetch: rssProvider({
 			feedUrl: "https://podcast.scouting.org/category/scoutcast/feed/",
 		}),
 	},
@@ -143,7 +134,7 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "CubCast",
 		},
-		posts: await rssProvider({
+		fetch: rssProvider({
 			feedUrl: "https://podcast.scouting.org/category/cubcast/feed/",
 		}),
 	},
@@ -151,6 +142,6 @@ export const feeds: Feed[] = [
 		meta: {
 			name: "Trail to Adventure",
 		},
-		posts: await ttaProvider(),
-	}
+		fetch: ttaProvider(),
+	},
 ];

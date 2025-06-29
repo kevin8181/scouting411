@@ -1,7 +1,8 @@
 export default function Sidebar() {
 	return (
-		<aside className="bg-brand-gray-2 w-64 min-w-64 flex-col justify-between hidden xl:flex">
+		<aside className="bg-brand-gray-2 hidden w-64 min-w-64 flex-col justify-between xl:flex">
 			<nav className="text-brand-gray-10 flex flex-col p-4">
+				{/* todo break out nav link into separate component, add active state, add icon slot */}
 				<a
 					href="/"
 					className="hover:bg-brand-gray-1 hover:border-brand-gray-3 rounded-lg border border-transparent px-2 py-1.5"
@@ -24,7 +25,7 @@ export default function Sidebar() {
 			<div>
 				<nav className="flex flex-col p-4">
 					<a
-						href="/rss.xml"
+						href="/feeds/rss.xml"
 						target="_blank"
 						className="hover:bg-brand-gray-1 hover:border-brand-gray-3 rounded-lg border border-transparent px-2 py-1.5"
 					>
@@ -40,8 +41,8 @@ export default function Sidebar() {
 					</a>
 				</nav>
 				<div className="bg-brand-gray-3 px-4 py-2 text-xs">
-					Not affiliated with Boy Scouts of America. Updated{" "}
-					{new Date().toLocaleString()}.
+					Not affiliated with Boy Scouts of America. Built at{" "}
+					{new Date().toISOString()}.
 				</div>
 			</div>
 		</aside>
