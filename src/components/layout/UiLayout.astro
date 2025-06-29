@@ -1,21 +1,25 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import Header from "@/components/layout/Header.astro";
-import Sidebar from "@/components/layout/sidebar";
+import Sidebar from "@/components/layout/sidebar/sidebar";
 ---
 
 <Layout>
 	<body>
 		<!-- header main column -->
-		<div class="flex h-dvh w-dvw flex-col">
-			<Header />
+		<div class="flex h-dvh w-full flex-col">
+			<header
+				class="bg-brand-blue flex h-[52px] items-center justify-between px-5 py-3 text-white"
+			>
+				<a href="/" class="font-display text-xl font-[800]">Scouting411</a>
+				<!-- todo add hamburger menu trigger -->
+				<button class="bg-brand-gray-1 aspect-square h-full xl:hidden"></button>
+			</header>
 
 			<!-- sidebar beside main row-->
-			<div class="flex h-full">
-				<Sidebar />
+			<div class="flex h-[calc(100vh-52px)]">
+				<Sidebar url={Astro.url} />
 
-				<!-- todo make it so the content of main always fills the content area, and if it overflows, there's an internal scroll rather than page-level -->
-				<main class="grow">
+				<main class="h-full w-full overflow-auto">
 					<slot />
 				</main>
 			</div>
