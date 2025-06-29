@@ -2,8 +2,18 @@
 
 @theme inline {
 	--color-brand-blue: #003f87;
-	--color-brand-gray-1: #f2f2f2;
 	--color-brand-red: #ce1126;
+	
+	--color-brand-gray-1: #f2f2f2;
+	--color-brand-gray-2: #e6e6e6;
+	--color-brand-gray-3: #cccccc;
+	--color-brand-gray-4: #b3b3b3;
+	--color-brand-gray-5: #999999;
+	--color-brand-gray-6: #808080;
+	--color-brand-gray-7: #666666;
+	--color-brand-gray-8: #4d4d4d;
+	--color-brand-gray-9: #333333;
+	--color-brand-gray-10: #1a1a1a;
 
 	--font-serif: var(--font-roboto-slab);
 	--font-sans: var(--font-roboto);

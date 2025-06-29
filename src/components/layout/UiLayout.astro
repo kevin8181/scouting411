@@ -1,18 +1,23 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
+import Sidebar from "@/components/layout/sidebar";
 ---
 
 <Layout>
 	<body>
-		<div class="bg-brand-gray-1 min-h-screen">
+		<!-- header main column -->
+		<div class="h-dvh w-dvw flex flex-col">
 			<Header />
 
-			<main>
-				<slot />
-			</main>
+			 <!-- sidebar beside main row-->
+			<div class="flex h-full">
+				<Sidebar />
+
+				<main class="grow">
+					<slot />
+				</main>
+			</div>
 		</div>
-		<Footer />
 	</body>
 </Layout>
