@@ -2,13 +2,17 @@ import type { Post, PostWithFeedMeta } from "@/features/feeds/types";
 
 export function Post({ post }: { post: PostWithFeedMeta }) {
 	return (
-		<div className="shadow-card flex flex-col items-start gap-3 rounded bg-white p-6">
+		<div className="border-brand-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a
 				href={post.post.url + "?utm_source=scouting411"}
 				rel="noopener noreferrer"
 				target="_blank"
 				className="text-brand-blue font-serif text-xl font-bold hover:underline"
 				dangerouslySetInnerHTML={{ __html: post.post.title }}
+			/>
+			<span
+				className="text-sm"
+				dangerouslySetInnerHTML={{ __html: post.post.description ?? "" }}
 			/>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				{/* todo make this a link/button that does something */}
@@ -23,10 +27,6 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 					})}
 				</span>
 			</span>
-			<span
-				className="text-sm"
-				dangerouslySetInnerHTML={{ __html: post.post.description ?? "" }}
-			/>
 		</div>
 	);
 }

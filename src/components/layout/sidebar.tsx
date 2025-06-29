@@ -1,6 +1,6 @@
 export default function Sidebar() {
 	return (
-		<aside className="bg-brand-gray-2 hidden w-64 min-w-64 flex-col justify-between xl:flex">
+		<aside className="bg-brand-gray-2 hidden w-64 min-w-64 flex-col justify-between xl:flex border-r border-brand-gray-3">
 			<nav className="text-brand-gray-10 flex flex-col p-4">
 				{/* todo break out nav link into separate component, add active state, add icon slot */}
 				<a
@@ -40,7 +40,7 @@ export default function Sidebar() {
 						GitHub
 					</a>
 				</nav>
-				<div className="bg-brand-gray-3 px-4 py-2 text-xs">
+				<div className="px-4 py-3 text-xs">
 					Not affiliated with Boy Scouts of America. Built at{" "}
 					{new Date().toISOString()}.
 				</div>
