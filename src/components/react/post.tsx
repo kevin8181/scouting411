@@ -4,7 +4,7 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 	return (
 		<div className="border-brand-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a
-				href={post.post.url + "?utm_source=scouting411"}
+				href={post.post.url}
 				rel="noopener noreferrer"
 				target="_blank"
 				className="text-brand-blue font-serif text-xl font-bold hover:underline"

@@ -5,7 +5,7 @@ export function Resource({ resource }: { resource: Resource }) {
 		<div className=" flex flex-col justify-between gap-3 rounded-lg border border-brand-gray-3 bg-white p-6 md:flex-row">
 			<div className="flex flex-col gap-3">
 				<a
-					href={resource.url + "?utm_source=scouting411"}
+					href={resource.url}
 					rel="noopener noreferrer"
 					target="_blank"
 					className="text-brand-blue font-serif text-xl font-bold hover:underline"
