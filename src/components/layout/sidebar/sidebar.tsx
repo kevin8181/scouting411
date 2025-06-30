@@ -1,4 +1,6 @@
 import { NavLink } from "@/components/layout/sidebar/navLink";
+import { NavGroup } from "@/components/layout/sidebar/navGroup";
+import { NavDivider } from "@/components/layout/sidebar/navDivider";
 import {
 	faBookBookmark,
 	faHome,
@@ -9,8 +11,8 @@ import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
 export default function Sidebar({ url }: { url: URL }) {
 	return (
-		<aside className="bg-brand-gray-1 border-brand-gray-3 hidden w-64 min-w-64 flex-col justify-between border-r xl:flex">
-			<nav className="text-brand-gray-10 flex flex-col gap-[2px] p-3">
+		<aside className="bg-brand-gray-1 border-brand-gray-3 hidden w-64 min-w-64 flex-col justify-between border-r xl:flex" aria-label="Main sidebar">
+			<NavGroup>
 				<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
 				<NavLink
 					href="/feed"
@@ -24,9 +26,10 @@ export default function Sidebar({ url }: { url: URL }) {
 					currentUrl={url}
 					icon={faBookBookmark}
 				/>
-			</nav>
+			</NavGroup>
+
 			<div>
-				<nav className="flex flex-col p-3">
+				<NavGroup label="about">
 					<NavLink
 						href="/feeds/rss.xml"
 						label="RSS Feed"
@@ -41,8 +44,9 @@ export default function Sidebar({ url }: { url: URL }) {
 						currentUrl={url}
 						icon={faGitAlt}
 					/>
-				</nav>
-				<div className="p-3 text-xs">
+				</NavGroup>
+				<NavDivider />
+				<div className="p-3 text-xs text-brand-gray-8">
 					Not affiliated with Boy Scouts of America. Built at{" "}
 					{new Date().toISOString()}.
 				</div>

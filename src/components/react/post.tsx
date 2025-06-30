@@ -8,12 +8,11 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 				rel="noopener noreferrer"
 				target="_blank"
 				className="text-brand-blue font-serif text-xl font-bold hover:underline"
-				dangerouslySetInnerHTML={{ __html: post.post.title }}
-			/>
-			<span
-				className="text-sm"
-				dangerouslySetInnerHTML={{ __html: post.post.description ?? "" }}
-			/>
+				
+			>
+				{post.post.title}
+			</a>
+			<span className="text-sm">{post.post.description}</span>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				{/* todo make this a link/button that does something */}
 				<span className="underline">{post.feedMeta.name}</span>
