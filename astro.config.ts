@@ -17,6 +17,7 @@ export default defineConfig({
 
 	site: "https://scouting411.org/",
 	devToolbar: { enabled: false },
+	trailingSlash: "never",
 
 	experimental: {
 		fonts: [
