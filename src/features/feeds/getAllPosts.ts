@@ -9,16 +9,18 @@ export async function getAllPosts() {
 		return cachedPosts;
 	}
 
-	const returnPosts: PostWithFeedMeta[] = (await Promise.all(
-		feeds.map(async (feed) => {
-			const posts = await feed.fetch();
+	const returnPosts: PostWithFeedMeta[] = (
+		await Promise.all(
+			feeds.map(async (feed) => {
+				const posts = await feed.fetch();
 
-			return posts.map((post) => ({
-				post,
-				feedMeta: feed.meta,
-			}));
-		}),
-	)).flat();
+				return posts.map((post) => ({
+					post,
+					feedMeta: feed.meta,
+				}));
+			}),
+		)
+	).flat();
 
 	//sort by date descending
 	returnPosts.sort((a, b) => b.post.date.getTime() - a.post.date.getTime());

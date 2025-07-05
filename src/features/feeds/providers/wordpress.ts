@@ -16,7 +16,8 @@ export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 		return posts.map((post) => ({
 			url: post.link,
 			title: post.title.rendered,
-			description: post.yoast_head_json?.og_description ?? post.excerpt.rendered,
+			description:
+				post.yoast_head_json?.og_description ?? post.excerpt.rendered,
 			date: new Date(post.date_gmt),
 		}));
 	};
@@ -36,9 +37,9 @@ type wordpressApiPost = {
 	};
 	excerpt: {
 		rendered: string;
-	}
+	};
 	yoast_head_json?: {
 		og_description: string;
-	}
+	};
 	date_gmt: string;
 };

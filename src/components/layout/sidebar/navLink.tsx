@@ -24,7 +24,7 @@ export function NavLink({
 		<a
 			href={href}
 			className={
-				"hover:border-brand-gray-3 rounded-lg border px-3 py-2 text-sm flex items-center gap-2.5 " +
+				"hover:border-brand-gray-3 flex items-center gap-2.5 rounded-lg border px-3 py-2 text-sm " +
 				activeStateCss
 			}
 			target={newTab ? "_blank" : undefined}

@@ -2,7 +2,7 @@ import type { Resource } from "@/features/resources/types";
 
 export function Resource({ resource }: { resource: Resource }) {
 	return (
-		<div className=" flex flex-col justify-between gap-3 rounded-lg border border-brand-gray-3 bg-white p-6 md:flex-row">
+		<div className="border-brand-gray-3 flex flex-col justify-between gap-3 rounded-lg border bg-white p-6 md:flex-row">
 			<div className="flex flex-col gap-3">
 				<a
 					href={resource.url}

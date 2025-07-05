@@ -7,7 +7,7 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 				href={post.post.url}
 				rel="noopener noreferrer"
 				target="_blank"
-				className="text-brand-blue font-serif text-xl font-bold hover:underline hyphens-auto wrap-anywhere"
+				className="text-brand-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
 			>
 				{post.post.title}
 			</a>
