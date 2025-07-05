@@ -23,7 +23,6 @@ export const GET: APIRoute = async (context) => {
 		})),
 		// (optional) inject custom xml
 		customData: `<language>en-us</language>`,
-		stylesheet: "/rss.xsl",
 		trailingSlash: false,
 	});
 };
