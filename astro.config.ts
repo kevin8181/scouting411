@@ -9,11 +9,7 @@ import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-	adapter: vercel({
-		isr: {
-			expiration: 60 * 60 * 24, // static regeneration happens every 24 hours
-		},
-	}),
+	adapter: vercel(),
 
 	site: "https://scouting411.org/",
 	devToolbar: { enabled: false },

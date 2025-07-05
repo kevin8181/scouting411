@@ -1,6 +1,7 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import Sidebar from "@/components/layout/sidebar/sidebar";
+import { Hamburger } from "@/components/layout/sidebar/hamburger";
 ---
 
 <Layout>
@@ -11,8 +12,7 @@ import Sidebar from "@/components/layout/sidebar/sidebar";
 				class="bg-brand-blue flex h-[52px] items-center justify-between px-5 py-3 text-white"
 			>
 				<a href="/" class="font-display text-xl font-[800]">Scouting411</a>
-				<!-- todo add hamburger menu trigger -->
-				<button class="bg-brand-gray-1 aspect-square h-full xl:hidden"></button>
+				<Hamburger client:idle />
 			</header>
 
 			<!-- sidebar beside main row-->
