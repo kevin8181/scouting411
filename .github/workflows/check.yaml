@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   Testing:
     runs-on: ubuntu-latest
@@ -24,6 +27,9 @@ jobs:
 
       - name: Formatting Check
         run: pnpm format
+
+      - name: Autofix Formatting
+        uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27
 
       - name: Type Checking
         run: pnpm astro check
