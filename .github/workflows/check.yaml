@@ -15,7 +15,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-          cache: "pnpm"
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm and dependencies
