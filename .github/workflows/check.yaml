@@ -1,4 +1,4 @@
-name: autofix.ci
+name: CI Checks
 
 on:
   push:
@@ -26,10 +26,7 @@ jobs:
           run_install: true
 
       - name: Formatting Check
-        run: pnpm format
-
-      - name: Autofix Formatting
-        uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27
+        run: pnpm format:check
 
       - name: Type Checking
         run: pnpm astro check

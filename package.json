@@ -7,6 +7,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"format": "prettier --write .",
+		"format:check": "prettier --check .",
 		"lint": "npx eslint \"src/**/*\"",
 		"check": "npm run astro check && npm run format && npm run lint && echo '✅ All checks passed.'",
 		"checkResources": "tsx src/scripts/checkResources.ts"
