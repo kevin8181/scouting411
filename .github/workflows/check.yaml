@@ -1,4 +1,4 @@
-name: CI Checks
+name: CI
 
 on:
   push:
@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  Testing:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,10 +30,12 @@ jobs:
 
       - name: Type Checking
         run: pnpm astro check
-        # todo fix this step failing
 
       - name: Linting
         run: pnpm lint
 
       - name: Validate Resource Links
         run: pnpm checkResources
+        
+    outputs:
+      status: ${{ job.status }}
