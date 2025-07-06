@@ -7,6 +7,8 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Scouts BSA Program Updates",
+			homepageUrl:
+				"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://scouting.org",
@@ -16,6 +18,8 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Cub Scouts Program Updates",
+			homepageUrl:
+				"https://www.scouting.org/topics/program-updates/program-updates-cub-scouts",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://www.scouting.org",
@@ -25,6 +29,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Scouting Wire",
+			homepageUrl: "https://scoutingwire.org",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://scoutingwire.org",
@@ -34,6 +39,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Scouting Newsroom",
+			homepageUrl: "https://scoutingnewsroom.org",
 		},
 		fetch: rssProvider({
 			feedUrl: "https://scoutingnewsroom.org/feed",
@@ -43,23 +49,26 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Abilities Digest",
+			homepageUrl: "https://ablescouts.org",
 		},
 		fetch: rssProvider({
-			feedUrl: "https://ablescouts.org/feed/",
+			feedUrl: "https://ablescouts.org/feed",
 			//wordpress api comes back 404
 		}),
 	},
 	{
 		meta: {
 			name: "Scouting Magazine",
+			homepageUrl: "https://blog.scoutingmagazine.org",
 		},
 		fetch: wordpressProvider({
-			baseUrl: "https://blog.scoutingmagazine.org/",
+			baseUrl: "https://blog.scoutingmagazine.org",
 		}),
 	},
 	{
 		meta: {
 			name: "Summit Blog",
+			homepageUrl: "https://www.summitbsa.org/blog",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://summitbsa.org",
@@ -68,6 +77,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Scout Life",
+			homepageUrl: "https://scoutlife.org",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://scoutlife.org",
@@ -76,6 +86,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Scouting Alumni",
+			homepageUrl: "https://scoutingalumni.org/news",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://scoutingalumni.org",
@@ -84,6 +95,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "National Eagle Scout Association",
+			homepageUrl: "https://nesa.org/news",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://nesa.org",
@@ -92,6 +104,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Scouting America Foundation",
+			homepageUrl: "https://scoutingamericafoundation.org/foundation-news",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://scoutingamericafoundation.org",
@@ -100,6 +113,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "OA News",
+			homepageUrl: "https://oa-scouting.org/news",
 		},
 		fetch: rssProvider({
 			feedUrl: "https://oa-scouting.org/rss.xml",
@@ -109,6 +123,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Sea Scouts News",
+			homepageUrl: "https://seascout.org/latest-news",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://seascout.org/",
@@ -117,6 +132,7 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "Troop Leader Resource Updates",
+			homepageUrl: "https://troopleader.scouting.org/updates-blog",
 		},
 		fetch: wordpressProvider({
 			baseUrl: "https://troopleader.scouting.org",
@@ -125,22 +141,26 @@ export const feeds: Feed[] = [
 	{
 		meta: {
 			name: "ScoutCast",
+			homepageUrl: "https://podcast.scouting.org/category/scoutcast",
 		},
 		fetch: rssProvider({
-			feedUrl: "https://podcast.scouting.org/category/scoutcast/feed/",
+			feedUrl: "https://podcast.scouting.org/category/scoutcast/feed",
 		}),
 	},
 	{
 		meta: {
 			name: "CubCast",
+			homepageUrl: "https://podcast.scouting.org/category/cubcast",
 		},
 		fetch: rssProvider({
-			feedUrl: "https://podcast.scouting.org/category/cubcast/feed/",
+			feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
 		}),
 	},
 	{
 		meta: {
 			name: "Trail to Adventure",
+			homepageUrl:
+				"https://www.scouting.org/outdoor-programs/trail-to-adventure",
 		},
 		fetch: ttaProvider(),
 	},
