@@ -16,7 +16,14 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 			</span>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				{/* todo make this a link/button that does something */}
-				<span className="underline">{post.feedMeta.name}</span>
+				<a
+					href={post.feedMeta.homepageUrl}
+					rel="noopener noreferrer"
+					target="_blank"
+					className="underline"
+				>
+					{post.feedMeta.name}
+				</a>
 
 				<span className="font-bold">&middot;</span>
 				<span className="whitespace-nowrap">

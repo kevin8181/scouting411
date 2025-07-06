@@ -1,3 +1,5 @@
+import type { UrlShaped } from "@/util/utilTypes";
+
 /** a parsed post object returned by one of the feed adapters */
 export type Post = {
 	/** the original url of the post */
@@ -20,6 +22,8 @@ export type PostWithFeedMeta = {
 export type FeedMeta = {
 	/** the name of the feed */
 	name: string;
+	/** the web homepage url of the feed */
+	homepageUrl: UrlShaped;
 };
 
 export type Feed = {
