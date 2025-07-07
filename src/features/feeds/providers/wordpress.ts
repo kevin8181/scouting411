@@ -1,4 +1,5 @@
 import type { FeedProvider } from "@/features/feeds/types";
+import he from "he";
 
 //todo fetch the full post history
 
@@ -17,9 +18,10 @@ export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 
 			return posts.map((post) => ({
 				url: post.link,
-				title: post.title.rendered,
-				description:
+				title: he.decode(post.title.rendered),
+				description: he.decode(
 					post.yoast_head_json?.og_description ?? post.excerpt.rendered,
+				),
 				date: new Date(post.date_gmt),
 			}));
 		},
