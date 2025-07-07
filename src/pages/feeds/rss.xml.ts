@@ -19,7 +19,7 @@ export const GET: APIRoute = async (context) => {
 			description: item.post.description,
 			pubDate: item.post.date,
 			link: item.post.url,
-			categories: [item.feedMeta.name],
+			categories: [item.feed.name],
 		})),
 		// (optional) inject custom xml
 		customData: `<language>en-us</language>`,

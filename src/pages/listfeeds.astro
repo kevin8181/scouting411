@@ -1,0 +1,24 @@
+---
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { feeds } from "@/features/feeds/config";
+---
+
+<UiLayout title="Feeds">
+	<div class="flex flex-col gap-4 p-4">
+		{
+			feeds.map(async (feed) => (
+				<div class="flex gap-4 items-center">
+					<a
+						href={feed.homepageUrl}
+						rel="noopener noreferrer"
+						target="_blank"
+						class="text-brand-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
+					>
+						{feed.name}
+					</a>
+					<span>{(await feed.posts()).length} posts</span>
+				</div>
+			))
+		}
+	</div>
+</UiLayout>
