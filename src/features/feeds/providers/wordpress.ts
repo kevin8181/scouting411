@@ -1,5 +1,7 @@
 import type { FeedProvider } from "@/features/feeds/types";
 
+//todo fetch the full post history
+
 export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 	return async () => {
 		const url = new URL(

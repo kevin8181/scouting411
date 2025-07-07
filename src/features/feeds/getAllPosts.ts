@@ -1,7 +1,6 @@
 import { feeds } from "@/features/feeds/config";
 import type { PostWithFeed } from "@/features/feeds/types";
 
-// todo for now, cache on first fetch and don't ever refetch on this same build
 const cachedPosts: PostWithFeed[] = [];
 
 export async function getAllPosts() {
@@ -15,7 +14,7 @@ export async function getAllPosts() {
 				const posts = await feed.posts();
 
 				return posts.map((post) => ({
-					post,
+					...post,
 					feed: feed,
 				}));
 			}),
@@ -23,7 +22,7 @@ export async function getAllPosts() {
 	).flat();
 
 	//sort by date descending
-	returnPosts.sort((a, b) => b.post.date.getTime() - a.post.date.getTime());
+	returnPosts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
 	cachedPosts.push(...returnPosts);
 

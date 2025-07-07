@@ -14,12 +14,12 @@ export const GET: APIRoute = async (context) => {
 		site: context.site ?? "",
 		// Array of `<item>`s in output xml
 		// See "Generating items" section for examples using content collections and glob imports
-		items: (await getAllPosts()).map((item) => ({
-			title: item.post.title,
-			description: item.post.description,
-			pubDate: item.post.date,
-			link: item.post.url,
-			categories: [item.feed.name],
+		items: (await getAllPosts()).map((post) => ({
+			title: post.title,
+			description: post.description,
+			pubDate: post.date,
+			link: post.url,
+			categories: [post.feed.name],
 		})),
 		// (optional) inject custom xml
 		customData: `<language>en-us</language>`,

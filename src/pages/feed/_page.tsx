@@ -5,8 +5,8 @@ import { getAllPosts } from "@/features/feeds/getAllPosts";
 export async function IndexPage() {
 	return (
 		<CardList>
-			{(await getAllPosts()).map((item) => (
-				<Post post={item} key={item.post.url} />
+			{(await getAllPosts()).map((post) => (
+				<Post post={post} key={post.url} />
 			))}
 		</CardList>
 	);
