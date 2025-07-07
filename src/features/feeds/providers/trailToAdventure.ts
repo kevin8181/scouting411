@@ -1,5 +1,7 @@
 import type { FeedProvider } from "@/features/feeds/types";
 
+import he from "he";
+
 //todo fetch the full post history
 
 export function ttaProvider(): FeedProvider {
@@ -14,7 +16,7 @@ export function ttaProvider(): FeedProvider {
 
 			return posts.map((post) => ({
 				url: post.link,
-				title: post.title.rendered,
+				title: he.decode(post.title.rendered),
 				description: post.yoast_head_json.description,
 				date: new Date(post.date_gmt),
 			}));
