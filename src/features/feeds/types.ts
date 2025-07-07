@@ -1,7 +1,7 @@
 import type { Feed } from "@/features/feeds/feed";
 
-/** a parsed post object returned by one of the feed adapters */
-export type Post = {
+/** a raw post data object returned by one of the feed adapters */
+export type PostData = {
 	/** the original url of the post */
 	url: string;
 	/** the title of the post */
@@ -12,10 +12,11 @@ export type Post = {
 	date: Date;
 };
 
-export type PostWithFeed = Post & { feed: Feed };
+/** Represents a post within a feed */
+export type Post = PostData & { feed: Feed };
 
 /** an instance of a feed provider */
 export type FeedProvider = {
 	type: string;
-	fetch: () => Promise<Post[]>;
+	fetch: () => Promise<PostData[]>;
 };

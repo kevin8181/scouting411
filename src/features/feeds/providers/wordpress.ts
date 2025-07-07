@@ -14,6 +14,12 @@ export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 			).toString();
 
 			const response = await fetch(url);
+
+			if (response.status !== 200) {
+				throw new Error(`failed to fetch posts from ${url}- status code ${response.status}`);	
+			}
+
+
 			const posts: wordpressApiPost[] = await response.json();
 
 			return posts.map((post) => ({
