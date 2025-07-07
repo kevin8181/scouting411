@@ -1,6 +1,6 @@
-import type { Post, PostWithFeed } from "@/features/feeds/types";
+import type { Post } from "@/features/feeds/types";
 
-export function Post({ post }: { post: PostWithFeed }) {
+export function Post({ post }: { post: Post }) {
 	return (
 		<div className="border-brand-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a

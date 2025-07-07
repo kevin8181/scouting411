@@ -1,16 +1,15 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
-import { feeds } from "@/features/feeds/config";
-import { getAllPosts } from "@/features/feeds/getAllPosts";
+import { Feed } from "@/features/feeds/feed";
 
 //todo remove this page
 ---
 
 <UiLayout title="Feeds">
 	<div class="flex flex-col gap-4 p-4">
-		<span>{(await getAllPosts()).length} total posts</span>
+		<span>{(await Feed.allPosts()).length} total posts</span>
 		{
-			feeds.map(async (feed) => (
+			Feed.instances.map(async (feed) => (
 				<div class="flex items-center gap-4">
 					<a
 						href={feed.homepageUrl}
