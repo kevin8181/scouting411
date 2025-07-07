@@ -1,17 +1,33 @@
 import type { FeedProvider } from "@/features/feeds/types";
 
-//todo figure out how to fetch older/paginated data
-
 export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 	return async () => {
-		const url = new URL(
-			`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
-			opts.baseUrl,
-		).toString();
+		const posts: wordpressApiPost[] = [];
 
-		const response = await fetch(url);
+		let page = 1;
+		let totalPages = 1;
 
-		const posts: wordpressApiPost[] = await response.json();
+		while (page <= totalPages) {
+
+			console.log(`fetching page ${page}`);
+
+			const url = new URL(
+				`/wp-json/wp/v2/posts?page=${page}&per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
+				opts.baseUrl,
+			).toString();
+
+			const response = await fetch(url);
+
+			posts.push(await response.json());
+
+			page++;
+
+			if (response.headers.get("X-WP-TotalPages")) {
+				totalPages = parseInt(response.headers.get("X-WP-TotalPages")!);
+			}
+
+			console.log(`there are ${totalPages} pages`);
+		}
 
 		return posts.map((post) => ({
 			url: post.link,
