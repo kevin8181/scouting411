@@ -12,10 +12,7 @@ export type Post = {
 	date: Date;
 };
 
-export type PostWithFeed = {
-	post: Post;
-	feed: Feed;
-};
+export type PostWithFeed = Post & { feed: Feed };
 
 /** a function which fetches and returns the posts from a feed */
 export type FeedProvider = () => Promise<Post[]>;

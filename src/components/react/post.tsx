@@ -4,15 +4,15 @@ export function Post({ post }: { post: PostWithFeed }) {
 	return (
 		<div className="border-brand-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a
-				href={post.post.url}
+				href={post.url}
 				rel="noopener noreferrer"
 				target="_blank"
 				className="text-brand-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
 			>
-				{post.post.title}
+				{post.title}
 			</a>
 			<span className="text-sm wrap-anywhere hyphens-auto">
-				{post.post.description}
+				{post.description}
 			</span>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				{/* todo make this a link/button that does something */}
@@ -27,7 +27,7 @@ export function Post({ post }: { post: PostWithFeed }) {
 
 				<span className="font-bold">&middot;</span>
 				<span className="whitespace-nowrap">
-					{post.post.date?.toLocaleDateString("en-US", {
+					{post.date?.toLocaleDateString("en-US", {
 						year: "numeric",
 						month: "long",
 						day: "numeric",

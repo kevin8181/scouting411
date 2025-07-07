@@ -1,10 +1,12 @@
 import type { FeedProvider } from "@/features/feeds/types";
 
-//todo figure out how to get full post history
+//todo fetch the full post history
 
 export function ttaProvider(): FeedProvider {
 	return async () => {
-		const response = await fetch("https://scouting.org/wp-json/wp/v2/tta-post");
+		const response = await fetch(
+			"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
+		);
 
 		const posts: ttaApiPost[] = await response.json();
 

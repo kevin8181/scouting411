@@ -1,7 +1,7 @@
 import RssParser from "rss-parser";
 import type { FeedProvider } from "@/features/feeds/types";
 
-//todo figure out how to fetch older/paginated data
+//todo fetch the full post history
 
 export function rssProvider(opts: rssProviderOpts): FeedProvider {
 	return async () => {
