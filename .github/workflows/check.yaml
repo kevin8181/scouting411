@@ -35,7 +35,7 @@ jobs:
         run: pnpm lint
 
       - name: Validate Resource Links
-        run: pnpm checkResources
+        run: pnpm validateResourceLinks
 
     outputs:
       status: ${{ job.status }}
