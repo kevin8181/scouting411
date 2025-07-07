@@ -3,22 +3,26 @@ import type { FeedProvider } from "@/features/feeds/types";
 //todo fetch the full post history
 
 export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
-	return async () => {
-		const url = new URL(
-			`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
-			opts.baseUrl,
-		).toString();
+	return {
+		type: "wordpress",
 
-		const response = await fetch(url);
-		const posts: wordpressApiPost[] = await response.json();
+		fetch: async () => {
+			const url = new URL(
+				`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
+				opts.baseUrl,
+			).toString();
 
-		return posts.map((post) => ({
-			url: post.link,
-			title: post.title.rendered,
-			description:
-				post.yoast_head_json?.og_description ?? post.excerpt.rendered,
-			date: new Date(post.date_gmt),
-		}));
+			const response = await fetch(url);
+			const posts: wordpressApiPost[] = await response.json();
+
+			return posts.map((post) => ({
+				url: post.link,
+				title: post.title.rendered,
+				description:
+					post.yoast_head_json?.og_description ?? post.excerpt.rendered,
+				date: new Date(post.date_gmt),
+			}));
+		},
 	};
 }
 

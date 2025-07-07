@@ -3,19 +3,22 @@ import type { FeedProvider } from "@/features/feeds/types";
 //todo fetch the full post history
 
 export function ttaProvider(): FeedProvider {
-	return async () => {
-		const response = await fetch(
-			"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
-		);
+	return {
+		type: "tta",
+		fetch: async () => {
+			const response = await fetch(
+				"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
+			);
 
-		const posts: ttaApiPost[] = await response.json();
+			const posts: ttaApiPost[] = await response.json();
 
-		return posts.map((post) => ({
-			url: post.link,
-			title: post.title.rendered,
-			description: post.yoast_head_json.description,
-			date: new Date(post.date_gmt),
-		}));
+			return posts.map((post) => ({
+				url: post.link,
+				title: post.title.rendered,
+				description: post.yoast_head_json.description,
+				date: new Date(post.date_gmt),
+			}));
+		},
 	};
 }
 

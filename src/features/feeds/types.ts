@@ -14,5 +14,8 @@ export type Post = {
 
 export type PostWithFeed = Post & { feed: Feed };
 
-/** a function which fetches and returns the posts from a feed */
-export type FeedProvider = () => Promise<Post[]>;
+/** an instance of a feed provider */
+export type FeedProvider = {
+	type: string;
+	fetch: () => Promise<Post[]>;
+};

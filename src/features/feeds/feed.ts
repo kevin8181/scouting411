@@ -13,14 +13,14 @@ export class Feed {
 	private readonly _name: string;
 	private readonly _homepageUrl: UrlShaped;
 
-	private readonly provider: FeedProvider;
+	private readonly _provider: FeedProvider;
 	private cachedPosts: Post[];
 
 	constructor(opts: CreateFeedOpts) {
 		this._name = opts.name;
 		this._homepageUrl = opts.homepageUrl;
 
-		this.provider = opts.provider;
+		this._provider = opts.provider;
 
 		this.cachedPosts = [];
 	}
@@ -32,7 +32,7 @@ export class Feed {
 
 		console.log(`fetching posts for feed ${this.name}`);
 
-		this.cachedPosts = await this.provider();
+		this.cachedPosts = await this._provider.fetch();
 		return this.cachedPosts;
 	}
 
@@ -41,5 +41,8 @@ export class Feed {
 	}
 	get homepageUrl() {
 		return this._homepageUrl;
+	}
+	get type() {
+		return this._provider.type;
 	}
 }
