@@ -1,10 +1,14 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
 import { feeds } from "@/features/feeds/config";
+import { getAllPosts } from "@/features/feeds/getAllPosts";
+
+//todo remove this page
 ---
 
 <UiLayout title="Feeds">
 	<div class="flex flex-col gap-4 p-4">
+		<span>{(await getAllPosts()).length} total posts</span>
 		{
 			feeds.map(async (feed) => (
 				<div class="flex items-center gap-4">
@@ -17,6 +21,7 @@ import { feeds } from "@/features/feeds/config";
 						{feed.name}
 					</a>
 					<span>{(await feed.posts()).length} posts</span>
+					<span>{feed.type}</span>
 				</div>
 			))
 		}
