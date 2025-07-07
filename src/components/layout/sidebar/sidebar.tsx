@@ -6,6 +6,7 @@ import {
 	faHome,
 	faNewspaper,
 	faSquareRss,
+	faTableList,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
@@ -39,6 +40,12 @@ export default function Sidebar({ url }: { url: URL }) {
 						newTab
 						currentUrl={url}
 						icon={faSquareRss}
+					/>
+					<NavLink
+						href="/listfeeds"
+						label="List Feeds"
+						currentUrl={url}
+						icon={faTableList}
 					/>
 					<NavLink
 						href="https://github.com/kevin8181/scouting411"
