@@ -1,4 +1,4 @@
-import type { UrlShaped } from "@/util/utilTypes";
+import type { Feed } from "@/features/feeds/feed";
 
 /** a parsed post object returned by one of the feed adapters */
 export type Post = {
@@ -12,25 +12,10 @@ export type Post = {
 	date: Date;
 };
 
-export type PostWithFeedMeta = {
+export type PostWithFeed = {
 	post: Post;
-	feedMeta: FeedMeta;
+	feed: Feed;
 };
 
-// todo add more metadata to feeds or link it up to a resource object
-/** a feed configuration object */
-export type FeedMeta = {
-	/** the name of the feed */
-	name: string;
-	/** the web homepage url of the feed */
-	homepageUrl: UrlShaped;
-};
-
-export type Feed = {
-	/** metadata about this feed */
-	meta: FeedMeta;
-	/** the feed provider function */
-	fetch: FeedProvider;
-};
-
+/** a function which fetches and returns the posts from a feed */
 export type FeedProvider = () => Promise<Post[]>;

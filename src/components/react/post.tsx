@@ -1,6 +1,6 @@
-import type { Post, PostWithFeedMeta } from "@/features/feeds/types";
+import type { Post, PostWithFeed } from "@/features/feeds/types";
 
-export function Post({ post }: { post: PostWithFeedMeta }) {
+export function Post({ post }: { post: PostWithFeed }) {
 	return (
 		<div className="border-brand-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a
@@ -17,12 +17,12 @@ export function Post({ post }: { post: PostWithFeedMeta }) {
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				{/* todo make this a link/button that does something */}
 				<a
-					href={post.feedMeta.homepageUrl}
+					href={post.feed.homepageUrl}
 					rel="noopener noreferrer"
 					target="_blank"
 					className="underline"
 				>
-					{post.feedMeta.name}
+					{post.feed.name}
 				</a>
 
 				<span className="font-bold">&middot;</span>

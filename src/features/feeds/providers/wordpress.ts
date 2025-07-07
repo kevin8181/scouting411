@@ -2,32 +2,13 @@ import type { FeedProvider } from "@/features/feeds/types";
 
 export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 	return async () => {
-		const posts: wordpressApiPost[] = [];
+		const url = new URL(
+			`/wp-json/wp/v2/posts?per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
+			opts.baseUrl,
+		).toString();
 
-		let page = 1;
-		let totalPages = 1;
-
-		while (page <= totalPages) {
-
-			console.log(`fetching page ${page}`);
-
-			const url = new URL(
-				`/wp-json/wp/v2/posts?page=${page}&per_page=100${opts.categoryFilter ? `&categories=${opts.categoryFilter}` : ""}`,
-				opts.baseUrl,
-			).toString();
-
-			const response = await fetch(url);
-
-			posts.push(await response.json());
-
-			page++;
-
-			if (response.headers.get("X-WP-TotalPages")) {
-				totalPages = parseInt(response.headers.get("X-WP-TotalPages")!);
-			}
-
-			console.log(`there are ${totalPages} pages`);
-		}
+		const response = await fetch(url);
+		const posts: wordpressApiPost[] = await response.json();
 
 		return posts.map((post) => ({
 			url: post.link,
