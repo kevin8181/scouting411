@@ -10,7 +10,7 @@
 		"format:check": "prettier --check .",
 		"lint": "npx eslint \"src/**/*\"",
 		"check": "npm run astro check && npm run format && npm run lint && echo '✅ All checks passed.'",
-		"checkResources": "tsx src/scripts/checkResources.ts"
+		"validateResourceLinks": "tsx scripts/validateResourceLinks.ts"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
