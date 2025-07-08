@@ -2,7 +2,6 @@ import type { FeedProvider } from "@/features/feeds/types";
 import type { PostData } from "@/features/feeds/types";
 import he from "he";
 
-
 export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 	async function fetchPage(page: number) {
 		const url = new URL(
