@@ -18,7 +18,7 @@ export class Feed {
 
 	// CONSTRUCTOR
 
-	constructor(opts: CreateFeedOpts) {
+	private constructor(opts: CreateFeedOpts) {
 		this._name = opts.name;
 		this._homepageUrl = opts.homepageUrl;
 		this._provider = opts.provider;
@@ -40,11 +40,11 @@ export class Feed {
 		return this._provider.type;
 	}
 
-	async posts(): Promise<Post[]> {
-		if (this.cachedPosts.length > 0) {
-			return this.cachedPosts;
-		}
+	get posts(): Post[] {
+		return this.cachedPosts;
+	}
 
+	async fetch() {
 		console.log(`fetching posts for ${this.name}`);
 
 		const postData = await this._provider.fetch();
@@ -54,19 +54,14 @@ export class Feed {
 			feed: this,
 		}));
 
-		return this.cachedPosts;
+		return this;
 	}
 
 	// STATIC PROPERTIES
 
 	private static _instances: Feed[] = [];
 	static async allPosts() {
-
-		console.log("fetching all posts");
-
-		const posts = (
-			await Promise.all(Feed._instances.map(async (feed) => await feed.posts()))
-		).flat();
+		const posts = Feed._instances.map((feed) => feed.posts).flat();
 
 		//return the posts sorted by date descending
 		return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
@@ -75,10 +70,14 @@ export class Feed {
 	static get instances() {
 		return Feed._instances;
 	}
+
+	static async create(opts: CreateFeedOpts) {
+		const feed = new Feed(opts);
+
+		await feed.fetch();
+	}
 }
 
 // instantiate all the feeds
 import { feedConfigs } from "@/features/feeds/config";
-for (const feedConfig of feedConfigs) {
-	new Feed(feedConfig);
-}
+Promise.all(feedConfigs.map((feedConfig) => Feed.create(feedConfig)));
