@@ -129,9 +129,8 @@ export const feedConfigs: CreateFeedOpts[] = [
 		name: "Trail to Adventure",
 		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
 		provider: ttaProvider(),
-	}
+	},
 ];
-
 
 // new Feed({
 // 	name: "Scouts BSA Program Updates",
