@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
-import { Feed } from "@/features/feeds/feed";
+import { FeedManager } from "@/features/feeds/feedManager";
 
 export const GET: APIRoute = async (context) => {
 	return rss({
@@ -14,7 +14,7 @@ export const GET: APIRoute = async (context) => {
 		site: context.site ?? "",
 		// Array of `<item>`s in output xml
 		// See "Generating items" section for examples using content collections and glob imports
-		items: (await Feed.allPosts()).map((post) => ({
+		items: FeedManager.allPosts().map((post) => ({
 			title: post.title,
 			description: post.description,
 			pubDate: post.date,
