@@ -1,6 +1,10 @@
-# Scouting411
+<div align="center">
 
-the unofficial aggregator for official Scouting America news and resources
+# [`Scouting411`](https://scouting411.org)
+
+	the unofficial aggregator for official Scouting America news and resources
+
+</div>
 
 ## Project Scope
 
