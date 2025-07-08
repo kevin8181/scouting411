@@ -1,10 +1,8 @@
-<div align="center">
 
 # [`Scouting411`](https://scouting411.org)
 
-the unofficial aggregator for official Scouting America news and resources
+	the unofficial aggregator for official Scouting America news and resources
 
-</div>
 
 ## Project Scope
 
