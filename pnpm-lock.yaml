@@ -72,8 +72,8 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       zod:
-        specifier: 4.0.0-beta.20250417T043022
-        version: 4.0.0-beta.20250417T043022
+        specifier: 4.0.0-beta.20250505T195954
+        version: 4.0.0-beta.20250505T195954
     devDependencies:
       '@eslint/js':
         specifier: ^9.30.1
@@ -1098,8 +1098,8 @@ packages:
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
 
-  '@zod/core@0.6.2':
-    resolution: {integrity: sha512-KdH7bT0BRG1CvJ1LWH8oyNnkvLpjVZ5qVGpRu7Vq8WsFTKRDWfdr3rFfBYh8atZJSWDgD0ibhOyff1AyRvG1DA==}
+  '@zod/core@0.11.6':
+    resolution: {integrity: sha512-03Bv82fFSfjDAvMfdHHdGSS6SOJs0iCcJlWJv1kJHRtoTT02hZpyip/2Lk6oo4l4FtjuwTrsEQTwg/LD8I7dJA==}
 
   abbrev@3.0.1:
     resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
@@ -3011,11 +3011,11 @@ packages:
       typescript: ^4.9.4 || ^5.0.2
       zod: ^3
 
-  zod@3.25.75:
-    resolution: {integrity: sha512-OhpzAmVzabPOL6C3A3gpAifqr9MqihV/Msx3gor2b2kviCgcb+HM9SEOpMWwwNp9MRunWnhtAKUoo0AHhjyPPg==}
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.0.0-beta.20250417T043022:
-    resolution: {integrity: sha512-zjfYudLXPgHvRdCWzy/iJqhB6suE8tBqnGubbFHSkMvcknI4iexEP53QCO13FoC/EIALseuZReVykCY8yd/skA==}
+  zod@4.0.0-beta.20250505T195954:
+    resolution: {integrity: sha512-iB8WvxkobVIXMARvQu20fKvbS7mUTiYRpcD8OQV1xjRhxO0EEpYIRJBk6yfBzHAHEdOSDh3SxDITr5Eajr2vtg==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -3130,7 +3130,7 @@ snapshots:
     dependencies:
       sitemap: 8.0.0
       stream-replace-string: 2.0.0
-      zod: 3.25.75
+      zod: 3.25.76
 
   '@astrojs/telemetry@3.3.0':
     dependencies:
@@ -4054,7 +4054,7 @@ snapshots:
 
   '@vscode/l10n@0.0.18': {}
 
-  '@zod/core@0.6.2': {}
+  '@zod/core@0.11.6': {}
 
   abbrev@3.0.1: {}
 
@@ -4188,9 +4188,9 @@ snapshots:
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.3
-      zod: 3.25.75
-      zod-to-json-schema: 3.24.6(zod@3.25.75)
-      zod-to-ts: 1.2.0(typescript@5.8.3)(zod@3.25.75)
+      zod: 3.25.76
+      zod-to-json-schema: 3.24.6(zod@3.25.76)
+      zod-to-ts: 1.2.0(typescript@5.8.3)(zod@3.25.76)
     optionalDependencies:
       sharp: 0.33.5
     transitivePeerDependencies:
@@ -6196,19 +6196,19 @@ snapshots:
 
   yoctocolors@2.1.1: {}
 
-  zod-to-json-schema@3.24.6(zod@3.25.75):
+  zod-to-json-schema@3.24.6(zod@3.25.76):
     dependencies:
-      zod: 3.25.75
+      zod: 3.25.76
 
-  zod-to-ts@1.2.0(typescript@5.8.3)(zod@3.25.75):
+  zod-to-ts@1.2.0(typescript@5.8.3)(zod@3.25.76):
     dependencies:
       typescript: 5.8.3
-      zod: 3.25.75
+      zod: 3.25.76
 
-  zod@3.25.75: {}
+  zod@3.25.76: {}
 
-  zod@4.0.0-beta.20250417T043022:
+  zod@4.0.0-beta.20250505T195954:
     dependencies:
-      '@zod/core': 0.6.2
+      '@zod/core': 0.11.6
 
   zwitch@2.0.4: {}
