@@ -3,6 +3,12 @@
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
+	"packageManager": "pnpm@10.12.4",
+	"engines": {
+		"node": ">=22.13.0",
+		"pnpm": "10.12.4"
+	},
+	"engineStrict": true,
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
@@ -12,7 +18,8 @@
 		"format:check": "prettier --check .",
 		"lint": "npx eslint \"src/**/*\"",
 		"check": "npm run astro check && npm run format && npm run lint && echo '✅ All checks passed.'",
-		"validateResourceLinks": "tsx scripts/validateResourceLinks.ts"
+		"validateResourceLinks": "tsx scripts/validateResourceLinks.ts",
+		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
