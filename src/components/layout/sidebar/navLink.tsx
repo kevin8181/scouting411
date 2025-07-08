@@ -1,3 +1,4 @@
+import {  faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import type { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -24,13 +25,16 @@ export function NavLink({
 		<a
 			href={href}
 			className={
-				"hover:border-brand-gray-3 flex items-center gap-2.5 rounded-lg border px-3 py-2 text-sm " +
+				"hover:border-brand-gray-3 flex justify-between items-center gap-2.5 rounded-lg border px-3 py-2 text-sm " +
 				activeStateCss
 			}
 			target={newTab ? "_blank" : undefined}
 			rel={newTab ? "noopener noreferrer" : undefined}
 		>
-			<FontAwesomeIcon icon={icon} height={"1em"}></FontAwesomeIcon> {label}
+			<div className="flex items-center gap-2">
+				<FontAwesomeIcon icon={icon} height={"1em"}></FontAwesomeIcon> {label}
+			</div>
+			{newTab && <FontAwesomeIcon icon={faSquareUpRight} height={"1em"} />}
 		</a>
 	);
 }

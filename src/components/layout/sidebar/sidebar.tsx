@@ -16,30 +16,17 @@ export default function Sidebar({ url }: { url: URL }) {
 			className="bg-brand-gray-1 border-brand-gray-3 hidden h-full w-64 min-w-64 flex-col justify-between overflow-auto border-r xl:flex"
 			aria-label="Main sidebar"
 		>
-			<NavGroup>
-				<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
-				<NavLink
-					href="/feed"
-					label="Feed"
-					currentUrl={url}
-					icon={faNewspaper}
-				/>
-				<NavLink
-					href="/resources"
-					label="Resources"
-					currentUrl={url}
-					icon={faBookBookmark}
-				/>
-			</NavGroup>
+			<div className="pt-3">
+				<NavGroup>
+					<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
+				</NavGroup>
 
-			<div>
-				<NavGroup label="about">
+				<NavGroup label="feeds">
 					<NavLink
-						href="/feeds/rss.xml"
-						label="RSS Feed"
-						newTab
+						href="/feed"
+						label="Browse Feed"
 						currentUrl={url}
-						icon={faSquareRss}
+						icon={faNewspaper}
 					/>
 					<NavLink
 						href="/listfeeds"
@@ -48,8 +35,29 @@ export default function Sidebar({ url }: { url: URL }) {
 						icon={faTableList}
 					/>
 					<NavLink
+						href="/feeds/rss.xml"
+						label="RSS"
+						newTab
+						currentUrl={url}
+						icon={faSquareRss}
+					/>
+				</NavGroup>
+
+				<NavGroup label="resources">
+					<NavLink
+						href="/resources"
+						label="Resources"
+						currentUrl={url}
+						icon={faBookBookmark}
+					/>
+				</NavGroup>
+			</div>
+
+			<div>
+				<NavGroup label="about">
+					<NavLink
 						href="https://github.com/kevin8181/scouting411"
-						label="GitHub"
+						label="Github"
 						newTab
 						currentUrl={url}
 						icon={faGitAlt}

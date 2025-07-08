@@ -6,7 +6,7 @@ import { Feed } from "@/features/feeds/feed";
 ---
 
 <UiLayout title="Feeds">
-	<div class="flex flex-col gap-4 p-4">
+	<div class="flex flex-col gap-4 p-6">
 		<span>{(await Feed.allPosts()).length} total posts</span>
 		{
 			Feed.instances.map(async (feed) => (
