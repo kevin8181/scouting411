@@ -17,9 +17,7 @@ export function Post({ post }: { post: Post }) {
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				{/* todo make this a link/button that does something */}
 				<a
-					href={post.feed.homepageUrl}
-					rel="noopener noreferrer"
-					target="_blank"
+					href={post.feed.overviewUrl}
 					className="underline"
 				>
 					{post.feed.name}

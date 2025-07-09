@@ -20,9 +20,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 					<tr>
 						<td>
 							<a
-								href={feed.homepageUrl}
-								rel="noopener noreferrer"
-								target="_blank"
+								href={feed.overviewUrl}
 								class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
 							>
 								{feed.name}
@@ -44,7 +42,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 						>{Intl.NumberFormat().format(FeedManager.allPosts().length)}</span
 					>
 				</td>
-				<td></td>
+				<td>{}</td>
 			</tr>
 		</tfoot>
 	</table>

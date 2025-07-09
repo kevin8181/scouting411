@@ -1,0 +1,60 @@
+---
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { FeedManager } from "@/features/feeds/feedManager";
+---
+
+<UiLayout>
+	<h1>Subscribe</h1>
+
+	<p>
+		Every source is available as an RSS feed, so you can subscribe on
+		your favorite reader app. If you don't know what RSS is, you can learn more
+		at <a
+			href="https://aboutfeeds.com/"
+			rel="noopener noreferrer"
+			target="_blank"
+			class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+			>aboutfeeds.com</a
+		>.
+	</p>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Feed Link</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				FeedManager.feeds.map(async (feed) => (
+					<tr>
+						<td>
+							<a
+								href={feed.overviewUrl}
+								class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+							>
+								{feed.name}
+							</a>
+						</td>
+						<td>
+							<a
+								href={feed.rssUrl}
+								rel="noopener noreferrer"
+								target="_blank"
+								class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+							>
+								rss
+							</a>
+						</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+
+	<p>
+		todo show a link to an OPML file with all the feeds, so you can import them
+		into your feed reader
+	</p>
+</UiLayout>

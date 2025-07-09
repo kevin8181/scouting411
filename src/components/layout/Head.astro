@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import ClientRouter from "astro/components/ClientRouter.astro";
+import { FeedManager } from "@/features/feeds/feedManager";
 ---
 
 <head>
@@ -10,12 +11,17 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 	<meta name="viewport" content="width=device-width" />
 	<meta name="generator" content={Astro.generator} />
 	<link rel="sitemap" href="/sitemap-index.xml" />
-	<link
-		rel="alternate"
-		type="application/rss+xml"
-		title="Scouting411"
-		href={new URL("/feeds/rss.xml", Astro.site)}
-	/>
+
+	{
+		FeedManager.feeds.map((feed) => (
+			<link
+				rel="alternate"
+				type="application/rss+xml"
+				title={feed.name}
+				href={feed.rssUrl}
+			/>
+		))
+	}
 
 	<!-- todo remove this before production -->
 	<meta name="robots" content="noindex" />

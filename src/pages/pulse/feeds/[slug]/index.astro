@@ -1,0 +1,24 @@
+---
+const { slug } = Astro.params;
+
+import { FeedManager } from "@/features/feeds/feedManager";
+
+export function getStaticPaths() {
+	return FeedManager.feeds.map((feed) => ({
+		params: { slug: feed.slug },
+	}));
+}
+
+const feed = FeedManager.getFeedBySlug(slug);
+
+if (!feed) throw new Error(`Feed ${slug} not found`);
+
+import UiLayout from "@/components/layout/UiLayout.astro";
+---
+
+<UiLayout title={feed.name}>
+	<h1>{feed.name}</h1>
+	<p>{feed.homepageUrl}</p>
+	<p>{feed.posts.length}</p>
+	<p><a href={feed.rssUrl}>rss</a></p>
+</UiLayout>

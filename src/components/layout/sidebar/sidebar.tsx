@@ -21,23 +21,22 @@ export default function Sidebar({ url }: { url: URL }) {
 					<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
 				</NavGroup>
 
-				<NavGroup label="feeds">
+				<NavGroup label="pulse">
 					<NavLink
-						href="/feed"
-						label="Browse Feed"
+						href="/pulse/browse"
+						label="Browse Pulse"
 						currentUrl={url}
 						icon={faNewspaper}
 					/>
 					<NavLink
-						href="/listfeeds"
-						label="List Feeds"
+						href="/pulse/stats"
+						label="Feed Stats"
 						currentUrl={url}
 						icon={faTableList}
 					/>
 					<NavLink
-						href="/feeds/rss.xml"
-						label="RSS"
-						newTab
+						href="/pulse/subscribe"
+						label="Subscribe"
 						currentUrl={url}
 						icon={faSquareRss}
 					/>
