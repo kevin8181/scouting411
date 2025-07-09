@@ -31,6 +31,7 @@
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@tailwindcss/vite": "^4.1.11",
+		"@tanstack/pacer": "^0.8.0",
 		"astro": "^5.11.0",
 		"he": "^1.2.0",
 		"react": "^19.1.0",
