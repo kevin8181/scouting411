@@ -32,7 +32,7 @@ export const GET: APIRoute = async (context) => {
 			source: {
 				title: feed.name,
 				url: feed.homepageUrl, //todo I think this is supposed to be an rss feed
-			}
+			},
 		})),
 		// (optional) inject custom xml
 		customData: `<language>en-us</language>`,
