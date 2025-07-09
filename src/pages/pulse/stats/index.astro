@@ -1,0 +1,49 @@
+---
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { FeedManager } from "@/features/feeds/feedManager";
+---
+
+<UiLayout title="Feeds">
+	<table
+		class="table-fixed border-separate border-spacing-x-8 border-spacing-y-2.5 p-6"
+	>
+		<thead>
+			<tr>
+				<th class="text-left">Feed</th>
+				<th class="text-left">Posts</th>
+				<th class="text-left">Type</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				FeedManager.feeds.map(async (feed) => (
+					<tr>
+						<td>
+							<a
+								href={feed.overviewUrl}
+								class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+							>
+								{feed.name}
+							</a>
+						</td>
+						<td class="text-right">
+							{Intl.NumberFormat().format(feed.posts.length)}
+						</td>
+						<td>{feed.provider}</td>
+					</tr>
+				))
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="font-bold"> Total: </td>
+				<td class="font-bold">
+					<span
+						>{Intl.NumberFormat().format(FeedManager.allPosts().length)}</span
+					>
+				</td>
+				<td>{}</td>
+			</tr>
+		</tfoot>
+	</table>
+</UiLayout>

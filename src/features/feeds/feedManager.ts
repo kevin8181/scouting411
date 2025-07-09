@@ -11,6 +11,10 @@ export class FeedManager {
 		return feeds;
 	}
 
+	static getFeedBySlug(slug: string) {
+		return feeds.find((feed) => feed.slug === slug);
+	}
+
 	static allPosts() {
 		const posts = feeds.map((feed) => feed.posts).flat();
 
