@@ -50,7 +50,7 @@ export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 				return async () => await fetchPage(i + 1, opts);
 			});
 
-			const pages = await promiseAllDelayed(functions, 200);
+			const pages = await promiseAllDelayed(functions, 400);
 
 			pages.forEach((page) => {
 				posts.push(...page.posts);
