@@ -36,7 +36,7 @@ export class Feed {
 	get homepageUrl() {
 		return this._homepageUrl;
 	}
-	get type() {
+	get provider() {
 		return this._provider.type;
 	}
 

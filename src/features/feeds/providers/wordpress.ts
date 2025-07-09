@@ -49,21 +49,20 @@ export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 
 			//todo fetch the full post history
 
-			// console.log(`fetching ${firstPage.totalPages} pages from ${opts.baseUrl}`)
+			// create an array where each entry is a page number we need to fetch
+			const arr = Array.from(
+				{ length: firstPage.totalPages - 1 },
+				(_, i) => i + 2,
+			);
 
-			// // create an array where each entry is a page number we need to fetch
-			// const arr = Array.from(
-			// 	{ length: firstPage.totalPages - 1 },
-			// 	(_, i) => i + 2,
-			// );
+			await Promise.all(
+				arr.map(async (pageNumber) => {
+					const page = await fetchPage(pageNumber);
+					posts.push(...page.posts);
+				}),
+			);
 
-			// Promise.all(arr.map(async (pageNumber) => {
-			// 	console.log(`fetching page ${pageNumber} of ${opts.baseUrl}`)
-			// 	const page = await fetchPage(pageNumber);
-			// 	posts.push(...page.posts);
-			// }))
-
-			// console.log(`finished fetching ${opts.baseUrl}`)
+			console.log(`fetched ${posts.length} posts from ${opts.baseUrl}`);
 
 			return posts;
 		},
