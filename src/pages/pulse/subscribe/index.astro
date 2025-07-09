@@ -4,11 +4,12 @@ import { FeedManager } from "@/features/feeds/feedManager";
 ---
 
 <UiLayout>
-	<h1>Subscribe</h1>
+	<h1 class="font-serif text-xl">Subscribe to Scouting411 Pulse</h1>
 
 	<p>
-		Every source is available as an RSS feed, so you can subscribe on your
-		favorite reader app. If you don't know what RSS is, you can learn more at <a
+		Every source on Scouting411 is made available as an RSS feed, so you can
+		subscribe on your favorite reader app. If you don't know what RSS is, you
+		can learn more at <a
 			href="https://aboutfeeds.com/"
 			rel="noopener noreferrer"
 			target="_blank"
@@ -17,43 +18,43 @@ import { FeedManager } from "@/features/feeds/feedManager";
 		>.
 	</p>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Feed Link</th>
-			</tr>
-		</thead>
-		<tbody>
-			{
-				FeedManager.feeds.map(async (feed) => (
-					<tr>
-						<td>
-							<a
-								href={feed.overviewUrl}
-								class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
-							>
-								{feed.name}
-							</a>
-						</td>
-						<td>
-							<a
-								href={feed.rssUrl}
-								rel="noopener noreferrer"
-								target="_blank"
-								class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
-							>
-								rss
-							</a>
-						</td>
-					</tr>
-				))
-			}
-		</tbody>
-	</table>
+	<div class="p-8">
+		<table class="w-full">
+			<thead>
+				<tr>
+					<th class="border-brand-gray-5 border-b text-left">Name</th>
+					<th class="border-brand-gray-5 border-b text-left">Feed</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					FeedManager.feeds.map(async (feed) => (
+						<tr>
+							<td class="border-brand-gray-3 border-b py-1.5 pr-8">
+								<a
+									href={feed.overviewUrl}
+									class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+								>
+									{feed.name}
+								</a>
+							</td>
+							<td class="border-brand-gray-3 border-b py-1.5 pr-8">
+								<a
+									href={feed.rssUrl}
+									rel="noopener noreferrer"
+									target="_blank"
+									class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+								>
+									rss
+								</a>
+							</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
 
-	<p>
-		todo show a link to an OPML file with all the feeds, so you can import them
-		into your feed reader
-	</p>
+	<!-- todo add OPML file output -->
+	<p>OPML: <a href="/feeds/all/opml.xml">OPML</a></p>
 </UiLayout>

@@ -1,13 +1,12 @@
 import rss from "@astrojs/rss";
+import type { APIRoute } from "astro";
+import { FeedManager } from "@/features/feeds/feedManager";
 
 export function getStaticPaths() {
 	return FeedManager.feeds.map((feed) => ({
 		params: { slug: feed.slug },
 	}));
 }
-
-import type { APIRoute } from "astro";
-import { FeedManager } from "@/features/feeds/feedManager";
 
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
