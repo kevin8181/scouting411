@@ -4,7 +4,6 @@ import { FeedManager } from "@/features/feeds/feedManager";
 
 //todo generate this with feedsmith instead of astro package. serve as text/xml
 
-
 export function getStaticPaths() {
 	return FeedManager.feeds.map((feed) => ({
 		params: { slug: feed.slug },
