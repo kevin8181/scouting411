@@ -12,14 +12,19 @@ export const GET: APIRoute = async (context) => {
 		body: {
 			outlines: FeedManager.feeds.map((feed) => ({
 				text: feed.name,
+				title: feed.name,
 				htmlUrl: new URL(feed.overviewUrl, context.site).toString(),
 				xmlUrl: new URL(feed.rssUrl, context.site).toString(),
 				type: "rss",
+				language: "en-us",
 			})),
 		},
 	});
 
 	return new Response(opml, {
 		status: 200,
+		headers: {
+			"Content-Type": "text/xml",
+		},
 	});
 };

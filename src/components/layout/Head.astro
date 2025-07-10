@@ -5,13 +5,29 @@ import { FeedManager } from "@/features/feeds/feedManager";
 ---
 
 <head>
+	<!-- TECHNICAL -->
 	<meta charset="utf-8" />
-	<!-- todo add favicon -->
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<meta name="viewport" content="width=device-width" />
 	<meta name="generator" content={Astro.generator} />
-	<link rel="sitemap" href="/sitemap-index.xml" />
 
+	<!-- IDENTITY -->
+	<!-- todo add favicon -->
+	<!-- todo add apple touch icons -->
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+	<!-- SEO -->
+	<!-- todo add stylesheet for the sitemap -->
+	<link rel="sitemap" href="/sitemap-index.xml" />
+	<!-- todo remove this before production -->
+	<meta name="robots" content="noindex" />
+	<!-- todo add canonical url -->
+	<!-- todo add  and twitter tags -->
+	<!-- todo add theme-color meta tag -->
+	<title>Scouting411</title>
+	<!-- todo add page title and meta description props -->
+
+	<!-- FEEDS -->
+	<link rel="outline" type="text/x-opml" href="/feeds/all/opml" />
 	{
 		FeedManager.feeds.map((feed) => (
 			<link
@@ -23,16 +39,11 @@ import { FeedManager } from "@/features/feeds/feedManager";
 		))
 	}
 
-	<!-- todo remove this before production -->
-	<meta name="robots" content="noindex" />
-
-	<title>Scouting411</title>
-
-	<!-- todo add opengraph tags and meta description -->
-
+	<!--STYLES-->
 	<Font cssVariable="--font-roboto-slab" preload />
 	<Font cssVariable="--font-roboto" preload />
 	<Font cssVariable="--font-montserrat" preload />
 
+	<!--SCRIPTS-->
 	<ClientRouter />
 </head>
