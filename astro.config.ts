@@ -45,7 +45,10 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 	},
 
-	integrations: [sitemap({
-		xslURL: "/xslt/sitemap.xslt",
-	}), react()],
+	integrations: [
+		sitemap({
+			xslURL: "/xslt/sitemap.xslt",
+		}),
+		react(),
+	],
 });
