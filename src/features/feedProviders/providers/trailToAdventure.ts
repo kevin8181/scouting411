@@ -1,10 +1,10 @@
-import type { FeedProvider } from "@/features/feedProviders/feedProvider";
+import { FeedProvider } from "@/features/feedProviders/feedProvider";
 import he from "he";
 
 //todo fetch the full post history
 
-export function ttaProvider(): FeedProvider {
-	return {
+export function TtaProvider(): FeedProvider {
+	return new FeedProvider({
 		type: "tta",
 		fetch: async () => {
 			const response = await fetch(
@@ -20,7 +20,7 @@ export function ttaProvider(): FeedProvider {
 				date: new Date(post.date_gmt),
 			}));
 		},
-	};
+	});
 }
 
 type ttaApiPost = {

@@ -1,9 +1,9 @@
-import type { FeedProvider } from "@/features/feedProviders/feedProvider";
+import { FeedProvider } from "@/features/feedProviders/feedProvider";
 import type { PostData } from "@/features/feeds/types";
 import he from "he";
 import { promiseAllDelayed } from "@/util/promiseAllDelayed";
 
-async function fetchPage(page: number, opts: wordpressProviderOpts) {
+async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 	console.log(`fetch page ${page} from ${opts.baseUrl}`);
 
 	const url = new URL(
@@ -19,7 +19,7 @@ async function fetchPage(page: number, opts: wordpressProviderOpts) {
 		);
 	}
 
-	const rawPosts: wordpressApiPost[] = await response.json();
+	const rawPosts: WordpressApiPost[] = await response.json();
 
 	const posts = rawPosts.map((post) => ({
 		url: post.link,
@@ -36,8 +36,10 @@ async function fetchPage(page: number, opts: wordpressProviderOpts) {
 	};
 }
 
-export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
-	return {
+export function WordpressApiProvider(
+	opts: WordpressApiProviderOpts,
+): FeedProvider {
+	return new FeedProvider({
 		type: "wordpress",
 
 		fetch: async () => {
@@ -60,17 +62,17 @@ export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
 
 			return posts;
 		},
-	};
+	});
 }
 
-type wordpressProviderOpts = {
+type WordpressApiProviderOpts = {
 	/** the base url of the wordpress site */
 	baseUrl: string;
 	/** return only posts which have this category id */
 	categoryFilter?: number;
 };
 
-type wordpressApiPost = {
+type WordpressApiPost = {
 	link: string;
 	title: {
 		rendered: string;
