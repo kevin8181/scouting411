@@ -33,7 +33,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 							<td class="border-brand-gray-3 border-b py-1.5 pr-8">
 								<a
 									href={feed.overviewUrl}
-									class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+									class="text-brand-blue hover:underline"
 								>
 									{feed.name}
 								</a>
@@ -43,7 +43,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 									href={feed.rssUrl}
 									rel="noopener noreferrer"
 									target="_blank"
-									class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
+									class="text-brand-blue hover:underline"
 								>
 									rss
 								</a>
@@ -55,6 +55,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 		</table>
 	</div>
 
-	<!-- todo add OPML file output -->
-	<p>OPML: <a href="/feeds/all/opml.xml">OPML</a></p>
+	<h2 class="font-serif text-lg">All Sources</h2>
+
+	<p>You can subscribe to every source at once by importing our <a href="/feeds/all/opml" rel="noopener noreferrer" target="_blank" class="text-brand-blue underline">OPML blogroll</a> into your reader.</p>
 </UiLayout>

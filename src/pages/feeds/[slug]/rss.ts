@@ -2,6 +2,9 @@ import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
 import { FeedManager } from "@/features/feeds/feedManager";
 
+//todo generate this with feedsmith instead of astro package. serve as text/xml
+
+
 export function getStaticPaths() {
 	return FeedManager.feeds.map((feed) => ({
 		params: { slug: feed.slug },
@@ -37,6 +40,6 @@ export const GET: APIRoute = async (context) => {
 		customData: `<language>en-us</language>`,
 		trailingSlash: false,
 
-		stylesheet: "/simple-rss.xslt",
+		stylesheet: "/xslt/rss.xslt",
 	});
 };

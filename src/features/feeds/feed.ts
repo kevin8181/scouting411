@@ -46,7 +46,7 @@ export class Feed {
 		return `/pulse/feeds/${this.slug}`;
 	}
 	get rssUrl() {
-		return `/feeds/${this.slug}/rss.xml`;
+		return `/feeds/${this.slug}/rss`;
 	}
 
 	async fetch() {
