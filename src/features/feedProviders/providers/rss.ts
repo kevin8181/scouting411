@@ -1,4 +1,4 @@
-import type { FeedProvider } from "@/features/feeds/types";
+import type { FeedProvider } from "@/features/feedProviders/feedProvider";
 import { parseRssFeed } from "feedsmith";
 
 //todo fetch the full post history on wordpress rss feeds. /feed?paged=2

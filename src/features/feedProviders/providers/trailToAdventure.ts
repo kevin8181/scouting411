@@ -1,5 +1,4 @@
-import type { FeedProvider } from "@/features/feeds/types";
-
+import type { FeedProvider } from "@/features/feedProviders/feedProvider";
 import he from "he";
 
 //todo fetch the full post history

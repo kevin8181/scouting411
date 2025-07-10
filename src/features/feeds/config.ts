@@ -1,8 +1,8 @@
 import type { CreateFeedOpts } from "@/features/feeds/feed";
 
-import { wordpressProvider } from "@/features/feeds/providers/wordpress";
-import { rssProvider } from "@/features/feeds/providers/rss";
-import { ttaProvider } from "@/features/feeds/providers/trailToAdventure";
+import { wordpressProvider } from "@/features/feedProviders/providers/wordpress";
+import { rssProvider } from "@/features/feedProviders/providers/rss";
+import { ttaProvider } from "@/features/feedProviders/providers/trailToAdventure";
 
 export const feedConfigs: CreateFeedOpts[] = [
 	{
