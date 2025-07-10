@@ -1,5 +1,5 @@
 import { FeedProvider } from "@/features/feedProviders/feedProvider";
-import type { PostData } from "@/features/feeds/types";
+import type { PostData } from "@/features/posts/post";
 import he from "he";
 import { promiseAllDelayed } from "@/util/promiseAllDelayed";
 

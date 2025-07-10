@@ -1,4 +1,4 @@
-import type { Post } from "@/features/feeds/types";
+import type { Post } from "@/features/posts/post";
 
 export function Post({ post }: { post: Post }) {
 	return (

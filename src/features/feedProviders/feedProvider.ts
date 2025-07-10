@@ -1,4 +1,4 @@
-import type { PostData } from "@/features/feeds/types";
+import type { PostData } from "@/features/posts/post";
 
 export class FeedProvider {
 	type: string;

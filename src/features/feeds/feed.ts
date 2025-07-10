@@ -1,4 +1,4 @@
-import type { Post } from "@/features/feeds/types";
+import type { Post } from "@/features/posts/post";
 import type { FeedProvider } from "@/features/feedProviders/feedProvider";
 import type { UrlShaped } from "@/util/utilTypes";
 
