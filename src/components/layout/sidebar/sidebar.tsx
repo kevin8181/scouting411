@@ -24,7 +24,7 @@ export default function Sidebar({ url }: { url: URL }) {
 
 				<NavGroup label="pulse">
 					<NavLink
-						href="/pulse/browse"
+						href="/pulse/browse/1"
 						label="Pulse"
 						currentUrl={url}
 						icon={faHeartPulse}
