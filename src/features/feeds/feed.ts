@@ -56,7 +56,7 @@ export class Feed {
 	async fetch() {
 		console.log(`fetching posts for ${this.name}`);
 
-		const postData = await this._provider.fetch();
+		const postData = await this._provider.execute();
 
 		this._cachedPosts = postData.map((post) => ({
 			...post,

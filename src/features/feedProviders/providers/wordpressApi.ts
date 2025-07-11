@@ -3,6 +3,34 @@ import type { PostData } from "@/features/posts/post";
 import he from "he";
 import { promiseAllDelayed } from "@/util/promiseAllDelayed";
 
+export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
+	const execute = async () => {
+		const posts: PostData[] = [];
+
+		const totalPages = (await fetchPage(1, opts)).totalPages;
+
+		// create an array where each element is a function that fetches a page
+		const functions = Array.from({ length: totalPages }, (_, i) => {
+			return async () => await fetchPage(i + 1, opts);
+		});
+
+		const pages = await promiseAllDelayed(functions, 1000);
+
+		pages.forEach((page) => {
+			posts.push(...page.posts);
+		});
+
+		console.log(`got ${posts.length} posts from ${opts.baseUrl}`);
+
+		return posts;
+	};
+
+	return new FeedProvider({
+		type: "wordpressApi",
+		execute,
+	});
+}
+
 async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 	console.log(`fetch page ${page} from ${opts.baseUrl}`);
 
@@ -34,35 +62,6 @@ async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 		posts,
 		totalPages: parseInt(response.headers.get("x-wp-totalpages")!),
 	};
-}
-
-export function WordpressApiProvider(
-	opts: WordpressApiProviderOpts,
-): FeedProvider {
-	return new FeedProvider({
-		type: "wordpressApi",
-
-		fetch: async () => {
-			const posts: PostData[] = [];
-
-			const totalPages = (await fetchPage(1, opts)).totalPages;
-
-			// create an array where each element is a function that fetches a page
-			const functions = Array.from({ length: totalPages }, (_, i) => {
-				return async () => await fetchPage(i + 1, opts);
-			});
-
-			const pages = await promiseAllDelayed(functions, 1000);
-
-			pages.forEach((page) => {
-				posts.push(...page.posts);
-			});
-
-			console.log(`got ${posts.length} posts from ${opts.baseUrl}`);
-
-			return posts;
-		},
-	});
 }
 
 type WordpressApiProviderOpts = {

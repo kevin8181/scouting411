@@ -3,10 +3,10 @@ import he from "he";
 
 //todo fetch the full post history
 
-export function TtaProvider(): FeedProvider {
+export function TtaProvider() {
 	return new FeedProvider({
 		type: "tta",
-		fetch: async () => {
+		execute: async () => {
 			const response = await fetch(
 				"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
 			);
