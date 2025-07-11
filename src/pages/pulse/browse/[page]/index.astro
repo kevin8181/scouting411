@@ -21,7 +21,7 @@ const firstItem = lastItem - page.size + 1;
 <UiLayout>
 	<span>Showing posts {firstItem} - {lastItem} of {page.total}.</span>
 	<BrowsePage posts={page.data} />
-	<div class="flex gap-3 w-full justify-center p-6">
+	<div class="flex w-full justify-center gap-3 p-6">
 		<a href={page.url.first}>First</a>
 		<a href={page.url.prev}>Prev</a>
 		<span>{page.currentPage} of {page.lastPage}</span>

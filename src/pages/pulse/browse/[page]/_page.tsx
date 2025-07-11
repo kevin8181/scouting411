@@ -9,6 +9,5 @@ export async function BrowsePage({ posts }: { posts: Post[] }) {
 				<PostComponent post={post} key={post.url} />
 			))}
 		</CardList>
-
 	);
 }

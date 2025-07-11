@@ -15,7 +15,6 @@ export function Post({ post }: { post: Post }) {
 				{post.description ?? "No excerpt available."}
 			</span>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
-				{/* todo make this a link/button that does something */}
 				<a href={post.feed.overviewUrl} className="underline">
 					{post.feed.name}
 				</a>
