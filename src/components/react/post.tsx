@@ -2,12 +2,12 @@ import type { Post } from "@/features/posts/post";
 
 export function Post({ post }: { post: Post }) {
 	return (
-		<div className="border-brand-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
+		<div className="border-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a
 				href={post.url}
 				rel="noopener noreferrer"
 				target="_blank"
-				className="text-brand-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
+				className="text-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
 			>
 				{post.title}
 			</a>

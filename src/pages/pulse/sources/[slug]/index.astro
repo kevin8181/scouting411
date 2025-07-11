@@ -1,0 +1,35 @@
+---
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { FeedManager } from "@/features/feeds/feedManager";
+
+const { slug } = Astro.params;
+
+export function getStaticPaths() {
+	return FeedManager.feeds.map((feed) => ({
+		params: { slug: feed.slug },
+	}));
+}
+
+const feed = FeedManager.getFeedBySlug(slug);
+
+if (!feed) throw new Error(`Feed ${slug} not found`);
+---
+
+<UiLayout title={feed.name}>
+	<div class="p-8">
+		<h1 class="font-serif text-xl">{feed.name}</h1>
+		<p>{feed.description}</p>
+		<p>
+			Homepage: <a
+				href={feed.homepageUrl}
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-blue underline">{feed.homepageUrl}</a
+			>
+		</p>
+		<p>Total posts in Pulse: {feed.posts.length}</p>
+		<p>
+			Subcribe: <a href={feed.rssUrl} class="text-blue underline">rss</a>
+		</p>
+	</div>
+</UiLayout>

@@ -3,17 +3,18 @@ import { NavGroup } from "@/components/layout/sidebar/navGroup";
 import { NavDivider } from "@/components/layout/sidebar/navDivider";
 import {
 	faBookBookmark,
+	faBullhorn,
+	faHeartPulse,
 	faHome,
-	faNewspaper,
-	faSquareRss,
-	faTableList,
+	faMagnifyingGlassChart,
+	faRssSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
 export default function Sidebar({ url }: { url: URL }) {
 	return (
 		<aside
-			className="bg-brand-gray-1 border-brand-gray-3 hidden h-full w-64 min-w-64 flex-col justify-between overflow-auto border-r xl:flex"
+			className="bg-gray-1 border-gray-3 hidden h-full w-64 min-w-64 flex-col justify-between overflow-auto border-r xl:flex"
 			aria-label="Main sidebar"
 		>
 			<div className="pt-3">
@@ -24,21 +25,21 @@ export default function Sidebar({ url }: { url: URL }) {
 				<NavGroup label="pulse">
 					<NavLink
 						href="/pulse/browse"
-						label="Browse Pulse"
+						label="Pulse"
 						currentUrl={url}
-						icon={faNewspaper}
+						icon={faHeartPulse}
 					/>
 					<NavLink
-						href="/pulse/stats"
-						label="Feed Stats"
+						href="/pulse/sources"
+						label="Sources"
 						currentUrl={url}
-						icon={faTableList}
+						icon={faBullhorn}
 					/>
 					<NavLink
 						href="/pulse/subscribe"
 						label="Subscribe"
 						currentUrl={url}
-						icon={faSquareRss}
+						icon={faRssSquare}
 					/>
 				</NavGroup>
 
@@ -55,6 +56,12 @@ export default function Sidebar({ url }: { url: URL }) {
 			<div>
 				<NavGroup label="about">
 					<NavLink
+						href="/pulse/stats"
+						label="Feed Stats"
+						currentUrl={url}
+						icon={faMagnifyingGlassChart}
+					/>
+					<NavLink
 						href="https://github.com/kevin8181/scouting411"
 						label="Github"
 						newTab
@@ -63,7 +70,7 @@ export default function Sidebar({ url }: { url: URL }) {
 					/>
 				</NavGroup>
 				<NavDivider />
-				<div className="text-brand-gray-8 p-3 text-xs">
+				<div className="text-gray-8 p-3 text-xs">
 					Not affiliated with Boy Scouts of America. Built at{" "}
 					{new Date().toISOString()}.
 				</div>

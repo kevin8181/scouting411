@@ -18,14 +18,14 @@ export function NavLink({
 	const isActive = currentUrl.pathname === href;
 
 	const activeStateCss = isActive
-		? "bg-white border-brand-gray-3 text-black"
-		: "border-transparent text-brand-gray-9";
+		? "bg-white border-gray-3 text-black"
+		: "border-transparent text-gray-9";
 
 	return (
 		<a
 			href={href}
 			className={
-				"hover:border-brand-gray-3 flex items-center justify-between gap-2.5 rounded-lg border px-3 py-2 text-sm " +
+				"hover:border-gray-3 flex items-center justify-between gap-2.5 rounded-lg border px-3 py-2 text-sm " +
 				activeStateCss
 			}
 			target={newTab ? "_blank" : undefined}

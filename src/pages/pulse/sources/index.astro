@@ -1,0 +1,26 @@
+---
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { FeedManager } from "@/features/feeds/feedManager";
+---
+
+<UiLayout>
+	<div class="p-8">
+		<h1 class="font-serif text-xl">Scouting411 Pulse Sources</h1>
+
+		<div class="flex flex-col gap-3">
+			{
+				FeedManager.feeds.map(async (feed) => (
+					<div class="border-gray-3 rounded-lg border p-3">
+						<a
+							href={feed.overviewUrl}
+							class="text-blue font-serif text-lg font-bold hover:underline"
+						>
+							{feed.name}
+						</a>
+						<p>{feed.description}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</UiLayout>
