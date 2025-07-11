@@ -1,10 +1,12 @@
-import type { FeedProvider, Post } from "@/features/feeds/types";
+import type { Post } from "@/features/posts/post";
+import type { FeedProvider } from "@/features/feedProviders/feedProvider";
 import type { UrlShaped } from "@/util/utilTypes";
 
 export type CreateFeedOpts = {
 	name: string;
-	homepageUrl: UrlShaped;
 	slug: string;
+	description: string;
+	homepageUrl: UrlShaped;
 	provider: FeedProvider;
 };
 
@@ -13,6 +15,7 @@ export class Feed {
 
 	readonly name: string;
 	readonly slug: string;
+	readonly description: string;
 	readonly homepageUrl: UrlShaped;
 	private readonly _provider: FeedProvider;
 	private _cachedPosts!: Post[];
@@ -27,6 +30,7 @@ export class Feed {
 	private constructor(opts: CreateFeedOpts) {
 		this.name = opts.name;
 		this.slug = opts.slug;
+		this.description = opts.description;
 		this.homepageUrl = opts.homepageUrl;
 		this._provider = opts.provider;
 	}
@@ -43,7 +47,7 @@ export class Feed {
 		return this._cachedPosts;
 	}
 	get overviewUrl() {
-		return `/pulse/feeds/${this.slug}`;
+		return `/pulse/sources/${this.slug}`;
 	}
 	get rssUrl() {
 		return `/feeds/${this.slug}/rss`;
@@ -52,7 +56,7 @@ export class Feed {
 	async fetch() {
 		console.log(`fetching posts for ${this.name}`);
 
-		const postData = await this._provider.fetch();
+		const postData = await this._provider.execute();
 
 		this._cachedPosts = postData.map((post) => ({
 			...post,

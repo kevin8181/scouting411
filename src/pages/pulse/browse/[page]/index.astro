@@ -1,0 +1,31 @@
+---
+import UiLayout from "@/components/layout/UiLayout.astro";
+import { BrowsePage } from "@/pages/pulse/browse/[page]/_page";
+import type { GetStaticPaths } from "astro";
+import { FeedManager } from "@/features/feeds/feedManager";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const posts = FeedManager.allPosts();
+
+	return paginate(posts, {
+		pageSize: 20,
+	});
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const lastItem = page.size * page.currentPage;
+const firstItem = lastItem - page.size + 1;
+---
+
+<UiLayout>
+	<span>Showing posts {firstItem} - {lastItem} of {page.total}.</span>
+	<BrowsePage posts={page.data} />
+	<div class="flex w-full justify-center gap-3 p-6">
+		<a href={page.url.first}>First</a>
+		<a href={page.url.prev}>Prev</a>
+		<span>{page.currentPage} of {page.lastPage}</span>
+		<a href={page.url.next}>Next</a>
+		<a href={page.url.last}>Last</a>
+	</div>
+</UiLayout>

@@ -1,13 +1,12 @@
-import type { FeedProvider } from "@/features/feeds/types";
-
+import { FeedProvider } from "@/features/feedProviders/feedProvider";
 import he from "he";
 
 //todo fetch the full post history
 
-export function ttaProvider(): FeedProvider {
-	return {
+export function TtaProvider() {
+	return new FeedProvider({
 		type: "tta",
-		fetch: async () => {
+		execute: async () => {
 			const response = await fetch(
 				"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
 			);
@@ -21,7 +20,7 @@ export function ttaProvider(): FeedProvider {
 				date: new Date(post.date_gmt),
 			}));
 		},
-	};
+	});
 }
 
 type ttaApiPost = {

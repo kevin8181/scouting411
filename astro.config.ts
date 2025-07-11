@@ -1,4 +1,4 @@
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig, fontProviders, envField } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
@@ -51,4 +51,19 @@ export default defineConfig({
 		}),
 		react(),
 	],
+
+	env: {
+		schema: {
+			UPSTASH_REDIS_REST_URL: envField.string({
+				context: "server",
+				access: "secret",
+				startsWith: "https://",
+			}),
+
+			UPSTASH_REDIS_REST_TOKEN: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+		},
+	},
 });

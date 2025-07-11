@@ -22,7 +22,7 @@ importers:
         version: 3.4.1
       '@astrojs/vercel':
         specifier: ^8.2.1
-        version: 8.2.1(astro@5.11.0(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0))(react@19.1.0)(rollup@4.44.2)
+        version: 8.2.1(astro@5.11.0(@types/node@24.0.10)(@upstash/redis@1.35.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0))(react@19.1.0)(rollup@4.44.2)
       '@fortawesome/free-brands-svg-icons':
         specifier: ^6.7.2
         version: 6.7.2
@@ -35,9 +35,12 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.11
         version: 4.1.11(vite@6.3.5(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
+      '@upstash/redis':
+        specifier: ^1.35.1
+        version: 1.35.1
       astro:
         specifier: ^5.11.0
-        version: 5.11.0(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)
+        version: 5.11.0(@types/node@24.0.10)(@upstash/redis@1.35.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)
       feedsmith:
         specifier: ^1.9.0
         version: 1.9.0
@@ -1014,6 +1017,9 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+
+  '@upstash/redis@1.35.1':
+    resolution: {integrity: sha512-sIMuAMU9IYbE2bkgDby8KLoQKRiBMXn0moXxqLvUmQ7VUu2CvulZLtK8O0x3WQZFvvZhU5sRC2/lOVZdGfudkA==}
 
   '@vercel/analytics@1.5.0':
     resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
@@ -3119,14 +3125,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/vercel@8.2.1(astro@5.11.0(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0))(react@19.1.0)(rollup@4.44.2)':
+  '@astrojs/vercel@8.2.1(astro@5.11.0(@types/node@24.0.10)(@upstash/redis@1.35.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0))(react@19.1.0)(rollup@4.44.2)':
     dependencies:
       '@astrojs/internal-helpers': 0.6.1
       '@vercel/analytics': 1.5.0(react@19.1.0)
       '@vercel/edge': 1.2.2
       '@vercel/nft': 0.29.4(rollup@4.44.2)
       '@vercel/routing-utils': 5.1.0
-      astro: 5.11.0(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)
+      astro: 5.11.0(@types/node@24.0.10)(@upstash/redis@1.35.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)
       esbuild: 0.25.6
       tinyglobby: 0.2.14
     transitivePeerDependencies:
@@ -3927,6 +3933,10 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
+  '@upstash/redis@1.35.1':
+    dependencies:
+      uncrypto: 0.1.3
+
   '@vercel/analytics@1.5.0(react@19.1.0)':
     optionalDependencies:
       react: 19.1.0
@@ -4095,7 +4105,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro@5.11.0(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0):
+  astro@5.11.0(@types/node@24.0.10)(@upstash/redis@1.35.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0):
     dependencies:
       '@astrojs/compiler': 2.12.2
       '@astrojs/internal-helpers': 0.6.1
@@ -4148,7 +4158,7 @@ snapshots:
       ultrahtml: 1.6.0
       unifont: 0.5.2
       unist-util-visit: 5.0.0
-      unstorage: 1.16.0
+      unstorage: 1.16.0(@upstash/redis@1.35.1)
       vfile: 6.0.3
       vite: 6.3.5(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0)
       vitefu: 1.1.1(vite@6.3.5(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.0))
@@ -5898,7 +5908,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
 
-  unstorage@1.16.0:
+  unstorage@1.16.0(@upstash/redis@1.35.1):
     dependencies:
       anymatch: 3.1.3
       chokidar: 4.0.3
@@ -5908,6 +5918,8 @@ snapshots:
       node-fetch-native: 1.6.6
       ofetch: 1.4.1
       ufo: 1.6.1
+    optionalDependencies:
+      '@upstash/redis': 1.35.1
 
   update-browserslist-db@1.1.3(browserslist@4.25.1):
     dependencies:

@@ -14,9 +14,3 @@ export type PostData = {
 
 /** Represents a post within a feed */
 export type Post = PostData & { feed: Feed };
-
-/** an instance of a feed provider */
-export type FeedProvider = {
-	type: string;
-	fetch: () => Promise<PostData[]>;
-};

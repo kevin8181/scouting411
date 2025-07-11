@@ -1,9 +1,37 @@
-import type { FeedProvider } from "@/features/feeds/types";
-import type { PostData } from "@/features/feeds/types";
+import { FeedProvider } from "@/features/feedProviders/feedProvider";
+import type { PostData } from "@/features/posts/post";
 import he from "he";
 import { promiseAllDelayed } from "@/util/promiseAllDelayed";
 
-async function fetchPage(page: number, opts: wordpressProviderOpts) {
+export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
+	const execute = async () => {
+		const posts: PostData[] = [];
+
+		const totalPages = (await fetchPage(1, opts)).totalPages;
+
+		// create an array where each element is a function that fetches a page
+		const functions = Array.from({ length: totalPages }, (_, i) => {
+			return async () => await fetchPage(i + 1, opts);
+		});
+
+		const pages = await promiseAllDelayed(functions, 1000);
+
+		pages.forEach((page) => {
+			posts.push(...page.posts);
+		});
+
+		console.log(`got ${posts.length} posts from ${opts.baseUrl}`);
+
+		return posts;
+	};
+
+	return new FeedProvider({
+		type: "wordpressApi",
+		execute,
+	});
+}
+
+async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 	console.log(`fetch page ${page} from ${opts.baseUrl}`);
 
 	const url = new URL(
@@ -19,7 +47,7 @@ async function fetchPage(page: number, opts: wordpressProviderOpts) {
 		);
 	}
 
-	const rawPosts: wordpressApiPost[] = await response.json();
+	const rawPosts: WordpressApiPost[] = await response.json();
 
 	const posts = rawPosts.map((post) => ({
 		url: post.link,
@@ -36,41 +64,14 @@ async function fetchPage(page: number, opts: wordpressProviderOpts) {
 	};
 }
 
-export function wordpressProvider(opts: wordpressProviderOpts): FeedProvider {
-	return {
-		type: "wordpress",
-
-		fetch: async () => {
-			const posts: PostData[] = [];
-
-			const totalPages = (await fetchPage(1, opts)).totalPages;
-
-			// create an array where each element is a function that fetches a page
-			const functions = Array.from({ length: totalPages }, (_, i) => {
-				return async () => await fetchPage(i + 1, opts);
-			});
-
-			const pages = await promiseAllDelayed(functions, 1000);
-
-			pages.forEach((page) => {
-				posts.push(...page.posts);
-			});
-
-			console.log(`got ${posts.length} posts from ${opts.baseUrl}`);
-
-			return posts;
-		},
-	};
-}
-
-type wordpressProviderOpts = {
+type WordpressApiProviderOpts = {
 	/** the base url of the wordpress site */
 	baseUrl: string;
 	/** return only posts which have this category id */
 	categoryFilter?: number;
 };
 
-type wordpressApiPost = {
+type WordpressApiPost = {
 	link: string;
 	title: {
 		rendered: string;

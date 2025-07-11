@@ -4,65 +4,75 @@ import { FeedManager } from "@/features/feeds/feedManager";
 ---
 
 <UiLayout>
-	<h1 class="font-serif text-xl">Subscribe to Scouting411 Pulse</h1>
-
-	<p>
-		Every source on Scouting411 is made available as an RSS feed, so you can
-		subscribe on your favorite reader app. If you don't know what RSS is, you
-		can learn more at <a
-			href="https://aboutfeeds.com/"
-			rel="noopener noreferrer"
-			target="_blank"
-			class="text-brand-blue wrap-anywhere hyphens-auto hover:underline"
-			>aboutfeeds.com</a
-		>.
-	</p>
-
 	<div class="p-8">
-		<table class="w-full">
-			<thead>
-				<tr>
-					<th class="border-brand-gray-5 border-b text-left">Name</th>
-					<th class="border-brand-gray-5 border-b text-left">Feed</th>
-				</tr>
-			</thead>
-			<tbody>
-				{
-					FeedManager.feeds.map(async (feed) => (
-						<tr>
-							<td class="border-brand-gray-3 border-b py-1.5 pr-8">
-								<a
-									href={feed.overviewUrl}
-									class="text-brand-blue hover:underline"
-								>
-									{feed.name}
-								</a>
-							</td>
-							<td class="border-brand-gray-3 border-b py-1.5 pr-8">
-								<a
-									href={feed.rssUrl}
-									rel="noopener noreferrer"
-									target="_blank"
-									class="text-brand-blue hover:underline"
-								>
-									rss
-								</a>
-							</td>
-						</tr>
-					))
-				}
-			</tbody>
-		</table>
+		<h1 class="font-serif text-xl">Subscribe to Scouting411 Pulse</h1>
+
+		<p>
+			Although the upstream sources on Pulse are published in a variety of
+			different formats, we have gone to the trouble of re-exporting every
+			source as a non-paginated RSS feed for you. If you don't know what RSS is,
+			you can learn more at <a
+				href="https://aboutfeeds.com/"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-blue wrap-anywhere hyphens-auto hover:underline"
+				>aboutfeeds.com</a
+			>.
+		</p>
+		<p>
+			There are a few caveats to be aware of when using these feeds. First, they
+			are not continuously updated. These feeds may be stale by up to 24 hours
+			at any given time. We may add support for instant updates using
+			pubsubhubbub in the future. Second, we have not yet added support for
+			media enclosures; these feeds will not work with a podcast app. Third,
+			while we have attempted to faithfully represent the original content, the
+			metadata and formatting of these feeds is not identical to the upstream
+			sources.
+		</p>
+
+		<div class="p-8">
+			<table class="w-full">
+				<thead>
+					<tr>
+						<th class="border-gray-5 border-b text-left">Source</th>
+						<th class="border-gray-5 border-b text-left">Feed</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						FeedManager.feeds.map(async (feed) => (
+							<tr>
+								<td class="border-gray-3 border-b py-1.5 pr-8">
+									<a href={feed.overviewUrl} class="text-blue hover:underline">
+										{feed.name}
+									</a>
+								</td>
+								<td class="border-gray-3 border-b py-1.5 pr-8">
+									<a
+										href={feed.rssUrl}
+										rel="noopener noreferrer"
+										target="_blank"
+										class="text-blue hover:underline"
+									>
+										rss
+									</a>
+								</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+		</div>
+
+		<h2 class="font-serif text-lg">All Sources</h2>
+
+		<p>
+			You can subscribe to every source at once by importing our <a
+				href="/feeds/all/opml"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-blue underline">OPML blogroll</a
+			> into your reader.
+		</p>
 	</div>
-
-	<h2 class="font-serif text-lg">All Sources</h2>
-
-	<p>
-		You can subscribe to every source at once by importing our <a
-			href="/feeds/all/opml"
-			rel="noopener noreferrer"
-			target="_blank"
-			class="text-brand-blue underline">OPML blogroll</a
-		> into your reader.
-	</p>
 </UiLayout>
