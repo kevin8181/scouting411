@@ -40,7 +40,7 @@ export function WordpressApiProvider(
 	opts: WordpressApiProviderOpts,
 ): FeedProvider {
 	return new FeedProvider({
-		type: "wordpress",
+		type: "wordpressApi",
 
 		fetch: async () => {
 			const posts: PostData[] = [];
