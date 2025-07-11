@@ -133,6 +133,17 @@ export const feedConfigs: CreateFeedOpts[] = [
 		}),
 	},
 	{
+		name: "OA System Maintenance",
+		slug: "oa-system-maintenance",
+		description:
+			"Updates on Order of the Arrow's digital infrastructure maintenance and outages.",
+		homepageUrl: "https://status.oa-scouting.org/",
+		provider: RssProvider({
+			feedUrl: "https://status.oa-scouting.org/history.rss",
+			// atom feed, text, and email also available
+		}),
+	},
+	{
 		name: "Sea Scouts News",
 		slug: "sea-scouts-news",
 		description: "News and updates about the Sea Scouts program.",
@@ -168,6 +179,16 @@ export const feedConfigs: CreateFeedOpts[] = [
 			feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
 		}),
 	},
+	// {
+	// 	name: "The Lookout",
+	// 	slug: "the-lookout",
+	// 	description:
+	// 		"The Lookout: Sea Scout Podcast Network. Features both news and interviews.",
+	// 	homepageUrl: "https://seascout.org/the-lookout-sea-scout-podcast-network/",
+	// 	provider: RssProvider({
+	// 		feedUrl: "https://feeds.buzzsprout.com/983503.rss",
+	// 	}),
+	// },
 	{
 		name: "Trail to Adventure",
 		slug: "trail-to-adventure",
