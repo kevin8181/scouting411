@@ -60,7 +60,7 @@ async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 
 	return {
 		posts,
-		totalPages: parseInt(response.headers.get("x-wp-totalpages")!),
+		totalPages: parseInt(response.headers.get("x-wp-totalpages") ?? "1"),
 	};
 }
 
