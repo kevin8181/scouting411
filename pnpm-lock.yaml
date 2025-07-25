@@ -42,8 +42,8 @@ importers:
         specifier: ^5.11.0
         version: 5.11.0(@types/node@24.0.10)(@upstash/redis@1.35.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)
       feedsmith:
-        specifier: ^1.9.0
-        version: 1.9.0
+        specifier: 2.0.0-next.4
+        version: 2.0.0-next.4
       he:
         specifier: ^1.2.0
         version: 1.2.0
@@ -1650,8 +1650,8 @@ packages:
       picomatch:
         optional: true
 
-  feedsmith@1.9.0:
-    resolution: {integrity: sha512-j8haMeMh6686mwYD4MEpdsT1ItOiR5ednDNKHWEGn/qro2sR0muAmNZRlXDAtaThkKHkaMfRC/mFh6QYsE4OdA==}
+  feedsmith@2.0.0-next.4:
+    resolution: {integrity: sha512-tUZp5zbXOGd2MaxP0GXueljXnCNdeJx/PnuJCgDCGV9Nkr12sbYpL9pUWyawoPWDmuQj/fpX6RBhlJjN4PO89Q==}
 
   file-entry-cache@8.0.0:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
@@ -4826,7 +4826,7 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.2
 
-  feedsmith@1.9.0:
+  feedsmith@2.0.0-next.4:
     dependencies:
       entities: 6.0.1
       fast-xml-parser: 5.2.5

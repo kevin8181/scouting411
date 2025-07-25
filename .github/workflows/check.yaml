@@ -37,5 +37,4 @@ jobs:
 
     outputs:
       status: ${{ job.status }}
-
 # todo add knip to CI for dead code checks
