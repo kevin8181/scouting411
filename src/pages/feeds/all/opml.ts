@@ -27,7 +27,7 @@ export const GET: APIRoute = async (context) => {
 					title: "OPML Stylesheet",
 					type: "text/xsl",
 					href: "/xslt/opml.xslt",
-				}
+				},
 			],
 		},
 	);
