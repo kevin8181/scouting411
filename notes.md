@@ -42,6 +42,7 @@
 - https://scoutingalumni.org/resources/monthly-alumni-association-newsletters/
 - https://t.email.scouting.org/lp/LP171 //for troopleader updates
 - https://ablescouts.org/subscribe/
+- https://t.email.scouting.org/lp/subscribeaquatics?_uuid=d01169b6-d353-489e-a0bc-4c383a5b16b0&_test=true
 
 ## social
 

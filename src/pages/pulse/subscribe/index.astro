@@ -4,7 +4,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 ---
 
 <UiLayout>
-	<div class="p-8">
+	<div class="flex flex-col gap-4 p-8">
 		<h1 class="font-serif text-xl">Subscribe to Scouting411 Pulse</h1>
 
 		<p>
@@ -20,17 +20,26 @@ import { FeedManager } from "@/features/feeds/feedManager";
 			>.
 		</p>
 		<p>
-			There are a few caveats to be aware of when using these feeds. First, they
-			are not continuously updated. These feeds may be stale by up to 24 hours
-			at any given time. We may add support for instant updates using
-			pubsubhubbub in the future. Second, we have not yet added support for
-			media enclosures; these feeds will not work with a podcast app. Third,
-			while we have attempted to faithfully represent the original content, the
-			metadata and formatting of these feeds is not identical to the upstream
-			sources.
+			There are a few caveats to be aware of when using these feeds:
+			<ul class="list-inside list-disc">
+				<li>
+					The feeds are not continuously updated. They may be stale by up to 24
+					hours at a given time. We may consider adding support for instant
+					updates in the future, where possible.
+				</li>
+				<li>
+					We have not yet added support for media enclosures; these feeds will
+					not work with a podcast app.
+				</li>
+				<li>
+					While we have attempted to faithfully represent the original content,
+					the metadata and formatting of these feeds is not identical to the
+					upstream sources.
+				</li>
+			</ul>
 		</p>
 
-		<div class="p-8">
+		<div class="p-4">
 			<table class="w-full">
 				<thead>
 					<tr>

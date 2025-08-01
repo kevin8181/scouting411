@@ -13,6 +13,6 @@ export default defineConfig([
 		files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
 		languageOptions: { globals: globals.browser },
 	},
-	tseslint.configs.recommended,
+	tseslint.configs.recommended, // todo change to strict and fix errors
 	eslintPluginAstro.configs.recommended,
 ]);

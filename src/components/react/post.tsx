@@ -1,6 +1,6 @@
-import type { Post } from "@/features/posts/post";
+import { Post } from "@/features/posts/post";
 
-export function Post({ post }: { post: Post }) {
+export function RenderPost({ post }: { post: Post }) {
 	return (
 		<div className="border-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<a

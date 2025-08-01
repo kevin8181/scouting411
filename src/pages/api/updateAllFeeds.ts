@@ -1,0 +1,10 @@
+import type { APIRoute } from "astro";
+import { FeedManager } from "@/features/feeds/feedManager";
+
+//todo secure this endpoint with cron secret https://vercel.com/docs/cron-jobs/manage-cron-jobs?framework=other#securing-cron-jobs
+
+export const POST: APIRoute = async () => {
+	await FeedManager.updateAllFeeds();
+
+	return new Response();
+};
