@@ -51,7 +51,7 @@ export class Feed {
 
 		// read the data from redis
 		const postDatas = await Feed.readCache(this.slug);
-		
+
 		return postDatas.map((postData) => {
 			return new Post(postData, this);
 		});
