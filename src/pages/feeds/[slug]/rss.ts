@@ -1,8 +1,8 @@
-import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
+import rss from "@astrojs/rss";
 import { FeedManager } from "@/features/feeds/feedManager";
 
-//todo generate this with feedsmith instead of astro package. serve as text/xml
+//todo generate this with feedsmith instead of astro package. serve as text/xml and include stylesheet
 
 export function getStaticPaths() {
 	return FeedManager.feeds.map((feed) => ({
@@ -13,6 +13,7 @@ export function getStaticPaths() {
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
 	const feed = FeedManager.getFeedBySlug(slug)!;
+	const posts = await feed.posts();
 
 	return rss({
 		title: feed.name,
@@ -24,7 +25,7 @@ export const GET: APIRoute = async (context) => {
 
 		// Array of `<item>`s in output xml
 		// See "Generating items" section for examples using content collections and glob imports
-		items: feed.posts.map((post) => ({
+		items: posts.map((post) => ({
 			title: post.title,
 			description: post.description,
 			pubDate: post.date,

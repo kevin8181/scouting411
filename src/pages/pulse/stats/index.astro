@@ -29,7 +29,7 @@ import { FeedManager } from "@/features/feeds/feedManager";
 						<td class="text-right">
 							{Intl.NumberFormat().format(feed.posts.length)}
 						</td>
-						<td>{feed.provider}</td>
+						<td>{feed.providerType}</td>
 					</tr>
 				))
 			}
@@ -39,7 +39,9 @@ import { FeedManager } from "@/features/feeds/feedManager";
 				<td class="font-bold"> Total: </td>
 				<td class="font-bold">
 					<span
-						>{Intl.NumberFormat().format(FeedManager.allPosts().length)}</span
+						>{
+							Intl.NumberFormat().format((await FeedManager.allPosts()).length)
+						}</span
 					>
 				</td>
 				<td>{}</td>

@@ -14,7 +14,7 @@ export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
 			return async () => await fetchPage(i + 1, opts);
 		});
 
-		const pages = await promiseAllDelayed(functions, 1000);
+		const pages = await promiseAllDelayed(functions, 1500);
 
 		pages.forEach((page) => {
 			posts.push(...page.posts);
@@ -55,7 +55,7 @@ async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 		description: he.decode(
 			post.yoast_head_json?.og_description ?? post.excerpt.rendered,
 		),
-		date: new Date(post.date_gmt),
+		date: post.date_gmt,
 	}));
 
 	return {

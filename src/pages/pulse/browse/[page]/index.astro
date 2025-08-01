@@ -5,7 +5,7 @@ import type { GetStaticPaths } from "astro";
 import { FeedManager } from "@/features/feeds/feedManager";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const posts = FeedManager.allPosts();
+	const posts = await FeedManager.allPosts();
 
 	return paginate(posts, {
 		pageSize: 20,

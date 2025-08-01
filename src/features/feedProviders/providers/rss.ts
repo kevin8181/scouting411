@@ -31,7 +31,7 @@ export function RssProvider(opts: RssProviderOpts) {
 				url: item.link,
 				title: item.title,
 				description: item.description,
-				date: new Date(item.pubDate),
+				date: item.pubDate,
 			};
 		});
 	};

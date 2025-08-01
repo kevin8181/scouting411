@@ -17,7 +17,7 @@ export function TtaProvider() {
 				url: post.link,
 				title: he.decode(post.title.rendered),
 				description: post.yoast_head_json.description,
-				date: new Date(post.date_gmt),
+				date: post.date_gmt,
 			}));
 		},
 	});
