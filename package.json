@@ -29,7 +29,7 @@
 		"@astrojs/sitemap": "^3.4.2",
 		"@astrojs/vercel": "^8.2.4",
 		"@fortawesome/free-brands-svg-icons": "^6.7.2",
-		"@fortawesome/free-solid-svg-icons": "^6.7.2",
+		"@fortawesome/free-solid-svg-icons": "^7.0.0",
 		"@fortawesome/react-fontawesome": "^0.2.3",
 		"@tailwindcss/vite": "^4.1.11",
 		"@upstash/redis": "^1.35.3",
