@@ -14,7 +14,7 @@ export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
 			return async () => await fetchPage(i + 1, opts);
 		});
 
-		const pages = await promiseAllDelayed(functions, 1500);
+		const pages = await promiseAllDelayed(functions, 2000);
 
 		pages.forEach((page) => {
 			posts.push(...page.posts);
