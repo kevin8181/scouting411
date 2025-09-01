@@ -10,7 +10,7 @@ import vercel from "@astrojs/vercel";
 // https://astro.build/config
 export default defineConfig({
 	adapter: vercel({
-		maxDuration: 1000 * 300,
+		maxDuration: 300,
 	}),
 
 	site: "https://scouting411.org/",
