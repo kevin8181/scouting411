@@ -4,9 +4,9 @@ import { NavDivider } from "@/components/layout/sidebar/navDivider";
 import {
 	faBookBookmark,
 	faBullhorn,
-	faHeartPulse,
 	faHome,
 	faMagnifyingGlassChart,
+	faNewspaper,
 	faRssSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
@@ -22,12 +22,12 @@ export default function Sidebar({ url }: { url: URL }) {
 					<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
 				</NavGroup>
 
-				<NavGroup label="pulse">
+				<NavGroup label="news">
 					<NavLink
 						href="/pulse/browse/1"
-						label="Pulse"
+						label="Newsfeed"
 						currentUrl={url}
-						icon={faHeartPulse}
+						icon={faNewspaper}
 					/>
 					<NavLink
 						href="/pulse/sources"
@@ -40,6 +40,12 @@ export default function Sidebar({ url }: { url: URL }) {
 						label="Subscribe"
 						currentUrl={url}
 						icon={faRssSquare}
+					/>
+					<NavLink
+						href="/pulse/stats"
+						label="Stats"
+						currentUrl={url}
+						icon={faMagnifyingGlassChart}
 					/>
 				</NavGroup>
 
@@ -56,12 +62,6 @@ export default function Sidebar({ url }: { url: URL }) {
 			<div>
 				<NavGroup label="about">
 					<NavLink
-						href="/pulse/stats"
-						label="Feed Stats"
-						currentUrl={url}
-						icon={faMagnifyingGlassChart}
-					/>
-					<NavLink
 						href="https://github.com/kevin8181/scouting411"
 						label="Github"
 						newTab
@@ -71,8 +71,7 @@ export default function Sidebar({ url }: { url: URL }) {
 				</NavGroup>
 				<NavDivider />
 				<div className="text-gray-8 p-3 text-xs">
-					Not affiliated with Boy Scouts of America. Built at{" "}
-					{new Date().toISOString()}.
+					Not affiliated with Scouting America.
 				</div>
 			</div>
 		</aside>

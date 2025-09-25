@@ -1,8 +1,6 @@
 import { FeedProvider } from "@/features/feedProviders/feedProvider";
 import { parseRssFeed } from "feedsmith";
 
-//todo fetch the full post history on wordpress rss feeds. /feed?paged=2
-
 export function RssProvider(opts: RssProviderOpts) {
 	const execute = async () => {
 		const response = await fetch(opts.feedUrl);
@@ -37,7 +35,10 @@ export function RssProvider(opts: RssProviderOpts) {
 	};
 
 	return new FeedProvider({
-		type: "rss",
+		type: {
+			id: "rss",
+			human: "RSS",
+		},
 		execute,
 	});
 }

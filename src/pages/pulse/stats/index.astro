@@ -27,9 +27,9 @@ import { FeedManager } from "@/features/feeds/feedManager";
 							</a>
 						</td>
 						<td class="text-right">
-							{Intl.NumberFormat().format(feed.posts.length)}
+							{Intl.NumberFormat().format((await feed.posts()).length)}
 						</td>
-						<td>{feed.providerType}</td>
+						<td>{feed.type.human}</td>
 					</tr>
 				))
 			}

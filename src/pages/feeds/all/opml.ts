@@ -6,7 +6,7 @@ export const GET: APIRoute = async (context) => {
 	const opml = generateOpml(
 		{
 			head: {
-				title: "Scouting411 Pulse Sources",
+				title: "Scouting411 News Sources",
 				ownerName: "Scouting411",
 				dateModified: new Date(),
 			},

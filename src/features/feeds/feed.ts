@@ -33,12 +33,14 @@ export class Feed {
 
 	// GETTERS
 
-	get providerType() {
+	get type() {
 		return this._provider.type;
 	}
+	/** relative href to the detail page for this feed */
 	get overviewUrl() {
 		return `/pulse/sources/${this.slug}`;
 	}
+	/** relative href to the generated rss feed */
 	get rssUrl() {
 		return `/feeds/${this.slug}/rss`;
 	}
