@@ -27,7 +27,7 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 				class="text-blue underline">{feed.homepageUrl}</a
 			>
 		</p>
-		<p>Total posts in Pulse: {feed.posts.length}</p>
+		<p>Indexed posts: {(await feed.posts()).length}</p>
 		<p>
 			Subcribe: <a href={feed.rssUrl} class="text-blue underline">rss</a>
 		</p>

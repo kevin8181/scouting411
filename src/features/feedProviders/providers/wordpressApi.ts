@@ -1,32 +1,19 @@
 import { FeedProvider } from "@/features/feedProviders/feedProvider";
 import type { PostData } from "@/features/posts/post";
 import he from "he";
-import { promiseAllDelayed } from "@/util/promiseAllDelayed";
 
 export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
 	const execute = async () => {
-		const posts: PostData[] = [];
+		const page1 = await fetchPage(1, opts);
 
-		const totalPages = (await fetchPage(1, opts)).totalPages;
-
-		// create an array where each element is a function that fetches a page
-		const functions = Array.from({ length: totalPages }, (_, i) => {
-			return async () => await fetchPage(i + 1, opts);
-		});
-
-		const pages = await promiseAllDelayed(functions, 2000);
-
-		pages.forEach((page) => {
-			posts.push(...page.posts);
-		});
-
-		console.log(`got ${posts.length} posts from ${opts.baseUrl}`);
-
-		return posts;
+		return page1.posts;
 	};
 
 	return new FeedProvider({
-		type: "wordpressApi",
+		type: {
+			id: "wordpressApi",
+			human: "Wordpress",
+		},
 		execute,
 	});
 }
@@ -49,7 +36,7 @@ async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 
 	const rawPosts: WordpressApiPost[] = await response.json();
 
-	const posts = rawPosts.map((post) => ({
+	const posts: PostData[] = rawPosts.map((post) => ({
 		url: post.link,
 		title: he.decode(post.title.rendered),
 		description: he.decode(

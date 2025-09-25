@@ -82,15 +82,15 @@ export const feedConfigs: CreateFeedOpts[] = [
 			baseUrl: "https://summitbsa.org",
 		}),
 	},
-	{
-		name: "Scout Life",
-		slug: "scout-life",
-		description: "Editorial and entertainment content mainly for youth.",
-		homepageUrl: "https://scoutlife.org",
-		provider: WordpressApiProvider({
-			baseUrl: "https://scoutlife.org",
-		}),
-	},
+	// {
+	// 	name: "Scout Life",
+	// 	slug: "scout-life",
+	// 	description: "Editorial and entertainment content mainly for youth.",
+	// 	homepageUrl: "https://scoutlife.org",
+	// 	provider: WordpressApiProvider({
+	// 		baseUrl: "https://scoutlife.org",
+	// 	}),
+	// },
 	{
 		name: "Scouting Alumni",
 		slug: "scouting-alumni",

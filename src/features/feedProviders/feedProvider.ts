@@ -1,7 +1,11 @@
 import type { PostData } from "@/features/posts/post";
 
 export class FeedProvider {
-	type: string;
+	type: {
+		id: string;
+		human: string;
+	};
+
 	execute: () => Promise<PostData[]>;
 
 	constructor(opts: FeedProviderOpts) {
@@ -11,8 +15,14 @@ export class FeedProvider {
 }
 
 type FeedProviderOpts = {
-	/** an identifier for the type of upstream source this provider is fetching from */
-	type: string;
+	/** metadata about the feed provider type */
+	type: {
+		/** machine id for the type of provider (rss, wordpressApi, etc) */
+		id: string;
+		/** human-readable name for the type of feed provider (RSS, Wordpress API, etc) */
+		human: string;
+	};
+
 	/** executes the fetching login and returns the post data */
 	execute: () => Promise<PostData[]>;
 };

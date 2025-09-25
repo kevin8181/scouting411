@@ -5,7 +5,10 @@ import he from "he";
 
 export function TtaProvider() {
 	return new FeedProvider({
-		type: "tta",
+		type: {
+			id: "tta",
+			human: "Trail to Adventure (bespoke)",
+		},
 		execute: async () => {
 			const response = await fetch(
 				"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
