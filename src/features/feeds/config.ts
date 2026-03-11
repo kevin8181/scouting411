@@ -2,33 +2,38 @@ import type { CreateFeedOpts } from "@/features/feeds/feed";
 
 import { WordpressApiProvider } from "@/features/feedProviders/providers/wordpressApi";
 import { RssProvider } from "@/features/feedProviders/providers/rss";
-import { TtaProvider } from "@/features/feedProviders/providers/tta";
+// import { TtaProvider } from "@/features/feedProviders/providers/tta";
 
 export const feedConfigs: CreateFeedOpts[] = [
-	{
-		name: "Scouts BSA Program Updates",
-		slug: "scouts-bsa-program-updates",
-		description:
-			"Information about changes and updates to the Scouts BSA program.",
-		homepageUrl:
-			"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
-		provider: WordpressApiProvider({
-			baseUrl: "https://scouting.org",
-			categoryFilter: 15054,
-		}),
-	},
-	{
-		name: "Cub Scouts Program Updates",
-		slug: "cub-scouts-program-updates",
-		description:
-			"Information about changes and updates to the Cub Scouts program.",
-		homepageUrl:
-			"https://www.scouting.org/topics/program-updates/program-updates-cub-scouts",
-		provider: WordpressApiProvider({
-			baseUrl: "https://www.scouting.org",
-			categoryFilter: 15053,
-		}),
-	},
+	
+	// todo this is not working any more because of cloudflare
+	// {
+	// 	name: "Scouts BSA Program Updates",
+	// 	slug: "scouts-bsa-program-updates",
+	// 	description:
+	// 		"Information about changes and updates to the Scouts BSA program.",
+	// 	homepageUrl:
+	// 		"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
+	// 	provider: WordpressApiProvider({
+	// 		baseUrl: "https://scouting.org",
+	// 		categoryFilter: 15054,
+	// 	}),
+	// },
+
+	// todo this is not working any more because of cloudflare
+	// {
+	// 	name: "Cub Scouts Program Updates",
+	// 	slug: "cub-scouts-program-updates",
+	// 	description:
+	// 		"Information about changes and updates to the Cub Scouts program.",
+	// 	homepageUrl:
+	// 		"https://www.scouting.org/topics/program-updates/program-updates-cub-scouts",
+	// 	provider: WordpressApiProvider({
+	// 		baseUrl: "https://www.scouting.org",
+	// 		categoryFilter: 15053,
+	// 	}),
+	// },
+
 	{
 		name: "Scouting Wire",
 		slug: "scouting-wire",
@@ -62,16 +67,19 @@ export const feedConfigs: CreateFeedOpts[] = [
 			//entire wordpress api is 404
 		}),
 	},
-	{
-		name: "Scouting Magazine",
-		slug: "scouting-magazine",
-		description:
-			"Editorial content for parents and volunteers. The adult counterpart of Scout Life.",
-		homepageUrl: "https://blog.scoutingmagazine.org",
-		provider: WordpressApiProvider({
-			baseUrl: "https://blog.scoutingmagazine.org",
-		}),
-	},
+
+	// todo this is not working any more because of cloudflare
+	// {
+	// 	name: "Scouting Magazine",
+	// 	slug: "scouting-magazine",
+	// 	description:
+	// 		"Editorial content for parents and volunteers. The adult counterpart of Scout Life.",
+	// 	homepageUrl: "https://blog.scoutingmagazine.org",
+	// 	provider: WordpressApiProvider({
+	// 		baseUrl: "https://blog.scoutingmagazine.org",
+	// 	}),
+	// },
+
 	{
 		name: "Summit Blog",
 		slug: "summit-blog",
@@ -82,6 +90,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 			baseUrl: "https://summitbsa.org",
 		}),
 	},
+
 	// {
 	// 	name: "Scout Life",
 	// 	slug: "scout-life",
@@ -91,6 +100,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 	// 		baseUrl: "https://scoutlife.org",
 	// 	}),
 	// },
+	
 	{
 		name: "Scouting Alumni",
 		slug: "scouting-alumni",
@@ -161,24 +171,29 @@ export const feedConfigs: CreateFeedOpts[] = [
 			baseUrl: "https://troopleader.scouting.org",
 		}),
 	},
-	{
-		name: "ScoutCast",
-		slug: "scoutcast",
-		description: "A defunct podcast about the Scouts BSA program.",
-		homepageUrl: "https://podcast.scouting.org/category/scoutcast",
-		provider: RssProvider({
-			feedUrl: "https://podcast.scouting.org/category/scoutcast/feed",
-		}),
-	},
-	{
-		name: "CubCast",
-		slug: "cubcast",
-		description: "A defunct podcast about the Cub Scouts program.",
-		homepageUrl: "https://podcast.scouting.org/category/cubcast",
-		provider: RssProvider({
-			feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
-		}),
-	},
+
+	// todo this is gone. rebuild from scraped copy
+	// {
+	// 	name: "ScoutCast",
+	// 	slug: "scoutcast",
+	// 	description: "A defunct podcast about the Scouts BSA program.",
+	// 	homepageUrl: "https://podcast.scouting.org/category/scoutcast",
+	// 	provider: RssProvider({
+	// 		feedUrl: "https://podcast.scouting.org/category/scoutcast/feed",
+	// 	}),
+	// },
+
+	// todo this is gone. rebuild from scraped copy
+	// {
+	// 	name: "CubCast",
+	// 	slug: "cubcast",
+	// 	description: "A defunct podcast about the Cub Scouts program.",
+	// 	homepageUrl: "https://podcast.scouting.org/category/cubcast",
+	// 	provider: RssProvider({
+	// 		feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
+	// 	}),
+	// },
+
 	// {
 	// 	name: "The Lookout",
 	// 	slug: "the-lookout",
