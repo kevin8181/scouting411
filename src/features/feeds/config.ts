@@ -5,7 +5,6 @@ import { RssProvider } from "@/features/feedProviders/providers/rss";
 // import { TtaProvider } from "@/features/feedProviders/providers/tta";
 
 export const feedConfigs: CreateFeedOpts[] = [
-	
 	// todo this is not working any more because of cloudflare
 	// {
 	// 	name: "Scouts BSA Program Updates",
@@ -100,7 +99,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 	// 		baseUrl: "https://scoutlife.org",
 	// 	}),
 	// },
-	
+
 	{
 		name: "Scouting Alumni",
 		slug: "scouting-alumni",
