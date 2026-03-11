@@ -189,12 +189,14 @@ export const feedConfigs: CreateFeedOpts[] = [
 	// 		feedUrl: "https://feeds.buzzsprout.com/983503.rss",
 	// 	}),
 	// },
-	{
-		name: "Trail to Adventure",
-		slug: "trail-to-adventure",
-		description:
-			"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
-		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
-		provider: TtaProvider(),
-	},
+
+	// todo this is not working any more because of cloudflare
+	// {
+	// 	name: "Trail to Adventure",
+	// 	slug: "trail-to-adventure",
+	// 	description:
+	// 		"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
+	// 	homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
+	// 	provider: TtaProvider(),
+	// },
 ];
