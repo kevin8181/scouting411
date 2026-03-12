@@ -1,41 +1,51 @@
+import { z } from "astro/zod";
+
 /** paginate an array of items */
-function paginate({
-	page,
-	pageSize,
-	totalItems,
-}: PaginateOpts): PaginateResult {
-	const startIndex = (page - 1) * pageSize;
-	const endIndex = startIndex + pageSize;
-	const totalPages = Math.ceil(totalItems / pageSize);
+export function paginate<T>(
+	data: T[],
+	opts: PaginateOpts,
+): PaginatedResults<T> {
+	const firstItemIndex = (opts.page - 1) * opts.pageSize;
+	const lastItemIndex = firstItemIndex + opts.pageSize - 1;
+	const totalPages = Math.ceil(data.length / opts.pageSize);
+
+	const items = data.slice(firstItemIndex, lastItemIndex + 1);
 
 	return {
-		startIndex,
-		endIndex,
-		page,
-		pageSize,
-		totalItems,
-		totalPages,
+		items,
+		pagination: {
+			page: opts.page,
+			pageSize: opts.pageSize,
+			firstItemIndex,
+			lastItemIndex,
+			totalItems: data.length,
+			totalPages,
+		},
 	};
 }
 
-type PaginateOpts = {
-	/** the total number of items */
-	totalItems: number;
+type PaginateOpts = z.infer<typeof paginateOptsSchema>;
+export const paginateOptsSchema = z.object({
 	/** the page size */
-	pageSize: number;
+	pageSize: z.number().min(1),
 	/** the page number */
-	page: number;
+	page: z.number().min(1),
+});
+
+export type PaginatedResults<T> = {
+	items: T[];
+	pagination: PaginationResultsMetadata;
 };
 
-type PaginateResult = {
-	/** the start index of the items on this page */
-	startIndex: number;
-	/** the end index of the items on this page */
-	endIndex: number;
+type PaginationResultsMetadata = {
 	/** the current page number */
 	page: number;
 	/** the maximum number of items per page */
 	pageSize: number;
+	/** the start index of the items on this page */
+	firstItemIndex: number;
+	/** the end index of the items on this page */
+	lastItemIndex: number;
 	/** the total number of items */
 	totalItems: number;
 	/** the total number of pages */
