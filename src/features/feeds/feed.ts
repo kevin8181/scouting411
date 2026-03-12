@@ -1,7 +1,7 @@
 import { Post } from "@/features/posts/post";
-import type { FeedProvider } from "@/features/feedProviders/feedProvider";
+import type { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import type { UrlShaped } from "@/util/utilTypes";
-import { redis } from "@/util/redis";
+import { redis } from "@/util/redisClient";
 import type { PostData } from "@/features/posts/post";
 
 export type CreateFeedOpts = {
@@ -9,7 +9,7 @@ export type CreateFeedOpts = {
 	slug: string;
 	description: string;
 	homepageUrl: UrlShaped;
-	provider: FeedProvider;
+	adapter: FeedAdapter;
 };
 
 export class Feed {
@@ -19,7 +19,7 @@ export class Feed {
 	readonly slug: string;
 	readonly description: string;
 	readonly homepageUrl: UrlShaped;
-	private readonly _provider: FeedProvider;
+	private readonly _adapter: FeedAdapter;
 
 	// LIFECYCLE
 
@@ -28,13 +28,13 @@ export class Feed {
 		this.slug = opts.slug;
 		this.description = opts.description;
 		this.homepageUrl = opts.homepageUrl;
-		this._provider = opts.provider;
+		this._adapter = opts.adapter;
 	}
 
 	// GETTERS
 
 	get type() {
-		return this._provider.type;
+		return this._adapter.type;
 	}
 	/** relative href to the detail page for this feed */
 	get overviewUrl() {
@@ -75,8 +75,8 @@ export class Feed {
 	async updatePosts() {
 		console.log(`updating cached posts for ${this.name}`);
 
-		//execute the feed provider to fetch the data from the original source
-		const postData = await this._provider.execute();
+		//execute the feed adapter to fetch the data from the original source
+		const postData = await this._adapter.execute();
 
 		// write the data to redis
 		await Feed.writeCache(this.slug, postData);

@@ -24,7 +24,7 @@
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
 // find new/edited pages at https://www.scouting.org/wp-json/wp/v2/pages
 
-//todo add podcast rss feed provider?
+//todo add podcast rss feed adapter?
 
 ## periodicals
 

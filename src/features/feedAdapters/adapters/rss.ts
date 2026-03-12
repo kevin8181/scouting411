@@ -1,7 +1,7 @@
-import { FeedProvider } from "@/features/feedProviders/feedProvider";
+import { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import { parseRssFeed } from "feedsmith";
 
-export function RssProvider(opts: RssProviderOpts) {
+export function RssAdapter(opts: RssAdapterOpts) {
 	const execute = async () => {
 		const response = await fetch(opts.feedUrl);
 		const xml = await response.text();
@@ -34,7 +34,7 @@ export function RssProvider(opts: RssProviderOpts) {
 		});
 	};
 
-	return new FeedProvider({
+	return new FeedAdapter({
 		type: {
 			id: "rss",
 			human: "RSS",
@@ -43,6 +43,6 @@ export function RssProvider(opts: RssProviderOpts) {
 	});
 }
 
-type RssProviderOpts = {
+type RssAdapterOpts = {
 	feedUrl: string;
 };

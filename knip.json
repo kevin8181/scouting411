@@ -1,5 +1,5 @@
 {
 	"$schema": "https://unpkg.com/knip@5/schema.json",
 	"ignoreDependencies": [""],
-	"ignoreFiles": ["src/features/feedProviders/providers/tta.ts"]
+	"ignoreFiles": ["src/features/feedAdapters/adapters/tta.ts"]
 }

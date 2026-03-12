@@ -1,6 +1,6 @@
 import type { PostData } from "@/features/posts/post";
 
-export class FeedProvider {
+export class FeedAdapter {
 	type: {
 		id: string;
 		human: string;
@@ -8,18 +8,18 @@ export class FeedProvider {
 
 	execute: () => Promise<PostData[]>;
 
-	constructor(opts: FeedProviderOpts) {
+	constructor(opts: FeedAdapterOpts) {
 		this.type = opts.type;
 		this.execute = opts.execute;
 	}
 }
 
-type FeedProviderOpts = {
-	/** metadata about the feed provider type */
+type FeedAdapterOpts = {
+	/** metadata about the feed adapter type */
 	type: {
-		/** machine id for the type of provider (rss, wordpressApi, etc) */
+		/** machine id for the type of adapter (rss, wordpressApi, etc) */
 		id: string;
-		/** human-readable name for the type of feed provider (RSS, Wordpress API, etc) */
+		/** human-readable name for the type of feed adapter (RSS, Wordpress API, etc) */
 		human: string;
 	};
 

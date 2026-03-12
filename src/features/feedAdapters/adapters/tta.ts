@@ -1,10 +1,10 @@
-import { FeedProvider } from "@/features/feedProviders/feedProvider";
+import { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import he from "he";
 
 //todo fetch the full post history
 
-export function TtaProvider() {
-	return new FeedProvider({
+export function TtaAdapter() {
+	return new FeedAdapter({
 		type: {
 			id: "tta",
 			human: "Trail to Adventure (bespoke)",
