@@ -35,6 +35,13 @@ export default defineConfig({
 				context: "server",
 				access: "secret",
 			}),
+
+			// vercel.com/docs/cron-jobs/manage-cron-jobs?framework=other#securing-cron-jobs
+			/** token to secure the vercel cron job that updates all the upstream feeds. */
+			CRON_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+			}),
 		},
 	},
 

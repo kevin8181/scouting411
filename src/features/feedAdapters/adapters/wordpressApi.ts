@@ -1,15 +1,15 @@
-import { FeedProvider } from "@/features/feedProviders/feedProvider";
+import { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import type { PostData } from "@/features/posts/post";
 import he from "he";
 
-export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
+export function WordpressApiAdapter(opts: WordpressApiAdapterOpts) {
 	const execute = async () => {
 		const page1 = await fetchPage(1, opts);
 
 		return page1.posts;
 	};
 
-	return new FeedProvider({
+	return new FeedAdapter({
 		type: {
 			id: "wordpressApi",
 			human: "Wordpress",
@@ -18,7 +18,7 @@ export function WordpressApiProvider(opts: WordpressApiProviderOpts) {
 	});
 }
 
-async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
+async function fetchPage(page: number, opts: WordpressApiAdapterOpts) {
 	console.log(`fetch page ${page} from ${opts.baseUrl}`);
 
 	const url = new URL(
@@ -51,7 +51,7 @@ async function fetchPage(page: number, opts: WordpressApiProviderOpts) {
 	};
 }
 
-type WordpressApiProviderOpts = {
+type WordpressApiAdapterOpts = {
 	/** the base url of the wordpress site */
 	baseUrl: string;
 	/** return only posts which have this category id */

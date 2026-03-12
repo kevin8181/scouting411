@@ -1,12 +1,16 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
-import { FeedManager } from "@/features/feeds/feedManager";
-import { filterPosts, filterSchema } from "@/features/feeds/filter";
+import { z } from "astro/zod";
+import { queryPosts } from "@/features/postsQuery/query";
 
-export const GET: APIRoute = async ({ url }) => {
-	const params = Object.fromEntries(url.searchParams);
+export const GET: APIRoute = async (context) => {
+	const params = context.url.searchParams;
 
-	const { error } = filterSchema.safeParse(params);
+	console.log(params);
+
+	const paramsObj = Object.fromEntries(params);
+
+	const { error, data: query } = postsQueryParamsSchema.safeParse(paramsObj);
 
 	if (error) {
 		return new Response(JSON.stringify({ error }), {
@@ -17,14 +21,22 @@ export const GET: APIRoute = async ({ url }) => {
 		});
 	}
 
-	const posts = await FeedManager.allPosts();
+	const posts = await queryPosts({
+		paginate: {
+			page: query.page,
+			pageSize: query.pageSize,
+		},
+	});
 
-	const filteredPosts = filterPosts({ posts, filter: params });
-
-	return new Response(JSON.stringify(filteredPosts), {
+	return new Response(JSON.stringify(posts), {
 		status: 200,
 		headers: {
 			"Content-Type": "application/json",
 		},
 	});
 };
+
+const postsQueryParamsSchema = z.object({
+	page: z.coerce.number().min(1),
+	pageSize: z.coerce.number().min(1).max(1000).default(20),
+});
