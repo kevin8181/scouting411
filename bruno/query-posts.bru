@@ -12,6 +12,16 @@ post {
 
 body:json {
   {
-    
+    "filter": {
+      "keyword": "scouting"
+    },
+    "sort": {
+      "mode": "date",
+      "direction": "desc"
+    },
+    "paginate": {
+      "page": 1,
+      "pageSize": 20
+    }
   }
 }
