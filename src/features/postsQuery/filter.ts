@@ -41,6 +41,7 @@ const predicateFactories: PredicateFactories<FilterOpts, Post> = {
 			return titleMatch || descriptionMatch;
 		};
 	},
+	//todo add filters for datebefore, dateafter
 };
 type PredicateFactories<F, T> = {
 	[K in keyof F]-?: (value: NonNullable<F[K]>) => Predicate<T>;

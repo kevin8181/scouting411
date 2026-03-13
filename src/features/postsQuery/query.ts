@@ -22,7 +22,7 @@ export async function queryPosts(
 	return paginateArray(sortedPosts, opts.paginate);
 }
 
-type QueryOpts = z.infer<typeof queryOptsSchema>;
+export type QueryOpts = z.infer<typeof queryOptsSchema>;
 export const queryOptsSchema = z.object({
 	filter: filterOptsSchema.default({}),
 	sort: sortOptsSchema.default({ mode: "date", direction: "desc" }),
