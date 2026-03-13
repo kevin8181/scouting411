@@ -26,5 +26,5 @@ export type QueryOpts = z.infer<typeof queryOptsSchema>;
 export const queryOptsSchema = z.object({
 	filter: filterOptsSchema.default({}),
 	sort: sortOptsSchema.default({ mode: "date", direction: "desc" }),
-	paginate: paginateOptsSchema.default({ page: 1, pageSize: 20 }),
+	paginate: paginateOptsSchema.default({ page: 1, maxPageSize: 20 }),
 });

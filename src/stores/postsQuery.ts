@@ -9,7 +9,7 @@ const defaultQueryOpts: QueryOpts = {
 	},
 	paginate: {
 		page: 1,
-		pageSize: 20,
+		maxPageSize: 20,
 	},
 };
 

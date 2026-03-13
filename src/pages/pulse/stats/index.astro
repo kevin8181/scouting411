@@ -4,48 +4,53 @@ import { FeedManager } from "@/features/feeds/feedManager";
 ---
 
 <UiLayout title="Feeds">
-	<table
-		class="table-fixed border-separate border-spacing-x-8 border-spacing-y-2.5 p-6"
-	>
-		<thead>
-			<tr>
-				<th class="text-left">Feed</th>
-				<th class="text-left">Posts</th>
-				<th class="text-left">Adapter Type</th>
-			</tr>
-		</thead>
-		<tbody>
-			{
-				FeedManager.feeds.map(async (feed) => (
-					<tr>
-						<td>
-							<a
-								href={feed.overviewUrl}
-								class="text-blue wrap-anywhere hyphens-auto hover:underline"
-							>
-								{feed.name}
-							</a>
-						</td>
-						<td class="text-right">
-							{Intl.NumberFormat().format((await feed.posts()).length)}
-						</td>
-						<td>{feed.type.human}</td>
-					</tr>
-				))
-			}
-		</tbody>
-		<tfoot>
-			<tr>
-				<td class="font-bold"> Total: </td>
-				<td class="font-bold">
-					<span
-						>{
-							Intl.NumberFormat().format((await FeedManager.allPosts()).length)
-						}</span
-					>
-				</td>
-				<td>{}</td>
-			</tr>
-		</tfoot>
-	</table>
+	<div class="p-8">
+		<h1 class="font-serif text-xl">Feed Statistics</h1>
+		<table
+			class="table-fixed border-separate border-spacing-x-4 border-spacing-y-2.5 py-4"
+		>
+			<thead>
+				<tr>
+					<th class="text-left">Feed</th>
+					<th class="text-left">Posts</th>
+					<th class="text-left">Adapter Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					FeedManager.feeds.map(async (feed) => (
+						<tr>
+							<td>
+								<a
+									href={feed.urls.overview}
+									class="text-blue wrap-anywhere hyphens-auto hover:underline"
+								>
+									{feed.name}
+								</a>
+							</td>
+							<td class="text-right">
+								{Intl.NumberFormat().format((await feed.posts()).length)}
+							</td>
+							<td>{feed.type.human}</td>
+						</tr>
+					))
+				}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td class="font-bold"> Total: </td>
+					<td class="font-bold">
+						<span
+							>{
+								Intl.NumberFormat().format(
+									(await FeedManager.allPosts()).length,
+								)
+							}</span
+						>
+					</td>
+					<td>{}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </UiLayout>

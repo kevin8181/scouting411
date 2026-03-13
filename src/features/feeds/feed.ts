@@ -18,7 +18,7 @@ export class Feed {
 	readonly name: string;
 	readonly slug: string;
 	readonly description: string;
-	readonly homepageUrl: UrlShaped;
+	private readonly _homepageUrl: UrlShaped;
 	private readonly _adapter: FeedAdapter;
 
 	// LIFECYCLE
@@ -27,7 +27,7 @@ export class Feed {
 		this.name = opts.name;
 		this.slug = opts.slug;
 		this.description = opts.description;
-		this.homepageUrl = opts.homepageUrl;
+		this._homepageUrl = opts.homepageUrl;
 		this._adapter = opts.adapter;
 	}
 
@@ -36,13 +36,26 @@ export class Feed {
 	get type() {
 		return this._adapter.type;
 	}
-	/** relative href to the detail page for this feed */
-	get overviewUrl() {
-		return `/pulse/sources/${this.slug}`;
-	}
-	/** relative href to the generated rss feed */
-	get rssUrl() {
-		return `/feeds/${this.slug}/rss`;
+	// /** relative href to the detail page for this feed */
+	// get overviewUrl() {
+	// 	return `/pulse/sources/${this.slug}`;
+	// }
+	// /** relative href to the generated rss feed */
+	// get rssUrl() {
+	// 	return `/feeds/${this.slug}/rss`;
+	// }
+
+	get urls() {
+		return {
+			/** relative href to the detail page for this feed */
+			overview: `/pulse/sources/${this.slug}`,
+			/** relative href to the generated rss feed */
+			rss: `/feeds/${this.slug}/rss`,
+			/** relative href to the generated atom feed */
+			atom: `/feeds/${this.slug}/atom`,
+			/** upstream's html homepage */
+			homepage: this._homepageUrl,
+		};
 	}
 
 	// INSTANCE METHODS
