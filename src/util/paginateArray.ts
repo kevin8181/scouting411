@@ -1,7 +1,7 @@
 import { z } from "astro/zod";
 
 /** paginate an array of items */
-export function paginate<T>(
+export function paginateArray<T>(
 	data: T[],
 	opts: PaginateOpts,
 ): PaginatedResults<T> {
@@ -27,9 +27,9 @@ export function paginate<T>(
 type PaginateOpts = z.infer<typeof paginateOptsSchema>;
 export const paginateOptsSchema = z.object({
 	/** the page size */
-	pageSize: z.number().min(1),
+	pageSize: z.coerce.number().min(1),
 	/** the page number */
-	page: z.number().min(1),
+	page: z.coerce.number().min(1),
 });
 
 export type PaginatedResults<T> = {
