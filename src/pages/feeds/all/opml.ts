@@ -8,12 +8,13 @@ export const GET: APIRoute = async (context) => {
 			head: {
 				title: "Scouting411 News Sources",
 				ownerName: "Scouting411",
-				dateModified: new Date(),
+				dateCreated: new Date(),
 			},
 			body: {
 				outlines: FeedManager.feeds.map((feed) => ({
 					text: feed.name,
 					title: feed.name,
+					description: feed.description,
 					htmlUrl: new URL(feed.overviewUrl, context.site).toString(),
 					xmlUrl: new URL(feed.rssUrl, context.site).toString(),
 					type: "rss",
