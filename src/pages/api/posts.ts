@@ -1,16 +1,11 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
-import { z } from "astro/zod";
-import { queryPosts } from "@/features/postsQuery/query";
+import { queryPosts, queryOptsSchema } from "@/features/postsQuery/query";
 
-export const GET: APIRoute = async (context) => {
-	const params = context.url.searchParams;
+export const POST: APIRoute = async (context) => {
+	const body = await context.request.json();
 
-	console.log(params);
-
-	const paramsObj = Object.fromEntries(params);
-
-	const { error, data: query } = postsQueryParamsSchema.safeParse(paramsObj);
+	const { error, data: query } = queryOptsSchema.safeParse(body);
 
 	if (error) {
 		return new Response(JSON.stringify({ error }), {
@@ -21,12 +16,7 @@ export const GET: APIRoute = async (context) => {
 		});
 	}
 
-	const posts = await queryPosts({
-		paginate: {
-			page: query.page,
-			pageSize: query.pageSize,
-		},
-	});
+	const posts = await queryPosts(query);
 
 	return new Response(JSON.stringify(posts), {
 		status: 200,
@@ -35,8 +25,3 @@ export const GET: APIRoute = async (context) => {
 		},
 	});
 };
-
-const postsQueryParamsSchema = z.object({
-	page: z.coerce.number().min(1),
-	pageSize: z.coerce.number().min(1).max(1000).default(20),
-});

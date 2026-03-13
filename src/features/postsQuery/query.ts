@@ -19,8 +19,6 @@ export async function queryPosts(
 }
 
 type QueryOpts = z.infer<typeof queryOptsSchema>;
-//todo
-//eslint-disable-next-line
-const queryOptsSchema = z.object({
-	paginate: paginateOptsSchema,
+export const queryOptsSchema = z.object({
+	paginate: paginateOptsSchema.default({ page: 1, pageSize: 20 }),
 });
