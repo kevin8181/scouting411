@@ -1,0 +1,27 @@
+meta {
+  name: Query Posts
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:4321/api/posts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "filter": {
+      "keyword": "scouting"
+    },
+    "sort": {
+      "mode": "date",
+      "direction": "desc"
+    },
+    "paginate": {
+      "page": 1,
+      "pageSize": 20
+    }
+  }
+}

@@ -21,15 +21,16 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 		<p>{feed.description}</p>
 		<p>
 			Homepage: <a
-				href={feed.homepageUrl}
+				href={feed.urls.homepage}
 				rel="noopener noreferrer"
 				target="_blank"
-				class="text-blue underline">{feed.homepageUrl}</a
+				class="text-blue underline">{feed.urls.homepage}</a
 			>
 		</p>
 		<p>Indexed posts: {(await feed.posts()).length}</p>
 		<p>
-			Subcribe: <a href={feed.rssUrl} class="text-blue underline">rss</a>
+			Subcribe: <a href={feed.urls.rss} class="text-blue underline">rss</a>
+			<a href={feed.urls.atom} class="text-blue underline">atom</a>
 		</p>
 	</div>
 </UiLayout>

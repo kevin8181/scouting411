@@ -1,26 +1,30 @@
 import { FeedManager } from "@/features/feeds/feedManager";
 import { z } from "astro/zod";
+import { sortPosts, sortOptsSchema } from "@/features/postsQuery/sort";
 import {
-	paginate,
+	paginateArray,
 	paginateOptsSchema,
 	type PaginatedResults,
-} from "@/util/paginate";
+} from "@/util/paginateArray";
+import { filterPosts, filterOptsSchema } from "@/features/postsQuery/filter";
 import { Post } from "@/features/posts/post";
 
 export async function queryPosts(
 	opts: QueryOpts,
 ): Promise<PaginatedResults<Post>> {
-	// get all the posts. todo make it so you can start with only a subset of the feeds
+	// todo make it so you can start with only a subset of the feeds
 	const posts = await FeedManager.allPosts();
 
-	// todo add filtering and sorting
+	const filteredPosts = filterPosts(posts, opts.filter);
 
-	return paginate(posts, opts.paginate);
+	const sortedPosts = sortPosts(filteredPosts, opts.sort);
+
+	return paginateArray(sortedPosts, opts.paginate);
 }
 
-type QueryOpts = z.infer<typeof queryOptsSchema>;
-//todo
-//eslint-disable-next-line
-const queryOptsSchema = z.object({
-	paginate: paginateOptsSchema,
+export type QueryOpts = z.infer<typeof queryOptsSchema>;
+export const queryOptsSchema = z.object({
+	filter: filterOptsSchema.default({}),
+	sort: sortOptsSchema.default({ mode: "date", direction: "desc" }),
+	paginate: paginateOptsSchema.default({ page: 1, maxPageSize: 20 }),
 });

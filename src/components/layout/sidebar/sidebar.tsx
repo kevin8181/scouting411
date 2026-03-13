@@ -4,6 +4,7 @@ import { NavDivider } from "@/components/layout/sidebar/navDivider";
 import {
 	faBookBookmark,
 	faBullhorn,
+	faCommentDots,
 	faHome,
 	faMagnifyingGlassChart,
 	faNewspaper,
@@ -24,7 +25,7 @@ export default function Sidebar({ url }: { url: URL }) {
 
 				<NavGroup label="news">
 					<NavLink
-						href="/pulse/browse/1"
+						href="/pulse/browse"
 						label="Newsfeed"
 						currentUrl={url}
 						icon={faNewspaper}
@@ -62,8 +63,15 @@ export default function Sidebar({ url }: { url: URL }) {
 			<div>
 				<NavGroup label="about">
 					<NavLink
+						href="https://github.com/kevin8181/scouting411/issues/new/choose"
+						label="Give Feedback"
+						newTab
+						currentUrl={url}
+						icon={faCommentDots}
+					/>
+					<NavLink
 						href="https://github.com/kevin8181/scouting411"
-						label="Github"
+						label="GitHub"
 						newTab
 						currentUrl={url}
 						icon={faGitAlt}

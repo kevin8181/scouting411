@@ -16,7 +16,7 @@ export const GET: APIRoute = async (context) => {
 	const generated = generateRssFeed(
 		{
 			title: feed.name,
-			description: feed.homepageUrl, //todo add a description to each feed
+			description: feed.description,
 
 			items: posts.map((post) => ({
 				title: post.title,
@@ -30,7 +30,7 @@ export const GET: APIRoute = async (context) => {
 				],
 				source: {
 					title: feed.name,
-					url: feed.homepageUrl, //todo I think this is supposed to be an rss feed
+					url: feed.urls.homepage, //todo I think this is supposed to be an rss feed
 				},
 			})),
 		},

@@ -1,13 +1,15 @@
 import { z } from "astro/zod";
 
 /** paginate an array of items */
-export function paginate<T>(
+export function paginateArray<T>(
 	data: T[],
 	opts: PaginateOpts,
 ): PaginatedResults<T> {
-	const firstItemIndex = (opts.page - 1) * opts.pageSize;
-	const lastItemIndex = firstItemIndex + opts.pageSize - 1;
-	const totalPages = Math.ceil(data.length / opts.pageSize);
+	const firstItemIndex = (opts.page - 1) * opts.maxPageSize;
+	const lastItemIndex = firstItemIndex + opts.maxPageSize - 1;
+	/** if the last item would be greater than the length of the array, set it to the last index */
+	const realLastItemIndex = Math.min(lastItemIndex, data.length - 1);
+	const totalPages = Math.ceil(data.length / opts.maxPageSize);
 
 	const items = data.slice(firstItemIndex, lastItemIndex + 1);
 
@@ -15,9 +17,10 @@ export function paginate<T>(
 		items,
 		pagination: {
 			page: opts.page,
-			pageSize: opts.pageSize,
+			maxPageSize: opts.maxPageSize,
+			pageSize: items.length,
 			firstItemIndex,
-			lastItemIndex,
+			lastItemIndex: realLastItemIndex,
 			totalItems: data.length,
 			totalPages,
 		},
@@ -26,10 +29,10 @@ export function paginate<T>(
 
 type PaginateOpts = z.infer<typeof paginateOptsSchema>;
 export const paginateOptsSchema = z.object({
-	/** the page size */
-	pageSize: z.number().min(1),
+	/** the maximum page size */
+	maxPageSize: z.coerce.number().min(1),
 	/** the page number */
-	page: z.number().min(1),
+	page: z.coerce.number().min(1),
 });
 
 export type PaginatedResults<T> = {
@@ -41,6 +44,8 @@ type PaginationResultsMetadata = {
 	/** the current page number */
 	page: number;
 	/** the maximum number of items per page */
+	maxPageSize: number;
+	/** the number of items on the current page */
 	pageSize: number;
 	/** the start index of the items on this page */
 	firstItemIndex: number;

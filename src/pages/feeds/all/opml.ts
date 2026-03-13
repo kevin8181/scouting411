@@ -8,14 +8,16 @@ export const GET: APIRoute = async (context) => {
 			head: {
 				title: "Scouting411 News Sources",
 				ownerName: "Scouting411",
-				dateModified: new Date(),
+				dateCreated: new Date(),
 			},
 			body: {
 				outlines: FeedManager.feeds.map((feed) => ({
 					text: feed.name,
 					title: feed.name,
-					htmlUrl: new URL(feed.overviewUrl, context.site).toString(),
-					xmlUrl: new URL(feed.rssUrl, context.site).toString(),
+					description: feed.description,
+					htmlUrl: new URL(feed.urls.overview, context.site).toString(),
+					//todo make an opml for atom feeds?
+					xmlUrl: new URL(feed.urls.rss, context.site).toString(),
 					type: "rss",
 					language: "en-us",
 				})),

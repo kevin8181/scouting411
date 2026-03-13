@@ -9,11 +9,26 @@
 					<xsl:value-of select="head/title" />
 				</title>
 				<link rel="stylesheet" href="https://www.xml.style/css/water.min.css" />
+				<script>
+					window.addEventListener('load', function() {
+					var viewPara = document.getElementById("viewpara");
+					viewPara.style.display = "block";
+					var viewUrl = document.getElementById("viewUrl");
+					viewUrl.value = window.location.href;
+					});
+				</script>
 			</head>
 			<body>
 				<h1>
 					<xsl:value-of select="head/title" />
 				</h1>
+				<p id="viewpara" style="display:none;">
+					<form method="get" action="https://opml-viewer.fileformat.info/view.html" id="viewform">
+						<input type="hidden" name="url" id="viewUrl" value="" />
+						<!-- customize by adding more inputs with the viewer parameters -->
+						Open in the <button>OPML Viewer</button> (requires JavaScript).
+					</form>
+				</p>
 				<p>
 					<time>
 						<xsl:value-of select="head/dateCreated" />

@@ -1,35 +1,53 @@
-// import { z } from "astro/zod";
-// import { Post } from "@/features/posts/post";
+import { z } from "astro/zod";
+import { Post } from "@/features/posts/post";
+import type { Predicate } from "@/util/utilTypes";
 
-// export function filterPosts({
-// 	posts,
-// 	filterOpts,
-// }: {
-// 	posts: Post[];
-// 	filterOpts: z.infer<typeof filterOptsSchema>;
-// }) {
-// 	return posts.filter((_post) => {
-// 		const predicates = buildPredicates(filterOpts);
+export function filterPosts(
+	posts: Post[],
+	opts: z.infer<typeof filterOptsSchema>,
+) {
+	const predicates = buildPredicates(opts);
 
-// 		// if all of the predicates are true, return true
-// 		if (Object.values(predicates).every((predicate) => predicate)) {
-// 			return true;
-// 		}
+	return posts.filter((post) =>
+		predicates.every((predicate) => predicate(post)),
+	);
+}
 
-// 		// if any of the predicates are false, return false
-// 		return false;
-// 	});
-// }
+/** turn a filter config into an array of predicates */
+function buildPredicates(filter: FilterOpts): Predicate<Post>[] {
+	const predicates: Predicate<Post>[] = [];
 
-// /** check a post against each filter. return an object with a bool for each predicate */
-// function buildPredicates(filters: FilterOpts) {
-// 	return {
+	for (const [key, value] of Object.entries(filter) as [
+		keyof FilterOpts,
+		FilterOpts[keyof FilterOpts],
+	][]) {
+		if (value !== undefined) {
+			const factory = predicateFactories[key];
+			predicates.push(factory(value as NonNullable<typeof value>));
+		}
+	}
 
-// 	};
-// }
+	return predicates;
+}
 
-// export const filterOptsSchema = z.object({
-// 	dateBefore: z.coerce.date().optional(),
-// 	dateAfter: z.coerce.date().optional(),
-// }).strict();
-// export type FilterOpts = z.infer<typeof filterOptsSchema>;
+const predicateFactories: PredicateFactories<FilterOpts, Post> = {
+	keyword: (value: string): Predicate<Post> => {
+		return (post) => {
+			const titleMatch = post.title.toUpperCase().includes(value.toUpperCase());
+			const descriptionMatch = !!post.description
+				?.toUpperCase()
+				.includes(value.toUpperCase());
+
+			return titleMatch || descriptionMatch;
+		};
+	},
+	//todo add filters for datebefore, dateafter
+};
+type PredicateFactories<F, T> = {
+	[K in keyof F]-?: (value: NonNullable<F[K]>) => Predicate<T>;
+};
+
+type FilterOpts = z.infer<typeof filterOptsSchema>;
+export const filterOptsSchema = z.object({
+	keyword: z.string().optional(),
+});
