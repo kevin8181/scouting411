@@ -10,21 +10,24 @@ import { FeedManager } from "@/features/feeds/feedManager";
 	<meta name="viewport" content="width=device-width" />
 	<meta name="generator" content={Astro.generator} />
 
-	<!-- IDENTITY -->
+	<!-- IDENTITY + BRANDING -->
 	<!-- todo add favicon -->
 	<!-- todo add apple touch icons -->
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<!-- todo not sure if the theme color is working -->
+	<meta name="theme-color" content="var(--color-blue)" />
 
-	<!-- SEO -->
+	<!-- INDEXING -->
 	<!-- todo add stylesheet for the sitemap -->
 	<link rel="sitemap" href="/sitemap-index.xml" />
 	<!-- todo remove this before production -->
 	<meta name="robots" content="noindex" />
 	<!-- todo add canonical url -->
-	<!-- todo add  and twitter tags -->
-	<!-- todo add theme-color meta tag -->
+
+	<!-- METADATA -->
 	<title>Scouting411</title>
-	<!-- todo add page title and meta description props -->
+	<!-- todo add meta description -->
+	<!-- todo add OG and twitter tags -->
 
 	<!-- FEEDS -->
 	<link rel="outline" type="text/x-opml" href="/feeds/all/opml" />

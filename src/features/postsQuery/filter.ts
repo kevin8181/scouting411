@@ -41,13 +41,27 @@ const predicateFactories: PredicateFactories<FilterOpts, Post> = {
 			return titleMatch || descriptionMatch;
 		};
 	},
-	//todo add filters for datebefore, dateafter
+	// todo this does not agree with typescript
+	// dateAfter: (value: Date): Predicate<Post> => {
+	// 	return (post) => {
+	// 		return post.date > value;
+	// 	};
+	// },
+	// dateBefore: (value: Date): Predicate<Post> => {
+	// 	return (post) => {
+	// 		return post.date < value;
+	// 	};
+	// },
 };
 type PredicateFactories<F, T> = {
 	[K in keyof F]-?: (value: NonNullable<F[K]>) => Predicate<T>;
 };
 
 type FilterOpts = z.infer<typeof filterOptsSchema>;
-export const filterOptsSchema = z.object({
-	keyword: z.string().optional(),
-});
+export const filterOptsSchema = z
+	.object({
+		keyword: z.string().optional(),
+		// dateAfter: z.coerce.date().optional(),
+		// dateBefore: z.coerce.date().optional(),
+	})
+	.strict();
