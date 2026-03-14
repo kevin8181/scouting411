@@ -37,6 +37,7 @@
 		"feedsmith": "2.9.0",
 		"he": "^1.2.0",
 		"nanostores": "^1.1.1",
+		"qs": "^6.15.0",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
 		"tailwindcss": "^4.2.1",
@@ -46,6 +47,7 @@
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@types/he": "^1.2.3",
+		"@types/qs": "^6.15.0",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"eslint": "^10.0.3",
