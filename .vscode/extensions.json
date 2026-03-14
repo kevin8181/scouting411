@@ -4,7 +4,8 @@
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
 		"yoavbls.pretty-ts-errors",
-		"bradlc.vscode-tailwindcss"
+		"bradlc.vscode-tailwindcss",
+		"bruno-api-client.bruno"
 	],
 	"unwantedRecommendations": []
 }
