@@ -33,6 +33,8 @@
 - https://www.scouting.org/commissioners/newsletter-eblast/
 - https://www.scouting.org/international/resources/
 - https://seascout.org/program-updates/
+- https://www.scouting.org/commissioners/news-for-commissioners/
+- https://www.scouting.org/commissioners/news-for-commissioners/monthly-all-commissioner-email/
 
 ## email newsletters
 

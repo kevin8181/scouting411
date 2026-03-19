@@ -1,10 +1,26 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
 import { BrowsePage } from "@/pages/pulse/browse/_page";
+import { postsQueryParamsEncoder } from "@/features/postsQuery/queryParams";
+import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
+
+const { searchParams } = Astro.url;
+
+const { error, data: query } = postsQueryParamsEncoder.decode(searchParams);
+
+if (error) {
+	Astro.response.status = 400;
+}
 
 export const prerender = false;
 ---
 
 <UiLayout>
-	<BrowsePage />
+	{
+		query ? (
+			<BrowsePage query={query} />
+		) : (
+			<p>{jsonPrettyPrint(error.issues)}</p>
+		)
+	}
 </UiLayout>

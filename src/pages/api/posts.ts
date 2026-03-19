@@ -1,7 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
 import { queryPosts, queryOptsSchema } from "@/features/postsQuery/query";
-import qs from "qs";
+import { postsQueryParamsEncoder } from "@/features/postsQuery/queryParams";
 
 export const POST: APIRoute = async (context) => {
 	const body = await context.request.json();
@@ -11,11 +11,7 @@ export const POST: APIRoute = async (context) => {
 	if (error) {
 		return new Response(
 			JSON.stringify({
-				errors: error.issues.map((i) => ({
-					path: i.path.join("."),
-					message: i.message,
-					code: i.code,
-				})),
+				errors: error.issues,
 			}),
 			{
 				status: 400,
@@ -37,22 +33,14 @@ export const POST: APIRoute = async (context) => {
 };
 
 export const GET: APIRoute = async (context) => {
-	const urlParams = context.url.searchParams.toString();
-
-	const queryRaw = qs.parse(urlParams, { allowDots: true });
-
-	console.log(queryRaw);
-
-	const { error, data: query } = queryOptsSchema.safeParse(queryRaw);
+	const { error, data: query } = postsQueryParamsEncoder.decode(
+		context.url.searchParams,
+	);
 
 	if (error) {
 		return new Response(
 			JSON.stringify({
-				errors: error.issues.map((i) => ({
-					path: i.path.join("."),
-					message: i.message,
-					code: i.code,
-				})),
+				errors: error.issues,
 			}),
 			{
 				status: 400,
