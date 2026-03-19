@@ -1,19 +1,15 @@
 import { CardList } from "@/components/react/cardList";
 import { RenderPost as PostComponent } from "@/components/react/post";
-import { queryPosts } from "@/features/postsQuery/query";
+import { queryPosts, type QueryOpts } from "@/features/postsQuery/query";
 
-export async function BrowsePage() {
-	const results = await queryPosts({
-		filter: {},
-		sort: {
-			mode: "date",
-			direction: "desc",
-		},
-		paginate: {
-			maxPageSize: 100,
-			page: 1,
-		},
-	});
+export async function BrowsePage({
+	query,
+}: {
+	query: QueryOpts;
+}) {
+	
+	
+	const results = await queryPosts(query);
 	return (
 		<>
 			<span>
