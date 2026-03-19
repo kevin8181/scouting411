@@ -80,7 +80,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 	// 	}),
 	// },
 
-	// todo why did I disable this one?
+	// todo it looks like this is about to be shut down. I downloaded the rss and and all the episodes. set up an archived version later
 	// {
 	// 	name: "The Lookout",
 	// 	slug: "the-lookout",
