@@ -1,4 +1,4 @@
-import type { TagCollection } from "@/features/resources/types";
+import type { TagCollection } from "@/lib/resources/types";
 
 export const ResourceTypeTags = {
 	Blog: {

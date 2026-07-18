@@ -1,5 +1,5 @@
 import { CardList } from "@/components/react/cardList";
-import { resources } from "@/features/resources/data";
+import { resources } from "@/lib/resources/data";
 import { Resource } from "@/components/react/resource";
 
 export function ResourcesPage() {

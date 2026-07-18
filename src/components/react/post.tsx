@@ -1,4 +1,4 @@
-import type { Post } from "@/features/news/posts/post";
+import type { Post } from "@/lib/news/posts/post";
 
 export function RenderPost({ post }: { post: Post }) {
 	return (

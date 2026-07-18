@@ -1,13 +1,13 @@
-import { FeedManager } from "@/features/news/feeds/feedManager";
+import { FeedManager } from "@/lib/news/feeds/feedManager";
 import { z } from "astro/zod";
-import { sortPosts, sortOptsSchema } from "@/features/news/query/sort";
+import { sortPosts, sortOptsSchema } from "@/lib/news/query/sort";
 import {
 	paginateArray,
 	paginateOptsSchema,
 	type PaginatedResults,
 } from "@/util/paginateArray";
-import { filterPosts, filterOptsSchema } from "@/features/news/query/filter";
-import type { Post } from "@/features/news/posts/post";
+import { filterPosts, filterOptsSchema } from "@/lib/news/query/filter";
+import type { Post } from "@/lib/news/posts/post";
 
 export async function queryPosts(
 	opts: QueryOpts,

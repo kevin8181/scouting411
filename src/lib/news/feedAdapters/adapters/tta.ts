@@ -1,4 +1,4 @@
-import type { FeedAdapter } from "@/features/news/feedAdapters/feedAdapters";
+import type { FeedAdapter } from "@/lib/news/feedAdapters/feedAdapters";
 import he from "he";
 
 //todo fetch the full post history

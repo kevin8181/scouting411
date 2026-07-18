@@ -2,7 +2,7 @@ import { arrayHasDupes } from "@/util/arrayDupeCheck";
 import { tryCatch } from "@/util/tryCatch";
 import z from "zod";
 import normalize from "normalize-url";
-import { resources } from "@/features/resources/data";
+import { resources } from "@/lib/resources/data";
 
 // get all the resource urls
 const urls = resources.map((link) => link.url);

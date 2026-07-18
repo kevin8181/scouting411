@@ -1,5 +1,5 @@
 import type { UrlShaped } from "@/util/utilTypes";
-import { ResourceTypeTags, TopicTags } from "@/features/resources/tags";
+import { ResourceTypeTags, TopicTags } from "@/lib/resources/tags";
 
 export interface Resource {
 	url: UrlShaped;

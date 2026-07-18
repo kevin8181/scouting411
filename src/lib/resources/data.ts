@@ -1,5 +1,5 @@
-import type { Resource } from "@/features/resources/types";
-import { ResourceTypeTags, TopicTags } from "@/features/resources/tags";
+import type { Resource } from "@/lib/resources/types";
+import { ResourceTypeTags, TopicTags } from "@/lib/resources/tags";
 
 export const resources: Resource[] = [
 	{

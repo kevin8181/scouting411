@@ -1,7 +1,7 @@
 ---
 import UiLayout from "@/components/layout/UiLayout.astro";
 import { BrowsePage } from "@/pages/news/browse/_page";
-import { postsQueryParamsEncoder } from "@/features/news/query/queryParams";
+import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
 
 const { searchParams } = Astro.url;
