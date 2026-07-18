@@ -12,19 +12,22 @@ export type PostData = {
 	date: string;
 };
 
-/** a post from a feed */
-export class Post {
+/** a hydrated post from a feed */
+export type Post = {
 	url: string;
 	title: string;
 	description: string | undefined;
 	date: Date;
 	feed: Feed;
+};
 
-	constructor(data: PostData, feed: Feed) {
-		this.url = data.url;
-		this.title = data.title;
-		this.description = data.description;
-		this.date = new Date(data.date);
-		this.feed = feed;
-	}
+/** create a hydrated post from a raw post data object */
+export function createHydratedPost(data: PostData, feed: Feed): Post {
+	return {
+		url: data.url,
+		title: data.title,
+		description: data.description,
+		date: new Date(data.date),
+		feed,
+	};
 }

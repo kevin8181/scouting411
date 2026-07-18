@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { Post } from "@/features/posts/post";
+import type { Post } from "@/features/posts/post";
 
 export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {
 	let sortedPosts;

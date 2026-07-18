@@ -1,4 +1,4 @@
-import { Post } from "@/features/posts/post";
+import { createHydratedPost, type Post } from "@/features/posts/post";
 import type { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import type { UrlShaped } from "@/util/utilTypes";
 import { redis } from "@/util/redisClient";
@@ -68,7 +68,7 @@ export class Feed {
 		const postDatas = await Feed.readCache(this.slug);
 
 		return postDatas.map((postData) => {
-			return new Post(postData, this);
+			return createHydratedPost(postData, this);
 		});
 	}
 
