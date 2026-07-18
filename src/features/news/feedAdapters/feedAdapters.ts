@@ -1,4 +1,4 @@
-import type { PostData } from "@/features/posts/post";
+import type { PostData } from "@/features/news/posts/post";
 
 export type FeedAdapter = {
 	/** metadata about the feed adapter type */

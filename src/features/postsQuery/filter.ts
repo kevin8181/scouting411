@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import type { Post } from "@/features/posts/post";
+import type { Post } from "@/features/news/posts/post";
 import type { Predicate } from "@/util/utilTypes";
 
 export function filterPosts(

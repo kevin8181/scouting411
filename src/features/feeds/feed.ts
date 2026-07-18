@@ -1,8 +1,8 @@
-import { createHydratedPost, type Post } from "@/features/posts/post";
+import { createHydratedPost, type Post } from "@/features/news/posts/post";
 import type { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import type { UrlShaped } from "@/util/utilTypes";
 import { redis } from "@/util/redisClient";
-import type { PostData } from "@/features/posts/post";
+import type { PostData } from "@/features/news/posts/post";
 
 export type CreateFeedOpts = {
 	name: string;

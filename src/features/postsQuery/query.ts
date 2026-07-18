@@ -7,7 +7,7 @@ import {
 	type PaginatedResults,
 } from "@/util/paginateArray";
 import { filterPosts, filterOptsSchema } from "@/features/postsQuery/filter";
-import type { Post } from "@/features/posts/post";
+import type { Post } from "@/features/news/posts/post";
 
 export async function queryPosts(
 	opts: QueryOpts,
