@@ -1,4 +1,4 @@
-import type { CreateFeedOpts } from "@/features/feeds/feed";
+import type { CreateFeedOpts } from "@/features/news/feeds/feed";
 
 import { WordpressAdapter } from "@/features/news/feedAdapters/adapters/wordpress";
 import { RssAdapter } from "@/features/news/feedAdapters/adapters/rss";

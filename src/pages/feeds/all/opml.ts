@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { generateOpml } from "feedsmith";
-import { FeedManager } from "@/features/feeds/feedManager";
+import { FeedManager } from "@/features/news/feeds/feedManager";
 
 export const GET: APIRoute = async (context) => {
 	const opml = generateOpml(

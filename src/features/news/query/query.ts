@@ -1,4 +1,4 @@
-import { FeedManager } from "@/features/feeds/feedManager";
+import { FeedManager } from "@/features/news/feeds/feedManager";
 import { z } from "astro/zod";
 import { sortPosts, sortOptsSchema } from "@/features/news/query/sort";
 import {

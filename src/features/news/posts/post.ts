@@ -1,4 +1,4 @@
-import type { Feed } from "@/features/feeds/feed";
+import type { Feed } from "@/features/news/feeds/feed";
 
 /** a raw post data object returned by one of the feed adapters */
 export type PostData = {

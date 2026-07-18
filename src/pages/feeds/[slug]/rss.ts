@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { FeedManager } from "@/features/feeds/feedManager";
+import { FeedManager } from "@/features/news/feeds/feedManager";
 import { generateRssFeed } from "feedsmith";
 
 export function getStaticPaths() {
