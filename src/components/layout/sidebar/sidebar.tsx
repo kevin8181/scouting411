@@ -25,25 +25,25 @@ export default function Sidebar({ url }: { url: URL }) {
 
 				<NavGroup label="news">
 					<NavLink
-						href="/pulse/browse"
+						href="/news/browse"
 						label="Newsfeed"
 						currentUrl={url}
 						icon={faNewspaper}
 					/>
 					<NavLink
-						href="/pulse/sources"
+						href="/news/sources"
 						label="Sources"
 						currentUrl={url}
 						icon={faBullhorn}
 					/>
 					<NavLink
-						href="/pulse/subscribe"
+						href="/news/subscribe"
 						label="Subscribe"
 						currentUrl={url}
 						icon={faRssSquare}
 					/>
 					<NavLink
-						href="/pulse/stats"
+						href="/news/stats"
 						label="Stats"
 						currentUrl={url}
 						icon={faMagnifyingGlassChart}

@@ -38,7 +38,7 @@ export class Feed {
 	}
 	// /** relative href to the detail page for this feed */
 	// get overviewUrl() {
-	// 	return `/pulse/sources/${this.slug}`;
+	// 	return `/news/sources/${this.slug}`;
 	// }
 	// /** relative href to the generated rss feed */
 	// get rssUrl() {
@@ -48,7 +48,7 @@ export class Feed {
 	get urls() {
 		return {
 			/** relative href to the detail page for this feed */
-			overview: `/pulse/sources/${this.slug}`,
+			overview: `/news/sources/${this.slug}`,
 			/** relative href to the generated rss feed */
 			rss: `/feeds/${this.slug}/rss`,
 			/** relative href to the generated atom feed */
