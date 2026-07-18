@@ -1,5 +1,5 @@
 import { Feed } from "@/lib/news/feeds/feed";
-import { feedConfigs } from "@/lib/news/feeds/config";
+import { feedConfigs } from "@/lib/news/config";
 
 // instantiate all the feeds
 const feeds = feedConfigs.map((opts) => new Feed(opts));
