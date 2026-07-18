@@ -2,7 +2,14 @@ import { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import type { PostData } from "@/features/posts/post";
 import he from "he";
 
-export function WordpressApiAdapter(opts: WordpressApiAdapterOpts) {
+type WordpressAdapterOpts = {
+	/** the base url of the wordpress site */
+	baseUrl: string;
+	/** return only posts which have this category id */
+	categoryFilter?: number;
+};
+
+export function WordpressAdapter(opts: WordpressAdapterOpts) {
 	const execute = async () => {
 		const page1 = await fetchPage(1, opts);
 
@@ -18,7 +25,7 @@ export function WordpressApiAdapter(opts: WordpressApiAdapterOpts) {
 	});
 }
 
-async function fetchPage(page: number, opts: WordpressApiAdapterOpts) {
+async function fetchPage(page: number, opts: WordpressAdapterOpts) {
 	console.log(`fetch page ${page} from ${opts.baseUrl}`);
 
 	const url = new URL(
@@ -51,13 +58,9 @@ async function fetchPage(page: number, opts: WordpressApiAdapterOpts) {
 	};
 }
 
-type WordpressApiAdapterOpts = {
-	/** the base url of the wordpress site */
-	baseUrl: string;
-	/** return only posts which have this category id */
-	categoryFilter?: number;
-};
 
+
+/** data about a post from the api */
 type WordpressApiPost = {
 	link: string;
 	title: {

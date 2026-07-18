@@ -1,6 +1,6 @@
 import type { CreateFeedOpts } from "@/features/feeds/feed";
 
-import { WordpressApiAdapter } from "@/features/feedAdapters/adapters/wordpressApi";
+import { WordpressAdapter } from "@/features/feedAdapters/adapters/wordpress";
 import { RssAdapter } from "@/features/feedAdapters/adapters/rss";
 // import { TtaAdapter } from "@/features/feedAdapters/adapters/tta";
 
@@ -98,7 +98,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		description:
 			"Billed as 'The Official Blog of the Scouting Movement'. General news and updates for professionals, volunteers, and parents.",
 		homepageUrl: "https://scoutingwire.org",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingwire.org",
 			//todo split by categories?
 		}),
@@ -131,7 +131,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		description:
 			"News and updates about the Summit Bechtel Reserve and National Scout Jamboree.",
 		homepageUrl: "https://www.summitbsa.org/blog",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://summitbsa.org",
 		}),
 	},
@@ -142,7 +142,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		description:
 			"The news feed of Scouting Alumni. Primarily editorial content with occasional news.",
 		homepageUrl: "https://scoutingalumni.org/news",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
 		}),
 	},
@@ -152,7 +152,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		description:
 			"The news feed of the National Eagle Scout Association. A mixture of editorial content and news.",
 		homepageUrl: "https://nesa.org/news",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://nesa.org",
 		}),
 	},
@@ -162,7 +162,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		description:
 			"The news feed of the Scouting America Foundation. Mostly entertainment and editorial content.",
 		homepageUrl: "https://scoutingamericafoundation.org/foundation-news",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingamericafoundation.org",
 		}),
 	},
@@ -193,7 +193,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		slug: "sea-scouts-news",
 		description: "News and updates about the Sea Scouts program.",
 		homepageUrl: "https://seascout.org/latest-news",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://seascout.org/",
 		}),
 	},
@@ -202,7 +202,7 @@ export const feedConfigs: CreateFeedOpts[] = [
 		slug: "troop-leader-resource-updates",
 		description: "Updates and news about the Troop Leader Resource Hub.",
 		homepageUrl: "https://troopleader.scouting.org/updates-blog",
-		adapter: WordpressApiAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://troopleader.scouting.org",
 		}),
 	},
