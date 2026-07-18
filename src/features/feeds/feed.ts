@@ -1,5 +1,5 @@
 import { createHydratedPost, type Post } from "@/features/news/posts/post";
-import type { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
+import type { FeedAdapter } from "@/features/news/feedAdapters/feedAdapters";
 import type { UrlShaped } from "@/util/utilTypes";
 import { redis } from "@/util/redisClient";
 import type { PostData } from "@/features/news/posts/post";

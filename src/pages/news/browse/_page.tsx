@@ -1,6 +1,6 @@
 import { CardList } from "@/components/react/cardList";
 import { RenderPost as PostComponent } from "@/components/react/post";
-import { queryPosts, type QueryOpts } from "@/features/postsQuery/query";
+import { queryPosts, type QueryOpts } from "@/features/news/query/query";
 
 export async function BrowsePage({ query }: { query: QueryOpts }) {
 	const results = await queryPosts(query);

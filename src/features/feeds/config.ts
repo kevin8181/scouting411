@@ -1,7 +1,7 @@
 import type { CreateFeedOpts } from "@/features/feeds/feed";
 
-import { WordpressAdapter } from "@/features/feedAdapters/adapters/wordpress";
-import { RssAdapter } from "@/features/feedAdapters/adapters/rss";
+import { WordpressAdapter } from "@/features/news/feedAdapters/adapters/wordpress";
+import { RssAdapter } from "@/features/news/feedAdapters/adapters/rss";
 // import { TtaAdapter } from "@/features/feedAdapters/adapters/tta";
 
 export const feedConfigs: CreateFeedOpts[] = [
