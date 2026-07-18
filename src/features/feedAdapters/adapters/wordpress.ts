@@ -1,4 +1,4 @@
-import { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
+import type { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import type { PostData } from "@/features/posts/post";
 import he from "he";
 
@@ -9,20 +9,20 @@ type WordpressAdapterOpts = {
 	categoryFilter?: number;
 };
 
-export function WordpressAdapter(opts: WordpressAdapterOpts) {
+export function WordpressAdapter(opts: WordpressAdapterOpts): FeedAdapter {
 	const execute = async () => {
 		const page1 = await fetchPage(1, opts);
 
 		return page1.posts;
 	};
 
-	return new FeedAdapter({
+	return {
 		type: {
 			id: "wordpressApi",
 			human: "Wordpress",
 		},
 		execute,
-	});
+	};
 }
 
 async function fetchPage(page: number, opts: WordpressAdapterOpts) {
@@ -57,8 +57,6 @@ async function fetchPage(page: number, opts: WordpressAdapterOpts) {
 		totalPages: parseInt(response.headers.get("x-wp-totalpages") ?? "1"),
 	};
 }
-
-
 
 /** data about a post from the api */
 type WordpressApiPost = {

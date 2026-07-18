@@ -1,10 +1,10 @@
-import { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
+import type { FeedAdapter } from "@/features/feedAdapters/feedAdapters";
 import he from "he";
 
 //todo fetch the full post history
 
-export function TtaAdapter() {
-	return new FeedAdapter({
+export function TtaAdapter(): FeedAdapter {
+	return {
 		type: {
 			id: "tta",
 			human: "Trail to Adventure (bespoke)",
@@ -23,7 +23,7 @@ export function TtaAdapter() {
 				date: post.date_gmt,
 			}));
 		},
-	});
+	};
 }
 
 type ttaApiPost = {

@@ -1,20 +1,6 @@
 import type { PostData } from "@/features/posts/post";
 
-export class FeedAdapter {
-	type: {
-		id: string;
-		human: string;
-	};
-
-	execute: () => Promise<PostData[]>;
-
-	constructor(opts: FeedAdapterOpts) {
-		this.type = opts.type;
-		this.execute = opts.execute;
-	}
-}
-
-type FeedAdapterOpts = {
+export type FeedAdapter = {
 	/** metadata about the feed adapter type */
 	type: {
 		/** machine id for the type of adapter (rss, wordpressApi, etc) */
