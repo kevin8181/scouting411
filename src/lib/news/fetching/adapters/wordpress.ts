@@ -1,4 +1,4 @@
-import type { FeedAdapter } from "@/lib/news/feedAdapters/feedAdapters";
+import type { FeedAdapter } from "@/lib/news/fetching/adapters";
 import type { PostData } from "@/lib/news/posts/post";
 import he from "he";
 

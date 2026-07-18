@@ -1,8 +1,7 @@
 import type { CreateFeedOpts } from "@/lib/news/feeds/feed";
 
-import { WordpressAdapter } from "@/lib/news/feedAdapters/adapters/wordpress";
-import { RssAdapter } from "@/lib/news/feedAdapters/adapters/rss";
-// import { TtaAdapter } from "@/lib/feedAdapters/adapters/tta";
+import { WordpressAdapter } from "@/lib/news/fetching/adapters/wordpress";
+import { RssAdapter } from "@/lib/news/fetching/adapters/rss";
 
 export const feedConfigs: CreateFeedOpts[] = [
 	// todo these are not working any more because of cloudflare
