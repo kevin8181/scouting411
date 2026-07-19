@@ -2,14 +2,7 @@ import { createHydratedPost, type Post } from "@/lib/news/posts/post";
 import type { FeedAdapter } from "@/lib/news/fetching/types";
 import type { UrlShaped } from "@/util/utilTypes";
 import { readCache } from "@/lib/news/fetching/cache";
-
-export type CreateFeedOpts = {
-	name: string;
-	slug: string;
-	description: string;
-	homepageUrl: UrlShaped;
-	adapter: FeedAdapter;
-};
+import type { FeedConfig } from "@/lib/news/config";
 
 export class Feed {
 	// INSTANCE PROPERTIES
@@ -22,7 +15,7 @@ export class Feed {
 
 	// LIFECYCLE
 
-	constructor(opts: CreateFeedOpts) {
+	constructor(opts: FeedConfig) {
 		this.name = opts.name;
 		this.slug = opts.slug;
 		this.description = opts.description;

@@ -1,9 +1,9 @@
-import type { CreateFeedOpts } from "@/lib/news/feeds/feed";
-
 import { WordpressAdapter } from "@/lib/news/fetching/adapters/wordpress";
 import { RssAdapter } from "@/lib/news/fetching/adapters/rss";
+import type { FeedAdapter } from "@/lib/news/fetching/types";
+import type { UrlShaped } from "@/util/utilTypes";
 
-export const feedConfigs: CreateFeedOpts[] = [
+export const feedConfigs: FeedConfig[] = [
 	// todo these are not working any more because of cloudflare
 	// {
 	// 	name: "Scouts BSA Program Updates",
@@ -206,3 +206,11 @@ export const feedConfigs: CreateFeedOpts[] = [
 		}),
 	},
 ];
+
+export type FeedConfig = {
+	name: string;
+	slug: string;
+	description: string;
+	homepageUrl: UrlShaped;
+	adapter: FeedAdapter;
+};
