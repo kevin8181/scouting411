@@ -1,6 +1,6 @@
 ---
-import UiLayout from "@/components/layout/UiLayout.astro";
-import { BrowsePage } from "@/pages/news/browse/_page";
+import Layout from "@/components/layout/Layout.astro";
+import { Page } from "@/pages/news/browse/_index";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
 
@@ -15,12 +15,6 @@ if (error) {
 export const prerender = false;
 ---
 
-<UiLayout>
-	{
-		query ? (
-			<BrowsePage query={query} />
-		) : (
-			<p>{jsonPrettyPrint(error.issues)}</p>
-		)
-	}
-</UiLayout>
+<Layout>
+	{query ? <Page query={query} /> : <p>{jsonPrettyPrint(error.issues)}</p>}
+</Layout>

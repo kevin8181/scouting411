@@ -1,9 +1,28 @@
 ---
-import "@/global.css";
-import Head from "@/components/layout/Head.astro";
+import RootLayout from "@/components/layout/Layout.astro";
+import { Sidebar } from "@/components/layout/sidebar/sidebar";
+import { Hamburger } from "@/components/layout/sidebar/hamburger";
 ---
 
-<html lang="en">
-	<Head />
-	<slot />
-</html>
+<RootLayout>
+	<body>
+		<!-- header main column -->
+		<div class="flex h-dvh w-full flex-col">
+			<header
+				class="bg-blue flex h-[52px] items-center justify-between px-5 py-3 text-white"
+			>
+				<a href="/" class="font-display text-xl font-extrabold">Scouting411</a>
+				<Hamburger client:idle />
+			</header>
+
+			<!-- sidebar beside main row-->
+			<div class="flex h-[calc(100vh-52px)]">
+				<Sidebar url={Astro.url} />
+
+				<main class="h-full w-full overflow-auto">
+					<slot />
+				</main>
+			</div>
+		</div>
+	</body>
+</RootLayout>

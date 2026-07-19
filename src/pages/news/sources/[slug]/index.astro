@@ -1,5 +1,5 @@
 ---
-import UiLayout from "@/components/layout/UiLayout.astro";
+import Layout from "@/components/layout/Layout.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
 
 const { slug } = Astro.params;
@@ -15,7 +15,7 @@ const feed = FeedManager.getFeedBySlug(slug);
 if (!feed) throw new Error(`Feed ${slug} not found`);
 ---
 
-<UiLayout title={feed.name}>
+<Layout title={feed.name}>
 	<div class="p-8">
 		<h1 class="font-serif text-xl">{feed.name}</h1>
 		<p>{feed.description}</p>
@@ -32,5 +32,6 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 			Subcribe: <a href={feed.urls.rss} class="text-blue underline">rss</a>
 			<a href={feed.urls.atom} class="text-blue underline">atom</a>
 		</p>
+		<!-- todo add a link to browse just this feed -->
 	</div>
-</UiLayout>
+</Layout>

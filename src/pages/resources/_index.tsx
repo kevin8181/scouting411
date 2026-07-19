@@ -2,7 +2,7 @@ import { CardList } from "@/components/react/cardList";
 import { resources } from "@/lib/resources/data";
 import { Resource } from "@/components/react/resource";
 
-export function ResourcesPage() {
+export function Page() {
 	return (
 		<CardList>
 			{resources.map((resource) => (

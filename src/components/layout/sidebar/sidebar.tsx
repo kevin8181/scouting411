@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
-export default function Sidebar({ url }: { url: URL }) {
+export function Sidebar({ url }: { url: URL }) {
 	return (
 		<aside
 			className="bg-gray-1 border-gray-3 hidden h-full w-64 min-w-64 flex-col justify-between overflow-auto border-r xl:flex"
