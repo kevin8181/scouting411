@@ -43,7 +43,7 @@ import { FeedManager } from "@/lib/news/feeds/feedManager";
 						<span
 							>{
 								Intl.NumberFormat().format(
-									(await FeedManager.allPosts()).length,
+									(await FeedManager.getAllPosts()).length,
 								)
 							}</span
 						>

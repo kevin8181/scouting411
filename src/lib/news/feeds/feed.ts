@@ -1,8 +1,7 @@
 import { createHydratedPost, type Post } from "@/lib/news/posts/post";
 import type { FeedAdapter } from "@/lib/news/fetching/types";
 import type { UrlShaped } from "@/util/utilTypes";
-import { redis } from "@/util/redisClient";
-import type { PostData } from "@/lib/news/fetching/types";
+import { readCache } from "@/lib/news/fetching/cache";
 
 export type CreateFeedOpts = {
 	name: string;
@@ -36,14 +35,6 @@ export class Feed {
 	get type() {
 		return this._adapter.type;
 	}
-	// /** relative href to the detail page for this feed */
-	// get overviewUrl() {
-	// 	return `/news/sources/${this.slug}`;
-	// }
-	// /** relative href to the generated rss feed */
-	// get rssUrl() {
-	// 	return `/feeds/${this.slug}/rss`;
-	// }
 
 	get urls() {
 		return {
@@ -62,36 +53,12 @@ export class Feed {
 
 	/** fetches the posts from the redis cache */
 	async posts(): Promise<Post[]> {
-		console.log(`fetching cached posts for ${this.name}`);
+		console.log(`reading cached posts for ${this.name}`);
 
-		// read the data from redis
-		const postDatas = await Feed.readCache(this.slug);
+		const postDatas = await readCache(this.slug);
 
 		return postDatas.map((postData) => {
 			return createHydratedPost(postData, this);
 		});
-	}
-
-	// CACHING
-
-	/** read a feed's post data from redis */
-	private static async readCache(feedSlug: string) {
-		const data: PostData[] | null = await redis.json.get("posts:" + feedSlug);
-
-		return data ?? [];
-	}
-	/** write a feed's post data to redis */
-	private static async writeCache(feedSlug: string, posts: PostData[]) {
-		await redis.json.set("posts:" + feedSlug, "$", JSON.stringify(posts));
-	}
-	/** fetches the posts from the original source and updates the redis cache */
-	async updatePosts() {
-		console.log(`updating cached posts for ${this.name}`);
-
-		//execute the feed adapter to fetch the data from the original source
-		const postData = await this._adapter.execute();
-
-		// write the data to redis
-		await Feed.writeCache(this.slug, postData);
 	}
 }

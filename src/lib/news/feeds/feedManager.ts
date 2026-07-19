@@ -13,14 +13,10 @@ export class FeedManager {
 		return feeds.find((feed) => feed.slug === slug);
 	}
 
-	static async allPosts() {
+	static async getAllPosts() {
 		const posts = (await Promise.all(feeds.map((feed) => feed.posts()))).flat();
 
 		//return the posts sorted by date descending
 		return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
-	}
-
-	static async updateAllFeeds() {
-		await Promise.all(feeds.map((feed) => feed.updatePosts()));
 	}
 }
