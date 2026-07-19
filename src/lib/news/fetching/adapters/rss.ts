@@ -1,4 +1,4 @@
-import type { FeedAdapter } from "@/lib/news/fetching/adapters";
+import type { FeedAdapter } from "@/lib/news/fetching/types";
 import { parseRssFeed } from "feedsmith";
 
 export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {

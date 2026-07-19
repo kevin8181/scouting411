@@ -1,16 +1,5 @@
 import type { Feed } from "@/lib/news/feeds/feed";
-
-/** a raw post data object returned by one of the feed adapters */
-export type PostData = {
-	/** the original url of the post */
-	url: string;
-	/** the title of the post */
-	title: string;
-	/** the description of the post */
-	description: string | undefined;
-	/** the date the post was published */
-	date: string;
-};
+import type { PostData } from "@/lib/news/fetching/types";
 
 /** a hydrated post from a feed */
 export type Post = {

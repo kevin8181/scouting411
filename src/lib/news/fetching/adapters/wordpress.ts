@@ -1,5 +1,4 @@
-import type { FeedAdapter } from "@/lib/news/fetching/adapters";
-import type { PostData } from "@/lib/news/posts/post";
+import type { FeedAdapter, PostData } from "@/lib/news/fetching/types";
 import he from "he";
 
 type WordpressAdapterOpts = {
