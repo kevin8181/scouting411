@@ -71,6 +71,7 @@
 - https://oa-scouting.org/
 - https://www.bsarestructuring.org/
 - https://www.scouting.org/international/
+- https://techhub.scouting.org/
 
 ## reference and guidance
 
@@ -104,6 +105,7 @@
 - https://oalodgemaster.featureupvote.com/
 - https://www.scouting.org/awards/scholarships/
 - https://api.scouting.org/organizations/v2/zip/12345/council
+- https://status.scouting.org/
 
 ## other
 
