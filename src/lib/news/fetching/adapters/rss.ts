@@ -1,5 +1,6 @@
 import type { FeedAdapter } from "@/lib/news/fetching/types";
 import { parseRssFeed } from "feedsmith";
+import { cleanHtmlString } from "@/util/cleanHtmlString";
 
 export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 	const execute = async () => {
@@ -27,8 +28,10 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 
 			return {
 				url: item.link,
-				title: item.title,
-				description: item.description,
+				title: cleanHtmlString(item.title),
+				description: item.description
+					? cleanHtmlString(item.description)
+					: undefined,
 				date: item.pubDate,
 			};
 		});

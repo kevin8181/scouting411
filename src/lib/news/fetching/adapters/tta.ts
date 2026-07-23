@@ -19,7 +19,7 @@ export function TtaAdapter(): FeedAdapter {
 			return posts.map((post) => ({
 				url: post.link,
 				title: cleanHtmlString(post.title.rendered),
-				description: post.yoast_head_json.description,
+				description: cleanHtmlString(post.yoast_head_json.description),
 				date: post.date_gmt,
 			}));
 		},
