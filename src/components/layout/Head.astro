@@ -1,6 +1,5 @@
 ---
 import { Font } from "astro:assets";
-import ClientRouter from "astro/components/ClientRouter.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
 ---
 
@@ -46,7 +45,4 @@ import { FeedManager } from "@/lib/news/feeds/feedManager";
 	<Font cssVariable="--font-roboto-slab" preload />
 	<Font cssVariable="--font-roboto" preload />
 	<Font cssVariable="--font-montserrat" preload />
-
-	<!--SCRIPTS-->
-	<ClientRouter />
 </head>
