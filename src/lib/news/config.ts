@@ -47,6 +47,16 @@ export const feedConfigs: FeedConfig[] = [
 	// 	homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
 	// 	adapter: TtaAdapter(),
 	// },
+	// {
+	// 	name: "Scouting Alumni",
+	// 	slug: "scouting-alumni",
+	// 	description:
+	// 		"The news feed of Scouting Alumni. Primarily editorial content with occasional news.",
+	// 	homepageUrl: "https://scoutingalumni.org/news",
+	// 	adapter: WordpressAdapter({
+	// 		baseUrl: "https://scoutingalumni.org",
+	// 	}),
+	// },
 
 	// todo disabled this one because it's spammy in the main feed. will re-enable once filtering is all implimented
 	// {
@@ -55,10 +65,10 @@ export const feedConfigs: FeedConfig[] = [
 	// 	description: "Editorial and entertainment content mainly for youth.",
 	// 	homepageUrl: "https://scoutlife.org",
 	// 	adapter: WordpressApiAdapter({
-	// 		baseUrl: "https://scoutlife.org",
-	// 	}),
-	// },
-
+		// 		baseUrl: "https://scoutlife.org",
+		// 	}),
+		// },
+		
 	// todo these are gone. rebuild from scraped copy
 	// {
 	// 	name: "ScoutCast",
@@ -75,10 +85,10 @@ export const feedConfigs: FeedConfig[] = [
 	// 	description: "A defunct podcast about the Cub Scouts program.",
 	// 	homepageUrl: "https://podcast.scouting.org/category/cubcast",
 	// 	adapter: RssAdapter({
-	// 		feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
-	// 	}),
-	// },
-
+		// 		feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
+		// 	}),
+		// },
+		
 	// todo it looks like this is about to be shut down. I downloaded the rss and and all the episodes. set up an archived version later
 	// {
 	// 	name: "The Lookout",
@@ -135,16 +145,6 @@ export const feedConfigs: FeedConfig[] = [
 		}),
 	},
 
-	{
-		name: "Scouting Alumni",
-		slug: "scouting-alumni",
-		description:
-			"The news feed of Scouting Alumni. Primarily editorial content with occasional news.",
-		homepageUrl: "https://scoutingalumni.org/news",
-		adapter: WordpressAdapter({
-			baseUrl: "https://scoutingalumni.org",
-		}),
-	},
 	{
 		name: "National Eagle Scout Association",
 		slug: "nesa",
