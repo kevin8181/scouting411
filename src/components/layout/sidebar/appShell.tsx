@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { AppSidebar } from "@/components/layout/sidebar/appSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export function AppShell({ url, children }: { url: URL; children: ReactNode }) {
 	return (
@@ -9,6 +9,7 @@ export function AppShell({ url, children }: { url: URL; children: ReactNode }) {
 				<a href="/" className="font-display text-xl font-extrabold">
 					Scouting411
 				</a>
+				<SidebarTrigger className="text-white hover:bg-white/10 hover:text-white md:hidden" />
 			</header>
 
 			<div className="flex h-[calc(100vh-52px)]">

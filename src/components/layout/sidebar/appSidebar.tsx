@@ -15,72 +15,73 @@ import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 export function AppSidebar({ url }: { url: URL }) {
 	return (
 		<Sidebar
-			collapsible="none"
-			className="bg-gray-1 border-gray-3 flex-col justify-between overflow-auto border-r"
+			className="bg-gray-1 border-gray-3 border-r"
 			aria-label="Main sidebar"
 		>
-			<div className="pt-3">
-				<NavGroup>
-					<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
-				</NavGroup>
+			<div className="flex h-full flex-col justify-between overflow-auto">
+				<div className="pt-3">
+					<NavGroup>
+						<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
+					</NavGroup>
 
-				<NavGroup label="news">
-					<NavLink
-						href="/news/browse"
-						label="Newsfeed"
-						currentUrl={url}
-						icon={faNewspaper}
-					/>
-					<NavLink
-						href="/news/sources"
-						label="Sources"
-						currentUrl={url}
-						icon={faBullhorn}
-					/>
-					<NavLink
-						href="/news/subscribe"
-						label="Subscribe"
-						currentUrl={url}
-						icon={faRssSquare}
-					/>
-					<NavLink
-						href="/news/stats"
-						label="Stats"
-						currentUrl={url}
-						icon={faMagnifyingGlassChart}
-					/>
-				</NavGroup>
+					<NavGroup label="news">
+						<NavLink
+							href="/news/browse"
+							label="Newsfeed"
+							currentUrl={url}
+							icon={faNewspaper}
+						/>
+						<NavLink
+							href="/news/sources"
+							label="Sources"
+							currentUrl={url}
+							icon={faBullhorn}
+						/>
+						<NavLink
+							href="/news/subscribe"
+							label="Subscribe"
+							currentUrl={url}
+							icon={faRssSquare}
+						/>
+						<NavLink
+							href="/news/stats"
+							label="Stats"
+							currentUrl={url}
+							icon={faMagnifyingGlassChart}
+						/>
+					</NavGroup>
 
-				<NavGroup label="resources">
-					<NavLink
-						href="/resources"
-						label="Resources"
-						currentUrl={url}
-						icon={faBookBookmark}
-					/>
-				</NavGroup>
-			</div>
+					<NavGroup label="resources">
+						<NavLink
+							href="/resources"
+							label="Resources"
+							currentUrl={url}
+							icon={faBookBookmark}
+						/>
+					</NavGroup>
+				</div>
 
-			<div>
-				<NavGroup label="about">
-					<NavLink
-						href="https://github.com/kevin8181/scouting411/issues/new/choose"
-						label="Give Feedback"
-						newTab
-						currentUrl={url}
-						icon={faCommentDots}
-					/>
-					<NavLink
-						href="https://github.com/kevin8181/scouting411"
-						label="GitHub"
-						newTab
-						currentUrl={url}
-						icon={faGitAlt}
-					/>
-				</NavGroup>
-				<hr className="border-gray-3 mx-3 border-t" />
-				<div className="text-gray-8 p-3 text-xs">
-					Not affiliated with Scouting America.
+				<div>
+					<NavGroup label="about">
+						<NavLink
+							href="https://github.com/kevin8181/scouting411/issues/new/choose"
+							label="Give Feedback"
+							newTab
+							currentUrl={url}
+							icon={faCommentDots}
+						/>
+						<NavLink
+							href="https://github.com/kevin8181/scouting411"
+							label="GitHub"
+							newTab
+							currentUrl={url}
+							icon={faGitAlt}
+						/>
+					</NavGroup>
+					<hr className="border-gray-3 mx-3 border-t" />
+					<div className="text-gray-8 p-3 text-xs">
+						Not affiliated with Scouting America.
+					</div>
 				</div>
 			</div>
 		</Sidebar>
