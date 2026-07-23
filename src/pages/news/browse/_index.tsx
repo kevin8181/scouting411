@@ -15,7 +15,9 @@ import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 export async function Page({ query }: { query: QueryOpts }) {
 	const results = await queryPosts(query);
 	return (
-		<SecondarySidebar>
+		<SecondarySidebar sidebar={<>
+			<span>Filters</span>
+		</>}>
 			<div className="flex flex-1 flex-col gap-5 p-8">
 				<span>
 					Showing posts {results.pagination.firstItemIndex + 1} -{" "}

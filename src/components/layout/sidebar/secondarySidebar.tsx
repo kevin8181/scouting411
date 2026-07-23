@@ -6,14 +6,13 @@ export function SecondarySidebar({
 	sidebar,
 }: {
 	children: ReactNode;
-	sidebar?: ReactNode;
+	sidebar: ReactNode;
 }) {
 	return (
 		<SidebarProvider className="min-h-0">
 			{children}
 			<Sidebar
 				side="right"
-				collapsible="none"
 				className="border-gray-3 border-l"
 				aria-label="Secondary sidebar"
 			>
