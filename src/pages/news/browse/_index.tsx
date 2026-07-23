@@ -14,7 +14,7 @@ import {
 export async function Page({ query }: { query: QueryOpts }) {
 	const results = await queryPosts(query);
 	return (
-		<div className="p-8">
+		<div className="p-8 flex flex-col gap-5">
 			<span>
 				Showing posts {results.pagination.firstItemIndex + 1} -{" "}
 				{results.pagination.lastItemIndex + 1} of{" "}
