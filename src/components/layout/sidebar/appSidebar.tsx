@@ -1,6 +1,6 @@
 import { NavLink } from "@/components/layout/sidebar/navLink";
 import { NavGroup } from "@/components/layout/sidebar/navGroup";
-import { NavDivider } from "@/components/layout/sidebar/navDivider";
+import { Sidebar } from "@/components/ui/sidebar";
 import {
 	faBookBookmark,
 	faBullhorn,
@@ -12,10 +12,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
-export function Sidebar({ url }: { url: URL }) {
+export function AppSidebar({ url }: { url: URL }) {
 	return (
-		<aside
-			className="bg-gray-1 border-gray-3 hidden h-full w-64 min-w-64 flex-col justify-between overflow-auto border-r xl:flex"
+		<Sidebar
+			collapsible="none"
+			className="bg-gray-1 border-gray-3 flex-col justify-between overflow-auto border-r"
 			aria-label="Main sidebar"
 		>
 			<div className="pt-3">
@@ -77,11 +78,11 @@ export function Sidebar({ url }: { url: URL }) {
 						icon={faGitAlt}
 					/>
 				</NavGroup>
-				<NavDivider />
+				<hr className="border-gray-3 mx-3 border-t" />
 				<div className="text-gray-8 p-3 text-xs">
 					Not affiliated with Scouting America.
 				</div>
 			</div>
-		</aside>
+		</Sidebar>
 	);
 }

@@ -1,4 +1,11 @@
 import React from "react";
+import {
+	SidebarGroup,
+	SidebarGroupContent,
+	SidebarGroupLabel,
+	SidebarMenu,
+	SidebarMenuItem,
+} from "@/components/ui/sidebar";
 
 export function NavGroup({
 	label,
@@ -8,14 +15,19 @@ export function NavGroup({
 	children: React.ReactNode;
 }) {
 	return (
-		<nav className="flex flex-col gap-1 px-3 pb-3">
-			{label && <h3 className="text-gray-8 pl-3 text-[0.78rem]">{label}</h3>}
-
-			<ul className="flex flex-col gap-[3px]">
-				{React.Children.map(children, (child) => {
-					return <li>{child}</li>;
-				})}
-			</ul>
-		</nav>
+		<SidebarGroup className="gap-1 p-0 px-3 pb-3">
+			{label && (
+				<SidebarGroupLabel className="text-gray-8 h-auto rounded-none p-0 pl-3 text-[0.78rem] font-normal">
+					{label}
+				</SidebarGroupLabel>
+			)}
+			<SidebarGroupContent>
+				<SidebarMenu className="gap-0.75">
+					{React.Children.map(children, (child) => (
+						<SidebarMenuItem>{child}</SidebarMenuItem>
+					))}
+				</SidebarMenu>
+			</SidebarGroupContent>
+		</SidebarGroup>
 	);
 }
