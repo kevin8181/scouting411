@@ -3,17 +3,6 @@ import type { Post } from "@/lib/news/posts/post";
 export function RenderPost({ post }: { post: Post }) {
 	return (
 		<div className="border-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
-			<a
-				href={post.url}
-				rel="noopener noreferrer"
-				target="_blank"
-				className="text-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
-			>
-				{post.title}
-			</a>
-			<span className="text-sm wrap-anywhere hyphens-auto">
-				{post.description ?? "No excerpt available."}
-			</span>
 			<span className="flex items-center gap-2 text-xs text-gray-700">
 				<a href={post.feed.urls.overview} className="underline">
 					{post.feed.name}
@@ -27,6 +16,17 @@ export function RenderPost({ post }: { post: Post }) {
 						day: "numeric",
 					})}
 				</span>
+			</span>
+			<a
+				href={post.url}
+				rel="noopener noreferrer"
+				target="_blank"
+				className="text-blue font-serif text-xl font-bold wrap-anywhere hyphens-auto hover:underline"
+			>
+				{post.title}
+			</a>
+			<span className="line-clamp-3 text-sm wrap-anywhere hyphens-auto">
+				{post.description ?? "No excerpt available."}
 			</span>
 		</div>
 	);

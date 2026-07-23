@@ -1,5 +1,27 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
+import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { resources } from "@/lib/resources/data";
+import {
+	faRssSquare,
+	faSquareUpRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const latestPosts = (await FeedManager.getAllPosts()).slice(0, 2);
+
+const allTags = resources.flatMap((resource) => [
+	...resource.tags.resourceType,
+	...resource.tags.topic,
+]);
+const featuredTags = [...new Map(allTags.map((tag) => [tag.id, tag])).values()];
+
+const quickLinks = [
+	{ href: "https://scoutbook.scouting.org", label: "Scoutbook" },
+	{ href: "https://advancements.scouting.org", label: "Scoutbook Plus" },
+	{ href: "https://my.scouting.org", label: "my.Scouting" },
+	{ href: "https://portal.oa-scouting.org", label: "LodgeMaster" },
+];
 ---
 
 <Layout>
@@ -8,7 +30,101 @@ import Layout from "@/components/layout/Layout.astro";
 	>
 		<h1 class="text-blue font-display text-5xl font-extrabold">Scouting411</h1>
 		<h2 class="text-gray-10 text-xl">
-			the unofficial aggregator for official Scouting America news and resources
+			the unofficial front page of Scouting America
 		</h2>
+
+		<div class="grid w-full max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3">
+			<div
+				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
+			>
+				<div class="flex w-full items-center justify-between">
+					<a
+						href="/news/browse"
+						class="text-blue font-serif text-xl font-bold hover:underline"
+					>
+						News
+					</a>
+					<a
+						href="/news/subscribe"
+						aria-label="Subscribe to news feed"
+						class="text-gray-400 hover:text-blue"
+					>
+						<FontAwesomeIcon icon={faRssSquare} height="1em" />
+					</a>
+				</div>
+				<ul class="flex w-full flex-col gap-2">
+					{
+						latestPosts.map((post) => (
+							<li>
+								<a
+									href={post.url}
+									rel="noopener noreferrer"
+									target="_blank"
+									class="text-blue line-clamp-2 text-sm font-medium underline wrap-anywhere hyphens-auto hover:no-underline"
+								>
+									{post.title}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				<a
+					href="/news/browse"
+					class="text-blue mt-auto text-xs font-medium hover:underline"
+				>
+					View all news &rarr;
+				</a>
+			</div>
+			<div
+				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
+			>
+				<a
+					href="/resources"
+					class="text-blue font-serif text-xl font-bold hover:underline"
+				>
+					Resources
+				</a>
+				<div class="flex flex-wrap gap-2">
+					{
+						featuredTags.map((tag) => (
+							<a
+								href="/resources"
+								class="border-blue/60 text-blue hover:bg-blue/10 rounded border-2 px-1.5 py-0.5 text-xs font-medium"
+							>
+								{tag.displayName}
+							</a>
+						))
+					}
+				</div>
+				<a
+					href="/resources"
+					class="text-blue mt-auto text-xs font-medium hover:underline"
+				>
+					View all resources &rarr;
+				</a>
+			</div>
+			<div
+				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
+			>
+				<span class="text-blue font-serif text-xl font-bold">Quick Links</span>
+				<ul class="flex w-full flex-col gap-1 text-sm">
+					{
+						quickLinks.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									rel="noopener noreferrer"
+									target="_blank"
+									class="border-gray-3 text-gray-10 hover:border-blue hover:text-blue flex items-center justify-between gap-2 rounded-md border bg-gray-50 px-3 py-2 font-medium transition-colors"
+								>
+									{link.label}
+									<FontAwesomeIcon icon={faSquareUpRight} height="1em" />
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
 	</div>
 </Layout>
