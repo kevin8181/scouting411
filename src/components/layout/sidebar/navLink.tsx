@@ -26,7 +26,7 @@ export function NavLink({
 		<SidebarMenuButton
 			isActive={isActive}
 			className={
-				"h-auto justify-between gap-2.5 rounded-lg border px-3 py-2 text-sm font-normal ring-0 outline-none hover:border-gray-3 hover:bg-transparent hover:text-inherit active:bg-transparent active:text-inherit data-active:bg-transparent data-active:font-normal data-active:text-inherit focus-visible:ring-0 " +
+				"hover:border-gray-3 h-auto justify-between gap-2.5 rounded-lg border px-3 py-2 text-sm font-normal ring-0 outline-none hover:bg-transparent hover:text-inherit focus-visible:ring-0 active:bg-transparent active:text-inherit data-active:bg-transparent data-active:font-normal data-active:text-inherit " +
 				activeStateCss
 			}
 			render={
