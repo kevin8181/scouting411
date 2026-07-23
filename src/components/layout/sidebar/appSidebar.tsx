@@ -1,11 +1,12 @@
 import { NavLink } from "@/components/layout/sidebar/navLink";
 import { NavGroup } from "@/components/layout/sidebar/navGroup";
-import { Sidebar } from "@/components/ui/sidebar";
+import { Sidebar, SidebarHeader } from "@/components/ui/sidebar";
 import {
 	faBookBookmark,
 	faBullhorn,
 	faCommentDots,
 	faHome,
+	faHeartPulse,
 	faMagnifyingGlassChart,
 	faNewspaper,
 	faRssSquare,
@@ -18,6 +19,12 @@ export function AppSidebar({ url }: { url: URL }) {
 			className="bg-gray-1 border-gray-3 border-r"
 			aria-label="Main sidebar"
 		>
+			<SidebarHeader className="bg-blue border-gray-3 border-b p-3">
+				<a href="/" className="font-display text-xl font-extrabold text-white">
+					Scouting411
+				</a>
+			</SidebarHeader>
+
 			<div className="flex h-full flex-col justify-between overflow-auto">
 				<div className="pt-3">
 					<NavGroup>
@@ -76,6 +83,13 @@ export function AppSidebar({ url }: { url: URL }) {
 							newTab
 							currentUrl={url}
 							icon={faGitAlt}
+						/>
+						<NavLink
+							href="https://status.scouting.org"
+							label="System Status"
+							newTab
+							currentUrl={url}
+							icon={faHeartPulse}
 						/>
 					</NavGroup>
 					<hr className="border-gray-3 mx-3 border-t" />
