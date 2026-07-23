@@ -15,13 +15,13 @@ import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
 export function AppSidebar({ url }: { url: URL }) {
 	return (
-		<Sidebar
-			className="border-gray-3 border-r"
-			aria-label="Main sidebar"
-		>
+		<Sidebar className="border-gray-3 border-r" aria-label="Main sidebar">
 			<SidebarHeader className="bg-blue border-gray-3 border-b p-3">
-				<a href="/" className="font-display text-xl font-extrabold text-white flex items-center gap-3">
-					<span className="size-7 bg-white rounded-[6px]" />
+				<a
+					href="/"
+					className="font-display flex items-center gap-3 text-xl font-extrabold text-white"
+				>
+					<span className="size-7 rounded-[6px] bg-white" />
 					<span>Scouting411</span>
 				</a>
 			</SidebarHeader>
@@ -29,7 +29,12 @@ export function AppSidebar({ url }: { url: URL }) {
 			<div className="flex h-full flex-col justify-between overflow-auto">
 				<div className="pt-3">
 					<NavGroup>
-						<NavLink href="/" label="Launchpad" currentUrl={url} icon={faRocket} />
+						<NavLink
+							href="/"
+							label="Launchpad"
+							currentUrl={url}
+							icon={faRocket}
+						/>
 					</NavGroup>
 
 					<NavGroup label="news">

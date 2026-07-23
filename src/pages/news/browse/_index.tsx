@@ -31,7 +31,6 @@ export async function Page({ query }: { query: QueryOpts }) {
 					<span>Pagination</span>
 					<span>Search</span>
 					<span>Sources</span>
-
 				</div>
 			}
 		>
