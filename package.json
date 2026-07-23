@@ -15,11 +15,10 @@
 		"astro": "astro",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
-		"lint": "npx eslint \"src/**/*\"",
-		"check": "npm run astro check && npm run format && npm run lint && npm run knip && echo '✅ All checks passed.'",
+		"lint": "pnpx eslint \"src/**/*\"",
+		"check": "pnpm run astro check && pnpm run format && pnpm run lint && pnpm run knip && echo '✅ All checks passed.'",
 		"validateResourceLinks": "tsx scripts/validateResourceLinks.ts",
-		"knip": "knip --treat-config-hints-as-errors",
-		"preinstall": "npx only-allow pnpm"
+		"knip": "knip --treat-config-hints-as-errors"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.9",
