@@ -21,7 +21,6 @@
 		"knip": "knip --treat-config-hints-as-errors"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.9.9",
 		"@astrojs/react": "^6.0.1",
 		"@astrojs/sitemap": "^3.7.3",
 		"@astrojs/vercel": "^11.0.3",
@@ -51,6 +50,7 @@
 		"zod": "4.4.3"
 	},
 	"devDependencies": {
+		"@astrojs/check": "^0.9.9",
 		"@eslint/js": "^10.0.1",
 		"@types/he": "^1.2.3",
 		"@types/qs": "^6.15.1",
@@ -61,7 +61,6 @@
 		"globals": "^17.7.0",
 		"knip": "^6.27.0",
 		"normalize-url": "^9.0.1",
-		"only-allow": "^1.2.2",
 		"prettier": "3.9.5",
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "^0.8.1",

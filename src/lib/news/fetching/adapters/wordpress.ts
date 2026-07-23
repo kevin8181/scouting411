@@ -1,5 +1,5 @@
 import type { FeedAdapter, PostData } from "@/lib/news/fetching/types";
-import he from "he";
+import { cleanHtmlString } from "@/util/cleanHtmlString";
 
 type WordpressAdapterOpts = {
 	/** the base url of the wordpress site */
@@ -44,8 +44,8 @@ async function fetchPage(page: number, opts: WordpressAdapterOpts) {
 
 	const posts: PostData[] = rawPosts.map((post) => ({
 		url: post.link,
-		title: he.decode(post.title.rendered),
-		description: he.decode(
+		title: cleanHtmlString(post.title.rendered),
+		description: cleanHtmlString(
 			post.yoast_head_json?.og_description ?? post.excerpt.rendered,
 		),
 		date: post.date_gmt,

@@ -1,5 +1,5 @@
 import type { FeedAdapter } from "@/lib/news/fetching/types";
-import he from "he";
+import { cleanHtmlString } from "@/util/cleanHtmlString";
 
 //todo fetch the full post history
 
@@ -18,7 +18,7 @@ export function TtaAdapter(): FeedAdapter {
 
 			return posts.map((post) => ({
 				url: post.link,
-				title: he.decode(post.title.rendered),
+				title: cleanHtmlString(post.title.rendered),
 				description: post.yoast_head_json.description,
 				date: post.date_gmt,
 			}));
