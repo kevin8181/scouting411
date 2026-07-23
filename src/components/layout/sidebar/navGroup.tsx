@@ -17,7 +17,7 @@ export function NavGroup({
 	return (
 		<SidebarGroup className="gap-1 p-0 px-3 pb-3">
 			{label && (
-				<SidebarGroupLabel className="text-gray-8 h-auto rounded-none p-0 pl-3 text-[0.78rem] font-normal">
+				<SidebarGroupLabel className="text-gray-8 h-auto rounded-none p-0 pl-3 text-[0.78rem] font-normal uppercase">
 					{label}
 				</SidebarGroupLabel>
 			)}

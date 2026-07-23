@@ -15,15 +15,27 @@ import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 export async function Page({ query }: { query: QueryOpts }) {
 	const results = await queryPosts(query);
 	return (
-		<SecondarySidebar sidebar={<>
-			<span>Filters</span>
-		</>}>
+		<SecondarySidebar
+			sidebar={
+				<div className="flex flex-col gap-5 p-4">
+					<span>
+						Showing posts {results.pagination.firstItemIndex + 1} -{" "}
+						{results.pagination.lastItemIndex + 1} of{" "}
+						{results.pagination.totalItems}.
+					</span>
+
+					<span className="font-bold">Filters (todo)</span>
+
+					{/* todo */}
+					<span>Sort</span>
+					<span>Pagination</span>
+					<span>Search</span>
+					<span>Sources</span>
+
+				</div>
+			}
+		>
 			<div className="flex flex-1 flex-col gap-5 p-8">
-				<span>
-					Showing posts {results.pagination.firstItemIndex + 1} -{" "}
-					{results.pagination.lastItemIndex + 1} of{" "}
-					{results.pagination.totalItems}.
-				</span>
 				<CardFeed>
 					{results.items.map((post) => (
 						<PostComponent post={post} key={post.url} />

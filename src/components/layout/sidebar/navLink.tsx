@@ -2,6 +2,7 @@ import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import type { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SidebarMenuButton } from "@/components/ui/sidebar";
+import { cn } from "@/util/cn";
 
 export function NavLink({
 	href,
@@ -18,17 +19,14 @@ export function NavLink({
 }) {
 	const isActive = currentUrl.pathname === href;
 
-	const activeStateCss = isActive
-		? "bg-white border-gray-3 text-black"
-		: "border-transparent text-gray-9";
-
 	return (
 		<SidebarMenuButton
 			isActive={isActive}
-			className={
-				"hover:border-gray-3 h-auto justify-between gap-2.5 rounded-lg border px-3 py-2 text-sm font-normal ring-0 outline-none hover:bg-transparent hover:text-inherit focus-visible:ring-0 active:bg-transparent active:text-inherit data-active:bg-transparent data-active:font-normal data-active:text-inherit " +
-				activeStateCss
-			}
+			className={cn(
+				"h-auto justify-between gap-2.5 rounded-lg border border-transparent px-3 py-2 text-sm font-normal outline-none",
+				"hover:border-gray-3",
+				"data-active:bg-blue/10 data-active:text-blue data-active:font-bold",
+			)}
 			render={
 				<a
 					href={href}
