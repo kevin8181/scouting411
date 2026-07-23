@@ -15,6 +15,6 @@ if (error) {
 }
 ---
 
-<Layout>
+<Layout title="News">
 	{query ? <Page query={query} /> : <p>{jsonPrettyPrint(error.issues)}</p>}
 </Layout>

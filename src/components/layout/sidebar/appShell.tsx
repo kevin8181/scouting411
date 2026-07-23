@@ -6,12 +6,21 @@ import {
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 
-export function AppShell({ url, children }: { url: URL; children: ReactNode }) {
+export function AppShell({
+	url,
+	title,
+	children,
+}: {
+	url: URL;
+	title: string;
+	children: ReactNode;
+}) {
 	return (
 		<SidebarProvider>
 			<AppSidebar url={url} />
 			<SidebarInset>
-				<header className="sticky top-0 bg-gray-1 border-gray-3 flex h-13 items-center justify-end border-b px-5 py-3">
+				<header className="bg-gray-1 border-gray-3 sticky top-0 flex h-13 items-center justify-between border-b px-5 py-3 font-serif text-lg">
+					<span>{title}</span>
 					<SidebarTrigger className="md:hidden" />
 				</header>
 				{children}
