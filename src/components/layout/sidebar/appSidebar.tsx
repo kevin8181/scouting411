@@ -5,7 +5,7 @@ import {
 	faBookBookmark,
 	faBullhorn,
 	faCommentDots,
-	faHome,
+	faRocket,
 	faHeartPulse,
 	faMagnifyingGlassChart,
 	faNewspaper,
@@ -29,7 +29,7 @@ export function AppSidebar({ url }: { url: URL }) {
 			<div className="flex h-full flex-col justify-between overflow-auto">
 				<div className="pt-3">
 					<NavGroup>
-						<NavLink href="/" label="Home" currentUrl={url} icon={faHome} />
+						<NavLink href="/" label="Launchpad" currentUrl={url} icon={faRocket} />
 					</NavGroup>
 
 					<NavGroup label="news">

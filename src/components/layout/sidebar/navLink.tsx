@@ -23,7 +23,7 @@ export function NavLink({
 		<SidebarMenuButton
 			isActive={isActive}
 			className={cn(
-				"h-auto justify-between gap-2.5 rounded-lg border border-transparent px-3 py-2 text-sm font-normal outline-none",
+				"h-auto justify-between gap-2.5 rounded-md border border-transparent px-3 py-2 text-sm font-normal outline-none",
 				"hover:border-gray-3",
 				"data-active:bg-blue/10 data-active:text-blue data-active:font-bold",
 			)}

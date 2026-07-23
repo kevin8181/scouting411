@@ -19,7 +19,7 @@ export function AppShell({
 		<SidebarProvider>
 			<AppSidebar url={url} />
 			<SidebarInset>
-				<header className="bg-sidebar border-gray-3 sticky top-0 flex h-13 items-center justify-between border-b px-5 py-3 font-serif text-lg">
+				<header className="bg-sidebar border-gray-3 sticky top-0 flex h-13 items-center justify-between border-b px-5 py-3 font-sans text-xl font-bold">
 					<span>{title}</span>
 					<SidebarTrigger className="md:hidden" />
 				</header>
