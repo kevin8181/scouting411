@@ -1,4 +1,4 @@
-import { CardList } from "@/components/react/cardList";
+import { CardFeed } from "@/components/react/cardFeed";
 import { RenderPost as PostComponent } from "@/components/react/post";
 import { queryPosts, type QueryOpts } from "@/lib/news/query";
 import {
@@ -14,17 +14,17 @@ import {
 export async function Page({ query }: { query: QueryOpts }) {
 	const results = await queryPosts(query);
 	return (
-		<>
+		<div className="p-8">
 			<span>
 				Showing posts {results.pagination.firstItemIndex + 1} -{" "}
 				{results.pagination.lastItemIndex + 1} of{" "}
 				{results.pagination.totalItems}.
 			</span>
-			<CardList>
+			<CardFeed>
 				{results.items.map((post) => (
 					<PostComponent post={post} key={post.url} />
 				))}
-			</CardList>
+			</CardFeed>
 			<Pagination>
 				<PaginationContent>
 					<PaginationItem>
@@ -49,6 +49,6 @@ export async function Page({ query }: { query: QueryOpts }) {
 					</PaginationItem>
 				</PaginationContent>
 			</Pagination>
-		</>
+		</div>
 	);
 }

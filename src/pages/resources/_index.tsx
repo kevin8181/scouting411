@@ -1,13 +1,13 @@
-import { CardList } from "@/components/react/cardList";
+import { CardFeed } from "@/components/react/cardFeed";
 import { resources } from "@/lib/resources/data";
 import { Resource } from "@/components/react/resource";
 
 export function Page() {
 	return (
-		<CardList>
+		<CardFeed>
 			{resources.map((resource) => (
 				<Resource resource={resource} key={resource.url} />
 			))}
-		</CardList>
+		</CardFeed>
 	);
 }
