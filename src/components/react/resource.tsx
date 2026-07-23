@@ -1,4 +1,4 @@
-import type { Resource } from "@/features/resources/types";
+import type { Resource } from "@/lib/resources/types";
 
 export function Resource({ resource }: { resource: Resource }) {
 	return (

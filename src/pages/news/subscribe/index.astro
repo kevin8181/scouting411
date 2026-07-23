@@ -1,0 +1,102 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import { FeedManager } from "@/lib/news/feeds/feedManager";
+---
+
+<Layout title="Subscribe with your Feed Reader">
+	<div class="flex flex-col gap-4 p-8">
+		<p>
+			The original/upstream news sources we use are published in a variety of
+			formats. For your convenience, Scouting411 parses and re-exports these
+			sources as a set of standards-compliant, non-paginated web feeds for you.
+			If you don't know what a web feed is, you can learn more at <a
+				href="https://aboutfeeds.com/"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-blue wrap-anywhere hyphens-auto hover:underline"
+				>aboutfeeds.com</a
+			>.
+		</p>
+		<p>
+			There are a few caveats to be aware of when using these feeds:
+			<ul class="list-inside list-disc">
+				<li>
+					The feeds are not continuously updated. They may be stale by up to 24
+					hours at a given time.
+				</li>
+				<li>
+					We have not added support for media enclosures; these feeds will not
+					work with a podcast app.
+				</li>
+				<li>
+					While we have attempted to faithfully represent the original content,
+					the metadata and formatting of these feeds is not identical to the
+					upstream sources.
+				</li>
+			</ul>
+		</p>
+
+		<div class="py-4">
+			<table class="w-full">
+				<thead>
+					<tr>
+						<th class="border-gray-5 border-b-2 py-1.5 text-left">Source</th>
+						<th class="border-gray-5 border-b-2 py-1.5 text-left">Feeds</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						FeedManager.feeds.map(async (feed) => (
+							<tr>
+								<td class="border-gray-3 border-b py-1.5 pr-8">
+									<a
+										class="text-blue hover:underline"
+										href={feed.urls.overview}
+									>
+										{feed.name}
+									</a>
+								</td>
+								<td class="border-gray-3 border-b py-1.5 pr-8">
+									<a
+										href={feed.urls.rss}
+										rel="noopener noreferrer"
+										target="_blank"
+										class="text-blue hover:underline"
+									>
+										rss
+									</a>
+									{" | "}
+									<a
+										href={feed.urls.atom}
+										rel="noopener noreferrer"
+										target="_blank"
+										class="text-blue hover:underline"
+									>
+										atom
+									</a>
+								</td>
+							</tr>
+						))
+					}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="border-gray-5 border-y-2 py-1.5 pr-8 font-bold"
+							>Import All Feeds</td
+						>
+						<td class="border-gray-5 border-y-2 py-1.5 pr-8">
+							<a
+								href="/feeds/all/opml"
+								rel="noopener noreferrer"
+								target="_blank"
+								class="text-blue hover:underline"
+							>
+								opml
+							</a>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</Layout>

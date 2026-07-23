@@ -1,9 +1,16 @@
 ---
-import "@/global.css";
-import Head from "@/components/layout/Head.astro";
+import RootLayout from "@/components/layout/RootLayout.astro";
+import { AppShell } from "@/components/layout/sidebar/appShell";
+
+const { title } = Astro.props;
+
+export type Props = {
+	title: string;
+};
 ---
 
-<html lang="en">
-	<Head />
-	<slot />
-</html>
+<RootLayout>
+	<AppShell url={Astro.url} title={title} client:load>
+		<slot />
+	</AppShell>
+</RootLayout>

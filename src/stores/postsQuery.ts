@@ -1,5 +1,5 @@
 import { persistentJSON } from "@nanostores/persistent";
-import type { QueryOpts } from "@/features/postsQuery/query";
+import type { QueryOpts } from "@/lib/news/query";
 
 const defaultQueryOpts: QueryOpts = {
 	filter: {},

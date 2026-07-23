@@ -1,7 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
-import { queryPosts, queryOptsSchema } from "@/features/postsQuery/query";
-import { postsQueryParamsEncoder } from "@/features/postsQuery/queryParams";
+import { queryPosts, queryOptsSchema } from "@/lib/news/query";
+import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 
 export const POST: APIRoute = async (context) => {
 	const body = await context.request.json();

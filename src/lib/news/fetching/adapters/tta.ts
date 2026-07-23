@@ -1,0 +1,38 @@
+import type { FeedAdapter } from "@/lib/news/fetching/types";
+import { cleanHtmlString } from "@/util/cleanHtmlString";
+
+//todo fetch the full post history
+
+export function TtaAdapter(): FeedAdapter {
+	return {
+		type: {
+			id: "tta",
+			human: "Trail to Adventure (bespoke)",
+		},
+		execute: async () => {
+			const response = await fetch(
+				"https://scouting.org/wp-json/wp/v2/tta-post?per_page=100",
+			);
+
+			const posts: ttaApiPost[] = await response.json();
+
+			return posts.map((post) => ({
+				url: post.link,
+				title: cleanHtmlString(post.title.rendered),
+				description: cleanHtmlString(post.yoast_head_json.description),
+				date: post.date_gmt,
+			}));
+		},
+	};
+}
+
+type ttaApiPost = {
+	link: string;
+	title: {
+		rendered: string;
+	};
+	yoast_head_json: {
+		description: string;
+	};
+	date_gmt: string;
+};

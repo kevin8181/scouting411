@@ -1,0 +1,104 @@
+import { NavLink } from "@/components/layout/sidebar/navLink";
+import { NavGroup } from "@/components/layout/sidebar/navGroup";
+import { Sidebar, SidebarHeader } from "@/components/ui/sidebar";
+import {
+	faBookBookmark,
+	faBullhorn,
+	faCommentDots,
+	faRocket,
+	faHeartPulse,
+	faMagnifyingGlassChart,
+	faNewspaper,
+	faRssSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
+
+export function AppSidebar({ url }: { url: URL }) {
+	return (
+		<Sidebar
+			className="border-gray-3 border-r"
+			aria-label="Main sidebar"
+		>
+			<SidebarHeader className="bg-blue border-gray-3 border-b p-3">
+				<a href="/" className="font-display text-xl font-extrabold text-white flex items-center gap-3">
+					<span className="size-7 bg-white rounded-[6px]" />
+					<span>Scouting411</span>
+				</a>
+			</SidebarHeader>
+
+			<div className="flex h-full flex-col justify-between overflow-auto">
+				<div className="pt-3">
+					<NavGroup>
+						<NavLink href="/" label="Launchpad" currentUrl={url} icon={faRocket} />
+					</NavGroup>
+
+					<NavGroup label="news">
+						<NavLink
+							href="/news/browse"
+							label="Newsfeed"
+							currentUrl={url}
+							icon={faNewspaper}
+						/>
+						<NavLink
+							href="/news/sources"
+							label="Sources"
+							currentUrl={url}
+							icon={faBullhorn}
+						/>
+						<NavLink
+							href="/news/subscribe"
+							label="Subscribe"
+							currentUrl={url}
+							icon={faRssSquare}
+						/>
+						<NavLink
+							href="/news/stats"
+							label="Stats"
+							currentUrl={url}
+							icon={faMagnifyingGlassChart}
+						/>
+					</NavGroup>
+
+					<NavGroup label="resources">
+						<NavLink
+							href="/resources"
+							label="Resources"
+							currentUrl={url}
+							icon={faBookBookmark}
+						/>
+					</NavGroup>
+				</div>
+
+				<div>
+					<NavGroup label="about">
+						<NavLink
+							href="https://github.com/kevin8181/scouting411/issues/new/choose"
+							label="Give Feedback"
+							newTab
+							currentUrl={url}
+							icon={faCommentDots}
+						/>
+						<NavLink
+							href="https://github.com/kevin8181/scouting411"
+							label="GitHub"
+							newTab
+							currentUrl={url}
+							icon={faGitAlt}
+						/>
+						<NavLink
+							href="https://status.scouting.org"
+							label="System Status"
+							newTab
+							currentUrl={url}
+							icon={faHeartPulse}
+						/>
+					</NavGroup>
+					<hr className="border-gray-3 mx-3 border-t" />
+					<div className="text-gray-8 p-3 text-xs">
+						Not affiliated with Scouting America.
+					</div>
+				</div>
+			</div>
+		</Sidebar>
+	);
+}

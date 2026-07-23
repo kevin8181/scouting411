@@ -1,0 +1,20 @@
+---
+export const prerender = false;
+
+import Layout from "@/components/layout/Layout.astro";
+import { Page } from "@/pages/news/browse/_index";
+import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
+import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
+
+const { searchParams } = Astro.url;
+
+const { error, data: query } = postsQueryParamsEncoder.decode(searchParams);
+
+if (error) {
+	Astro.response.status = 400;
+}
+---
+
+<Layout title="News">
+	{query ? <Page query={query} /> : <p>{jsonPrettyPrint(error.issues)}</p>}
+</Layout>
