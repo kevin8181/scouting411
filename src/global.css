@@ -189,7 +189,7 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground h-dvh overflow-hidden;
+		@apply bg-background text-foreground h-dvh;
 	}
 	html {
 		@apply font-sans;
