@@ -2,10 +2,7 @@
 import Layout from "@/components/layout/Layout.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
 import { resources } from "@/lib/resources/data";
-import {
-	faRssSquare,
-	faSquareUpRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const latestPosts = (await FeedManager.getAllPosts()).slice(0, 2);
@@ -37,21 +34,13 @@ const quickLinks = [
 			<div
 				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
 			>
-				<div class="flex w-full items-center justify-between">
-					<a
-						href="/news/browse"
-						class="text-blue font-serif text-xl font-bold hover:underline"
-					>
-						News
-					</a>
-					<a
-						href="/news/subscribe"
-						aria-label="Subscribe to news feed"
-						class="hover:text-blue text-gray-400"
-					>
-						<FontAwesomeIcon icon={faRssSquare} height="1em" />
-					</a>
-				</div>
+				<a
+					href="/news/browse"
+					class="text-blue font-serif text-xl font-bold hover:underline"
+				>
+					News
+				</a>
+
 				<ul class="flex w-full flex-col gap-2">
 					{
 						latestPosts.map((post) => (
