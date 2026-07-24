@@ -68,6 +68,7 @@
 - https://tap.scouting.org/
 - https://confluence.oa-scouting.org/
 - https://www.scouting.org/awards/awards-central/
+- https://www.scouting.org/resources/insignia-guide/
 
 ## tools
 
@@ -93,6 +94,7 @@
 
 give.scouting.org
 reservations.scouting.org
+connect.scouting.org
 
 - https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast https://www.youtube.com/playlist?list=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
 - https://www.youtube.com/playlist?list=PLuxQzUzGg-5y2JBj7x0n9GjjEC3n0SrDs troop talk live series

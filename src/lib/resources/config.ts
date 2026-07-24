@@ -1,5 +1,12 @@
 import type { Resource } from "@/lib/resources/types";
 
+// todo
+// I think eventually it will make sense to store these in a database
+// there should be dimensions for the type of resource, as well as topic tags
+
+// eventually this could be fully searchable and filterable in the same way the new feeds are
+// it could also be part of an MCP or have some way of doing natural language search
+
 export const resources: Resource[] = [
 	// marketing/landing pages
 	{
@@ -149,6 +156,12 @@ export const resources: Resource[] = [
 		title: "Tech Hub",
 		description:
 			"Homepage and reference info for the  Scouting America National IT Team and Technology Advisory Committee",
+	},
+	{
+		url: "https://www.scouting.org/resources/guide-to-advancement/",
+		title: "Guide to Advancement",
+		description:
+			"The current edition of the Guide to Advancement is the official source for administering advancement in all Scouting America programs: Cub Scouting, Scouts BSA, Venturing, and Sea Scouts.",
 	},
 
 	// tools
