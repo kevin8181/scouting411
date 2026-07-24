@@ -17,11 +17,7 @@ export function AppSidebar({ url }: { url: URL }) {
 	return (
 		<Sidebar className="border-gray-3 border-r" aria-label="Main sidebar">
 			<SidebarHeader className="bg-blue border-gray-3 border-b p-3">
-				<a
-					href="/"
-					className="font-display flex items-center gap-3 text-xl font-extrabold text-white"
-				>
-					<span className="size-7 rounded-[6px] bg-white" />
+				<a href="/" className="font-display text-xl font-extrabold text-white">
 					<span>Scouting411</span>
 				</a>
 			</SidebarHeader>
