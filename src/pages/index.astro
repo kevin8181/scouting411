@@ -1,17 +1,10 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
-import { resources } from "@/lib/resources/data";
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const latestPosts = (await FeedManager.getAllPosts()).slice(0, 2);
-
-const allTags = resources.flatMap((resource) => [
-	...resource.tags.resourceType,
-	...resource.tags.topic,
-]);
-const featuredTags = [...new Map(allTags.map((tag) => [tag.id, tag])).values()];
 
 const quickLinks = [
 	{ href: "https://scoutbook.scouting.org", label: "Scoutbook" },
@@ -73,18 +66,7 @@ const quickLinks = [
 				>
 					Resources
 				</a>
-				<div class="flex flex-wrap gap-2">
-					{
-						featuredTags.map((tag) => (
-							<a
-								href="/resources"
-								class="border-blue/60 text-blue hover:bg-blue/10 rounded border-2 px-1.5 py-0.5 text-xs font-medium"
-							>
-								{tag.displayName}
-							</a>
-						))
-					}
-				</div>
+				<div class="flex flex-wrap gap-2"></div>
 				<a
 					href="/resources"
 					class="text-blue mt-auto text-xs font-medium hover:underline"

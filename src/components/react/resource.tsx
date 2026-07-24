@@ -15,30 +15,6 @@ export function Resource({ resource }: { resource: Resource }) {
 
 				<p className="text-sm">{resource.description}</p>
 			</div>
-			{/* todo display all tags as one list */}
-			{/* todo display resource type using an icon or something */}
-			<div className="flex flex-col gap-3">
-				<div className="flex items-center gap-3 md:justify-end">
-					{resource.tags.resourceType.map((tag) => (
-						<div
-							key={tag.id}
-							className="border-blue/60 text-blue rounded border-2 px-1 py-0.5 text-xs"
-						>
-							{tag.displayName}
-						</div>
-					))}
-				</div>
-				<div className="flex items-center gap-3 md:justify-end">
-					{resource.tags.topic.map((tag) => (
-						<div
-							key={tag.id}
-							className="border-blue/60 text-blue rounded border-2 px-1 py-0.5 text-xs"
-						>
-							{tag.displayName}
-						</div>
-					))}
-				</div>
-			</div>
 		</div>
 	);
 }

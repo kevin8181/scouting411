@@ -10,27 +10,31 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
+
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
+import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
 
 export async function Page({ query }: { query: QueryOpts }) {
 	const results = await queryPosts(query);
 	return (
 		<SecondarySidebar
 			sidebar={
-				<div className="flex flex-col gap-5 p-4">
+				<div className="flex flex-col">
 					<span>
 						Showing posts {results.pagination.firstItemIndex + 1} -{" "}
 						{results.pagination.lastItemIndex + 1} of{" "}
 						{results.pagination.totalItems}.
 					</span>
 
-					<span className="font-bold">Filters (todo)</span>
+					<div className="flex flex-col divide-y">
+						<FilterSidebarItem label="sort">todo</FilterSidebarItem>
 
-					{/* todo */}
-					<span>Sort</span>
-					<span>Pagination</span>
-					<span>Search</span>
-					<span>Sources</span>
+						<FilterSidebarItem label="pagination">todo</FilterSidebarItem>
+
+						<FilterSidebarItem label="search">todo</FilterSidebarItem>
+
+						<FilterSidebarItem label="sources">todo</FilterSidebarItem>
+					</div>
 				</div>
 			}
 		>
