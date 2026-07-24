@@ -17,7 +17,7 @@ import type { queryPosts, QueryOpts } from "@/lib/news/query";
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
 
-export async function Page({
+export function Page({
 	results,
 	query,
 }: {
