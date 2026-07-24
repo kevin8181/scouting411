@@ -1,55 +1,80 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
+
+const feedRows = await Promise.all(
+	FeedManager.feeds.map(async (feed) => ({
+		feed,
+		postCount: (await feed.posts()).length,
+	})),
+);
+feedRows.sort((a, b) => b.postCount - a.postCount);
+
+const totalPosts = feedRows.reduce((sum, { postCount }) => sum + postCount, 0);
 ---
 
 <Layout title="Feed Statistics">
-	<div class="p-8">
-		<table
-			class="table-fixed border-separate border-spacing-x-4 border-spacing-y-2.5"
-		>
-			<thead>
-				<tr>
-					<th class="text-left">Feed</th>
-					<th class="text-left">Posts</th>
-					<th class="text-left">Adapter Type</th>
-				</tr>
-			</thead>
-			<tbody>
-				{
-					FeedManager.feeds.map(async (feed) => (
-						<tr>
-							<td>
-								<a
-									href={feed.urls.overview}
-									class="text-blue wrap-anywhere hyphens-auto hover:underline"
-								>
-									{feed.name}
-								</a>
-							</td>
-							<td class="text-right">
-								{Intl.NumberFormat().format((await feed.posts()).length)}
-							</td>
-							<td>{feed.type.human}</td>
-						</tr>
-					))
-				}
-			</tbody>
-			<tfoot>
-				<tr>
-					<td class="font-bold"> Total: </td>
-					<td class="font-bold">
-						<span
-							>{
-								Intl.NumberFormat().format(
-									(await FeedManager.getAllPosts()).length,
-								)
-							}</span
+	<div class="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
+		
+
+		<div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+			<div class="border-gray-3 rounded-lg border bg-white p-4">
+				<div class="text-gray-6 text-xs font-medium uppercase">Feeds</div>
+				<div class="text-gray-10 font-serif text-2xl font-bold">
+					{Intl.NumberFormat().format(feedRows.length)}
+				</div>
+			</div>
+			<div class="border-gray-3 rounded-lg border bg-white p-4">
+				<div class="text-gray-6 text-xs font-medium uppercase">Total posts</div>
+				<div class="text-gray-10 font-serif text-2xl font-bold">
+					{Intl.NumberFormat().format(totalPosts)}
+				</div>
+			</div>
+		</div>
+
+		<div class="border-gray-3 overflow-hidden rounded-lg border bg-white">
+			<table class="w-full border-collapse text-sm">
+				<thead>
+					<tr class="border-gray-3 border-b bg-gray-50">
+						<th class="text-gray-7 px-4 py-3 text-left font-medium">Feed</th>
+						<th class="text-gray-7 px-4 py-3 text-right font-medium">Posts</th>
+						<th class="text-gray-7 px-4 py-3 text-left font-medium">
+							Adapter
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						feedRows.map(({ feed, postCount }) => (
+							<tr class="border-gray-2 hover:bg-gray-1/60 border-b last:border-0">
+								<td class="px-4 py-3">
+									<a
+										href={feed.urls.overview}
+										class="text-blue font-medium wrap-anywhere hyphens-auto hover:underline"
+									>
+										{feed.name}
+									</a>
+								</td>
+								<td class="text-gray-10 px-4 py-3 text-right tabular-nums">
+									{Intl.NumberFormat().format(postCount)}
+								</td>
+								<td class="text-gray-8 px-4 py-3">{feed.type.human}</td>
+							</tr>
+						))
+					}
+				</tbody>
+				<tfoot>
+					<tr class="border-gray-3 border-t">
+						<td class="text-gray-10 px-4 py-3 font-bold">Total</td>
+						<td
+							class="text-gray-10 px-4 py-3 text-right font-bold tabular-nums"
 						>
-					</td>
-					<td>{}</td>
-				</tr>
-			</tfoot>
-		</table>
+							{Intl.NumberFormat().format(totalPosts)}
+						</td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 	</div>
 </Layout>
