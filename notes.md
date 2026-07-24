@@ -29,10 +29,7 @@
 ## periodicals
 
 - https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/advancement-news/
-- https://www.philmontscoutranch.org/resources/philnews/
-- https://www.scouting.org/commissioners/newsletter-eblast/
 - https://www.scouting.org/international/resources/
-- https://seascout.org/program-updates/
 - https://www.scouting.org/commissioners/news-for-commissioners/
 - https://www.scouting.org/commissioners/news-for-commissioners/monthly-all-commissioner-email/
 
@@ -56,43 +53,25 @@
 
 ## marketing / landing pages
 
-- https://www.scouting.org/
 - https://stg.scouting.org/
-- https://www.exploring.org/
 - https://donations.scouting.org/
-- https://nam.scouting.org/
-- https://seascout.org/
 - https://councils.scouting.org/
 - https://arbsaf2018.scouting.org/bsa-foundation-annual-report-2018-home/
 - https://ar2018.scouting.org
 - https://ar2019.scouting.org/
-- https://scoutingamericafoundation.org/
-- https://scoutingamericalegacy.org/
-- https://oa-scouting.org/
 - https://www.bsarestructuring.org/
 - https://www.scouting.org/international/
-- https://techhub.scouting.org/
 
 ## reference and guidance
 
 - https://scoutingwire.org/marketing-and-membership-hub/
-- https://help.scoutbook.scouting.org/
-- https://troopleader.scouting.org/
 - https://tap.scouting.org/
 - https://confluence.oa-scouting.org/
-- https://scene.zeplin.io/project/59b6b6554fc4d8840a822300
-- https://ablescouts.org/toolbox/
 - https://www.scouting.org/awards/awards-central/
 
 ## tools
 
-- https://beascout.scouting.org/
-- https://joinexploring.org/
-- https://scoutbook.scouting.org/
-- https://advancements.scouting.org/
-- https://my.scouting.org/
-- https://scouting.webdamdb.com/ - https://assets.scouting.org/
-- https://training.scouting.org/
+- https://assets.scouting.org/
 - https://directory.scouting.org/alumni-dashboard
 - https://discussions.scouting.org/
 - https://id.oa-scouting.org/
@@ -100,26 +79,20 @@
 - https://members.oa-scouting.org/
 - https://portal.oa-scouting.org/
 - https://lodgemaster.oa-scouting.org/
-- https://status.oa-scouting.org/
 - https://jira.oa-scouting.org/
 - https://oalodgemaster.featureupvote.com/
 - https://www.scouting.org/awards/scholarships/
 - https://api.scouting.org/organizations/v2/zip/12345/council
-- https://status.scouting.org/
 
 ## other
 
-- https://www.scoutshop.org/
 - https://www.myscoutshop.org/
-- https://scoutingalumni.org/
-- https://nesa.org/
-- https://store.philmontscoutranch.org/
-- https://store.ntier.org/
-- https://store.summitbsa.org/
-- https://tradingpost.oa-scouting.org/
 - https://licensingbsa.org/
 - https://open.spotify.com/show/57YZ4Fu74WkSHE5qyVkQS2
 - https://filestore.scouting.org/filestore ... figure out how to list everything or see updates?
+
+give.scouting.org
+reservations.scouting.org
 
 - https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast https://www.youtube.com/playlist?list=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
 - https://www.youtube.com/playlist?list=PLuxQzUzGg-5y2JBj7x0n9GjjEC3n0SrDs troop talk live series
@@ -130,9 +103,6 @@
 
 ## high adventure bases
 
-- https://www.philmontscoutranch.org/
-- https://seabaseha.org/
-- https://www.summitbsa.org/
 - https://www.ntier.org/
 - https://summiteventswv.com/
 - https://jamboreg.scouting.org/

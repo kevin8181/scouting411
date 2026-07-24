@@ -1,5 +1,5 @@
 import { CardFeed } from "@/components/react/cardFeed";
-import { resources } from "@/lib/resources/data";
+import { resources } from "@/lib/resources/config";
 import { Resource } from "@/components/react/resource";
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 
