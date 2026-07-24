@@ -13,6 +13,7 @@ export function SecondarySidebar({
 			{children}
 			<Sidebar
 				side="right"
+				collapsible="none"
 				className="border-gray-3 border-l"
 				aria-label="Secondary sidebar"
 			>

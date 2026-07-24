@@ -40,7 +40,7 @@ export function Page({
 function FilterSidebar({ query }: { query: QueryOpts }) {
 	return (
 		<div className="flex flex-col">
-			<div className="flex flex-col divide-y">
+			<div className="flex flex-col divide-y divide-gray-3">
 				<FilterSidebarItem label="sort">
 					<Select value={query.sort.direction}>
 						<SelectTrigger className="w-full">
