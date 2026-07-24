@@ -1,6 +1,7 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { getFeedPosts } from "@/lib/news/cache/cache";
 
 const { slug } = Astro.params;
 
@@ -26,7 +27,7 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 				class="text-blue underline">{feed.urls.homepage}</a
 			>
 		</p>
-		<p>Indexed posts: {(await feed.posts()).length}</p>
+		<p>Indexed posts: {(await getFeedPosts(feed)).length}</p>
 		<p>
 			Subcribe:
 			<ul>

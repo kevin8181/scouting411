@@ -1,59 +1,34 @@
-import { createHydratedPost, type Post } from "@/lib/news/posts/post";
 import type { FeedAdapter } from "@/lib/news/ingest/types";
-import type { UrlShaped } from "@/util/utilTypes";
-import { readCache } from "@/lib/news/cache/cache";
 import type { FeedConfig } from "@/lib/news/config";
 
-export class Feed {
-	// INSTANCE PROPERTIES
+export type Feed = {
+	name: string;
+	slug: string;
+	description: string;
+	urls: {
+		/** relative href to the detail page for this feed */
+		overview: string;
+		/** relative href to the generated rss feed */
+		rss: string;
+		/** relative href to the generated atom feed */
+		atom: string;
+		/** upstream's html homepage */
+		homepage: string;
+	};
+	type: FeedAdapter["type"];
+};
 
-	readonly name: string;
-	readonly slug: string;
-	readonly description: string;
-	private readonly _homepageUrl: UrlShaped;
-	private readonly _adapter: FeedAdapter;
-
-	// LIFECYCLE
-
-	constructor(opts: FeedConfig) {
-		this.name = opts.name;
-		this.slug = opts.slug;
-		this.description = opts.description;
-		this._homepageUrl = opts.homepageUrl;
-		this._adapter = opts.adapter;
-	}
-
-	// GETTERS
-
-	get type() {
-		return this._adapter.type;
-	}
-
-	get urls() {
-		return {
-			/** relative href to the detail page for this feed */
-			overview: `/news/sources/${this.slug}`,
-			/** relative href to the generated rss feed */
-			rss: `/feeds/${this.slug}/rss`,
-			/** relative href to the generated atom feed */
-			atom: `/feeds/${this.slug}/atom`,
-			/** upstream's html homepage */
-			homepage: this._homepageUrl,
-		};
-	}
-
-	// INSTANCE METHODS
-
-	/**
-	 * fetches the posts from the redis cache
-	 * */
-	async posts(): Promise<Post[]> {
-		console.log(`reading cached posts for ${this.name}`);
-
-		const postDatas = await readCache(this.slug);
-
-		return postDatas.map((postData) => {
-			return createHydratedPost(postData, this);
-		});
-	}
+export function hydrateFeed(opts: FeedConfig): Feed {
+	return {
+		name: opts.name,
+		slug: opts.slug,
+		description: opts.description,
+		urls: {
+			overview: `/news/sources/${opts.slug}`,
+			rss: `/feeds/${opts.slug}/rss`,
+			atom: `/feeds/${opts.slug}/atom`,
+			homepage: opts.homepageUrl,
+		},
+		type: opts.adapter.type,
+	};
 }

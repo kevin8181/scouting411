@@ -1,11 +1,12 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { getFeedPosts } from "@/lib/news/cache/cache";
 
 const feedRows = await Promise.all(
 	FeedManager.feeds.map(async (feed) => ({
 		feed,
-		postCount: (await feed.posts()).length,
+		postCount: (await getFeedPosts(feed)).length,
 	})),
 );
 feedRows.sort((a, b) => b.postCount - a.postCount);

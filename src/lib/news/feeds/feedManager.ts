@@ -1,8 +1,9 @@
-import { Feed } from "@/lib/news/feeds/feed";
+import { hydrateFeed } from "@/lib/news/feeds/feed";
 import { feedConfigs } from "@/lib/news/config";
+import { getFeedPosts } from "@/lib/news/cache/cache";
 
-// instantiate all the feeds
-const feeds = feedConfigs.map((opts) => new Feed(opts));
+// hydrate all the feeds
+const feeds = feedConfigs.map(hydrateFeed);
 
 export class FeedManager {
 	static get feeds() {
@@ -14,7 +15,9 @@ export class FeedManager {
 	}
 
 	static async getAllPosts() {
-		const posts = (await Promise.all(feeds.map((feed) => feed.posts()))).flat();
+		const posts = (
+			await Promise.all(feeds.map((feed) => getFeedPosts(feed)))
+		).flat();
 
 		//return the posts sorted by date descending
 		return posts.sort((a, b) => b.date.getTime() - a.date.getTime());

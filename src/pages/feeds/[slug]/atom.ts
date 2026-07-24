@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
 import { generateAtomFeed } from "feedsmith";
+import { getFeedPosts } from "@/lib/news/cache/cache";
 
 export function getStaticPaths() {
 	return FeedManager.feeds.map((feed) => ({
@@ -11,7 +12,7 @@ export function getStaticPaths() {
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
 	const feed = FeedManager.getFeedBySlug(slug)!;
-	const posts = await feed.posts();
+	const posts = await getFeedPosts(feed);
 
 	const generated = generateAtomFeed(
 		{
