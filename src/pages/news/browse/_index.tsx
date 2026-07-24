@@ -1,5 +1,5 @@
 import { CardFeed } from "@/components/react/cardFeed";
-import { RenderPost as PostComponent } from "@/components/react/post";
+import { Post } from "@/components/react/post";
 import {
 	Pagination,
 	PaginationContent,
@@ -36,7 +36,7 @@ export async function Page({
 			<div className="flex flex-1 flex-col gap-5 p-8">
 				<CardFeed>
 					{results.items.map((post) => (
-						<PostComponent post={post} key={post.url} />
+						<Post post={post} key={post.url} />
 					))}
 				</CardFeed>
 				<Pagination>
