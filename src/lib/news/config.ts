@@ -1,73 +1,74 @@
 import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
 import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
+import { TtaAdapter } from "@/lib/news/ingest/adapters/tta";
 import type { FeedAdapter } from "@/lib/news/ingest/types";
 import type { UrlShaped } from "@/util/utilTypes";
 
 export const feedConfigs: FeedConfig[] = [
 	// todo these are not working any more because of cloudflare
-	// {
-	// 	name: "Scouts BSA Program Updates",
-	// 	slug: "scouts-bsa-program-updates",
-	// 	description:
-	// 		"Information about changes and updates to the Scouts BSA program.",
-	// 	homepageUrl:
-	// 		"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
-	// 	adapter: WordpressApiAdapter({
-	// 		baseUrl: "https://scouting.org",
-	// 		categoryFilter: 15054,
-	// 	}),
-	// },
-	// {
-	// 	name: "Cub Scouts Program Updates",
-	// 	slug: "cub-scouts-program-updates",
-	// 	description:
-	// 		"Information about changes and updates to the Cub Scouts program.",
-	// 	homepageUrl:
-	// 		"https://www.scouting.org/topics/program-updates/program-updates-cub-scouts",
-	// 	adapter: WordpressApiAdapter({
-	// 		baseUrl: "https://www.scouting.org",
-	// 		categoryFilter: 15053,
-	// 	}),
-	// },
-	// {
-	// 	name: "Scouting Magazine",
-	// 	slug: "scouting-magazine",
-	// 	description:
-	// 		"Editorial content for parents and volunteers. The adult counterpart of Scout Life.",
-	// 	homepageUrl: "https://blog.scoutingmagazine.org",
-	// 	adapter: WordpressApiAdapter({
-	// 		baseUrl: "https://blog.scoutingmagazine.org",
-	// 	}),
-	// },
-	// {
-	// 	name: "Trail to Adventure",
-	// 	slug: "trail-to-adventure",
-	// 	description:
-	// 		"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
-	// 	homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
-	// 	adapter: TtaAdapter(),
-	// },
-	// {
-	// 	name: "Scouting Alumni",
-	// 	slug: "scouting-alumni",
-	// 	description:
-	// 		"The news feed of Scouting Alumni. Primarily editorial content with occasional news.",
-	// 	homepageUrl: "https://scoutingalumni.org/news",
-	// 	adapter: WordpressAdapter({
-	// 		baseUrl: "https://scoutingalumni.org",
-	// 	}),
-	// },
+	{
+		name: "Scouts BSA Program Updates",
+		slug: "scouts-bsa-program-updates",
+		description:
+			"Information about changes and updates to the Scouts BSA program.",
+		homepageUrl:
+			"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
+		adapter: WordpressAdapter({
+			baseUrl: "https://scouting.org",
+			categoryFilter: 15054,
+		}),
+	},
+	{
+		name: "Cub Scouts Program Updates",
+		slug: "cub-scouts-program-updates",
+		description:
+			"Information about changes and updates to the Cub Scouts program.",
+		homepageUrl:
+			"https://www.scouting.org/topics/program-updates/program-updates-cub-scouts",
+		adapter: WordpressAdapter({
+			baseUrl: "https://www.scouting.org",
+			categoryFilter: 15053,
+		}),
+	},
+	{
+		name: "Scouting Magazine",
+		slug: "scouting-magazine",
+		description:
+			"Editorial content for parents and volunteers. The adult counterpart of Scout Life.",
+		homepageUrl: "https://blog.scoutingmagazine.org",
+		adapter: WordpressAdapter({
+			baseUrl: "https://blog.scoutingmagazine.org",
+		}),
+	},
+	{
+		name: "Trail to Adventure",
+		slug: "trail-to-adventure",
+		description:
+			"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
+		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
+		adapter: TtaAdapter(),
+	},
+	{
+		name: "Scouting Alumni",
+		slug: "scouting-alumni",
+		description:
+			"The news feed of Scouting Alumni. Primarily editorial content with occasional news.",
+		homepageUrl: "https://scoutingalumni.org/news",
+		adapter: WordpressAdapter({
+			baseUrl: "https://scoutingalumni.org",
+		}),
+	},
 
 	// todo disabled this one because it's spammy in the main feed. will re-enable once filtering is all implimented
-	// {
-	// 	name: "Scout Life",
-	// 	slug: "scout-life",
-	// 	description: "Editorial and entertainment content mainly for youth.",
-	// 	homepageUrl: "https://scoutlife.org",
-	// 	adapter: WordpressApiAdapter({
-	// 		baseUrl: "https://scoutlife.org",
-	// 	}),
-	// },
+	{
+		name: "Scout Life",
+		slug: "scout-life",
+		description: "Editorial and entertainment content mainly for youth.",
+		homepageUrl: "https://scoutlife.org",
+		adapter: WordpressAdapter({
+			baseUrl: "https://scoutlife.org",
+		}),
+	},
 
 	// todo these are gone. rebuild from scraped copy
 	// {
