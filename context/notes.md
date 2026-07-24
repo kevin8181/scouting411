@@ -128,3 +128,20 @@ dimensions
   - instagram
   - twitter
   - youtube
+
+## third-party blogroll
+
+- https://scouterstan.org/
+- https://mikecooney.net/
+- https://markaray.wordpress.com/
+- https://modernscouting.wordpress.com/
+- https://scoutingmaverick.com/
+- https://web.archive.org/web/20220518095928/https://scoutmastercg.com/category/scout-leader-skills/
+- https://mrsscoutmaster.com/
+- https://scoutmastercg.com/
+- https://scoutsmarts.com/
+
+## third party tools and resources
+
+- https://www.scouter.com
+- https://scoutingamericasquareknots.app/
