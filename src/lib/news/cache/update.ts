@@ -1,5 +1,5 @@
 import { feedConfigs } from "@/lib/news/config";
-import { writeCache } from "@/lib/news/fetching/cache";
+import { writeCache } from "@/lib/news/cache/cache";
 
 /** fetches the posts from an original feed source and updates the cache */
 async function updateFeed(slug: string) {

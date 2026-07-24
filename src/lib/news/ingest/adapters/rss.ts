@@ -1,4 +1,4 @@
-import type { FeedAdapter } from "@/lib/news/fetching/types";
+import type { FeedAdapter } from "@/lib/news/ingest/types";
 import { parseRssFeed } from "feedsmith";
 import { cleanHtmlString } from "@/util/cleanHtmlString";
 

@@ -1,7 +1,7 @@
 import { createHydratedPost, type Post } from "@/lib/news/posts/post";
-import type { FeedAdapter } from "@/lib/news/fetching/types";
+import type { FeedAdapter } from "@/lib/news/ingest/types";
 import type { UrlShaped } from "@/util/utilTypes";
-import { readCache } from "@/lib/news/fetching/cache";
+import { readCache } from "@/lib/news/cache/cache";
 import type { FeedConfig } from "@/lib/news/config";
 
 export class Feed {
@@ -44,7 +44,9 @@ export class Feed {
 
 	// INSTANCE METHODS
 
-	/** fetches the posts from the redis cache */
+	/**
+	 * fetches the posts from the redis cache
+	 * */
 	async posts(): Promise<Post[]> {
 		console.log(`reading cached posts for ${this.name}`);
 

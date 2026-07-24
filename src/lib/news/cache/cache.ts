@@ -1,5 +1,5 @@
 import { redis } from "@/util/redisClient";
-import type { PostData } from "@/lib/news/fetching/types";
+import type { PostData } from "@/lib/news/ingest/types";
 
 /** read a feed's cached post data from redis */
 export async function readCache(feedSlug: string) {

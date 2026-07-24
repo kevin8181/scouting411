@@ -1,4 +1,4 @@
-import type { FeedAdapter, PostData } from "@/lib/news/fetching/types";
+import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
 import { cleanHtmlString } from "@/util/cleanHtmlString";
 
 type WordpressAdapterOpts = {

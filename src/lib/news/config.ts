@@ -1,6 +1,6 @@
-import { WordpressAdapter } from "@/lib/news/fetching/adapters/wordpress";
-import { RssAdapter } from "@/lib/news/fetching/adapters/rss";
-import type { FeedAdapter } from "@/lib/news/fetching/types";
+import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
+import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
+import type { FeedAdapter } from "@/lib/news/ingest/types";
 import type { UrlShaped } from "@/util/utilTypes";
 
 export const feedConfigs: FeedConfig[] = [
@@ -65,10 +65,10 @@ export const feedConfigs: FeedConfig[] = [
 	// 	description: "Editorial and entertainment content mainly for youth.",
 	// 	homepageUrl: "https://scoutlife.org",
 	// 	adapter: WordpressApiAdapter({
-		// 		baseUrl: "https://scoutlife.org",
-		// 	}),
-		// },
-		
+	// 		baseUrl: "https://scoutlife.org",
+	// 	}),
+	// },
+
 	// todo these are gone. rebuild from scraped copy
 	// {
 	// 	name: "ScoutCast",
@@ -85,10 +85,10 @@ export const feedConfigs: FeedConfig[] = [
 	// 	description: "A defunct podcast about the Cub Scouts program.",
 	// 	homepageUrl: "https://podcast.scouting.org/category/cubcast",
 	// 	adapter: RssAdapter({
-		// 		feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
-		// 	}),
-		// },
-		
+	// 		feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
+	// 	}),
+	// },
+
 	// todo it looks like this is about to be shut down. I downloaded the rss and and all the episodes. set up an archived version later
 	// {
 	// 	name: "The Lookout",

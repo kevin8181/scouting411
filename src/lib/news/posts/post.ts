@@ -1,5 +1,5 @@
 import type { Feed } from "@/lib/news/feeds/feed";
-import type { PostData } from "@/lib/news/fetching/types";
+import type { PostData } from "@/lib/news/ingest/types";
 
 /** a hydrated post from a feed */
 export type Post = {

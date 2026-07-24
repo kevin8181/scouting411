@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { updateAllFeeds } from "@/lib/news/fetching/update";
+import { updateAllFeeds } from "@/lib/news/cache/update";
 import { CRON_SECRET } from "astro:env/server";
 
 export const prerender = false;
