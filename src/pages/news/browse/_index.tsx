@@ -1,6 +1,5 @@
 import { CardFeed } from "@/components/react/cardFeed";
 import { RenderPost as PostComponent } from "@/components/react/post";
-import { queryPosts, type QueryOpts } from "@/lib/news/query";
 import {
 	Pagination,
 	PaginationContent,
@@ -22,12 +21,16 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
+import type { queryPosts } from "@/lib/news/query";
 
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
 
-export async function Page({ query }: { query: QueryOpts }) {
-	const results = await queryPosts(query);
+export async function Page({
+	results,
+}: {
+	results: Awaited<ReturnType<typeof queryPosts>>;
+}) {
 	return (
 		<SecondarySidebar sidebar={<FilterSidebar />}>
 			<div className="flex flex-1 flex-col gap-5 p-8">
@@ -105,7 +108,7 @@ function FilterSidebar() {
 								</FieldDescription> */}
 						<FieldGroup className="gap-3">
 							{FeedManager.feeds.map((feed) => (
-								<Field orientation="horizontal">
+								<Field orientation="horizontal" key={feed.slug}>
 									<Checkbox id={feed.name} name={feed.name} defaultChecked />
 									<FieldLabel htmlFor={feed.name}>{feed.name}</FieldLabel>
 								</Field>

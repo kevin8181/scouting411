@@ -1,18 +1,28 @@
 ---
+export const prerender = false;
+
 import Layout from "@/components/layout/Layout.astro";
 import { Page } from "@/pages/news/browse/_index";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
+import { queryPosts } from "@/lib/news/query";
 
 const { searchParams } = Astro.url;
 
 const { error, data: query } = postsQueryParamsEncoder.decode(searchParams);
 
 if (error) {
-	Astro.response.status = 400;
+	return new Response(jsonPrettyPrint(error.issues), {
+		status: 400,
+		headers: {
+			"content-type": "application/json",
+		},
+	});
 }
+
+const results = await queryPosts(query);
 ---
 
 <Layout title="News">
-	{query ? <Page query={query} /> : <p>{jsonPrettyPrint(error.issues)}</p>}
+	<Page results={results} client:load/>
 </Layout>
