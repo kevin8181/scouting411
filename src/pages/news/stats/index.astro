@@ -3,6 +3,8 @@ import Layout from "@/components/layout/Layout.astro";
 import { feeds } from "@/lib/news/feeds/feedManager";
 import { getFeedPosts } from "@/lib/news/cache/cache";
 
+export const prerender = false;
+
 const feedRows = await Promise.all(
 	feeds.map(async (feed) => ({
 		feed,
