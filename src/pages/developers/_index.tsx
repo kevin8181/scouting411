@@ -1,5 +1,3 @@
-import { CommandPalette } from "@/components/react/commandPalette";
-
 export function Page() {
 	return (
 		<div className="flex flex-col items-start gap-4 p-8">
@@ -24,7 +22,6 @@ export function Page() {
 			>
 				Github Repo
 			</a>
-			<CommandPalette />
 		</div>
 	);
 }
