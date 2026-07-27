@@ -20,11 +20,30 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd";
 
 import { useHotkey } from "@tanstack/react-hotkeys";
 
+const navigation = [
+	{ href: "/", label: "Launchpad" },
+	{ href: "/news/browse", label: "Newsfeed" },
+	{ href: "/news/sources", label: "Sources" },
+	{ href: "/news/subscribe", label: "Subscribe" },
+	{ href: "/news/stats", label: "Stats" },
+	{ href: "/resources", label: "Resources" },
+	{ href: "/developers", label: "API" },
+];
+
 export function CommandPalette() {
 	const [open, setOpen] = useState(false);
 
 	useHotkey("/", () => setOpen(true));
 	useHotkey("Mod+K", () => setOpen(true));
+
+	function go(url: string, newTab = false) {
+		setOpen(false);
+		if (newTab) {
+			window.open(url, "_blank", "noopener,noreferrer");
+		} else {
+			window.location.href = url;
+		}
+	}
 
 	return (
 		<>
@@ -50,24 +69,43 @@ export function CommandPalette() {
 						<CommandEmpty>No results found.</CommandEmpty>
 
 						<CommandGroup heading="Navigation">
-							<CommandItem>Home</CommandItem>
-							<CommandItem>About</CommandItem>
-							<CommandItem>News</CommandItem>
-							<CommandItem>Resources</CommandItem>
-							<CommandItem>Developers</CommandItem>
+							{navigation.map((item) => (
+								<CommandItem
+									key={item.href}
+									value={item.href}
+									keywords={[item.label]}
+									onSelect={() => go(item.href)}
+								>
+									{item.label}
+								</CommandItem>
+							))}
 						</CommandGroup>
 						<CommandSeparator />
 
 						<CommandGroup heading="Feeds">
 							{feeds.map((feed) => (
-								<CommandItem key={feed.slug}>{feed.name}</CommandItem>
+								<CommandItem
+									key={feed.slug}
+									value={feed.slug}
+									keywords={[feed.name, feed.description]}
+									onSelect={() => go(feed.urls.overview)}
+								>
+									{feed.name}
+								</CommandItem>
 							))}
 						</CommandGroup>
 						<CommandSeparator />
 
 						<CommandGroup heading="Resources">
 							{resources.map((resource) => (
-								<CommandItem key={resource.url}>{resource.title}</CommandItem>
+								<CommandItem
+									key={resource.url}
+									value={resource.url}
+									keywords={[resource.title, resource.description]}
+									onSelect={() => go(resource.url, true)}
+								>
+									{resource.title}
+								</CommandItem>
 							))}
 						</CommandGroup>
 					</CommandList>
