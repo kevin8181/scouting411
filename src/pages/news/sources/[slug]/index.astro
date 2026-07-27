@@ -1,17 +1,18 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { feeds } from "@/lib/news/feeds/feedManager";
 import { getFeedPosts } from "@/lib/news/cache/cache";
+import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 
 const { slug } = Astro.params;
 
 export function getStaticPaths() {
-	return FeedManager.feeds.map((feed) => ({
+	return feeds.map((feed) => ({
 		params: { slug: feed.slug },
 	}));
 }
 
-const feed = FeedManager.getFeedBySlug(slug);
+const feed = getFeedBySlug(slug);
 
 if (!feed) throw new Error(`Feed ${slug} not found`);
 ---

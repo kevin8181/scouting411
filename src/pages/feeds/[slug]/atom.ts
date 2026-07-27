@@ -1,17 +1,18 @@
 import type { APIRoute } from "astro";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 import { generateAtomFeed } from "feedsmith";
 import { getFeedPosts } from "@/lib/news/cache/cache";
+import { feeds } from "@/lib/news/feeds/feedManager";
 
 export function getStaticPaths() {
-	return FeedManager.feeds.map((feed) => ({
+	return feeds.map((feed) => ({
 		params: { slug: feed.slug },
 	}));
 }
 
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
-	const feed = FeedManager.getFeedBySlug(slug)!;
+	const feed = getFeedBySlug(slug)!;
 	const posts = await getFeedPosts(feed);
 
 	const generated = generateAtomFeed(
@@ -63,7 +64,7 @@ export const GET: APIRoute = async (context) => {
 		},
 		{
 			stylesheets: [
-				// todo this styleshee doesn't seem to play nice with atom
+				// todo this stylesheet doesn't seem to play nice with atom
 				// {
 				// 	title: "RSS Stylesheet",
 				// 	type: "text/xsl",

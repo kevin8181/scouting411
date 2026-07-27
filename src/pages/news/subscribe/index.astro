@@ -1,6 +1,8 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+
+import { feeds } from "@/lib/news/feeds/feedManager";
+
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 ---
@@ -75,7 +77,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 				</thead>
 				<tbody>
 					{
-						FeedManager.feeds.map((feed) => (
+						feeds.map((feed) => (
 							<tr class="border-gray-2 hover:bg-gray-1/60 border-b last:border-0">
 								<td class="px-4 py-3">
 									<a

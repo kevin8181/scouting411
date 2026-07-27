@@ -1,6 +1,7 @@
 import type { FeedAdapter } from "@/lib/news/ingest/types";
 import type { FeedConfig } from "@/lib/news/config";
 
+/** a hydrated feed object */
 export type Feed = {
 	name: string;
 	slug: string;

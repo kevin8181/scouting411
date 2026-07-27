@@ -2,6 +2,7 @@ import { redis } from "@/util/redisClient";
 import type { PostData } from "@/lib/news/ingest/types";
 import { createHydratedPost } from "@/lib/news/posts/post";
 import type { Feed } from "@/lib/news/feeds/feed";
+import { feeds } from "@/lib/news/feeds/feedManager";
 
 /** read a feed's cached post data from redis */
 export async function readCache(feedSlug: string) {
@@ -20,6 +21,16 @@ export async function getFeedPosts(feed: Feed) {
 	return postData.map((postData) => {
 		return createHydratedPost(postData, feed);
 	});
+}
+
+/** fetches all posts (across all feeds) from redis */
+export async function getAllPosts() {
+	const posts = (
+		await Promise.all(feeds.map((feed) => getFeedPosts(feed)))
+	).flat();
+
+	//return the posts sorted by date descending
+	return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 
 /** write a feed's post data to the redis cache */

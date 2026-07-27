@@ -1,10 +1,10 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { feeds } from "@/lib/news/feeds/feedManager";
 import { getFeedPosts } from "@/lib/news/cache/cache";
 
 const feedRows = await Promise.all(
-	FeedManager.feeds.map(async (feed) => ({
+	feeds.map(async (feed) => ({
 		feed,
 		postCount: (await getFeedPosts(feed)).length,
 	})),

@@ -1,17 +1,18 @@
 import type { APIRoute } from "astro";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { feeds } from "@/lib/news/feeds/feedManager";
+import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 import { generateRssFeed } from "feedsmith";
 import { getFeedPosts } from "@/lib/news/cache/cache";
 
 export function getStaticPaths() {
-	return FeedManager.feeds.map((feed) => ({
+	return feeds.map((feed) => ({
 		params: { slug: feed.slug },
 	}));
 }
 
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
-	const feed = FeedManager.getFeedBySlug(slug)!;
+	const feed = getFeedBySlug(slug)!;
 	const posts = await getFeedPosts(feed);
 
 	const generated = generateRssFeed(

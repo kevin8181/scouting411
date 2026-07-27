@@ -1,7 +1,8 @@
 ---
 import { Font } from "astro:assets";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
 import { ClientRouter } from "astro:transitions";
+
+import { feeds } from "@/lib/news/feeds/feedManager";
 ---
 
 <head>
@@ -33,7 +34,7 @@ import { ClientRouter } from "astro:transitions";
 	<!-- FEEDS -->
 	<link rel="outline" type="text/x-opml" href="/feeds/all/opml" />
 	{
-		FeedManager.feeds.map((feed) => (
+		feeds.map((feed) => (
 			<link
 				rel="alternate"
 				type="application/rss+xml"

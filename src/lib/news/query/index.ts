@@ -1,4 +1,4 @@
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { getAllPosts } from "@/lib/news/cache/cache";
 import { z } from "astro/zod";
 import { sortPosts, sortOptsSchema } from "@/lib/news/query/sort";
 import {
@@ -13,7 +13,7 @@ export async function queryPosts(
 	opts: QueryOpts,
 ): Promise<PaginatedResults<Post>> {
 	// todo make it so you can start with only a subset of the feeds
-	const posts = await FeedManager.getAllPosts();
+	const posts = await getAllPosts();
 
 	const filteredPosts = filterPosts(posts, opts.filter);
 

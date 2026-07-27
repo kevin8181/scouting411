@@ -1,10 +1,10 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { getAllPosts } from "@/lib/news/cache/cache";
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const latestPosts = (await FeedManager.getAllPosts()).slice(0, 2);
+const latestPosts = (await getAllPosts()).slice(0, 2);
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },

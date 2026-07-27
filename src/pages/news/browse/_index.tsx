@@ -73,16 +73,8 @@ function FilterSidebar({ query }: { query: QueryOpts }) {
 
 				<FilterSidebarItem label="sources">
 					todo
-					{/* <FieldSet>
-						<FieldGroup className="gap-3">
-							{FeedManager.feeds.map((feed) => (
-								<Field orientation="horizontal" key={feed.slug}>
-									<Checkbox id={feed.name} name={feed.name} defaultChecked />
-									<FieldLabel htmlFor={feed.name}>{feed.name}</FieldLabel>
-								</Field>
-							))}
-						</FieldGroup>
-					</FieldSet> */}
+					<ul>
+					</ul>
 				</FilterSidebarItem>
 
 				<FilterSidebarItem label="debug">
