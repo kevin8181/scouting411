@@ -1,8 +1,7 @@
 import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
-import { cn } from "@/util/cn";
-import { SidebarMenuButton } from "@/components/ui/sidebar";
+import { Moon, Sun } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -30,25 +29,12 @@ export function DarkModeControl() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="w-full">
-				<SidebarMenuButton
-					className={cn(
-						"h-auto justify-between gap-2.5 rounded-md border-transparent px-3 py-2 text-sm font-normal outline-none",
-						"hover:bg-blue/8",
-						"data-active:bg-blue/12 data-active:text-blue data-active:font-bold",
-					)}
-					render={
-						<button>
-							<div className="flex items-center gap-2">
-								<FontAwesomeIcon
-									icon={theme === "theme-light" ? faSun : faMoon}
-									height={"1em"}
-								/>
-								{theme === "theme-light" ? "Light" : "Dark"} Mode
-							</div>
-						</button>
-					}
-				/>
+			<DropdownMenuTrigger>
+				<Button variant="outline" size="icon-sm">
+					<Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+					<Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+					<span className="sr-only">Toggle theme</span>
+				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuItem onClick={() => setThemeState("theme-light")}>

@@ -5,6 +5,7 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { DarkModeControl } from "@/components/react/darkModeControl";
 
 export function AppShell({
 	url,
@@ -21,7 +22,10 @@ export function AppShell({
 			<SidebarInset>
 				<header className="bg-sidebar border-gray-3 sticky top-0 flex h-13 shrink-0 items-center justify-between border-b px-4">
 					<span className="font-serif font-bold">{title}</span>
-					<SidebarTrigger className="md:hidden" />
+					<div className="flex items-center gap-2">
+						<DarkModeControl />
+						<SidebarTrigger className="md:hidden" variant="outline" />
+					</div>
 				</header>
 				{children}
 			</SidebarInset>
