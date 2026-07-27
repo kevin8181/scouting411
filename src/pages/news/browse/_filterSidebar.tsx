@@ -13,6 +13,13 @@ import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
 import { feeds } from "@/lib/news/feeds/feedManager";
 import { type QueryOpts, queryOptsSchema } from "@/lib/news/query/types";
 import { useForm } from "@tanstack/react-form";
+import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
+
+/** value -> pretty label for the sort direction select */
+const sortDirectionItems = [
+	{ value: "desc", label: "Newest first" },
+	{ value: "asc", label: "Oldest first" },
+] satisfies { value: QueryOpts["sort"]["direction"]; label: string }[];
 
 export function FilterSidebar({
 	query,
@@ -30,6 +37,8 @@ export function FilterSidebar({
 
 				if (parsed.success) {
 					setQuery(parsed.data);
+
+					updateUrlQuery(parsed.data);
 				}
 			},
 			onChangeDebounceMs: 300,
@@ -43,6 +52,7 @@ export function FilterSidebar({
 					<form.Field name="sort.direction">
 						{(field) => (
 							<Select
+								items={sortDirectionItems}
 								value={field.state.value}
 								onValueChange={(value: "asc" | "desc" | null) => {
 									if (value) field.handleChange(value);
@@ -53,8 +63,11 @@ export function FilterSidebar({
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
-										<SelectItem value="asc">Ascending</SelectItem>
-										<SelectItem value="desc">Descending</SelectItem>
+										{sortDirectionItems.map((item) => (
+											<SelectItem key={item.value} value={item.value}>
+												{item.label}
+											</SelectItem>
+										))}
 									</SelectGroup>
 								</SelectContent>
 							</Select>
@@ -130,4 +143,13 @@ export function FilterSidebar({
 			</div>
 		</div>
 	);
+}
+
+function updateUrlQuery(query: QueryOpts) {
+	const queryString = postsQueryParamsEncoder.encode(query);
+
+	const url = new URL(document.location.href);
+	url.search = queryString.toString();
+
+	history.replaceState(null, "", url);
 }
