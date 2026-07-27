@@ -5,7 +5,6 @@ import type { FeedAdapter } from "@/lib/news/ingest/types";
 import type { UrlShaped } from "@/util/utilTypes";
 
 export const feedConfigs: FeedConfig[] = [
-	// todo these are not working any more because of cloudflare
 	{
 		name: "Scouts BSA Program Updates",
 		slug: "scouts-bsa-program-updates",
@@ -17,6 +16,7 @@ export const feedConfigs: FeedConfig[] = [
 			baseUrl: "https://scouting.org",
 			categoryFilter: 15054,
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Cub Scouts Program Updates",
@@ -29,6 +29,7 @@ export const feedConfigs: FeedConfig[] = [
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15053,
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Scouting Magazine",
@@ -39,6 +40,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://blog.scoutingmagazine.org",
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Trail to Adventure",
@@ -47,6 +49,7 @@ export const feedConfigs: FeedConfig[] = [
 			"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
 		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
 		adapter: TtaAdapter(),
+		defaultVisible: true,
 	},
 	{
 		name: "Scouting Alumni",
@@ -57,9 +60,8 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
 		}),
+		defaultVisible: true,
 	},
-
-	// todo disabled this one because it's spammy in the main feed. will re-enable once filtering is all implimented
 	{
 		name: "Scout Life",
 		slug: "scout-life",
@@ -68,6 +70,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutlife.org",
 		}),
+		defaultVisible: false,
 	},
 
 	// todo these are gone. rebuild from scraped copy
@@ -112,6 +115,7 @@ export const feedConfigs: FeedConfig[] = [
 			baseUrl: "https://scoutingwire.org",
 			//todo split by categories?
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Scouting Newsroom",
@@ -123,6 +127,7 @@ export const feedConfigs: FeedConfig[] = [
 			feedUrl: "https://scoutingnewsroom.org/feed",
 			//for some reason the wordpress posts api doesn't return any results on this site
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Abilities Digest",
@@ -134,6 +139,7 @@ export const feedConfigs: FeedConfig[] = [
 			feedUrl: "https://ablescouts.org/feed",
 			//entire wordpress api is 404
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Summit Blog",
@@ -144,6 +150,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://summitbsa.org",
 		}),
+		defaultVisible: true,
 	},
 
 	{
@@ -155,6 +162,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://nesa.org",
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Scouting America Foundation",
@@ -165,6 +173,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingamericafoundation.org",
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Order of the Arrow News",
@@ -176,6 +185,7 @@ export const feedConfigs: FeedConfig[] = [
 			feedUrl: "https://oa-scouting.org/rss.xml",
 			//not wordpress. might be bespoke. find out about if there's an api or a way to source better data
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "OA System Maintenance",
@@ -187,6 +197,7 @@ export const feedConfigs: FeedConfig[] = [
 			feedUrl: "https://status.oa-scouting.org/history.rss",
 			// atom feed, text, and email also available
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Sea Scouts News",
@@ -196,6 +207,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://seascout.org/",
 		}),
+		defaultVisible: true,
 	},
 	{
 		name: "Troop Leader Resource Updates",
@@ -205,6 +217,7 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://troopleader.scouting.org",
 		}),
+		defaultVisible: true,
 	},
 ];
 
@@ -214,4 +227,5 @@ export type FeedConfig = {
 	description: string;
 	homepageUrl: UrlShaped;
 	adapter: FeedAdapter;
+	defaultVisible: boolean;
 };
