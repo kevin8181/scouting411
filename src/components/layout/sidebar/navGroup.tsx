@@ -15,9 +15,9 @@ export function NavGroup({
 	children: React.ReactNode;
 }) {
 	return (
-		<SidebarGroup className="gap-1 p-0 px-3 pb-3">
+		<SidebarGroup className="gap-1 p-0 px-3 pb-6">
 			{label && (
-				<SidebarGroupLabel className="text-gray-8 h-auto rounded-none p-0 pl-3 text-[0.78rem] font-normal uppercase">
+				<SidebarGroupLabel className="text-gray-5 h-auto rounded-none p-0 pl-3 text-xs font-bold uppercase">
 					{label}
 				</SidebarGroupLabel>
 			)}
