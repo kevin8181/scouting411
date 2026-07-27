@@ -9,13 +9,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-// import { Checkbox } from "@/components/ui/checkbox";
-// import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
-// import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import type { queryPosts, QueryOpts } from "@/lib/news/query";
 
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
+
+import { feeds } from "@/lib/news/feeds/feedManager";
 
 export function Page({
 	results,
@@ -40,7 +41,7 @@ export function Page({
 function FilterSidebar({ query }: { query: QueryOpts }) {
 	return (
 		<div className="flex flex-col">
-			<div className="flex flex-col divide-y divide-gray-3">
+			<div className="divide-gray-3 flex flex-col divide-y">
 				<FilterSidebarItem label="sort">
 					<Select value={query.sort.direction}>
 						<SelectTrigger className="w-full">
@@ -72,9 +73,21 @@ function FilterSidebar({ query }: { query: QueryOpts }) {
 				</FilterSidebarItem>
 
 				<FilterSidebarItem label="sources">
-					todo
-					<ul>
-					</ul>
+					<FieldSet>
+						<FieldGroup data-slot="checkbox-group">
+							{feeds.map((feed) => (
+								<Field key={feed.slug} orientation="horizontal">
+									<Checkbox id={`source-${feed.slug}`} value={feed.slug} />
+									<FieldLabel
+										htmlFor={`source-${feed.slug}`}
+										className="font-normal"
+									>
+										{feed.name}
+									</FieldLabel>
+								</Field>
+							))}
+						</FieldGroup>
+					</FieldSet>
 				</FilterSidebarItem>
 
 				<FilterSidebarItem label="debug">
