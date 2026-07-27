@@ -9,7 +9,6 @@ const feedRows = await Promise.all(
 		postCount: (await getFeedPosts(feed)).length,
 	})),
 );
-feedRows.sort((a, b) => b.postCount - a.postCount);
 
 const totalPosts = feedRows.reduce((sum, { postCount }) => sum + postCount, 0);
 ---
