@@ -32,6 +32,16 @@ export const feedConfigs: FeedConfig[] = [
 		defaultVisible: true,
 	},
 	{
+		name: "#CubChatLive",
+		slug: "cubchat",
+		description: "The official video podcast of the Cub Scouts program.",
+		homepageUrl: "https://onscouting.org/cubchatlive/",
+		adapter: RssAdapter({
+			feedUrl: "https://anchor.fm/s/10fd33ec4/podcast/rss",
+		}),
+		defaultVisible: false,
+	},
+	{
 		name: "Scouting Magazine",
 		slug: "scouting-magazine",
 		description:
