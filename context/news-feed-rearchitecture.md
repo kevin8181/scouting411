@@ -23,13 +23,13 @@ reasoning and decisions made; implementation specifics are still open where note
   feed's failure — but the `Promise.all` itself rejects on the first throw,
   the cron API route (`src/pages/api/updateAllFeeds.ts`) has no try/catch, and
   there's no per-feed failure record beyond ephemeral Vercel logs.
-- `cache/cache.ts`: `getFeedPosts()` reads a feed's *entire* cached JSON array
+- `cache/cache.ts`: `getFeedPosts()` reads a feed's _entire_ cached JSON array
   from Redis (`redis.json.get`) and hydrates it into `Post[]`. It's called
   directly by `FeedManager.getAllPosts()`, bypassing the query layer. There's
   already a `todo` comment on this function: "push all post access to go
   through the query system. keep this internal."
 - `query/index.ts`: `queryPosts()` calls `FeedManager.getAllPosts()` — i.e.
-  pulls full history for *every* feed — then filters/sorts/paginates in
+  pulls full history for _every_ feed — then filters/sorts/paginates in
   memory. Cost scales with total history × feed count regardless of what's
   actually requested.
 - `pages/news/browse/_index.tsx`: mostly a static mock. Hardcoded select
@@ -44,10 +44,11 @@ reasoning and decisions made; implementation specifics are still open where note
 ## Decisions made
 
 ### 1. Durability
+
 - Per-feed fetch failures should not abort the whole update run or destroy
   other feeds' cached data (largely already true structurally — needs the
-  `Promise.all` rejection / missing try-catch fixed so the *reporting* matches
-  the *actual* per-feed isolation).
+  `Promise.all` rejection / missing try-catch fixed so the _reporting_ matches
+  the _actual_ per-feed isolation).
 - Open / not yet decided:
   - What happens to a feed's cached posts when its fetch fails (leave stale
     cache as-is vs. mark it errored so the UI can surface it).
@@ -55,6 +56,7 @@ reasoning and decisions made; implementation specifics are still open where note
     Slack/Discord webhook, Sentry, etc.) — undecided.
 
 ### 2. Boundary clarity (ingestion/caching vs. query/consumption)
+
 - Principle: keep ingestion/caching as far from UI-level consumers as
   possible. There should be a clean read interface for feed/post data that has
   conceptually nothing to do with adapters or cache writing — working on one
@@ -67,6 +69,7 @@ reasoning and decisions made; implementation specifics are still open where note
   swapped later without the query layer changing.
 
 ### 3. Functional query system
+
 - The browse page (`/news/browse`) becomes a **fully static/prerendered
   shell** (`prerender: true`) — no server-side `queryPosts` call in the
   `.astro` file at all.
@@ -85,6 +88,7 @@ reasoning and decisions made; implementation specifics are still open where note
   are leftover exploration and should be dropped/replaced by the above.
 
 ### 4. Performance/scale
+
 - Current read path (full per-feed JSON blob × every feed × every query) is
   the specific bottleneck flagged for fixing.
 - Open to changing the Redis storage shape (e.g. sorted sets by date enabling
