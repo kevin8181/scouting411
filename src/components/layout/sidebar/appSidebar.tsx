@@ -6,7 +6,6 @@ import {
 	faBullhorn,
 	faCommentDots,
 	faRocket,
-	faHeartPulse,
 	faMagnifyingGlassChart,
 	faNewspaper,
 	faRssSquare,
@@ -85,13 +84,6 @@ export function AppSidebar({ url }: { url: URL }) {
 							newTab
 							currentUrl={url}
 							icon={faGitAlt}
-						/>
-						<NavLink
-							href="https://status.scouting.org"
-							label="Status"
-							newTab
-							currentUrl={url}
-							icon={faHeartPulse}
 						/>
 					</NavGroup>
 					<hr className="border-gray-3 mx-3 border-t" />
