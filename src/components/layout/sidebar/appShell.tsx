@@ -7,6 +7,13 @@ import {
 } from "@/components/ui/sidebar";
 import { DarkModeControl } from "@/components/react/darkModeControl";
 
+import {
+	TooltipProvider,
+	Tooltip,
+	TooltipTrigger,
+	TooltipContent,
+} from "@/components/ui/tooltip";
+
 export function AppShell({
 	url,
 	title,
@@ -23,8 +30,21 @@ export function AppShell({
 				<header className="bg-sidebar border-gray-3 sticky top-0 flex h-13 shrink-0 items-center justify-between border-b px-4">
 					<span className="font-serif font-bold">{title}</span>
 					<div className="flex items-center gap-2">
-						<DarkModeControl />
-						<SidebarTrigger className="md:hidden" variant="outline" />
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger render={<DarkModeControl />} />
+								<TooltipContent>Toggle dark mode</TooltipContent>
+							</Tooltip>
+
+							<Tooltip>
+								<TooltipTrigger
+									render={
+										<SidebarTrigger className="md:hidden" variant="outline" />
+									}
+								/>
+								<TooltipContent>Toggle sidebar</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</div>
 				</header>
 				{children}
