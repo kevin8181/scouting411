@@ -1,6 +1,6 @@
 import { defineAction } from "astro:actions";
 
-import { queryOptsSchema } from "@/lib/news/query";
+import { queryOptsSchema } from "@/lib/news/query/types";
 import { queryPosts } from "@/lib/news/query";
 
 export const server = {

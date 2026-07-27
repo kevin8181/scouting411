@@ -1,13 +1,9 @@
 import { getAllPosts } from "@/lib/news/cache/cache";
-import { z } from "astro/zod";
-import { sortPosts, sortOptsSchema } from "@/lib/news/query/sort";
-import {
-	paginateArray,
-	paginateOptsSchema,
-	type PaginatedResults,
-} from "@/util/paginateArray";
-import { filterPosts, filterOptsSchema } from "@/lib/news/query/filter";
+import { sortPosts } from "@/lib/news/query/sort";
+import { paginateArray, type PaginatedResults } from "@/util/paginateArray";
+import { filterPosts } from "@/lib/news/query/filter";
 import type { Post } from "@/lib/news/posts/post";
+import type { QueryOpts } from "@/lib/news/query/types";
 
 export async function queryPosts(
 	opts: QueryOpts,
@@ -21,10 +17,3 @@ export async function queryPosts(
 
 	return paginateArray(sortedPosts, opts.paginate);
 }
-
-export type QueryOpts = z.infer<typeof queryOptsSchema>;
-export const queryOptsSchema = z.object({
-	filter: filterOptsSchema.default({}),
-	sort: sortOptsSchema.default({ mode: "date", direction: "desc" }),
-	paginate: paginateOptsSchema.default({ page: 1, maxPageSize: 20 }),
-});

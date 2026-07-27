@@ -1,6 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
-import { queryPosts, queryOptsSchema } from "@/lib/news/query";
+import { queryPosts } from "@/lib/news/query";
+import { queryOptsSchema } from "@/lib/news/query/types";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 
 export const POST: APIRoute = async (context) => {

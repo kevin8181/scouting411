@@ -1,5 +1,5 @@
 import qs from "qs";
-import { type QueryOpts, queryOptsSchema } from "@/lib/news/query";
+import { type QueryOpts, queryOptsSchema } from "@/lib/news/query/types";
 
 export const postsQueryParamsEncoder = {
 	encode,
