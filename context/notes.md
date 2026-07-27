@@ -1,24 +1,7 @@
 ## blogs feeds
-
-- https://scoutlife.org/
-- https://www.scouting.org/topics/program-updates/program-updates-cub-scouts/ (cubs category id 15053, sbsa category id 15054)
-- https://scoutingwire.org/
-- https://blog.scoutingmagazine.org/
-- https://www.scoutingnewsroom.org/
 - https://www.scoutshop.org/blog //not wordpress. can't find rss feed
 - https://www.summitbsa.org/blog/
-- https://ablescouts.org/
-- https://scoutingamericafoundation.org/foundation-news/
-- https://nesa.org
-- https://scoutingalumni.org
-- https://oa-scouting.org/news/
-- https://seascout.org/news/
-- https://troopleader.scouting.org/updates-blog/
-- https://podcast.scouting.org/
-
-- https://status.oa-scouting.org/history.rss //atom feed and email also available
 - https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
-- https://www.scouting.org/outdoor-programs/trail-to-adventure/ //https://www.scouting.org/wp-json/wp/v2/tta-post
 - https://www.scouting.org/about/executive-communications/ //https://www.scouting.org/wp-json/wp/v2/ec-post
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
@@ -96,12 +79,8 @@ give.scouting.org
 reservations.scouting.org
 connect.scouting.org
 
-- https://blog.scoutingmagazine.org/wp-json/wp/v2/podcast cub chat live podcast https://www.youtube.com/playlist?list=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
-- https://www.youtube.com/playlist?list=PLuxQzUzGg-5y2JBj7x0n9GjjEC3n0SrDs troop talk live series
-  https://www.youtube.com/feeds/videos.xml?playlist_id=PLuxQzUzGg-5ww_sB8Yc-jlIPm57xaa_gt
-- https://feeds.buzzsprout.com/983503.rss
-  rssbridge
-  rsshub
+rssbridge
+rsshub
 
 ## high adventure bases
 

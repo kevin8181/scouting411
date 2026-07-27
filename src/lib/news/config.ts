@@ -39,8 +39,19 @@ export const feedConfigs: FeedConfig[] = [
 		adapter: RssAdapter({
 			feedUrl: "https://anchor.fm/s/10fd33ec4/podcast/rss",
 		}),
-		defaultVisible: false,
+		defaultVisible: true,
 	},
+	// todo it says this is "on hiatus". could not locate an rss feed other than via youtube
+	// {
+	// 	name: "#TroopTalkLive",
+	// 	slug: "trooptalk",
+	// 	description: "The official video podcast of the Scouts BSA program.",
+	// 	homepageUrl: "https://onscouting.org/trooptalklive/",
+	// 	adapter: RssAdapter({
+	// 		feedUrl: "",
+	// 	}),
+	// 	defaultVisible: true,
+	// },
 	{
 		name: "Scouting Magazine",
 		slug: "scouting-magazine",
@@ -104,16 +115,17 @@ export const feedConfigs: FeedConfig[] = [
 	// },
 
 	// todo it looks like this is about to be shut down. I downloaded the rss and and all the episodes. set up an archived version later
-	// {
-	// 	name: "The Lookout",
-	// 	slug: "the-lookout",
-	// 	description:
-	// 		"The Lookout: Sea Scout Podcast Network. Features both news and interviews.",
-	// 	homepageUrl: "https://seascout.org/the-lookout-sea-scout-podcast-network/",
-	// 	adapter: RssAdapter({
-	// 		feedUrl: "https://feeds.buzzsprout.com/983503.rss",
-	// 	}),
-	// },
+	{
+		name: "The Lookout",
+		slug: "the-lookout",
+		description:
+			"The Lookout: Sea Scout Podcast Network. Features both news and interviews.",
+		homepageUrl: "https://seascout.org/the-lookout-sea-scout-podcast-network/",
+		adapter: RssAdapter({
+			feedUrl: "https://feeds.buzzsprout.com/983503.rss",
+		}),
+		defaultVisible: true,
+	},
 
 	{
 		name: "Scouting Wire",
