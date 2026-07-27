@@ -13,6 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
+import { DarkModeControl } from "@/components/react/darkModeControl";
+
 export function AppSidebar({ url }: { url: URL }) {
 	return (
 		<Sidebar className="border-gray-3 border-r" aria-label="Main sidebar">
@@ -88,11 +90,12 @@ export function AppSidebar({ url }: { url: URL }) {
 						/>
 						<NavLink
 							href="https://status.scouting.org"
-							label="System Status"
+							label="Status"
 							newTab
 							currentUrl={url}
 							icon={faHeartPulse}
 						/>
+						<DarkModeControl />
 					</NavGroup>
 					<hr className="border-gray-3 mx-3 border-t" />
 					<div className="text-gray-8 p-3 text-xs">
