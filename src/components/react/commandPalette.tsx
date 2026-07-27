@@ -18,8 +18,13 @@ import { resources } from "@/lib/resources/config";
 
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 
+import { useHotkey } from "@tanstack/react-hotkeys";
+
 export function CommandPalette() {
 	const [open, setOpen] = useState(false);
+
+	useHotkey("/", () => setOpen(true));
+	useHotkey("Mod+K", () => setOpen(true));
 
 	return (
 		<>
@@ -31,11 +36,10 @@ export function CommandPalette() {
 			>
 				<span className="flex min-w-0 items-center gap-2">
 					<SearchIcon className="" />
-					<span className="truncate text-muted-foreground">Search...</span>
+					<span className="text-muted-foreground truncate">Search...</span>
 				</span>
 				<KbdGroup>
-					<Kbd>⌘</Kbd>
-					<Kbd>K</Kbd>
+					<Kbd>/</Kbd>
 				</KbdGroup>
 			</Button>
 
