@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import { FeedManager } from "@/lib/news/feeds/feedManager";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <head>
@@ -8,6 +9,7 @@ import { FeedManager } from "@/lib/news/feeds/feedManager";
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<meta name="generator" content={Astro.generator} />
+	<ClientRouter />
 
 	<!-- IDENTITY + BRANDING -->
 	<!-- todo add favicon -->
