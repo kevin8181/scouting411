@@ -1,11 +1,8 @@
 ---
-export const prerender = false;
-
 import Layout from "@/components/layout/Layout.astro";
 import { Page } from "@/pages/news/browse/_index";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
-import { queryPosts } from "@/lib/news/query";
 
 const { searchParams } = Astro.url;
 
@@ -19,10 +16,8 @@ if (error) {
 		},
 	});
 }
-
-const results = await queryPosts(query);
 ---
 
 <Layout title="News">
-	<Page results={results} query={query} client:load/>
+	<Page initialQuery={query} client:load />
 </Layout>

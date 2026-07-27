@@ -1,5 +1,6 @@
 import { CardFeed } from "@/components/react/cardFeed";
-import { Post } from "@/components/react/post";
+import { PostComponent } from "@/components/react/post";
+import type { Post } from "@/lib/news/posts/post";
 import { Input } from "@/components/ui/input";
 import {
 	Select,
@@ -11,26 +12,43 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
-import type { queryPosts, QueryOpts } from "@/lib/news/query";
+import type { QueryOpts } from "@/lib/news/query";
 
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
 
 import { feeds } from "@/lib/news/feeds/feedManager";
 
+import { useState, useEffect } from "react";
+
+import { actions } from "astro:actions";
+
 export function Page({
-	results,
-	query,
+	initialQuery,
 }: {
-	results: Awaited<ReturnType<typeof queryPosts>>;
-	query: QueryOpts;
+	initialQuery: QueryOpts;
 }) {
+	const [query] = useState(initialQuery);
+	const [posts, setPosts] = useState<Post[]>([]);
+
+	useEffect(() => {
+		(async () => {
+			const results = await actions.queryPosts(query);
+			if (results.error) {
+				alert(results.error);
+				return;
+			}
+
+			setPosts(results.data.items);
+		})();
+	}, [query]);
+
 	return (
 		<SecondarySidebar sidebar={<FilterSidebar query={query} />}>
 			<div className="flex flex-1 flex-col gap-5 p-8">
 				<CardFeed>
-					{results.items.map((post) => (
-						<Post post={post} key={post.url} />
+					{posts.map((post) => (
+						<PostComponent post={post} key={post.url} />
 					))}
 				</CardFeed>
 			</div>
