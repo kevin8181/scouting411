@@ -9,6 +9,7 @@ import {
 	faMagnifyingGlassChart,
 	faNewspaper,
 	faRssSquare,
+	faCode,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
@@ -79,8 +80,14 @@ export function AppSidebar({ url }: { url: URL }) {
 							icon={faCommentDots}
 						/>
 						<NavLink
+							href="/developers"
+							label="API"
+							currentUrl={url}
+							icon={faCode}
+						/>
+						<NavLink
 							href="https://github.com/kevin8181/scouting411"
-							label="GitHub"
+							label="Source Code"
 							newTab
 							currentUrl={url}
 							icon={faGitAlt}
