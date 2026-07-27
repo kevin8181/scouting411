@@ -16,13 +16,10 @@ import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 export function AppSidebar({ url }: { url: URL }) {
 	return (
 		<Sidebar className="border-gray-3 border-r" aria-label="Main sidebar">
-
-			<SidebarHeader className="border-gray-3 flex h-13 justify-center border-b px-4 items-start shrink-0">
-				
+			<SidebarHeader className="border-gray-3 flex h-13 shrink-0 items-start justify-center border-b px-4">
 				<a href="/" className="font-display text-blue text-xl font-extrabold">
 					Scouting411
 				</a>
-
 			</SidebarHeader>
 
 			<div className="flex h-full flex-col justify-between overflow-auto">

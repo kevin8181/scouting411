@@ -4,7 +4,7 @@ export function Post({ post }: { post: Post }) {
 	return (
 		<div className="border-gray-3 flex flex-col items-start gap-3 rounded-lg border bg-white p-6">
 			<span className="flex items-center gap-2 text-xs text-gray-700">
-				<a href={post.feed.urls.overview} className="underline">
+				<a href={post.feed.urls.overview} className="hover:underline">
 					{post.feed.name}
 				</a>
 
