@@ -9,7 +9,7 @@ import { FilterSidebar } from "@/pages/news/browse/_filterSidebar";
 
 export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 	const [query, setQuery] = useState(initialQuery);
-	const [posts, setPosts] = useState<Post[]>([]);
+	const [posts, setPosts] = useState<Post[] | undefined>(undefined);
 
 	useEffect(() => {
 		(async () => {
@@ -28,11 +28,30 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 			sidebar={<FilterSidebar query={query} setQuery={setQuery} />}
 		>
 			<div className="flex flex-1 flex-col gap-5 p-8">
-				<CardFeed>
-					{posts.map((post) => (
-						<PostComponent post={post} key={post.url} />
-					))}
-				</CardFeed>
+				{posts?.length === 0 && (
+					<div className="flex flex-col items-center gap-4 p-8">
+						<div className="text-gray-10 text-xl">
+							No posts found matching your search.
+						</div>
+						<div className="text-gray-10 text-sm">
+							Try adjusting your filters or searching for a different keyword.
+						</div>
+					</div>
+				)}
+
+				{posts === undefined && (
+					<div className="flex flex-col items-center gap-4 p-8">
+						<div className="text-gray-10 text-xl">Loading posts...</div>
+					</div>
+				)}
+
+				{posts && posts.length > 0 && (
+					<CardFeed>
+						{posts.map((post) => (
+							<PostComponent post={post} key={post.url} />
+						))}
+					</CardFeed>
+				)}
 			</div>
 		</SecondarySidebar>
 	);

@@ -16,16 +16,20 @@ const quickLinks = [
 
 <Layout title="Launchpad">
 	<div
-		class="flex h-full w-full flex-col items-center justify-center gap-8 p-8"
+		class="flex h-full w-full flex-col items-center justify-center gap-10 p-8"
 	>
-		<h1 class="text-blue font-display text-5xl font-extrabold">Scouting411</h1>
-		<h2 class="text-gray-10 text-xl">
-			the unofficial front page of Scouting America
-		</h2>
+		<div class="flex flex-col items-center gap-4">
+			<h1 class="text-blue font-display text-5xl font-extrabold">
+				Scouting411
+			</h1>
+			<h2 class="text-gray-10 text-xl">
+				the unofficial front page of Scouting America
+			</h2>
+		</div>
 
 		<div class="grid w-full max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3">
 			<div
-				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
+				class="border-gray-3 flex flex-col items-start gap-4 rounded-lg border bg-white p-6"
 			>
 				<a
 					href="/news/browse"
@@ -58,7 +62,7 @@ const quickLinks = [
 				</a>
 			</div>
 			<div
-				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
+				class="border-gray-3 flex flex-col items-start gap-4 rounded-lg border bg-white p-6"
 			>
 				<a
 					href="/resources"
@@ -75,10 +79,10 @@ const quickLinks = [
 				</a>
 			</div>
 			<div
-				class="border-gray-3 flex flex-col items-start gap-2 rounded-lg border bg-white p-6"
+				class="border-gray-3 flex flex-col items-start gap-4 rounded-lg border bg-white p-6"
 			>
 				<span class="text-blue font-serif text-xl font-bold">Quick Links</span>
-				<ul class="flex w-full flex-col gap-1 text-sm">
+				<ul class="flex w-full flex-col gap-2 text-sm">
 					{
 						quickLinks.map((link) => (
 							<li>
@@ -99,7 +103,7 @@ const quickLinks = [
 		</div>
 
 		<div
-			class="border-gray-3 flex w-full max-w-5xl flex-col items-start gap-2 rounded-lg border bg-white p-6"
+			class="border-gray-3 flex w-full max-w-5xl flex-col items-start gap-4 rounded-lg border bg-white p-6"
 		>
 			<span class="text-blue font-serif text-xl font-bold"
 				>Stay In The Loop</span
