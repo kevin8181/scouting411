@@ -16,5 +16,23 @@ async function updateFeed(slug: string) {
 
 /** fetches the upstream post data for all feeds and updates the cache */
 export async function updateAllFeeds() {
-	await Promise.all(feedConfigs.map((feed) => updateFeed(feed.slug)));
+	const failures: { slug: string; reason: unknown }[] = [];
+
+	await Promise.all(
+		feedConfigs.map(async (feed) => {
+			try {
+				await updateFeed(feed.slug);
+			} catch (reason) {
+				failures.push({ slug: feed.slug, reason });
+			}
+		}),
+	);
+
+	for (const failure of failures) {
+		console.error(`failed to update feed ${failure.slug}`, failure.reason);
+	}
+
+	console.log(
+		`updated ${feedConfigs.length - failures.length}/${feedConfigs.length} feeds`,
+	);
 }
