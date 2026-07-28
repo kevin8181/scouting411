@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/news/posts/fetch";
+import { getMultipleFeedsPosts } from "@/lib/news/posts/fetch";
 import { sortPosts } from "@/lib/news/query/sort";
 import { paginateArray, type PaginatedResults } from "@/util/paginateArray";
 import { filterPosts } from "@/lib/news/query/filter";
@@ -9,7 +9,7 @@ export async function queryPosts(
 	opts: QueryOpts,
 ): Promise<PaginatedResults<Post>> {
 	// todo make it so you can start with only a subset of the feeds
-	const posts = await getAllPosts();
+	const posts = await getMultipleFeedsPosts(opts.feeds);
 
 	const filteredPosts = filterPosts(posts, opts.filter);
 

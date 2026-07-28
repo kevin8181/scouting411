@@ -16,3 +16,6 @@ export function getFeedBySlug(slug: FeedSlug) {
 export function isFeedSlug(value: string): value is FeedSlug {
 	return feedSlugSchema.safeParse(value).success;
 }
+
+/** the list of feeds that should be included in the default query */
+export const defaultVisibleFeeds = feeds.filter((feed) => feed.defaultVisible).map((feed) => feed.slug);

@@ -1,11 +1,11 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { getAllPosts } from "@/lib/news/posts/fetch";
+import { getMultipleFeedsPosts } from "@/lib/news/posts/fetch";
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // todo migrate this to query system or a dedicated feature
-const latestPosts = (await getAllPosts()).slice(0, 2);
+const latestPosts = (await getMultipleFeedsPosts()).slice(0, 2);
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },

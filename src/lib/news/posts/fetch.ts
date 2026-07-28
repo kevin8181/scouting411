@@ -1,4 +1,4 @@
-import type { Feed } from "@/lib/news/feeds/types";
+import type { Feed, FeedSlug } from "@/lib/news/feeds/types";
 import { readPosts } from "@/lib/news/posts/cache";
 import { hydratePost } from "@/lib/news/posts/post";
 import { feeds } from "@/lib/news/feeds/feedManager";
@@ -19,6 +19,8 @@ export async function getFeedPosts(feed: Feed) {
 //todo maybe make this take an array of feed slugs
 
 /** fetches all posts (across all feeds) from redis */
-export async function getAllPosts() {
-	return (await Promise.all(feeds.map((feed) => getFeedPosts(feed)))).flat();
+export async function getMultipleFeedsPosts(feedSlugs: FeedSlug[]) {
+	const selectedFeeds = feeds.filter((feed) => feedSlugs.includes(feed.slug));
+	
+	return (await Promise.all(selectedFeeds.map((feed) => getFeedPosts(feed)))).flat();
 }

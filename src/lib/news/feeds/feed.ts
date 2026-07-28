@@ -13,5 +13,6 @@ export function hydrateFeed(opts: FeedConfigEntry): Feed {
 			homepage: opts.homepageUrl,
 		},
 		type: opts.adapter.type,
+		defaultVisible: opts.defaultVisible,
 	};
 }

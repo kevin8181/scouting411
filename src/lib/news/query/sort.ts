@@ -6,7 +6,7 @@ export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {
 
 	switch (opts.mode) {
 		case "date":
-			sortedPosts = posts.sort((a, b) => a.date.getTime() - b.date.getTime());
+			sortedPosts = posts.toSorted((a, b) => a.date.getTime() - b.date.getTime());
 			break;
 		default:
 			return posts;

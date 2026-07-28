@@ -12,6 +12,12 @@ async function updateFeed(slug: FeedSlug) {
 
 	const postData = await feedConfig.adapter.execute();
 
+	if (postData.length === 0) {
+		throw new Error(
+			`feed ${slug} fetched successfully but returned an empty array of posts; keeping existing cache`,
+		);
+	}
+
 	await writePosts({ feedSlug: feedConfig.slug, postData: postData });
 }
 

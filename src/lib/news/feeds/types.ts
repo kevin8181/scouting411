@@ -35,4 +35,5 @@ export type Feed = {
 		homepage: string;
 	};
 	type: FeedAdapter["type"];
+	defaultVisible: boolean;
 };

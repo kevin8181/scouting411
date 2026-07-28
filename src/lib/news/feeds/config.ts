@@ -12,7 +12,7 @@ export const feedConfigs = [
 		homepageUrl:
 			"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
 		adapter: WordpressAdapter({
-			baseUrl: "https://scouting.org",
+			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15054,
 		}),
 		defaultVisible: true,
@@ -80,7 +80,7 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
 		}),
-		defaultVisible: true,
+		defaultVisible: false,
 	},
 	{
 		name: "Scout Life",

@@ -4,16 +4,17 @@ import { cleanHtmlString } from "@/util/cleanHtmlString";
 
 export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 	const execute = async () => {
-		
 		console.log(`fetching rss feed ${opts.feedUrl}`);
-		
+
 		const response = await fetch(opts.feedUrl);
 		const xml = await response.text();
 
 		const feed = parseRssFeed(xml);
 
-		if (!feed.items?.length) {
-			throw new Error(`failed to parse rss feed ${opts.feedUrl}: no items`);
+		if (!feed.items) {
+			throw new Error(
+				`failed to parse rss feed ${opts.feedUrl}: no "items" property`,
+			);
 		}
 
 		const postData = feed.items.map((item) => {
@@ -29,8 +30,6 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 				throw new Error(`failed to parse rss feed ${opts.feedUrl}: no pubDate`);
 			}
 
-			
-
 			return {
 				url: item.link,
 				title: cleanHtmlString(item.title),
@@ -41,7 +40,9 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 			};
 		});
 
-		console.log(`fetched ${postData.length} posts from rss feed ${opts.feedUrl}`);
+		console.log(
+			`fetched ${postData.length} posts from rss feed ${opts.feedUrl}`,
+		);
 
 		return postData;
 	};
