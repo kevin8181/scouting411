@@ -18,57 +18,57 @@ const totalPosts = feedRows.reduce((sum, { postCount }) => sum + postCount, 0);
 <Layout title="Feed Statistics">
 	<div class="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
 		<div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
-			<div class="rounded-lg border bg-white p-4">
-				<div class="text-gray-6 text-xs font-medium uppercase">Feeds</div>
-				<div class="text-gray-10 font-serif text-2xl font-bold">
+			<div class="rounded-lg border p-4">
+				<div class="text-muted-foreground text-xs font-medium uppercase">
+					Feeds
+				</div>
+				<div class="font-serif text-2xl font-bold">
 					{Intl.NumberFormat().format(feedRows.length)}
 				</div>
 			</div>
-			<div class="rounded-lg border bg-white p-4">
-				<div class="text-gray-6 text-xs font-medium uppercase">Total posts</div>
-				<div class="text-gray-10 font-serif text-2xl font-bold">
+			<div class="rounded-lg border p-4">
+				<div class="text-muted-foreground text-xs font-medium uppercase">
+					Total posts
+				</div>
+				<div class="font-serif text-2xl font-bold">
 					{Intl.NumberFormat().format(totalPosts)}
 				</div>
 			</div>
 		</div>
 
-		<div class="overflow-hidden rounded-lg border bg-white">
+		<div class="overflow-hidden rounded-lg border">
 			<table class="w-full border-collapse text-sm">
 				<thead>
 					<tr class="border-b">
-						<th class="text-gray-7 px-4 py-3 text-left font-medium">Feed</th>
-						<th class="text-gray-7 px-4 py-3 text-right font-medium">Posts</th>
-						<th class="text-gray-7 px-4 py-3 text-left font-medium">
-							Adapter
-						</th>
+						<th class="px-4 py-3 text-left font-medium">Feed</th>
+						<th class="px-4 py-3 text-right font-medium">Posts</th>
+						<th class="px-4 py-3 text-left font-medium"> Adapter </th>
 					</tr>
 				</thead>
 				<tbody>
 					{
 						feedRows.map(({ feed, postCount }) => (
-							<tr class="border-gray-2 hover:bg-gray-1/60 border-b last:border-0">
+							<tr class="hover:bg-muted border-b last:border-0">
 								<td class="px-4 py-3">
 									<a
 										href={feed.urls.overview}
-										class="text-blue font-medium wrap-anywhere hyphens-auto hover:underline"
+										class="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
 									>
 										{feed.name}
 									</a>
 								</td>
-								<td class="text-gray-10 px-4 py-3 text-right tabular-nums">
+								<td class="px-4 py-3 text-right tabular-nums">
 									{Intl.NumberFormat().format(postCount)}
 								</td>
-								<td class="text-gray-8 px-4 py-3">{feed.type.human}</td>
+								<td class="px-4 py-3">{feed.type.human}</td>
 							</tr>
 						))
 					}
 				</tbody>
 				<tfoot>
 					<tr class="border-t">
-						<td class="text-gray-10 px-4 py-3 font-bold">Total</td>
-						<td
-							class="text-gray-10 px-4 py-3 text-right font-bold tabular-nums"
-						>
+						<td class="px-4 py-3 font-bold">Total</td>
+						<td class="px-4 py-3 text-right font-bold tabular-nums">
 							{Intl.NumberFormat().format(totalPosts)}
 						</td>
 						<td></td>

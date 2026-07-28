@@ -146,10 +146,7 @@ export function FilterSidebar({
 													)
 												}
 											/>
-											<FieldLabel
-												htmlFor={`source-${feed.slug}`}
-												className="font-normal"
-											>
+											<FieldLabel htmlFor={`source-${feed.slug}`}>
 												{feed.name}
 											</FieldLabel>
 										</Field>
