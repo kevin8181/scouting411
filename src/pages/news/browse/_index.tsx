@@ -49,9 +49,7 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 			<div className="flex flex-1 flex-col gap-5 p-8">
 				{results?.items.length === 0 && (
 					<div className="flex flex-col items-center gap-4 p-8">
-						<div className=" text-xl">
-							No posts found matching your search.
-						</div>
+						<div className="text-xl">No posts found matching your search.</div>
 						<div className="text-muted-foreground text-sm">
 							Try adjusting your filters or searching for a different keyword.
 						</div>
@@ -60,7 +58,7 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 
 				{results === undefined && (
 					<div className="flex flex-col items-center gap-4 p-8">
-						<div className="text-muted-foreground text-xl">Loading posts...</div>
+						<div className="shimmer text-xl">Loading posts...</div>
 					</div>
 				)}
 
