@@ -105,7 +105,7 @@ export const feedConfigs = [
 		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
 		adapter: WordpressCustomTypesAdapter({
 			baseUrl: "https://scoutingalumni.org",
-			typeName: "scouting-alumni-ask-the-chair",
+			typeName: "ask_the_chair",
 		}),
 		defaultVisible: false,
 	},
@@ -117,7 +117,7 @@ export const feedConfigs = [
 		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
 		adapter: WordpressCustomTypesAdapter({
 			baseUrl: "https://scoutingalumni.org",
-			typeName: "scouting-alumni-ask-the-chair",
+			typeName: "alumni-highlight",
 		}),
 		defaultVisible: false,
 	},
