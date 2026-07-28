@@ -99,7 +99,7 @@ export const feedConfigs = [
 	},
 	{
 		name: "Scouting Alumni - Ask the Chair",
-		slug: "scouting-alumni",
+		slug: "scouting-alumni-chair",
 		description:
 			"The doorway to Scouting is always open for our alumni! Scouting Alumni National Chair Andrew Miller is available to answer your questions. We look forward to hearing from you!",
 		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
@@ -108,9 +108,10 @@ export const feedConfigs = [
 			typeName: "scouting-alumni-ask-the-chair",
 		}),
 		defaultVisible: false,
-	},{
+	},
+	{
 		name: "Scouting Alumni - Alumni Highlights",
-		slug: "scouting-alumni",
+		slug: "scouting-alumni-highlights",
 		description:
 			"Miscellaneous news from Scouting Alumni, separate from their main news feed.",
 		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
@@ -211,15 +212,26 @@ export const feedConfigs = [
 		}),
 		defaultVisible: true,
 	},
-
 	{
-		name: "National Eagle Scout Association",
+		name: "NESA News and Articles",
 		slug: "nesa",
 		description:
 			"The news feed of the National Eagle Scout Association. A mixture of editorial content and news.",
 		homepageUrl: "https://nesa.org/news",
 		adapter: WordpressAdapter({
 			baseUrl: "https://nesa.org",
+		}),
+		defaultVisible: true,
+	},
+	{
+		name: "NESA Events",
+		slug: "nesa-events",
+		description:
+			"A feed of events run by the National Eagle Scout Association.",
+		homepageUrl: "https://nesa.org/news",
+		adapter: WordpressCustomTypesAdapter({
+			baseUrl: "https://nesa.org",
+			typeName: "events",
 		}),
 		defaultVisible: true,
 	},
@@ -235,7 +247,7 @@ export const feedConfigs = [
 		defaultVisible: true,
 	},
 	{
-		name: "Order of the Arrow News",
+		name: "OA News",
 		slug: "oa-news",
 		description:
 			"News and updates about the Order of the Arrow on the national level.",
