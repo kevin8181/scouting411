@@ -118,23 +118,42 @@ export function FilterSidebar({
 					</form.Field>
 				</FilterSidebarItem>
 
-				{/* todo wire the source selection up to the query */}
 				<FilterSidebarItem label="sources">
-					<FieldSet>
-						<FieldGroup data-slot="checkbox-group">
-							{feeds.map((feed) => (
-								<Field key={feed.slug} orientation="horizontal">
-									<Checkbox id={`source-${feed.slug}`} value={feed.slug} />
-									<FieldLabel
-										htmlFor={`source-${feed.slug}`}
-										className="font-normal"
-									>
-										{feed.name}
-									</FieldLabel>
-								</Field>
-							))}
-						</FieldGroup>
-					</FieldSet>
+					<form.Field name="feeds">
+						{(field) => (
+							<FieldSet>
+								<FieldGroup data-slot="checkbox-group">
+									{feeds.map((feed) => (
+										<Field key={feed.slug} orientation="horizontal">
+											<Checkbox
+												id={`source-${feed.slug}`}
+												name={feed.slug}
+												checked={field.state.value.includes(feed.slug)}
+												onCheckedChange={(checked) =>
+													field.handleChange(
+														/** rebuild from the canonical feed list so the order stays stable */
+														feeds
+															.filter((candidate) =>
+																candidate.slug === feed.slug
+																	? checked
+																	: field.state.value.includes(candidate.slug),
+															)
+															.map((candidate) => candidate.slug),
+													)
+												}
+											/>
+											<FieldLabel
+												htmlFor={`source-${feed.slug}`}
+												className="font-normal"
+											>
+												{feed.name}
+											</FieldLabel>
+										</Field>
+									))}
+								</FieldGroup>
+							</FieldSet>
+						)}
+					</form.Field>
 				</FilterSidebarItem>
 
 				<FilterSidebarItem label="debug">

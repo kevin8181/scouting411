@@ -1,11 +1,23 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { getMultipleFeedsPosts } from "@/lib/news/posts/fetch";
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { feedSlugs } from "@/lib/news/feeds/types";
 
-// todo migrate this to query system or a dedicated feature
-const latestPosts = (await getMultipleFeedsPosts()).slice(0, 2);
+import { queryPosts } from "@/lib/news/query/query";
+
+const latestPosts = await queryPosts({
+	feeds: feedSlugs,
+	filter: {},
+	sort: {
+		mode: "date",
+		direction: "desc",
+	},
+	paginate: {
+		page: 1,
+		maxPageSize: 2,
+	},
+});
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },
@@ -41,7 +53,7 @@ const quickLinks = [
 
 				<ul class="flex w-full flex-col gap-2">
 					{
-						latestPosts.map((post) => (
+						latestPosts.items.map((post) => (
 							<li>
 								<a
 									href={post.url}

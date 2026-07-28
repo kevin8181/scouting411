@@ -16,11 +16,11 @@ export async function getFeedPosts(feed: Feed) {
 	});
 }
 
-//todo maybe make this take an array of feed slugs
-
 /** fetches all posts (across all feeds) from redis */
 export async function getMultipleFeedsPosts(feedSlugs: FeedSlug[]) {
 	const selectedFeeds = feeds.filter((feed) => feedSlugs.includes(feed.slug));
-	
-	return (await Promise.all(selectedFeeds.map((feed) => getFeedPosts(feed)))).flat();
+
+	return (
+		await Promise.all(selectedFeeds.map((feed) => getFeedPosts(feed)))
+	).flat();
 }

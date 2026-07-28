@@ -32,7 +32,7 @@ export function AppShell({
 					<span className="font-serif font-bold">{title}</span>
 					<div className="flex items-center gap-2">
 						<CommandPalette />
-						
+
 						<TooltipProvider>
 							<Tooltip>
 								<TooltipTrigger render={<DarkModeControl />} />

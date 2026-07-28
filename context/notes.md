@@ -1,4 +1,5 @@
 ## blogs feeds
+
 - https://www.scoutshop.org/blog //not wordpress. can't find rss feed
 - https://www.summitbsa.org/blog/
 - https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
