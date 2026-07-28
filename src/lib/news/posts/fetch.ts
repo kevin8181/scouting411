@@ -20,10 +20,5 @@ export async function getFeedPosts(feed: Feed) {
 
 /** fetches all posts (across all feeds) from redis */
 export async function getAllPosts() {
-	const posts = (
-		await Promise.all(feeds.map((feed) => getFeedPosts(feed)))
-	).flat();
-
-	//return the posts sorted by date descending
-	return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+	return (await Promise.all(feeds.map((feed) => getFeedPosts(feed)))).flat();
 }

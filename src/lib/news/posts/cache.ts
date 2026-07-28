@@ -17,5 +17,5 @@ export async function writePosts({
 	feedSlug: FeedSlug;
 	postData: PostData[];
 }) {
-	await redis.json.set("posts:" + feedSlug, "$", JSON.stringify(postData));
+	await redis.json.set("posts:" + feedSlug, "$", postData);
 }

@@ -1,4 +1,4 @@
-import { z } from "astro/zod";
+import { z } from "zod";
 import type { Post } from "@/lib/news/posts/post";
 
 export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {

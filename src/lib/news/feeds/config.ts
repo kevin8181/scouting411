@@ -226,7 +226,7 @@ export const feedConfigs = [
 		description: "News and updates about the Sea Scouts program.",
 		homepageUrl: "https://seascout.org/latest-news",
 		adapter: WordpressAdapter({
-			baseUrl: "https://seascout.org/",
+			baseUrl: "https://seascout.org",
 		}),
 		defaultVisible: true,
 	},

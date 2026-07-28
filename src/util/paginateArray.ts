@@ -1,4 +1,4 @@
-import { z } from "astro/zod";
+import { z } from "zod";
 
 /** paginate an array of items */
 export function paginateArray<T>(

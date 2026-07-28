@@ -1,4 +1,4 @@
-import { z } from "astro/zod";
+import { z } from "zod";
 import { filterOptsSchema } from "@/lib/news/query/filter";
 import { sortOptsSchema } from "@/lib/news/query/sort";
 import { paginateOptsSchema } from "@/util/paginateArray";
