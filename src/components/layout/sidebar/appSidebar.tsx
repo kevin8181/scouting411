@@ -15,9 +15,12 @@ import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
 export function AppSidebar({ url }: { url: URL }) {
 	return (
-		<Sidebar className="border-gray-3 border-r" aria-label="Main sidebar">
-			<SidebarHeader className="border-gray-3 flex h-13 shrink-0 items-start justify-center border-b px-4">
-				<a href="/" className="font-display text-blue text-xl font-extrabold">
+		<Sidebar className="border-r" aria-label="Main sidebar">
+			<SidebarHeader className="flex h-13 shrink-0 items-start justify-center border-b px-4">
+				<a
+					href="/"
+					className="font-display text-primary text-xl font-extrabold"
+				>
 					Scouting411
 				</a>
 			</SidebarHeader>
@@ -93,8 +96,8 @@ export function AppSidebar({ url }: { url: URL }) {
 							icon={faGitAlt}
 						/>
 					</NavGroup>
-					<hr className="border-gray-3 mx-3 border-t" />
-					<div className="text-gray-8 p-3 text-xs">
+					<hr className="mx-3 border-t" />
+					<div className="text-muted-foreground p-3 text-xs">
 						Not affiliated with Scouting America.
 					</div>
 				</div>

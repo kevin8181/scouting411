@@ -27,7 +27,7 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 				href={feed.urls.homepage}
 				rel="noopener noreferrer"
 				target="_blank"
-				class="text-blue underline">{feed.urls.homepage}</a
+				class="text-primary underline">{feed.urls.homepage}</a
 			>
 		</p>
 		<p>Indexed posts: {(await getFeedPosts(feed)).length}</p>
@@ -35,10 +35,10 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 			Subcribe:
 			<ul>
 				<li>
-					<a href={feed.urls.rss} class="text-blue underline">rss</a>
+					<a href={feed.urls.rss} class="text-primary underline">rss</a>
 				</li>
 				<li>
-					<a href={feed.urls.atom} class="text-blue underline">atom</a>
+					<a href={feed.urls.atom} class="text-primary underline">atom</a>
 				</li>
 			</ul>
 		</p>

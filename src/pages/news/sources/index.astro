@@ -10,10 +10,10 @@ import { feeds } from "@/lib/news/feeds/feedManager";
 		>
 			{
 				feeds.map(async (feed) => (
-					<div class="border-gray-3 flex flex-col items-start gap-1.5 rounded-lg border p-5">
+					<div class="flex flex-col items-start gap-1.5 rounded-lg border p-5">
 						<a
 							href={feed.urls.overview}
-							class="text-blue font-serif text-xl font-bold hover:underline"
+							class="text-primary font-serif text-xl font-bold hover:underline"
 						>
 							{feed.name}
 						</a>

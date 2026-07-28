@@ -24,8 +24,8 @@ export function NavLink({
 			isActive={isActive}
 			className={cn(
 				"h-auto justify-between gap-2.5 rounded-md border-transparent px-3 py-2 text-sm font-normal outline-none",
-				"hover:bg-blue/8",
-				"data-active:bg-blue/12 data-active:text-blue data-active:font-bold",
+				"hover:bg-primary/8",
+				"data-active:bg-primary/12 data-active:text-primary data-active:font-bold",
 			)}
 			render={
 				<a

@@ -51,7 +51,7 @@ export function FilterSidebar({
 
 	return (
 		<div className="flex flex-col">
-			<div className="divide-gray-3 flex flex-col divide-y">
+			<div className="flex flex-col divide-y">
 				<FilterSidebarItem label="sort">
 					<form.Field name="sort.direction">
 						{(field) => (

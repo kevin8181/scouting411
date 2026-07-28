@@ -14,7 +14,7 @@ export function SecondarySidebar({
 			<Sidebar
 				side="right"
 				collapsible="none"
-				className="border-gray-3 h-[calc(100svh-(--spacing(13)))] sticky top-13 overflow-y-scroll border-l"
+				className="sticky top-13 h-[calc(100svh-(--spacing(13)))] overflow-y-scroll border-l"
 				aria-label="Secondary sidebar"
 			>
 				{sidebar}

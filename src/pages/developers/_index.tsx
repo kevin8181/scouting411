@@ -3,7 +3,7 @@ export function Page() {
 		<div className="flex flex-col items-start gap-4 p-8">
 			<div>
 				The REST API can be found at{" "}
-				<a href="/api/posts" className="text-blue underline">
+				<a href="/api/posts" className="text-primary underline">
 					/api/posts
 				</a>
 				. This is still changing so it isn't fully documented yet. No API key is
@@ -18,7 +18,7 @@ export function Page() {
 			</span>
 			<a
 				href="https://github.com/kevin8181/scouting411"
-				className="text-blue underline"
+				className="text-primary underline"
 			>
 				Github Repo
 			</a>
