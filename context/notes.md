@@ -67,6 +67,7 @@
 - https://oalodgemaster.featureupvote.com/
 - https://www.scouting.org/awards/scholarships/
 - https://api.scouting.org/organizations/v2/zip/12345/council
+- https://global.scoutingevent.com/
 
 ## other
 
