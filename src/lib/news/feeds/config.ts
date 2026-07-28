@@ -30,6 +30,8 @@ export const feedConfigs = [
 		}),
 		defaultVisible: true,
 	},
+	// todo there are more posts from scouting.org that are not within the two categories above, which we are currently missing.
+
 	{
 		name: "#CubChatLive",
 		slug: "cubchat",
@@ -114,7 +116,7 @@ export const feedConfigs = [
 		slug: "scouting-alumni-highlights",
 		description:
 			"Miscellaneous news from Scouting Alumni, separate from their main news feed.",
-		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
+		homepageUrl: "https://scoutingalumni.org/",
 		adapter: WordpressCustomTypesAdapter({
 			baseUrl: "https://scoutingalumni.org",
 			typeName: "alumni-highlight",
