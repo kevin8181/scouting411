@@ -1,6 +1,6 @@
 import { redis } from "@/util/redisClient";
 import type { PostData } from "@/lib/news/ingest/types";
-import { createHydratedPost } from "@/lib/news/posts/post";
+import { hydratePost } from "@/lib/news/posts/post";
 import type { Feed } from "@/lib/news/types";
 import { feeds } from "@/lib/news/feeds/feedManager";
 
@@ -19,7 +19,7 @@ export async function getFeedPosts(feed: Feed) {
 	const postData = await readCache(feed.slug);
 
 	return postData.map((postData) => {
-		return createHydratedPost(postData, feed);
+		return hydratePost(postData, feed);
 	});
 }
 

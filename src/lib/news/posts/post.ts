@@ -11,7 +11,7 @@ export type Post = {
 };
 
 /** create a hydrated post from a raw post data object */
-export function createHydratedPost(data: PostData, feed: Feed): Post {
+export function hydratePost(data: PostData, feed: Feed): Post {
 	return {
 		url: data.url,
 		title: data.title,

@@ -1,6 +1,6 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
-import { queryPosts } from "@/lib/news/query";
+import { queryPosts } from "@/lib/news/query/query";
 import { queryOptsSchema } from "@/lib/news/query/types";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 
