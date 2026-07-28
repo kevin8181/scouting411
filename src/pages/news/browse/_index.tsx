@@ -6,29 +6,48 @@ import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { useState, useEffect } from "react";
 import { actions } from "astro:actions";
 import { FilterSidebar } from "@/pages/news/browse/_filterSidebar";
+import type { PaginatedResults } from "@/util/paginateArray";
 
 export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 	const [query, setQuery] = useState(initialQuery);
-	const [posts, setPosts] = useState<Post[] | undefined>(undefined);
+	const [results, setResults] = useState<PaginatedResults<Post> | undefined>(
+		undefined,
+	);
 
 	useEffect(() => {
+		/**
+		 * a narrower query resolves faster than a broader one (one redis read per
+		 * selected feed), so without this an in-flight broad query can land after a
+		 * narrow one and overwrite it. only the latest query may set posts.
+		 */
+		let stale = false;
+
 		(async () => {
-			const results = await actions.queryPosts(query);
-			if (results.error) {
-				alert(results.error);
+			const response = await actions.queryPosts(query);
+
+			if (stale) return;
+
+			if (response.error) {
+				alert(response.error);
 				return;
 			}
 
-			setPosts(results.data.items);
+			setResults(response.data);
 		})();
+
+		return () => {
+			stale = true;
+		};
 	}, [query]);
 
 	return (
 		<SecondarySidebar
-			sidebar={<FilterSidebar query={query} setQuery={setQuery} />}
+			sidebar={
+				<FilterSidebar query={query} setQuery={setQuery} results={results} />
+			}
 		>
 			<div className="flex flex-1 flex-col gap-5 p-8">
-				{posts?.length === 0 && (
+				{results?.items.length === 0 && (
 					<div className="flex flex-col items-center gap-4 p-8">
 						<div className="text-gray-10 text-xl">
 							No posts found matching your search.
@@ -39,15 +58,15 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 					</div>
 				)}
 
-				{posts === undefined && (
+				{results === undefined && (
 					<div className="flex flex-col items-center gap-4 p-8">
 						<div className="text-gray-10 text-xl">Loading posts...</div>
 					</div>
 				)}
 
-				{posts && posts.length > 0 && (
+				{results && results.items.length > 0 && (
 					<CardFeed>
-						{posts.map((post) => (
+						{results.items.map((post) => (
 							<PostComponent post={post} key={post.url} />
 						))}
 					</CardFeed>

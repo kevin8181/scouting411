@@ -14,6 +14,8 @@ import { feeds } from "@/lib/news/feeds/feedManager";
 import { type QueryOpts, queryOptsSchema } from "@/lib/news/query/types";
 import { useForm } from "@tanstack/react-form";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
+import type { PaginatedResults } from "@/util/paginateArray";
+import type { Post } from "@/lib/news/posts/post";
 
 /** value -> pretty label for the sort direction select */
 const sortDirectionItems = [
@@ -24,9 +26,11 @@ const sortDirectionItems = [
 export function FilterSidebar({
 	query,
 	setQuery,
+	results,
 }: {
 	query: QueryOpts;
 	setQuery: React.Dispatch<React.SetStateAction<QueryOpts>>;
+	results: PaginatedResults<Post> | undefined;
 }) {
 	const form = useForm({
 		defaultValues: query,
@@ -158,6 +162,10 @@ export function FilterSidebar({
 
 				<FilterSidebarItem label="debug">
 					<span className="text-sm">{JSON.stringify(query, null, 2)}</span>
+
+					<span className="text-sm">
+						{JSON.stringify(results?.pagination, null, 2)}
+					</span>
 				</FilterSidebarItem>
 			</div>
 		</div>
