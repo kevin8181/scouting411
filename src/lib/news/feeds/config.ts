@@ -108,6 +108,17 @@ export const feedConfigs = [
 			typeName: "scouting-alumni-ask-the-chair",
 		}),
 		defaultVisible: false,
+	},{
+		name: "Scouting Alumni - Alumni Highlights",
+		slug: "scouting-alumni",
+		description:
+			"Miscellaneous news from Scouting Alumni, separate from their main news feed.",
+		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
+		adapter: WordpressCustomTypesAdapter({
+			baseUrl: "https://scoutingalumni.org",
+			typeName: "scouting-alumni-ask-the-chair",
+		}),
+		defaultVisible: false,
 	},
 	{
 		name: "Scout Life",
