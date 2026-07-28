@@ -1,10 +1,9 @@
 import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
 import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
 import { TtaAdapter } from "@/lib/news/ingest/adapters/tta";
-import type { FeedAdapter } from "@/lib/news/ingest/types";
-import type { UrlShaped } from "@/util/utilTypes";
+import type { FeedConfig } from "@/lib/news/types";
 
-export const feedConfigs: FeedConfig[] = [
+export const feedConfigs = [
 	{
 		name: "Scouts BSA Program Updates",
 		slug: "scouts-bsa-program-updates",
@@ -241,13 +240,5 @@ export const feedConfigs: FeedConfig[] = [
 		}),
 		defaultVisible: true,
 	},
-];
+] as const satisfies FeedConfig[];
 
-export type FeedConfig = {
-	name: string;
-	slug: string;
-	description: string;
-	homepageUrl: UrlShaped;
-	adapter: FeedAdapter;
-	defaultVisible: boolean;
-};

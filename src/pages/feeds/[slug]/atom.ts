@@ -2,12 +2,16 @@ import type { APIRoute } from "astro";
 import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 import { generateAtomFeed } from "feedsmith";
 import { getFeedPosts } from "@/lib/news/cache/cache";
+import { isFeedSlug } from "@/lib/news/feeds/feedManager";
 
 export const prerender = false;
 
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
-	const feed = getFeedBySlug(slug)!;
+	if (!isFeedSlug(slug)) {
+		throw new Response("Not found", { status: 404 });
+	}
+	const feed = getFeedBySlug(slug);
 	const posts = await getFeedPosts(feed);
 
 	const generated = generateAtomFeed(

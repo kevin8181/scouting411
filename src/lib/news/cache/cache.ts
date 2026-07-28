@@ -1,7 +1,7 @@
 import { redis } from "@/util/redisClient";
 import type { PostData } from "@/lib/news/ingest/types";
 import { createHydratedPost } from "@/lib/news/posts/post";
-import type { Feed } from "@/lib/news/feeds/feed";
+import type { Feed } from "@/lib/news/types";
 import { feeds } from "@/lib/news/feeds/feedManager";
 
 /** read a feed's cached post data from redis */

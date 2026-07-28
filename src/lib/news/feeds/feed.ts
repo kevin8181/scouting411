@@ -1,25 +1,7 @@
-import type { FeedAdapter } from "@/lib/news/ingest/types";
-import type { FeedConfig } from "@/lib/news/config";
+import type { FeedConfigEntry, Feed } from "@/lib/news/types";
 
-/** a hydrated feed object */
-export type Feed = {
-	name: string;
-	slug: string;
-	description: string;
-	urls: {
-		/** relative href to the detail page for this feed */
-		overview: string;
-		/** relative href to the generated rss feed */
-		rss: string;
-		/** relative href to the generated atom feed */
-		atom: string;
-		/** upstream's html homepage */
-		homepage: string;
-	};
-	type: FeedAdapter["type"];
-};
-
-export function hydrateFeed(opts: FeedConfig): Feed {
+/** create a hydrated feed object from a config */
+export function hydrateFeed(opts: FeedConfigEntry): Feed {
 	return {
 		name: opts.name,
 		slug: opts.slug,

@@ -1,0 +1,39 @@
+import type { UrlShaped } from "@/util/utilTypes";
+import type { FeedAdapter } from "@/lib/news/ingest/types";
+import z from "zod";
+
+import { feedConfigs } from "@/lib/news/config";
+
+export type FeedConfig = {
+	name: string;
+	slug: string;
+	description: string;
+	homepageUrl: UrlShaped;
+	adapter: FeedAdapter;
+	defaultVisible: boolean;
+};
+
+export type FeedConfigEntry = (typeof feedConfigs)[number];
+
+const feedSlugs = feedConfigs.map((feed) => feed.slug);
+export const feedSlugSchema = z.enum(feedSlugs);
+
+export type FeedSlug = z.infer<typeof feedSlugSchema>;
+
+/** a hydrated feed object */
+export type Feed = {
+	name: string;
+	slug: FeedSlug;
+	description: string;
+	urls: {
+		/** relative href to the detail page for this feed */
+		overview: string;
+		/** relative href to the generated rss feed */
+		rss: string;
+		/** relative href to the generated atom feed */
+		atom: string;
+		/** upstream's html homepage */
+		homepage: string;
+	};
+	type: FeedAdapter["type"];
+};
