@@ -10,7 +10,7 @@ export function PostComponent({ post }: { post: Post }) {
 
 				<span className="font-bold">&middot;</span>
 				<span className="whitespace-nowrap">
-					{post.date?.toLocaleDateString("en-US", {
+					{post.date.toLocaleDateString("en-US", {
 						year: "numeric",
 						month: "long",
 						day: "numeric",
