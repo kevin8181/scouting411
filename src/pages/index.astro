@@ -2,12 +2,12 @@
 import Layout from "@/components/layout/Layout.astro";
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { feedSlugs } from "@/lib/news/feeds/types";
+import { defaultVisibleFeeds } from "@/lib/news/feeds/feedManager";
 
 import { queryPosts } from "@/lib/news/query/query";
 
 const latestPosts = await queryPosts({
-	feeds: feedSlugs,
+	feeds: defaultVisibleFeeds,
 	filter: {},
 	sort: {
 		mode: "date",
