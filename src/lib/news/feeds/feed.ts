@@ -1,4 +1,4 @@
-import type { FeedConfigEntry, Feed } from "@/lib/news/types";
+import type { FeedConfigEntry, Feed } from "@/lib/news/feeds/types";
 
 /** create a hydrated feed object from a config */
 export function hydrateFeed(opts: FeedConfigEntry): Feed {

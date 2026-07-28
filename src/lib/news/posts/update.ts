@@ -1,8 +1,9 @@
-import { feedConfigs } from "@/lib/news/config";
-import { writeCache } from "@/lib/news/cache/cache";
+import { feedConfigs } from "@/lib/news/feeds/config";
+import { writePosts } from "@/lib/news/posts/cache";
+import { type FeedSlug } from "@/lib/news/feeds/types";
 
 /** fetches the posts from an original feed source and updates the cache */
-async function updateFeed(slug: string) {
+async function updateFeed(slug: FeedSlug) {
 	const feedConfig = feedConfigs.find((feed) => feed.slug === slug);
 
 	if (!feedConfig) {
@@ -11,7 +12,7 @@ async function updateFeed(slug: string) {
 
 	const postData = await feedConfig.adapter.execute();
 
-	await writeCache({ feedSlug: feedConfig.slug, postData: postData });
+	await writePosts({ feedSlug: feedConfig.slug, postData: postData });
 }
 
 /** fetches the upstream post data for all feeds and updates the cache */

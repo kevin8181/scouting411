@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/news/cache/cache";
+import { getAllPosts } from "@/lib/news/posts/fetch";
 import { sortPosts } from "@/lib/news/query/sort";
 import { paginateArray, type PaginatedResults } from "@/util/paginateArray";
 import { filterPosts } from "@/lib/news/query/filter";

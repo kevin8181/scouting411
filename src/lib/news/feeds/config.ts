@@ -1,7 +1,7 @@
 import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
 import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
 import { TtaAdapter } from "@/lib/news/ingest/adapters/tta";
-import type { FeedConfig } from "@/lib/news/types";
+import type { FeedConfig } from "@/lib/news/feeds/types";
 
 export const feedConfigs = [
 	{
@@ -241,4 +241,3 @@ export const feedConfigs = [
 		defaultVisible: true,
 	},
 ] as const satisfies FeedConfig[];
-

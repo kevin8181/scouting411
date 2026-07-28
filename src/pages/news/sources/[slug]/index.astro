@@ -1,10 +1,12 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { feeds } from "@/lib/news/feeds/feedManager";
-import { getFeedPosts } from "@/lib/news/cache/cache";
+import { getFeedPosts } from "@/lib/news/posts/fetch";
 import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 
 const { slug } = Astro.params;
+
+//todo make this page ssr or fetch via a server action rather than being static
 
 export function getStaticPaths() {
 	return feeds.map((feed) => ({

@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 import { generateAtomFeed } from "feedsmith";
-import { getFeedPosts } from "@/lib/news/cache/cache";
+import { getFeedPosts } from "@/lib/news/posts/fetch";
 import { isFeedSlug } from "@/lib/news/feeds/feedManager";
 
 export const prerender = false;

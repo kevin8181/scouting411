@@ -2,7 +2,7 @@ import type { UrlShaped } from "@/util/utilTypes";
 import type { FeedAdapter } from "@/lib/news/ingest/types";
 import z from "zod";
 
-import { feedConfigs } from "@/lib/news/config";
+import { feedConfigs } from "@/lib/news/feeds/config";
 
 export type FeedConfig = {
 	name: string;
@@ -17,7 +17,6 @@ export type FeedConfigEntry = (typeof feedConfigs)[number];
 
 const feedSlugs = feedConfigs.map((feed) => feed.slug);
 export const feedSlugSchema = z.enum(feedSlugs);
-
 export type FeedSlug = z.infer<typeof feedSlugSchema>;
 
 /** a hydrated feed object */

@@ -1,4 +1,4 @@
-import type { Feed } from "@/lib/news/types";
+import type { Feed } from "@/lib/news/feeds/types";
 import type { PostData } from "@/lib/news/ingest/types";
 
 /** a hydrated post from a feed */
