@@ -15,7 +15,7 @@ export type FeedConfig = {
 
 export type FeedConfigEntry = (typeof feedConfigs)[number];
 
-export const feedSlugs = feedConfigs.map((feed) => feed.slug);
+const feedSlugs = feedConfigs.map((feed) => feed.slug);
 export const feedSlugSchema = z.enum(feedSlugs);
 export type FeedSlug = z.infer<typeof feedSlugSchema>;
 
