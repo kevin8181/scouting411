@@ -56,9 +56,9 @@ export const feedConfigs = [
 		slug: "scouting-magazine",
 		description:
 			"Editorial content for parents and volunteers. The adult counterpart of Scout Life.",
-		homepageUrl: "https://blog.scoutingmagazine.org",
+		homepageUrl: "https://onscouting.org",
 		adapter: WordpressAdapter({
-			baseUrl: "https://blog.scoutingmagazine.org",
+			baseUrl: "https://onscouting.org",
 		}),
 		defaultVisible: true,
 	},
@@ -68,7 +68,10 @@ export const feedConfigs = [
 		description:
 			"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
 		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
-		adapter: WordpressCustomTypesAdapter({ typeName: "tta-post" }),
+		adapter: WordpressCustomTypesAdapter({
+			baseUrl: "https://scouting.org",
+			typeName: "tta-post",
+		}),
 		defaultVisible: true,
 	},
 	{
@@ -77,7 +80,10 @@ export const feedConfigs = [
 		description:
 			"Hear from Scouting's Leadership: executives share thoughts on a variety of key Scouting topics.",
 		homepageUrl: "https://www.scouting.org/about/executive-communications/",
-		adapter: WordpressCustomTypesAdapter({ typeName: "ec-post" }),
+		adapter: WordpressCustomTypesAdapter({
+			baseUrl: "https://scouting.org",
+			typeName: "ec-post",
+		}),
 		defaultVisible: true,
 	},
 	{
@@ -88,6 +94,18 @@ export const feedConfigs = [
 		homepageUrl: "https://scoutingalumni.org/news",
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
+		}),
+		defaultVisible: false,
+	},
+	{
+		name: "Scouting Alumni - Ask the Chair",
+		slug: "scouting-alumni",
+		description:
+			"The doorway to Scouting is always open for our alumni! Scouting Alumni National Chair Andrew Miller is available to answer your questions. We look forward to hearing from you!",
+		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
+		adapter: WordpressCustomTypesAdapter({
+			baseUrl: "https://scoutingalumni.org",
+			typeName: "scouting-alumni-ask-the-chair",
 		}),
 		defaultVisible: false,
 	},

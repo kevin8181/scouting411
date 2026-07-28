@@ -4,10 +4,13 @@ import { cleanHtmlString } from "@/util/cleanHtmlString";
 //todo fetch the full post history
 
 type WordpressCustomTypesAdapterOpts = {
+	baseUrl: string;
 	typeName: string;
 };
 
-export function WordpressCustomTypesAdapter(opts: WordpressCustomTypesAdapterOpts): FeedAdapter {
+export function WordpressCustomTypesAdapter(
+	opts: WordpressCustomTypesAdapterOpts,
+): FeedAdapter {
 	return {
 		type: {
 			id: "wordpress-custom-type",
@@ -15,7 +18,7 @@ export function WordpressCustomTypesAdapter(opts: WordpressCustomTypesAdapterOpt
 		},
 		execute: async () => {
 			const response = await fetch(
-				`https://scouting.org/wp-json/wp/v2/${opts.typeName}?per_page=100`,
+				new URL(`/wp-json/wp/v2/${opts.typeName}?per_page=100`, opts.baseUrl),
 			);
 
 			const posts: customTypeApiPost[] = await response.json();
