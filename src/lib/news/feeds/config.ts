@@ -1,6 +1,6 @@
 import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
 import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
-import { TtaAdapter } from "@/lib/news/ingest/adapters/tta";
+import { WordpressCustomTypesAdapter } from "@/lib/news/ingest/adapters/wordpressCustomType";
 import type { FeedConfig } from "@/lib/news/feeds/types";
 
 export const feedConfigs = [
@@ -68,7 +68,16 @@ export const feedConfigs = [
 		description:
 			"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
 		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
-		adapter: TtaAdapter(),
+		adapter: WordpressCustomTypesAdapter({ typeName: "tta-post" }),
+		defaultVisible: true,
+	},
+	{
+		name: "Executive Communications",
+		slug: "executive-communications",
+		description:
+			"Hear from Scouting's Leadership: executives share thoughts on a variety of key Scouting topics.",
+		homepageUrl: "https://www.scouting.org/about/executive-communications/",
+		adapter: WordpressCustomTypesAdapter({ typeName: "ec-post" }),
 		defaultVisible: true,
 	},
 	{
