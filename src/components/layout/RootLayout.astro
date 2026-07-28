@@ -3,6 +3,33 @@ import "@/global.css";
 import Head from "@/components/layout/Head.astro";
 ---
 
+<script is:inline data-astro-rerun>
+	const getThemePreference = () => {
+		// if there is a saved preference, and it isn't "system", return the saved preference
+		const savedTheme = localStorage.getItem("theme");
+		if (savedTheme && savedTheme !== "system") {
+			return savedTheme;
+		}
+
+		// otherwise use the system preference
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
+	};
+
+	const applyTheme = () => {
+		const theme = getThemePreference();
+
+		const isDark = theme === "dark";
+
+		document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+	};
+
+	applyTheme();
+
+	document.addEventListener("astro:after-swap", applyTheme);
+</script>
+
 <html lang="en">
 	<Head />
 	<body>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,16 +9,19 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { persistentAtom } from "@nanostores/persistent";
+import { useStore } from "@nanostores/react";
+
+/** persistently stores the user's theme preference. */
+const $theme = persistentAtom<"light" | "dark" | "system">("theme", "system");
+
+// NOTE: there is a script in the root layout that handles actually setting the theme on page load / navigation
+
 export function DarkModeControl() {
-	const [theme, setThemeState] = React.useState<
-		"theme-light" | "dark" | "system"
-	>("theme-light");
+	const theme = useStore($theme);
+	const setTheme = $theme.set;
 
-	React.useEffect(() => {
-		const isDarkMode = document.documentElement.classList.contains("dark");
-		setThemeState(isDarkMode ? "dark" : "theme-light");
-	}, []);
-
+	// when the theme changes, sync the class to the document
 	React.useEffect(() => {
 		const isDark =
 			theme === "dark" ||
@@ -39,14 +42,26 @@ export function DarkModeControl() {
 				}
 			></DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => setThemeState("theme-light")}>
+				<DropdownMenuItem
+					onClick={() => setTheme("light")}
+					className="flex flex-row items-center justify-between"
+				>
 					Light
+					{theme === "light" && <Check className="ml-2 h-4 w-4" />}
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setThemeState("dark")}>
+				<DropdownMenuItem
+					onClick={() => setTheme("dark")}
+					className="flex flex-row items-center justify-between"
+				>
 					Dark
+					{theme === "dark" && <Check className="ml-2 h-4 w-4" />}
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setThemeState("system")}>
+				<DropdownMenuItem
+					onClick={() => setTheme("system")}
+					className="flex flex-row items-center justify-between"
+				>
 					System
+					{theme === "system" && <Check className="ml-2 h-4 w-4" />}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
