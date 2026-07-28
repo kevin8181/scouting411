@@ -7,7 +7,9 @@ export function FilterSidebarItem({
 }) {
 	return (
 		<div className="flex flex-col gap-3 p-3">
-			<span className="text-muted-foreground text-xs font-bold uppercase">{label}</span>
+			<span className="text-muted-foreground text-xs font-bold uppercase">
+				{label}
+			</span>
 			{children}
 		</div>
 	);
