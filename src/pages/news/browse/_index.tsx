@@ -6,6 +6,7 @@ import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { useState, useEffect } from "react";
 import { actions } from "astro:actions";
 import { FilterSidebar } from "@/pages/news/browse/_filterSidebar";
+import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import type { PaginatedResults } from "@/util/paginateArray";
 
 export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
@@ -22,7 +23,12 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 		 */
 		let stale = false;
 
+		/** push the new query values to the page url */
+		updateUrlQuery(query);
+
 		(async () => {
+			
+			
 			const response = await actions.queryPosts(query);
 
 			if (stale) return;
@@ -72,4 +78,13 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 			</div>
 		</SecondarySidebar>
 	);
+}
+
+function updateUrlQuery(query: QueryOpts) {
+	const queryString = postsQueryParamsEncoder.encode(query);
+
+	const url = new URL(document.location.href);
+	url.search = queryString.toString();
+
+	history.replaceState(null, "", url);
 }
