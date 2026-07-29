@@ -1,6 +1,6 @@
 import { NavLink } from "@/components/layout/sidebar/navLink";
 import { NavGroup } from "@/components/layout/sidebar/navGroup";
-import { Sidebar, SidebarHeader } from "@/components/ui/sidebar";
+import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
 import {
 	faBookBookmark,
 	faBullhorn,
@@ -25,7 +25,7 @@ export function AppSidebar({ url }: { url: URL }) {
 				</a>
 			</SidebarHeader>
 
-			<div className="flex h-full flex-col justify-between overflow-auto">
+			<SidebarContent className="flex h-full flex-col justify-between overflow-auto">
 				<div className="pt-3">
 					<NavGroup>
 						<NavLink
@@ -96,12 +96,13 @@ export function AppSidebar({ url }: { url: URL }) {
 							icon={faGitAlt}
 						/>
 					</NavGroup>
-					<hr className="mx-3 border-t" />
-					<div className="text-muted-foreground p-3 text-xs">
-						Not affiliated with Scouting America.
-					</div>
 				</div>
-			</div>
+			</SidebarContent>
+			<SidebarFooter className="border-t">
+				<span className="text-muted-foreground p-3 py-1 text-xs">
+					Not affiliated with Scouting America.
+				</span>
+			</SidebarFooter>
 		</Sidebar>
 	);
 }

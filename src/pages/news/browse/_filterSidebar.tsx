@@ -17,6 +17,7 @@ import type { PaginatedResults } from "@/util/paginateArray";
 import type { Post } from "@/lib/news/posts/post";
 import { SidebarHeader, SidebarContent } from "@/components/ui/sidebar";
 import { PaginationControl } from "@/components/react/paginate";
+import { Button } from "@/components/ui/button";
 
 /** value -> pretty label for the sort direction select */
 const sortDirectionItems = [
@@ -130,9 +131,31 @@ export function FilterSidebar({
 							</form.Field>
 						</FilterSidebarItem>
 
-						<FilterSidebarItem label="sources">
-							<form.Field name="feeds">
-								{(field) => (
+						<form.Field name="feeds">
+							{(field) => (
+								<FilterSidebarItem
+									label="sources"
+									accessory={
+										<Button
+											variant="ghost"
+											className="text-primary"
+											size="xs"
+											onClick={() =>
+												field.handleChange(
+													feeds.flatMap((feed) =>
+														field.state.value.length < feeds.length
+															? feed.slug
+															: [],
+													),
+												)
+											}
+										>
+											{field.state.value.length === feeds.length
+												? "Clear all"
+												: "Select all"}
+										</Button>
+									}
+								>
 									<FieldSet>
 										<FieldGroup data-slot="checkbox-group">
 											{feeds.map((feed) => (
@@ -163,9 +186,9 @@ export function FilterSidebar({
 											))}
 										</FieldGroup>
 									</FieldSet>
-								)}
-							</form.Field>
-						</FilterSidebarItem>
+								</FilterSidebarItem>
+							)}
+						</form.Field>
 
 						{/* <FilterSidebarItem label="debug">
 							<span className="text-sm">{JSON.stringify(query, null, 2)}</span>
