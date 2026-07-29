@@ -42,6 +42,7 @@ export const feedConfigs = [
 		}),
 		defaultVisible: true,
 	},
+
 	// todo it says this is "on hiatus". could not locate an rss feed other than via youtube
 	// {
 	// 	name: "#TroopTalkLive",
@@ -109,7 +110,7 @@ export const feedConfigs = [
 			baseUrl: "https://scoutingalumni.org",
 			typeName: "ask_the_chair",
 		}),
-		defaultVisible: false,
+		defaultVisible: true,
 	},
 	{
 		name: "Scouting Alumni - Alumni Highlights",
@@ -121,7 +122,7 @@ export const feedConfigs = [
 			baseUrl: "https://scoutingalumni.org",
 			typeName: "alumni-highlight",
 		}),
-		defaultVisible: false,
+		defaultVisible: true,
 	},
 	{
 		name: "Scout Life",
