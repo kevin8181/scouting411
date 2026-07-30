@@ -33,7 +33,7 @@ export function PostComponent({ post }: { post: Post }) {
 
 			{post.thumbnail && (
 				<img
-					className="size-28 shrink-0 rounded-lg border object-cover"
+					className="h-36 w-48 shrink-0 rounded-lg border object-cover"
 					src={post.thumbnail}
 				/>
 			)}
