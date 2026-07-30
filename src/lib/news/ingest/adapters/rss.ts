@@ -18,8 +18,8 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 		}
 
 		const postData = feed.items.map((item) => {
-			if (!item.link) {
-				throw new Error(`failed to parse rss feed ${opts.feedUrl}: no link`);
+			if (!item.link && !item.enclosures?.[0]?.url) {
+				throw new Error(`failed to parse rss feed ${opts.feedUrl}: no link or enclosure`);
 			}
 
 			if (!item.title) {
@@ -31,7 +31,7 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 			}
 
 			return {
-				url: item.link,
+				url: item.link ?? item.enclosures![0]!.url!,
 				title: cleanHtmlString(item.title),
 				description: item.description
 					? cleanHtmlString(item.description)
