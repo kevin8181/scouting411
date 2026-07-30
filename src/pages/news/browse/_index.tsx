@@ -27,8 +27,6 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 		updateUrlQuery(query);
 
 		(async () => {
-			
-			
 			const response = await actions.queryPosts(query);
 
 			if (stale) return;

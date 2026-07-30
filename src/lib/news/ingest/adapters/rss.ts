@@ -19,7 +19,9 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 
 		const postData = feed.items.map((item) => {
 			if (!item.link && !item.enclosures?.[0]?.url) {
-				throw new Error(`failed to parse rss feed ${opts.feedUrl}: no link or enclosure`);
+				throw new Error(
+					`failed to parse rss feed ${opts.feedUrl}: no link or enclosure`,
+				);
 			}
 
 			if (!item.title) {
