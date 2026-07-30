@@ -10,7 +10,7 @@ import {
 	faBookBookmark,
 	faBullhorn,
 	faCommentDots,
-	faRocket,
+	faHouseChimney,
 	faMagnifyingGlassChart,
 	faNewspaper,
 	faRssSquare,
@@ -36,9 +36,9 @@ export function AppSidebar({ url }: { url: URL }) {
 					<NavGroup>
 						<NavLink
 							href="/"
-							label="Launchpad"
+							label="Home"
 							currentUrl={url}
-							icon={faRocket}
+							icon={faHouseChimney}
 						/>
 					</NavGroup>
 
