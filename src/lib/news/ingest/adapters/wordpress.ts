@@ -53,7 +53,7 @@ async function fetchPage(
 		url: post.link,
 		title: cleanHtmlString(post.title.rendered),
 		description: cleanHtmlString(
-			post.yoast_head_json?.og_description ?? post.excerpt.rendered,
+			post.yoast_head_json?.og_description ?? post.excerpt?.rendered ?? "",
 		),
 		date: post.date_gmt,
 	}));
@@ -73,10 +73,10 @@ const wordpressApiPostSchema = z.array(
 		}),
 		excerpt: z.object({
 			rendered: z.string(),
-		}),
+		}).optional(),
 		yoast_head_json: z
 			.object({
-				og_description: z.string(),
+				og_description: z.string().optional(),
 			})
 			.optional(),
 		date_gmt: z.string(),
