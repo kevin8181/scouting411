@@ -51,14 +51,16 @@ export function CommandPalette() {
 				variant="outline"
 				onClick={() => setOpen(true)}
 				aria-label="Search"
-				className="h-8 justify-between gap-2 px-2.5 font-normal md:text-sm"
+				className="h-8 w-8 items-center justify-center gap-2 sm:w-40 sm:justify-between sm:px-1.5"
 			>
-				<span className="flex min-w-0 items-center gap-2">
+				<span className="flex items-center gap-2">
 					<SearchIcon className="" />
-					<span className="text-muted-foreground truncate">Search...</span>
+					<span className="text-muted-foreground hidden sm:block">
+						Search...
+					</span>
 				</span>
-				<KbdGroup>
-					<Kbd>/</Kbd>
+				<KbdGroup className="hidden sm:inline-flex">
+					<Kbd>Ctrl K</Kbd>
 				</KbdGroup>
 			</Button>
 
