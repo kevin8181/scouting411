@@ -46,7 +46,7 @@ export function CommandPalette() {
 			</CommandDialog>
 
 			<Sheet open={open && isMobile} onOpenChange={setOpen}>
-				<SheetContent side="bottom" showCloseButton={false}>
+				<SheetContent side="top" showCloseButton={false}>
 					<CommandPaletteContent setOpen={setOpen} />
 				</SheetContent>
 			</Sheet>
