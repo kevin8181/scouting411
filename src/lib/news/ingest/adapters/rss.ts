@@ -1,4 +1,4 @@
-import type { FeedAdapter } from "@/lib/news/ingest/types";
+import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
 import { parseRssFeed } from "feedsmith";
 import { cleanHtmlString } from "@/util/cleanHtmlString";
 
@@ -17,7 +17,7 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 			);
 		}
 
-		const postData = feed.items.map((item) => {
+		const postData: PostData[] = feed.items.map((item) => {
 			if (!item.link && !item.enclosures?.[0]?.url) {
 				throw new Error(
 					`failed to parse rss feed ${opts.feedUrl}: no link or enclosure`,
@@ -39,6 +39,7 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 					? cleanHtmlString(item.description)
 					: undefined,
 				date: item.pubDate,
+				thumbnail: item.itunes?.image,
 			};
 		});
 
