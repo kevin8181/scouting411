@@ -55,10 +55,10 @@ export const feedConfigs = [
 	// },
 
 	{
-		name: "Scouting Magazine",
-		slug: "scouting-magazine",
+		name: "On Scouting",
+		slug: "on-scouting",
 		description:
-			"Editorial content for parents and volunteers. The adult counterpart of Scout Life.",
+			"Editorial content for parents and volunteers. The adult counterpart of Scout Life magazine.",
 		homepageUrl: "https://onscouting.org",
 		adapter: WordpressAdapter({
 			baseUrl: "https://onscouting.org",
