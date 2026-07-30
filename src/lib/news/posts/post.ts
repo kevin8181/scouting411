@@ -8,6 +8,7 @@ export type Post = {
 	description: string | undefined;
 	date: Date;
 	feed: Feed;
+	thumbnail: string | undefined;
 };
 
 /** create a hydrated post from a raw post data object */
@@ -18,5 +19,6 @@ export function hydratePost(data: PostData, feed: Feed): Post {
 		description: data.description,
 		date: new Date(data.date),
 		feed,
+		thumbnail: data.thumbnail,
 	};
 }

@@ -76,6 +76,7 @@ async function fetchPage(
 			post.yoast_head_json?.og_description ?? post.excerpt?.rendered ?? "",
 		),
 		date: post.date_gmt,
+		thumbnail: post.yoast_head_json?.og_image?.[0]?.url,
 	}));
 
 	return {
@@ -99,6 +100,13 @@ const wordpressApiPostSchema = z.array(
 		yoast_head_json: z
 			.object({
 				og_description: z.string().optional(),
+				og_image: z
+					.array(
+						z.object({
+							url: z.string(),
+						}),
+					)
+					.optional(),
 			})
 			.optional(),
 		date_gmt: z.string(),

@@ -10,6 +10,8 @@ export type PostData = {
 	description: string | undefined;
 	/** the date the post was published */
 	date: string;
+	/** external image url to use as a thumbnail */
+	thumbnail: string | undefined;
 };
 
 /** the shape of an adapter function to fetch a certain type of feed */
