@@ -1,9 +1,10 @@
-import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
-import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
-import { WordpressCustomTypesAdapter } from "@/lib/news/ingest/adapters/wordpressCustomType";
 import type { FeedConfig } from "@/lib/news/feeds/types";
 
+import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
+import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
+
 export const feedConfigs = [
+	// todo there are more posts from scouting.org that are not within the two categories below, which we are currently missing.
 	{
 		name: "Scouts BSA Program Updates",
 		slug: "scouts-bsa-program-updates",
@@ -30,7 +31,6 @@ export const feedConfigs = [
 		}),
 		defaultVisible: true,
 	},
-	// todo there are more posts from scouting.org that are not within the two categories above, which we are currently missing.
 
 	{
 		name: "#CubChatLive",
@@ -42,7 +42,6 @@ export const feedConfigs = [
 		}),
 		defaultVisible: true,
 	},
-
 	// todo it says this is "on hiatus". could not locate an rss feed other than via youtube
 	// {
 	// 	name: "#TroopTalkLive",
@@ -54,6 +53,7 @@ export const feedConfigs = [
 	// 	}),
 	// 	defaultVisible: true,
 	// },
+
 	{
 		name: "Scouting Magazine",
 		slug: "scouting-magazine",
@@ -71,9 +71,9 @@ export const feedConfigs = [
 		description:
 			"News and updates regarding scout camp administration. The Official Blog of the National Outdoor Programs and Properties Subcommittees.",
 		homepageUrl: "https://www.scouting.org/outdoor-programs/trail-to-adventure",
-		adapter: WordpressCustomTypesAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scouting.org",
-			typeName: "tta-post",
+			type: "tta-post",
 		}),
 		defaultVisible: true,
 	},
@@ -83,9 +83,9 @@ export const feedConfigs = [
 		description:
 			"Hear from Scouting's Leadership: executives share thoughts on a variety of key Scouting topics.",
 		homepageUrl: "https://www.scouting.org/about/executive-communications/",
-		adapter: WordpressCustomTypesAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scouting.org",
-			typeName: "ec-post",
+			type: "ec-post",
 		}),
 		defaultVisible: true,
 	},
@@ -106,9 +106,9 @@ export const feedConfigs = [
 		description:
 			"The doorway to Scouting is always open for our alumni! Scouting Alumni National Chair Andrew Miller is available to answer your questions. We look forward to hearing from you!",
 		homepageUrl: "https://scoutingalumni.org/resources/ask-the-chair/",
-		adapter: WordpressCustomTypesAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
-			typeName: "ask_the_chair",
+			type: "ask_the_chair",
 		}),
 		defaultVisible: true,
 	},
@@ -118,9 +118,9 @@ export const feedConfigs = [
 		description:
 			"Miscellaneous news from Scouting Alumni, separate from their main news feed.",
 		homepageUrl: "https://scoutingalumni.org/",
-		adapter: WordpressCustomTypesAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
-			typeName: "alumni-highlight",
+			type: "alumni-highlight",
 		}),
 		defaultVisible: true,
 	},
@@ -176,7 +176,7 @@ export const feedConfigs = [
 		homepageUrl: "https://scoutingwire.org",
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingwire.org",
-			//todo split by categories?
+			//todo split by categories / tags?
 		}),
 		defaultVisible: true,
 	},
@@ -188,7 +188,7 @@ export const feedConfigs = [
 		homepageUrl: "https://scoutingnewsroom.org",
 		adapter: RssAdapter({
 			feedUrl: "https://scoutingnewsroom.org/feed",
-			//for some reason the wordpress posts api doesn't return any results on this site
+			// the wordpress posts api works but doesn't return any posts. not sure what's up
 		}),
 		defaultVisible: true,
 	},
@@ -232,9 +232,9 @@ export const feedConfigs = [
 		description:
 			"A feed of events run by the National Eagle Scout Association.",
 		homepageUrl: "https://nesa.org/news",
-		adapter: WordpressCustomTypesAdapter({
+		adapter: WordpressAdapter({
 			baseUrl: "https://nesa.org",
-			typeName: "events",
+			type: "events",
 		}),
 		defaultVisible: true,
 	},
