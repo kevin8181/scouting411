@@ -1,6 +1,11 @@
 import { NavLink } from "@/components/layout/sidebar/navLink";
 import { NavGroup } from "@/components/layout/sidebar/navGroup";
-import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter } from "@/components/ui/sidebar";
+import {
+	Sidebar,
+	SidebarHeader,
+	SidebarContent,
+	SidebarFooter,
+} from "@/components/ui/sidebar";
 import {
 	faBookBookmark,
 	faBullhorn,
@@ -10,6 +15,7 @@ import {
 	faNewspaper,
 	faRssSquare,
 	faCode,
+	faArrowsRotate,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
@@ -95,6 +101,15 @@ export function AppSidebar({ url }: { url: URL }) {
 							currentUrl={url}
 							icon={faGitAlt}
 						/>
+						{import.meta.env.DEV && (
+							<NavLink
+								href="/api/updateAllFeeds"
+								label="Update All Feeds"
+								currentUrl={url}
+								icon={faArrowsRotate}
+								newTab
+							/>
+						)}
 					</NavGroup>
 				</div>
 			</SidebarContent>
