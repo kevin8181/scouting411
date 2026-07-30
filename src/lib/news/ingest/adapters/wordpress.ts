@@ -1,6 +1,7 @@
 import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
 import { cleanHtmlString } from "@/util/cleanHtmlString";
 import { z } from "zod";
+import { sleep } from "@/util/sleep";
 
 type WordpressAdapterOpts = {
 	/** the base url of the wordpress site */
@@ -11,11 +12,30 @@ type WordpressAdapterOpts = {
 	categoryFilter?: number;
 };
 
+/** the number of milliseconds to wait between requests */
+const requestInterval = 500;
+
 export function WordpressAdapter(opts: WordpressAdapterOpts): FeedAdapter {
 	const execute = async () => {
 		const firstPage = await fetchPage(1, opts);
 
-		return firstPage.posts;
+		const remainingPages = Array.from(
+			{ length: firstPage.totalPages - 1 },
+			(_, i) => i + 2,
+		);
+
+		const functions = remainingPages.map(
+			(page) => async () => (await fetchPage(page, opts)).posts,
+		);
+
+		const remainingPagesPosts = await Promise.all(
+			functions.map(async (fn, i) => {
+				await sleep(requestInterval * i);
+				return fn();
+			}),
+		);
+
+		return [firstPage.posts, ...remainingPagesPosts].flat();
 	};
 
 	return {
@@ -71,9 +91,11 @@ const wordpressApiPostSchema = z.array(
 		title: z.object({
 			rendered: z.string(),
 		}),
-		excerpt: z.object({
-			rendered: z.string(),
-		}).optional(),
+		excerpt: z
+			.object({
+				rendered: z.string(),
+			})
+			.optional(),
 		yoast_head_json: z
 			.object({
 				og_description: z.string().optional(),
