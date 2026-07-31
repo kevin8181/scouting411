@@ -27,6 +27,8 @@ export type Feed = {
 	urls: {
 		/** relative href to the detail page for this feed */
 		overview: string;
+		/** go to the post browser page and select just this feed */
+		browsePosts: string;
 		/** relative href to the generated rss feed */
 		rss: string;
 		/** relative href to the generated atom feed */

@@ -39,6 +39,7 @@ const { posts } = await queryPosts({
 			>
 		</p>
 		<p>Indexed posts: {posts.length}</p>
+		<a href={feed.urls.browsePosts}>browse posts</a>
 		<p>
 			Subcribe:
 			<ul>
@@ -50,6 +51,5 @@ const { posts } = await queryPosts({
 				</li>
 			</ul>
 		</p>
-		<!-- todo add a link to browse just this feed -->
 	</div>
 </Layout>
