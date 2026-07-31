@@ -1,14 +1,28 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { feeds } from "@/lib/news/feeds/feedManager";
-import { getFeedPosts } from "@/lib/news/posts/fetch";
+import { queryPosts } from "@/lib/news/query/query";
 
 export const prerender = false;
 
 const feedRows = await Promise.all(
 	feeds.map(async (feed) => ({
 		feed,
-		postCount: (await getFeedPosts(feed)).length,
+		postCount: (
+			await queryPosts({
+				feeds: [feed.slug],
+				filter: {},
+				sort: {
+					direction: "desc",
+					mode: "date",
+				},
+				paginate: {
+					// todo we need a way to disable pagination
+					maxPageSize: 999999,
+					page: 1,
+				},
+			})
+		).posts.length,
 	})),
 );
 

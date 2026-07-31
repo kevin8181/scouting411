@@ -1,22 +1,30 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import { feeds } from "@/lib/news/feeds/feedManager";
-import { getFeedPosts } from "@/lib/news/posts/fetch";
-import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
+import { getFeedBySlug, isFeedSlug } from "@/lib/news/feeds/feedManager";
+import { queryPosts } from "@/lib/news/query/query";
+
+export const prerender = false;
 
 const { slug } = Astro.params;
 
-//todo make this page ssr or fetch via a server action rather than being static
-
-export function getStaticPaths() {
-	return feeds.map((feed) => ({
-		params: { slug: feed.slug },
-	}));
+if (!slug || !isFeedSlug(slug)) {
+	throw new Response("Not found", { status: 404 });
 }
 
 const feed = getFeedBySlug(slug);
-
-if (!feed) throw new Error(`Feed ${slug} not found`);
+const { posts } = await queryPosts({
+	feeds: [slug],
+	filter: {},
+	sort: {
+		direction: "desc",
+		mode: "date",
+	},
+	paginate: {
+		// todo we need a way to disable pagination
+		maxPageSize: 999999,
+		page: 1,
+	},
+});
 ---
 
 <Layout title={"Feed: " + feed.name}>
@@ -30,7 +38,7 @@ if (!feed) throw new Error(`Feed ${slug} not found`);
 				class="text-primary underline">{feed.urls.homepage}</a
 			>
 		</p>
-		<p>Indexed posts: {(await getFeedPosts(feed)).length}</p>
+		<p>Indexed posts: {posts.length}</p>
 		<p>
 			Subcribe:
 			<ul>
