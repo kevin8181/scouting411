@@ -1,9 +1,12 @@
 import type { APIRoute } from "astro";
-import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 import { generateRssFeed } from "feedsmith";
-import { getFeedPosts } from "@/lib/news/posts/fetch";
 
+import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
+import { queryPosts } from "@/lib/news/query/query";
 import { isFeedSlug } from "@/lib/news/feeds/feedManager";
+
+// todo maybe this could just accept a full query as url params and return it as rss,
+// allowing users to make whatever query they want into an rss feed
 
 export const prerender = false;
 
@@ -13,7 +16,19 @@ export const GET: APIRoute = async (context) => {
 		throw new Response("Not found", { status: 404 });
 	}
 	const feed = getFeedBySlug(slug);
-	const posts = await getFeedPosts(feed);
+	const { posts } = await queryPosts({
+		feeds: [slug],
+		filter: {},
+		sort: {
+			direction: "desc",
+			mode: "date",
+		},
+		paginate: {
+			// todo we need a way to disable pagination
+			maxPageSize: 999999,
+			page: 1,
+		},
+	});
 
 	const generated = generateRssFeed(
 		{
@@ -34,6 +49,16 @@ export const GET: APIRoute = async (context) => {
 					title: feed.name,
 					url: feed.urls.homepage, //todo I think this is supposed to be an rss feed
 				},
+
+				...(post.thumbnail && {
+					media: {
+						thumbnails: [
+							{
+								url: post.thumbnail,
+							},
+						],
+					},
+				}),
 			})),
 		},
 		{

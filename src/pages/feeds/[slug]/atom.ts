@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
 import { generateAtomFeed } from "feedsmith";
-import { getFeedPosts } from "@/lib/news/posts/fetch";
+import { queryPosts } from "@/lib/news/query/query";
 import { isFeedSlug } from "@/lib/news/feeds/feedManager";
 
 export const prerender = false;
@@ -11,8 +11,22 @@ export const GET: APIRoute = async (context) => {
 	if (!isFeedSlug(slug)) {
 		throw new Response("Not found", { status: 404 });
 	}
+
 	const feed = getFeedBySlug(slug);
-	const posts = await getFeedPosts(feed);
+
+	const { posts } = await queryPosts({
+		feeds: [slug],
+		filter: {},
+		sort: {
+			direction: "desc",
+			mode: "date",
+		},
+		paginate: {
+			// todo we need a way to disable pagination
+			maxPageSize: 999999,
+			page: 1,
+		},
+	});
 
 	const generated = generateAtomFeed(
 		{
@@ -59,6 +73,16 @@ export const GET: APIRoute = async (context) => {
 						hreflang: "en-us",
 					},
 				],
+
+				...(post.thumbnail && {
+					media: {
+						thumbnails: [
+							{
+								url: post.thumbnail,
+							},
+						],
+					},
+				}),
 			})),
 		},
 		{

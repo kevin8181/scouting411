@@ -14,7 +14,7 @@ export function paginateArray<T>(
 	const items = data.slice(firstItemIndex, lastItemIndex + 1);
 
 	return {
-		items,
+		posts: items,
 		pagination: {
 			page: opts.page,
 			maxPageSize: opts.maxPageSize,
@@ -36,7 +36,7 @@ export const paginateOptsSchema = z.object({
 });
 
 export type PaginatedResults<T> = {
-	items: T[];
+	posts: T[];
 	pagination: PaginationResultsMetadata;
 };
 

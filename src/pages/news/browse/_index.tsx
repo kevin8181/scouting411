@@ -51,7 +51,7 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 			}
 		>
 			<div className="flex flex-1 flex-col gap-5 p-8">
-				{results?.items.length === 0 && (
+				{results?.posts.length === 0 && (
 					<div className="flex flex-col items-center gap-4 p-8">
 						<div className="text-xl">No posts found matching your search.</div>
 						<div className="text-muted-foreground text-sm">
@@ -66,9 +66,9 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 					</div>
 				)}
 
-				{results && results.items.length > 0 && (
+				{results && results.posts.length > 0 && (
 					<CardFeed>
-						{results.items.map((post) => (
+						{results.posts.map((post) => (
 							<PostComponent post={post} key={post.url} />
 						))}
 					</CardFeed>
