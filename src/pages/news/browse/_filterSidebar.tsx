@@ -150,7 +150,7 @@ export function FilterSidebar({
 												)
 											}
 										>
-											{field.state.value.length === feeds.length
+											{field.state.value?.length === feeds.length
 												? "Clear all"
 												: "Select all"}
 										</Button>
@@ -163,7 +163,7 @@ export function FilterSidebar({
 													<Checkbox
 														id={`source-${feed.slug}`}
 														name={feed.slug}
-														checked={field.state.value.includes(feed.slug)}
+														checked={field.state.value?.includes(feed.slug)}
 														onCheckedChange={(checked) =>
 															field.handleChange(
 																/** rebuild from the canonical feed list so the order stays stable */
