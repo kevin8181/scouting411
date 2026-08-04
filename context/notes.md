@@ -123,8 +123,12 @@ dimensions
 - https://mrsscoutmaster.com/
 - https://scoutmastercg.com/
 - https://scoutsmarts.com/
+- https://middletownscouter.wordpress.com/
+- https://www.melrosetroop68.org/blog/
 
 ## third party tools and resources
 
 - https://www.scouter.com
 - https://scoutingamericasquareknots.app/
+- https://scoutbugle.com/
+- https://scoutpioneering.com/
