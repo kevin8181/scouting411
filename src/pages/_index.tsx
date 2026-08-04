@@ -17,7 +17,7 @@ export function Page({
 	latestPosts: Awaited<ReturnType<typeof queryPosts>>;
 }) {
 	return (
-		<div className="flex h-full w-full flex-col items-center justify-center p-8 bg-linear-to-b from-muted to-white">
+		<div className="flex h-full w-full flex-col items-center justify-center p-8 bg-linear-to-b from-muted to-background">
 			<div className="flex flex-col items-center gap-4">
 				<h1 className="text-primary font-display text-5xl font-extrabold">
 					Scouting411
