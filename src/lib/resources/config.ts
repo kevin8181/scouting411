@@ -163,6 +163,33 @@ export const resources: Resource[] = [
 		description:
 			"The current edition of the Guide to Advancement is the official source for administering advancement in all Scouting America programs: Cub Scouting, Scouts BSA, Venturing, and Sea Scouts.",
 	},
+	{
+		url: "https://www.scouting.org/resources/insignia-guide/",
+		title: "Guide to Awards and Insignia",
+		description: "The official guide to uniforming and insignia",
+	},
+	{
+		url: "https://www.scouting.org/wp-content/uploads/2025/11/2025-Rules_Regulations_NEB-Approved-10.28.2025.pdf",
+		title: "Rules and Regulation of the Boy Scouts of America",
+		description: "The official bylaws of the Boy Scouts of America",
+	},
+	{
+		url: "https://filestore.scouting.org/filestore/Outdoor%20Program/Aquatics/pdf/Aquatics_34346.pdf",
+		title: "Aquatics Supervision",
+		description: "A Leader's Guide to Youth Swimming and Boating Activities",
+	},
+
+	// forms
+	{
+		url: "https://filestore.scouting.org/filestore/pdf/34405.pdf",
+		title: "Merit Badge Counselor Information",
+		description: "The form to add or remove Merit Badges for counselors",
+	},
+	{
+		url: "https://filestore.scouting.org/filestore/pdf/34427.pdf",
+		title: "Unit Money Earning Application",
+		description: "The form to apply for holding a unit-level fundraiser",
+	},
 
 	// tools
 	{

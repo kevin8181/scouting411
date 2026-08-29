@@ -79,6 +79,7 @@
 - https://licensingbsa.org/
 - https://open.spotify.com/show/57YZ4Fu74WkSHE5qyVkQS2
 - https://filestore.scouting.org/filestore ... figure out how to list everything or see updates?
+- https://scouting-oec.org/news/
 
 give.scouting.org
 reservations.scouting.org
