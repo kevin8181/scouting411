@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { queryPosts } from "@/lib/news/query/query";
 import type { Post } from "@/lib/news/posts/post";
 import relativeDate from "tiny-relative-date";
+import { Button } from "@/components/ui/button";
+import { SearchIcon } from "lucide-react";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { useCommandPalette } from "@/components/react/commandPalette";
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },
@@ -16,20 +20,35 @@ export function Page({
 }: {
 	latestPosts: Awaited<ReturnType<typeof queryPosts>>;
 }) {
+	const { setOpen } = useCommandPalette();
+
 	return (
 		<div className="flex h-full w-full flex-col items-center justify-center p-8">
 			<div className="flex flex-col items-center gap-4">
 				<h1 className="text-primary font-display text-5xl font-extrabold">
 					Scouting411
 				</h1>
-				<h2 className="text-secondary-foreground text-xl">
+				<h2 className="text-secondary-foreground text-xl mb-3">
 					the unofficial front page of Scouting America
 				</h2>
 
-				{/* <Input
-					placeholder={`Search ${resources.length} resources`}
-					className="h-10 w-full max-w-xl text-lg"
-				/> */}
+				<Button
+					variant="outline"
+					size="lg"
+					onClick={() => setOpen(true)}
+					aria-label="Search"
+					className="h-10 w-lg items-center justify-between gap-2 px-3 text-md"
+				>
+					<span className="flex items-center gap-2">
+						<SearchIcon className="" />
+						<span className="text-muted-foreground hidden sm:block">
+							Search...
+						</span>
+					</span>
+					<KbdGroup className="hidden sm:inline-flex">
+						<Kbd>Ctrl K</Kbd>
+					</KbdGroup>
+				</Button>
 			</div>
 
 			<div className="mt-10 mb-3 flex w-full max-w-5xl justify-between">
