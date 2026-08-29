@@ -182,7 +182,7 @@ function handleSelection(
 
 /** site navigation links to include in the palette */
 const navigation = [
-	{ href: "/", label: "Launchpad" },
+	{ href: "/", label: "Home" },
 	{ href: "/news/browse", label: "Newsfeed" },
 	{ href: "/news/sources", label: "Sources" },
 	{ href: "/news/subscribe", label: "Subscribe" },
