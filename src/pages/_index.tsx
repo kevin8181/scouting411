@@ -17,7 +17,7 @@ export function Page({
 	latestPosts: Awaited<ReturnType<typeof queryPosts>>;
 }) {
 	return (
-		<div className="from-muted to-background flex h-full w-full flex-col items-center justify-center bg-linear-to-b p-8">
+		<div className="flex h-full w-full flex-col items-center justify-center p-8">
 			<div className="flex flex-col items-center gap-4">
 				<h1 className="text-primary font-display text-5xl font-extrabold">
 					Scouting411
@@ -105,15 +105,18 @@ export function Page({
 
 function PostSmallCard({ post }: { post: Post }) {
 	return (
-		<a href={post.url} rel="noopener noreferrer" target="_blank">
-			<div className="hover:border-primary flex flex-col items-start gap-2 rounded-lg border p-3">
-				<span className="text-muted-foreground text-sm">
-					{post.feed.name} &middot; {relativeDate(post.date)}
-				</span>
-				<h3 className="line-clamp-2 font-serif font-bold text-ellipsis">
-					{post.title}
-				</h3>
-			</div>
+		<a
+			href={post.url}
+			rel="noopener noreferrer"
+			target="_blank"
+			className="hover:border-primary flex h-full flex-col items-start gap-2 rounded-lg border p-3"
+		>
+			<span className="text-muted-foreground text-sm">
+				{post.feed.name} &middot; {relativeDate(post.date)}
+			</span>
+			<h3 className="line-clamp-2 font-serif font-bold text-ellipsis">
+				{post.title}
+			</h3>
 		</a>
 	);
 }
