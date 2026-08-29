@@ -2,7 +2,7 @@ import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { queryPosts } from "@/lib/news/query/query";
 import type { Post } from "@/lib/news/posts/post";
-import relativeDate from "tiny-relative-date"
+import relativeDate from "tiny-relative-date";
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },
@@ -17,7 +17,7 @@ export function Page({
 	latestPosts: Awaited<ReturnType<typeof queryPosts>>;
 }) {
 	return (
-		<div className="flex h-full w-full flex-col items-center justify-center p-8 bg-linear-to-b from-muted to-background">
+		<div className="from-muted to-background flex h-full w-full flex-col items-center justify-center bg-linear-to-b p-8">
 			<div className="flex flex-col items-center gap-4">
 				<h1 className="text-primary font-display text-5xl font-extrabold">
 					Scouting411
@@ -32,7 +32,7 @@ export function Page({
 				/> */}
 			</div>
 
-			<div className="flex w-full max-w-5xl justify-between mb-3 mt-10">
+			<div className="mt-10 mb-3 flex w-full max-w-5xl justify-between">
 				<span className="text-primary font-serif text-xl font-bold">
 					Latest News
 				</span>
@@ -48,8 +48,7 @@ export function Page({
 				))}
 			</div>
 
-			<div className="grid w-full max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3 mt-10">
-				
+			<div className="mt-10 grid w-full max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3">
 				<div className="flex flex-col items-start gap-4 rounded-lg border p-6">
 					<span className="text-primary font-serif text-xl font-bold">
 						Resources
@@ -69,7 +68,7 @@ export function Page({
 					</span>
 					<ul className="flex w-full flex-col gap-2 text-sm">
 						{quickLinks.map((link) => (
-							<li>
+							<li key={link.href}>
 								<a
 									href={link.href}
 									rel="noopener noreferrer"
