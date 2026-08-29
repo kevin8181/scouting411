@@ -15,11 +15,16 @@ import { useStore } from "@nanostores/react";
 /** persistently stores the user's theme preference. */
 const $theme = persistentAtom<"light" | "dark" | "system">("theme", "system");
 
+export function useTheme() {
+	const theme = useStore($theme);
+	const setTheme = $theme.set;
+	return { theme, setTheme };
+}
+
 // NOTE: there is a script in the root layout that handles actually setting the theme on page load / navigation
 
 export function DarkModeControl() {
-	const theme = useStore($theme);
-	const setTheme = $theme.set;
+	const { theme, setTheme } = useTheme();
 
 	// when the theme changes, sync the class to the document
 	React.useEffect(() => {

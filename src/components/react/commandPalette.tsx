@@ -20,6 +20,7 @@ import { useIsMobile } from "@/util/hooks/use-mobile";
 
 import { feeds } from "@/lib/news/feeds/feedManager";
 import { resources } from "@/lib/resources/config";
+import { useTheme } from "@/components/react/darkModeControl";
 
 /** global store for whether the command palette is open */
 const $commandPaletteOpen = atom(false);
@@ -80,12 +81,13 @@ export function CommandPaletteTrigger() {
 }
 
 function CommandPaletteContent() {
+	const { setTheme } = useTheme();
+
 	return (
 		<Command>
 			<CommandInput placeholder="Search..." />
 			<CommandList>
 				<CommandEmpty>No results found.</CommandEmpty>
-
 				<CommandGroup heading="Navigation">
 					{navigation.map((item) => (
 						<CommandItem
@@ -99,7 +101,6 @@ function CommandPaletteContent() {
 					))}
 				</CommandGroup>
 				<CommandSeparator />
-
 				<CommandGroup heading="Feeds">
 					{feeds.map((feed) => (
 						<CommandItem
@@ -113,7 +114,6 @@ function CommandPaletteContent() {
 					))}
 				</CommandGroup>
 				<CommandSeparator />
-
 				<CommandGroup heading="Resources">
 					{resources.map((resource) => (
 						<CommandItem
@@ -125,6 +125,34 @@ function CommandPaletteContent() {
 							{resource.title}
 						</CommandItem>
 					))}
+				</CommandGroup>
+				<CommandSeparator />
+
+				<CommandGroup heading="Site Theme">
+					<CommandItem
+						key={"dark"}
+						value={"dark"}
+						keywords={["dark mode", "light mode", "system theme"]}
+						onSelect={() => setTheme("dark")}
+					>
+						Enable dark mode
+					</CommandItem>
+					<CommandItem
+						key={"light"}
+						value={"light"}
+						keywords={["dark mode", "light mode", "system theme"]}
+						onSelect={() => setTheme("light")}
+					>
+						Enable light mode
+					</CommandItem>
+					<CommandItem
+						key={"system"}
+						value={"system"}
+						keywords={["dark mode", "light mode", "system theme"]}
+						onSelect={() => setTheme("system")}
+					>
+						Use system theme
+					</CommandItem>
 				</CommandGroup>
 			</CommandList>
 		</Command>
