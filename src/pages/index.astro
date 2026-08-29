@@ -22,5 +22,5 @@ const latestPosts = await queryPosts({
 ---
 
 <Layout title="Home">
-	<Page latestPosts={latestPosts} />
+	<Page latestPosts={latestPosts} client:load />
 </Layout>
