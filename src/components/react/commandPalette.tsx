@@ -94,7 +94,7 @@ function CommandPaletteContent() {
 							key={item.href}
 							value={item.href}
 							keywords={[item.label]}
-							onSelect={() => openSelection(item.href)}
+							onSelect={handleSelection({ url: item.href })}
 						>
 							{item.label}
 						</CommandItem>
@@ -107,7 +107,7 @@ function CommandPaletteContent() {
 							key={feed.slug}
 							value={feed.slug}
 							keywords={[feed.name, feed.description]}
-							onSelect={() => openSelection(feed.urls.overview)}
+							onSelect={handleSelection({ url: feed.urls.overview })}
 						>
 							{feed.name}
 						</CommandItem>
@@ -120,7 +120,7 @@ function CommandPaletteContent() {
 							key={resource.url}
 							value={resource.url}
 							keywords={[resource.title, resource.description]}
-							onSelect={() => openSelection(resource.url, true)}
+							onSelect={handleSelection({ url: resource.url, newTab: true })}
 						>
 							{resource.title}
 						</CommandItem>
@@ -133,7 +133,7 @@ function CommandPaletteContent() {
 						key={"dark"}
 						value={"dark"}
 						keywords={["dark mode", "light mode", "system theme"]}
-						onSelect={() => setTheme("dark")}
+						onSelect={handleSelection(() => setTheme("dark"))}
 					>
 						Enable dark mode
 					</CommandItem>
@@ -141,7 +141,7 @@ function CommandPaletteContent() {
 						key={"light"}
 						value={"light"}
 						keywords={["dark mode", "light mode", "system theme"]}
-						onSelect={() => setTheme("light")}
+						onSelect={handleSelection(() => setTheme("light"))}
 					>
 						Enable light mode
 					</CommandItem>
@@ -149,7 +149,7 @@ function CommandPaletteContent() {
 						key={"system"}
 						value={"system"}
 						keywords={["dark mode", "light mode", "system theme"]}
-						onSelect={() => setTheme("system")}
+						onSelect={handleSelection(() => setTheme("system"))}
 					>
 						Use system theme
 					</CommandItem>
@@ -160,16 +160,24 @@ function CommandPaletteContent() {
 }
 
 /** run when a command palette item is selected */
-function openSelection(url: string, newTab = false) {
-	// have to close the pallete first, because of spa routing
-	const { setOpen } = useCommandPalette();
-	setOpen(false);
+function handleSelection(
+	opts: { url: string; newTab?: boolean } | (() => void),
+) {
+	return () => {
+		const { setOpen } = useCommandPalette();
+		setOpen(false);
 
-	if (newTab) {
-		window.open(url, "_blank", "noopener,noreferrer");
-	} else {
-		window.location.href = url;
-	}
+		if (typeof opts === "function") {
+			opts();
+			return;
+		}
+
+		if (opts.newTab) {
+			window.open(opts.url, "_blank", "noopener,noreferrer");
+		} else {
+			window.location.href = opts.url;
+		}
+	};
 }
 
 /** site navigation links to include in the palette */
