@@ -6,7 +6,10 @@ import {
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { DarkModeControl } from "@/components/react/darkModeControl";
-import { CommandPalette } from "@/components/react/commandPalette";
+import {
+	CommandPalette,
+	CommandPaletteTrigger,
+} from "@/components/react/commandPalette";
 
 import {
 	TooltipProvider,
@@ -32,6 +35,7 @@ export function AppShell({
 					<span className="font-serif font-bold">{title}</span>
 					<div className="flex items-center gap-2">
 						<CommandPalette />
+						<CommandPaletteTrigger />
 
 						<TooltipProvider>
 							<Tooltip>

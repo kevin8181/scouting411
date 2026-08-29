@@ -11,27 +11,32 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
-
-import { useState } from "react";
 import { SearchIcon } from "lucide-react";
+
+import { atom } from "nanostores";
+import { useStore } from "@nanostores/react";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useIsMobile } from "@/util/hooks/use-mobile";
 
 import { feeds } from "@/lib/news/feeds/feedManager";
 import { resources } from "@/lib/resources/config";
 
-const navigation = [
-	{ href: "/", label: "Launchpad" },
-	{ href: "/news/browse", label: "Newsfeed" },
-	{ href: "/news/sources", label: "Sources" },
-	{ href: "/news/subscribe", label: "Subscribe" },
-	{ href: "/news/stats", label: "Stats" },
-	{ href: "/resources", label: "Resources" },
-	{ href: "/developers", label: "API" },
-];
+/** global store for whether the command palette is open */
+const $commandPaletteOpen = atom(false);
 
+/** hook for the command palette open/closed state */
+export function useCommandPalette() {
+	const open = useStore($commandPaletteOpen);
+	const setOpen = $commandPaletteOpen.set;
+	return { open, setOpen };
+}
+
+/**
+ * mount this component to wire up the command palette and hotkeys.
+ * doesn't render anything until the command palette is actually open.
+ * */
 export function CommandPalette() {
-	const [open, setOpen] = useState(false);
+	const { open, setOpen } = useCommandPalette();
 	const isMobile = useIsMobile();
 
 	useHotkey("/", () => setOpen(true));
@@ -39,26 +44,23 @@ export function CommandPalette() {
 
 	return (
 		<>
-			<CommandPaletteTrigger setOpen={setOpen} />
-
 			<CommandDialog open={open && !isMobile} onOpenChange={setOpen}>
-				<CommandPaletteContent setOpen={setOpen} />
+				<CommandPaletteContent />
 			</CommandDialog>
 
 			<Sheet open={open && isMobile} onOpenChange={setOpen}>
 				<SheetContent side="top" showCloseButton={false}>
-					<CommandPaletteContent setOpen={setOpen} />
+					<CommandPaletteContent />
 				</SheetContent>
 			</Sheet>
 		</>
 	);
 }
 
-function CommandPaletteTrigger({
-	setOpen,
-}: {
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+/** the trigger button used in the site header */
+export function CommandPaletteTrigger() {
+	const { setOpen } = useCommandPalette();
+
 	return (
 		<Button
 			variant="outline"
@@ -77,20 +79,7 @@ function CommandPaletteTrigger({
 	);
 }
 
-function CommandPaletteContent({
-	setOpen,
-}: {
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-	function go(url: string, newTab = false) {
-		setOpen(false);
-		if (newTab) {
-			window.open(url, "_blank", "noopener,noreferrer");
-		} else {
-			window.location.href = url;
-		}
-	}
-
+function CommandPaletteContent() {
 	return (
 		<Command>
 			<CommandInput placeholder="Search..." />
@@ -103,7 +92,7 @@ function CommandPaletteContent({
 							key={item.href}
 							value={item.href}
 							keywords={[item.label]}
-							onSelect={() => go(item.href)}
+							onSelect={() => openSelection(item.href)}
 						>
 							{item.label}
 						</CommandItem>
@@ -117,7 +106,7 @@ function CommandPaletteContent({
 							key={feed.slug}
 							value={feed.slug}
 							keywords={[feed.name, feed.description]}
-							onSelect={() => go(feed.urls.overview)}
+							onSelect={() => openSelection(feed.urls.overview)}
 						>
 							{feed.name}
 						</CommandItem>
@@ -131,7 +120,7 @@ function CommandPaletteContent({
 							key={resource.url}
 							value={resource.url}
 							keywords={[resource.title, resource.description]}
-							onSelect={() => go(resource.url, true)}
+							onSelect={() => openSelection(resource.url, true)}
 						>
 							{resource.title}
 						</CommandItem>
@@ -141,3 +130,27 @@ function CommandPaletteContent({
 		</Command>
 	);
 }
+
+/** run when a command palette item is selected */
+function openSelection(url: string, newTab = false) {
+	// have to close the pallete first, because of spa routing
+	const { setOpen } = useCommandPalette();
+	setOpen(false);
+
+	if (newTab) {
+		window.open(url, "_blank", "noopener,noreferrer");
+	} else {
+		window.location.href = url;
+	}
+}
+
+/** site navigation links to include in the palette */
+const navigation = [
+	{ href: "/", label: "Launchpad" },
+	{ href: "/news/browse", label: "Newsfeed" },
+	{ href: "/news/sources", label: "Sources" },
+	{ href: "/news/subscribe", label: "Subscribe" },
+	{ href: "/news/stats", label: "Stats" },
+	{ href: "/resources", label: "Resources" },
+	{ href: "/developers", label: "API" },
+];
