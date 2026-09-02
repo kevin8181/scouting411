@@ -28,7 +28,7 @@ export function Page({
 				<h1 className="text-primary font-display text-5xl font-extrabold">
 					Scouting411
 				</h1>
-				<h2 className="text-secondary-foreground text-xl mb-3">
+				<h2 className="text-secondary-foreground mb-3 text-xl">
 					the unofficial front page of Scouting America
 				</h2>
 
@@ -37,7 +37,7 @@ export function Page({
 					size="lg"
 					onClick={() => setOpen(true)}
 					aria-label="Search"
-					className="h-10 w-lg items-center justify-between gap-2 px-3 text-md"
+					className="text-md h-10 w-lg items-center justify-between gap-2 px-3"
 				>
 					<span className="flex items-center gap-2">
 						<SearchIcon className="" />

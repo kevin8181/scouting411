@@ -294,3 +294,16 @@ export const feedConfigs = [
 		defaultVisible: true,
 	},
 ] as const satisfies FeedConfig[];
+
+/**
+ * the slugs of the feeds that should be included in the default query.
+ *
+ * derived from the raw configs rather than the hydrated `feeds` so that the
+ * query layer can read it without importing `feedManager` — hydration pulls in
+ * `queryParams`, which would make the import graph cyclic and leave this
+ * binding in its tdz when the browser bundle happens to evaluate `feedManager`
+ * first.
+ */
+export const defaultVisibleFeeds = feedConfigs
+	.filter((feed) => feed.defaultVisible)
+	.map((feed) => feed.slug);

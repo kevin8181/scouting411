@@ -3,7 +3,7 @@ import { filterOptsSchema } from "@/lib/news/query/filter";
 import { sortOptsSchema } from "@/lib/news/query/sort";
 import { paginateOptsSchema } from "@/util/paginateArray";
 import { feedSlugSchema } from "@/lib/news/feeds/types";
-import { defaultVisibleFeeds } from "@/lib/news/feeds/feedManager";
+import { defaultVisibleFeeds } from "@/lib/news/feeds/config";
 
 export type QueryOpts = z.infer<typeof queryOptsSchema>;
 export const queryOptsSchema = z.object({
