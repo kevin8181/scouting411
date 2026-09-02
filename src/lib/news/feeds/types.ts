@@ -8,6 +8,7 @@ export type FeedConfig = {
 	name: string;
 	slug: string;
 	description: string;
+	coverImageSrc: string;
 	homepageUrl: UrlShaped;
 	adapter: FeedAdapter;
 	defaultVisible: boolean;
