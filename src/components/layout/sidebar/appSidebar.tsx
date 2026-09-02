@@ -90,16 +90,9 @@ export function AppSidebar({ url }: { url: URL }) {
 						/>
 						<NavLink
 							href="/developers"
-							label="API"
+							label="Developers"
 							currentUrl={url}
 							icon={faCode}
-						/>
-						<NavLink
-							href="https://github.com/kevin8181/scouting411"
-							label="Source Code"
-							newTab
-							currentUrl={url}
-							icon={faGitAlt}
 						/>
 						{import.meta.env.DEV && (
 							<NavLink

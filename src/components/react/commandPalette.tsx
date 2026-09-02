@@ -188,5 +188,5 @@ const navigation = [
 	{ href: "/news/subscribe", label: "Subscribe" },
 	{ href: "/news/stats", label: "Stats" },
 	{ href: "/resources", label: "Resources" },
-	{ href: "/developers", label: "API" },
+	{ href: "/developers", label: "Developers" },
 ];

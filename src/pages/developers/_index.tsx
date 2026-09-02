@@ -6,11 +6,10 @@ export function Page() {
 				<a href="/api/posts" className="text-primary underline">
 					/api/posts
 				</a>
-				. This is still changing so it isn't fully documented yet. No API key is
-				required.
+				. No authentication is required.
 			</div>
 
-			<span>In the future we may also add an MCP server.</span>
+			<span>The API is not yet documented and will be subject to major breaking changes.</span>
 
 			<span>
 				Scouting411 is free and open source software, licensed under the AGPLv3.
