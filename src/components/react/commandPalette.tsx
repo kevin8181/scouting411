@@ -164,8 +164,7 @@ function handleSelection(
 	opts: { url: string; newTab?: boolean } | (() => void),
 ) {
 	return () => {
-		const { setOpen } = useCommandPalette();
-		setOpen(false);
+		$commandPaletteOpen.set(false);
 
 		if (typeof opts === "function") {
 			opts();
