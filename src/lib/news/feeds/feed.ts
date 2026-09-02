@@ -7,6 +7,7 @@ export function hydrateFeed(opts: FeedConfigEntry): Feed {
 		name: opts.name,
 		slug: opts.slug,
 		description: opts.description,
+		coverImageSrc: opts.coverImageSrc,
 		urls: {
 			overview: `/news/sources/${opts.slug}`,
 			browsePosts: `/news/browse?${postsQueryParamsEncoder.encode({

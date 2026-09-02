@@ -24,6 +24,7 @@ export type Feed = {
 	name: string;
 	slug: FeedSlug;
 	description: string;
+	coverImageSrc: string;
 	urls: {
 		/** relative href to the detail page for this feed */
 		overview: string;

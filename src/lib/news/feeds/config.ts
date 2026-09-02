@@ -36,6 +36,8 @@ export const feedConfigs = [
 		name: "#CubChatLive",
 		slug: "cubchat",
 		description: "The official video podcast of the Cub Scouts program.",
+		coverImageSrc:
+			"https://i0.wp.com/onscouting.org/wp-content/uploads/2022/01/cubchat-1280x720-1.png",
 		homepageUrl: "https://onscouting.org/cubchatlive/",
 		adapter: RssAdapter({
 			feedUrl: "https://anchor.fm/s/10fd33ec4/podcast/rss",
@@ -198,6 +200,8 @@ export const feedConfigs = [
 		description:
 			"Provides updates and news about special needs scouting. A publication of the National Special Needs and Disabilities Committee.",
 		homepageUrl: "https://ablescouts.org",
+		coverImageSrc:
+			"https://ablescouts.org/wp-content/uploads/2022/04/cropped-sn-logo-only.png",
 		adapter: RssAdapter({
 			feedUrl: "https://ablescouts.org/feed",
 			//entire wordpress api is 404

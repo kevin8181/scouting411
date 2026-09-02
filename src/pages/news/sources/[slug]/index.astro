@@ -67,20 +67,28 @@ const stats = [
 
 <Layout title={feed.name}>
 	<div class="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
-		<div class="flex flex-col items-start gap-3">
-			<h1 class="font-serif text-3xl font-bold wrap-anywhere hyphens-auto">
-				{feed.name}
-			</h1>
-			<p class="text-sm">{feed.description}</p>
-			<a
-				href={feed.urls.homepage}
-				rel="noopener noreferrer"
-				target="_blank"
-				class="text-primary flex items-center gap-2 text-sm font-medium wrap-anywhere hyphens-auto hover:underline"
-			>
-				{feed.urls.homepage}
-				<FontAwesomeIcon icon={faSquareUpRight} height="0.9em" />
-			</a>
+		<div class="flex flex-col items-start gap-5 sm:flex-row sm:items-start">
+			<img
+				src={feed.coverImageSrc}
+				alt={`${feed.name} logo`}
+				class="bg-card h-32 w-full rounded-lg border object-contain p-3 sm:w-40 sm:shrink-0"
+			/>
+
+			<div class="flex min-w-0 flex-col items-start gap-3">
+				<h1 class="font-serif text-3xl font-bold wrap-anywhere hyphens-auto">
+					{feed.name}
+				</h1>
+				<p class="text-sm">{feed.description}</p>
+				<a
+					href={feed.urls.homepage}
+					rel="noopener noreferrer"
+					target="_blank"
+					class="text-primary flex items-center gap-2 text-sm font-medium wrap-anywhere hyphens-auto hover:underline"
+				>
+					{feed.urls.homepage}
+					<FontAwesomeIcon icon={faSquareUpRight} height="0.9em" />
+				</a>
+			</div>
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
