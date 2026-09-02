@@ -1,8 +1,9 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
+import { feeds } from "@/lib/news/feeds/feedManager";
 import { Page } from "@/pages/developers/_index";
 ---
 
 <Layout title="For Developers">
-	<Page client:load />
+	<Page feeds={feeds} />
 </Layout>
