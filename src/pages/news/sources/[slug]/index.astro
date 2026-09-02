@@ -1,7 +1,15 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
+import { PostComponent } from "@/components/react/post";
 import { getFeedBySlug, isFeedSlug } from "@/lib/news/feeds/feedManager";
 import { queryPosts } from "@/lib/news/query/query";
+
+import {
+	faSquareUpRight,
+	faRss,
+	faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const prerender = false;
 
@@ -25,31 +33,121 @@ const { posts } = await queryPosts({
 		page: 1,
 	},
 });
+
+const recentPosts = posts.slice(0, 10);
+const latestPost = posts.at(0);
+const oldestPost = posts.at(-1);
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+
+const stats = [
+	{
+		label: "Indexed posts",
+		value: Intl.NumberFormat().format(posts.length),
+	},
+	{
+		label: "Latest post",
+		value: latestPost ? formatDate(latestPost.date) : "—",
+	},
+	{
+		label: "Oldest post",
+		value: oldestPost ? formatDate(oldestPost.date) : "—",
+	},
+	{
+		label: "Source type",
+		value: feed.type.human,
+	},
+];
 ---
 
-<Layout title={"Feed: " + feed.name}>
-	<div class="p-8">
-		<p>{feed.description}</p>
-		<p>
-			Homepage: <a
+<Layout title={feed.name}>
+	<div class="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
+		<div class="flex flex-col items-start gap-3">
+			<h1 class="font-serif text-3xl font-bold wrap-anywhere hyphens-auto">
+				{feed.name}
+			</h1>
+			<p class="text-sm">{feed.description}</p>
+			<a
 				href={feed.urls.homepage}
 				rel="noopener noreferrer"
 				target="_blank"
-				class="text-primary underline">{feed.urls.homepage}</a
+				class="text-primary flex items-center gap-2 text-sm font-medium wrap-anywhere hyphens-auto hover:underline"
 			>
-		</p>
-		<p>Indexed posts: {posts.length}</p>
-		<a href={feed.urls.browsePosts}>browse posts</a>
-		<p>
-			Subcribe:
-			<ul>
-				<li>
-					<a href={feed.urls.rss} class="text-primary underline">rss</a>
-				</li>
-				<li>
-					<a href={feed.urls.atom} class="text-primary underline">atom</a>
-				</li>
-			</ul>
-		</p>
+				{feed.urls.homepage}
+				<FontAwesomeIcon icon={faSquareUpRight} height="0.9em" />
+			</a>
+		</div>
+
+		<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+			{
+				stats.map((stat) => (
+					<div class="rounded-lg border p-4">
+						<div class="text-muted-foreground text-xs font-medium uppercase">
+							{stat.label}
+						</div>
+						<div class="font-serif text-lg font-bold">{stat.value}</div>
+					</div>
+				))
+			}
+		</div>
+
+		<div
+			class="border-primary/30 bg-primary/5 flex flex-col items-start gap-3 rounded-lg border p-4 px-5 sm:flex-row sm:items-center sm:justify-between"
+		>
+			<div>
+				<div class="mb-2 font-serif font-bold">Subscribe to this source</div>
+				<p class="text-muted-foreground text-sm">
+					Follow {feed.name} in your feed reader.
+				</p>
+			</div>
+			<div class="flex gap-2">
+				<a
+					href={feed.urls.rss}
+					rel="noopener noreferrer"
+					target="_blank"
+					class="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold whitespace-nowrap"
+				>
+					<FontAwesomeIcon icon={faRss} height="0.9em" />
+					RSS
+				</a>
+				<a
+					href={feed.urls.atom}
+					rel="noopener noreferrer"
+					target="_blank"
+					class="hover:border-primary hover:text-primary flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-semibold whitespace-nowrap transition-colors"
+				>
+					<FontAwesomeIcon icon={faRss} height="0.9em" />
+					Atom
+				</a>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-5">
+			<div class="flex items-center justify-between gap-4">
+				<h2 class="font-serif text-xl font-bold">Recent posts</h2>
+				<a
+					href={feed.urls.browsePosts}
+					class="text-primary flex items-center gap-2 text-sm font-medium whitespace-nowrap hover:underline"
+				>
+					Browse all posts
+					<FontAwesomeIcon icon={faArrowRight} height="0.9em" />
+				</a>
+			</div>
+
+			{
+				recentPosts.length === 0 ? (
+					<div class="text-muted-foreground rounded-lg border p-6 text-sm">
+						No posts have been indexed from this source yet.
+					</div>
+				) : (
+					recentPosts.map((post) => <PostComponent post={post} />)
+				)
+			}
+		</div>
 	</div>
 </Layout>
