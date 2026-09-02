@@ -186,9 +186,9 @@ export const feedConfigs = [
 		description:
 			"Provides updates and news about the national Scouting administration.",
 		homepageUrl: "https://scoutingnewsroom.org",
-		adapter: RssAdapter({
-			feedUrl: "https://scoutingnewsroom.org/feed",
-			// the wordpress posts api works but doesn't return any posts. not sure what's up
+		adapter: WordpressAdapter({
+			baseUrl: "https://scoutingnewsroom.org",
+			type: "press-releases",
 		}),
 		defaultVisible: true,
 	},
