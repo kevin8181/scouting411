@@ -33,12 +33,12 @@ export const GET: APIRoute = async (context) => {
 	const generated = generateRssFeed(
 		{
 			title: feed.name,
-			link: feed.urls.homepage,
+			link: feed.urls.overview,
 			description: feed.description,
 			image: {
 				url: feed.coverImageSrc,
 				title: feed.name,
-				link: feed.urls.homepage,
+				link: feed.urls.overview,
 			},
 
 			generator: "scouting411",
