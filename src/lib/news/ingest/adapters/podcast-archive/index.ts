@@ -1,5 +1,9 @@
 import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
 import { cleanHtmlString } from "@/util/cleanHtmlString";
+import {
+	extractAudioUrl,
+	stripPodcastChrome,
+} from "@/lib/news/ingest/adapters/podcast-archive/extractors";
 import data from "./data.json";
 import { z } from "zod";
 
@@ -23,12 +27,17 @@ export function PodcastArchiveAdapter(
 					return [];
 				}
 
+				const url = extractAudioUrl(item.content.rendered);
+				if (!url)
+					throw new Error(`no audio url found for ${item.title.rendered}`);
+
 				return {
 					date: item.date_gmt,
-					description: cleanHtmlString(item.excerpt.rendered),
+					description: cleanHtmlString(
+						stripPodcastChrome(item.excerpt.rendered),
+					),
 					title: cleanHtmlString(item.title.rendered),
-					// todo this goes to the dead link at podcast.scouting.org. need to figure out how to pull out the mp3 url
-					url: item.link,
+					url,
 					thumbnail: undefined,
 				};
 			});
@@ -41,13 +50,15 @@ export function PodcastArchiveAdapter(
 const archivedPostsSchema = z.array(
 	z.object({
 		date_gmt: z.string(),
+		content: z.object({
+			rendered: z.string(),
+		}),
 		excerpt: z.object({
 			rendered: z.string(),
 		}),
 		title: z.object({
 			rendered: z.string(),
 		}),
-		link: z.url(),
 		categories: z.array(z.number()),
 	}),
 );
