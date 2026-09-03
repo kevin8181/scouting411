@@ -35,6 +35,7 @@ export const GET: APIRoute = async (context) => {
 			title: feed.name,
 			description: feed.description,
 			generator: "scouting411",
+			docs: "https://www.rssboard.org/rss-specification",
 
 			items: posts.map((post) => ({
 				title: post.title,
