@@ -17,7 +17,6 @@ import {
 	faCode,
 	faArrowsRotate,
 } from "@fortawesome/free-solid-svg-icons";
-import { faGitAlt } from "@fortawesome/free-brands-svg-icons";
 
 export function AppSidebar({ url }: { url: URL }) {
 	return (
