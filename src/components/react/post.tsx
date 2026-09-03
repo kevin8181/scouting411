@@ -4,12 +4,10 @@ export function PostComponent({ post }: { post: Post }) {
 	return (
 		<div className="@container rounded-lg border">
 			<div className="flex flex-col gap-3 p-4 @xl:flex-row @xl:justify-between @xl:gap-4 @xl:p-6">
-				{post.thumbnail && (
-					<img
-						className="h-44 w-full rounded-lg border object-cover @xl:order-1 @xl:h-36 @xl:w-48 @xl:shrink-0"
-						src={post.thumbnail}
-					/>
-				)}
+				<img
+					className="h-44 w-full rounded-lg border object-cover @xl:order-1 @xl:h-36 @xl:w-48 @xl:shrink-0"
+					src={post.thumbnail ?? post.feed.coverImageSrc}
+				/>
 
 				<div className="flex min-w-0 flex-col items-start gap-2 @xl:gap-3">
 					<span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
