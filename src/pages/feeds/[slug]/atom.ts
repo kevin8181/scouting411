@@ -32,16 +32,18 @@ export const GET: APIRoute = async (context) => {
 		{
 			title: feed.name,
 			id: feed.urls.homepage,
+			icon: feed.coverImageSrc,
+
+			updated: new Date(),
 			generator: {
 				text: "scouting411",
 			},
-			updated: new Date(),
 
 			links: [
 				{
 					rel: "self",
-					href: feed.urls.overview,
-					type: "text/html",
+					href: feed.urls.atom,
+					type: "text/xml",
 					title: feed.name,
 					hreflang: "en-us",
 				},
