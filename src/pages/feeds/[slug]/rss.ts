@@ -44,7 +44,7 @@ export const GET: APIRoute = async (context) => {
 			generator: "scouting411",
 			docs: "https://www.rssboard.org/rss-specification",
 			language: "en-us",
-			
+
 			items: posts.map((post) => ({
 				title: post.title,
 				...(post.description && { description: post.description }),
@@ -55,9 +55,9 @@ export const GET: APIRoute = async (context) => {
 						name: post.feed.name,
 					},
 				],
-				source: {
-					title: feed.name,
-					url: feed.urls.homepage, //todo I think this is supposed to be an rss feed
+				guid: {
+					isPermaLink: true,
+					value: post.url,
 				},
 
 				...(post.thumbnail && {
