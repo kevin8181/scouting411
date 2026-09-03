@@ -2,7 +2,6 @@
 
 - https://www.scoutshop.org/blog //not wordpress. can't find rss feed
 - https://www.summitbsa.org/blog/
-- https://confluence.oa-scouting.org/pages/viewrecentblogposts.action?key=OALMLC
 - https://www.scouting.org/about/executive-communications/ //https://www.scouting.org/wp-json/wp/v2/ec-post
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types

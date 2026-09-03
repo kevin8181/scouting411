@@ -351,7 +351,8 @@ export const feedConfigs = [
 		slug: "oa-news",
 		description:
 			"News and updates about the Order of the Arrow on the national level.",
-		coverImageSrc: "/images/OA_Trademark_FullColor.png",
+		coverImageSrc:
+			"https://confluence.oa-scouting.org/download/attachments/655365/OALMLC",
 		homepageUrl: "https://oa-scouting.org/news",
 		adapter: RssAdapter({
 			feedUrl: "https://oa-scouting.org/rss.xml",
@@ -364,11 +365,27 @@ export const feedConfigs = [
 		slug: "oa-system-maintenance",
 		description:
 			"Updates on Order of the Arrow's digital infrastructure maintenance and outages.",
-		coverImageSrc: "/images/OA_Trademark_FullColor.png",
+		coverImageSrc:
+			"https://confluence.oa-scouting.org/download/attachments/655365/OALMLC",
 		homepageUrl: "https://status.oa-scouting.org/",
 		adapter: RssAdapter({
 			feedUrl: "https://status.oa-scouting.org/history.rss",
 			// atom feed, text, and email also available
+		}),
+		defaultVisible: true,
+	},
+	{
+		name: "OA LodgeMaster Blog",
+		slug: "oa-lodgemaster",
+		description:
+			"The OA LodgeMaster Support Center blog. Contains changelog and news about the LodgeMaster program.",
+		coverImageSrc:
+			"https://confluence.oa-scouting.org/download/attachments/655365/OALMLC",
+		homepageUrl: "https://status.oa-scouting.org/",
+		adapter: RssAdapter({
+			feedUrl:
+				"https://confluence.oa-scouting.org/spaces/createrssfeed.action?types=blogpost&spaces=OALMLC&sort=created&maxResults=1000&timeSpan=3650&showContent=true&publicFeed=true&rssType=rss2&title=OA+LodgeMaster+Support+Center+Blog",
+			// atom feed also available
 		}),
 		defaultVisible: true,
 	},
