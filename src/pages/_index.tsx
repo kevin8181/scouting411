@@ -5,7 +5,6 @@ import type { Post } from "@/lib/news/posts/post";
 import relativeDate from "tiny-relative-date";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
-import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { useCommandPalette } from "@/components/react/commandPalette";
 
 const quickLinks = [
@@ -45,9 +44,6 @@ export function Page({
 							Search...
 						</span>
 					</span>
-					<KbdGroup className="hidden sm:inline-flex">
-						<Kbd>Ctrl K</Kbd>
-					</KbdGroup>
 				</Button>
 			</div>
 
