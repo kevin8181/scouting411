@@ -201,7 +201,7 @@ export const feedConfigs = [
 		slug: "scout-life",
 		description: "Editorial and entertainment content mainly for youth.",
 		coverImageSrc:
-			"https://scoutlife.org/wp-content/uploads/2024/07/scoutlife-logo-1200x675-1.jpg",
+			"https://scoutlife.org/wp-content/uploads/2026/06/SL-logo_white_340x72.png",
 		homepageUrl: "https://scoutlife.org",
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutlife.org",
@@ -351,8 +351,7 @@ export const feedConfigs = [
 		slug: "oa-news",
 		description:
 			"News and updates about the Order of the Arrow on the national level.",
-		coverImageSrc:
-			"https://oa-scouting.org/themes/oascouting-theme/images/og/oa-social-stamp-og.jpg",
+		coverImageSrc: "/images/OA_Trademark_FullColor.png",
 		homepageUrl: "https://oa-scouting.org/news",
 		adapter: RssAdapter({
 			feedUrl: "https://oa-scouting.org/rss.xml",
@@ -365,8 +364,7 @@ export const feedConfigs = [
 		slug: "oa-system-maintenance",
 		description:
 			"Updates on Order of the Arrow's digital infrastructure maintenance and outages.",
-		coverImageSrc:
-			"https://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/28698/Signature_Horizontal_Standard-195ea529-94f9-4cc0-9981-ad4c2179a0a1.png",
+		coverImageSrc: "/images/OA_Trademark_FullColor.png",
 		homepageUrl: "https://status.oa-scouting.org/",
 		adapter: RssAdapter({
 			feedUrl: "https://status.oa-scouting.org/history.rss",
