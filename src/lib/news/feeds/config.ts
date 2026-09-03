@@ -2,6 +2,7 @@ import type { FeedConfig } from "@/lib/news/feeds/types";
 
 import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
 import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
+import { PodcastArchiveAdapter } from "@/lib/news/ingest/adapters/podcast-archive";
 
 export const feedConfigs = [
 	// todo there are more posts from scouting.org that are not within the two categories below, which we are currently missing.
@@ -155,25 +156,33 @@ export const feedConfigs = [
 		defaultVisible: false,
 	},
 
-	// todo these are gone. rebuild from scraped copy
-	// {
-	// 	name: "ScoutCast",
-	// 	slug: "scoutcast",
-	// 	description: "A defunct podcast about the Scouts BSA program.",
-	// 	homepageUrl: "https://podcast.scouting.org/category/scoutcast",
-	// 	adapter: RssAdapter({
-	// 		feedUrl: "https://podcast.scouting.org/category/scoutcast/feed",
-	// 	}),
-	// },
-	// {
-	// 	name: "CubCast",
-	// 	slug: "cubcast",
-	// 	description: "A defunct podcast about the Cub Scouts program.",
-	// 	homepageUrl: "https://podcast.scouting.org/category/cubcast",
-	// 	adapter: RssAdapter({
-	// 		feedUrl: "https://podcast.scouting.org/category/cubcast/feed",
-	// 	}),
-	// },
+	// todo this site has more episodes https://www.podchaser.com/podcasts/scoutcast-31182
+	{
+		name: "ScoutCast",
+		slug: "scoutcast",
+		description: "A defunct podcast for Scouts BSA unit volunteers.",
+		homepageUrl: "https://podcast.scouting.org/category/scoutcast",
+		coverImageSrc:
+			"https://cachedimages.podchaser.com/512x512/aHR0cHM6Ly9wb2RjYXN0LnNjb3V0aW5nLm9yZy9zY291dGNhc3QtbG9nby0xNTAweDE1MDAuanBn/aHR0cHM6Ly93d3cucG9kY2hhc2VyLmNvbS9pbWFnZXMvbWlzc2luZy1pbWFnZS5wbmc%3D",
+		adapter: PodcastArchiveAdapter({
+			categoryId: 2,
+		}),
+		defaultVisible: true,
+	},
+
+	// todo this site has more old episodes available for download than I already have https://www.podchaser.com/podcasts/cubcast-3834
+	{
+		name: "CubCast",
+		slug: "cubcast",
+		description: "A defunct podcast for Cub Scouts unit volunteers.",
+		homepageUrl: "https://podcast.scouting.org/category/cubcast",
+		coverImageSrc:
+			"https://cachedimages.podchaser.com/512x512/aHR0cHM6Ly9wb2RjYXN0LnNjb3V0aW5nLm9yZy9jdWJjYXN0LWxvZ28tMTUwMHgxNTAwLmpwZw%3D%3D/aHR0cHM6Ly93d3cucG9kY2hhc2VyLmNvbS9pbWFnZXMvbWlzc2luZy1pbWFnZS5wbmc%3D",
+		adapter: PodcastArchiveAdapter({
+			categoryId: 3,
+		}),
+		defaultVisible: true,
+	},
 
 	// todo it looks like this is about to be shut down. I downloaded the rss and and all the episodes. set up an archived version later
 	{
@@ -208,7 +217,7 @@ export const feedConfigs = [
 		name: "Scouting Newsroom",
 		slug: "scouting-newsroom",
 		description:
-			"Provides updates and news about the national Scouting administration.",
+			"Provides updates and news press releases the national Scouting administration.",
 		coverImageSrc:
 			"https://www.scoutingnewsroom.org/wp-content/uploads/2026/07/cropped-bsa-original-270x270.webp",
 		homepageUrl: "https://scoutingnewsroom.org",
@@ -235,8 +244,7 @@ export const feedConfigs = [
 	{
 		name: "Summit Blog",
 		slug: "summit-blog",
-		description:
-			"News and updates about the Summit Bechtel Reserve and National Scout Jamboree.",
+		description: "News and updates about the Summit Bechtel Reserve.",
 		coverImageSrc:
 			"https://www.summitbsa.org/wp-content/uploads/2018/01/cropped-SBR-BlackBearPaw_Combo_-Logo-1-1-192x192.png",
 		homepageUrl: "https://www.summitbsa.org/blog",
