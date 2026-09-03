@@ -10,6 +10,8 @@ type WordpressAdapterOpts = {
 	type?: string;
 	/** return only posts which have this category id */
 	categoryFilter?: number;
+	/** omit posts which have any of these category ids */
+	categoryExcludeFilter?: number[];
 };
 
 /** the number of milliseconds to wait between requests */
@@ -50,12 +52,27 @@ export function WordpressAdapter(opts: WordpressAdapterOpts): FeedAdapter {
 /** retrieve one page worth of objects */
 async function fetchPage(
 	page: number,
-	{ baseUrl, type = "posts", categoryFilter }: WordpressAdapterOpts,
+	{
+		baseUrl,
+		type = "posts",
+		categoryFilter,
+		categoryExcludeFilter,
+	}: WordpressAdapterOpts,
 ) {
 	console.log(`fetch page ${page} from ${baseUrl}`);
 
+	const params = new URLSearchParams({
+		page: String(page),
+		per_page: "100",
+	});
+
+	if (categoryFilter) params.set("categories", String(categoryFilter));
+
+	if (categoryExcludeFilter?.length)
+		params.set("categories_exclude", categoryExcludeFilter.join(","));
+
 	const url = new URL(
-		`/wp-json/wp/v2/${type}?page=${page}&per_page=100${categoryFilter ? `&categories=${categoryFilter}` : ""}`,
+		`/wp-json/wp/v2/${type}?${params.toString()}`,
 		baseUrl,
 	).toString();
 

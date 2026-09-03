@@ -5,7 +5,41 @@ import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
 import { PodcastArchiveAdapter } from "@/lib/news/ingest/adapters/podcast-archive";
 
 export const feedConfigs = [
-	// todo there are more posts from scouting.org that are not within the two categories below, which we are currently missing.
+	{
+		name: "Scouting America News",
+		slug: "scouting-america-news",
+		description:
+			"General news from Scouting America, covering everything on scouting.org that is not part of another feed here.",
+		coverImageSrc:
+			"https://www.scouting.org/wp-content/uploads/2026/01/BSA-logo.png",
+		homepageUrl: "https://www.scouting.org",
+		adapter: WordpressAdapter({
+			baseUrl: "https://www.scouting.org",
+			// everything not already covered by the international adventure and
+			// program update feeds below, minus the cub/scouts bsa/venturing
+			// "features" and outdoor locations categories - those posts are not
+			// articles, they all 301 to a generic landing page.
+			categoryExcludeFilter: [
+				10763, 15052, 15053, 15054, 15546, 15552, 15558, 15738,
+			],
+		}),
+		defaultVisible: true,
+	},
+	{
+		name: "International Adventure",
+		slug: "international-adventure",
+		description:
+			"The Blog and Newsletter of the Scouting America International Committee & Department",
+		coverImageSrc:
+			"https://www.scouting.org/wp-content/uploads/2021/10/IC-Cover_Dark-scaled.jpg",
+		homepageUrl:
+			"https://www.scouting.org/international/international-adventure/",
+		adapter: WordpressAdapter({
+			baseUrl: "https://www.scouting.org",
+			categoryFilter: 10763,
+		}),
+		defaultVisible: true,
+	},
 	{
 		name: "Scouts BSA Program Updates",
 		slug: "scouts-bsa-program-updates",
@@ -18,6 +52,21 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15054,
+		}),
+		defaultVisible: true,
+	},
+	{
+		name: "Sea Scouts Program Updates",
+		slug: "sea-scouts-program-updates",
+		description:
+			"Information about changes and updates to the Sea Scouts program.",
+		coverImageSrc:
+			"https://www.scouting.org/wp-content/uploads/2023/05/SeaScouts_Logo.png",
+		homepageUrl:
+			"https://www.scouting.org/topics/program-updates/program-updates-sea-scouts",
+		adapter: WordpressAdapter({
+			baseUrl: "https://www.scouting.org",
+			categoryFilter: 15052,
 		}),
 		defaultVisible: true,
 	},
@@ -326,7 +375,7 @@ export const feedConfigs = [
 		slug: "sea-scouts-news",
 		description: "News and updates about the Sea Scouts program.",
 		coverImageSrc:
-			"https://seascout.org/wp-content/uploads/2015/09/cropped-certificate_logo.png",
+			"https://www.scouting.org/wp-content/uploads/2023/05/SeaScouts_Logo.png",
 		homepageUrl: "https://seascout.org/latest-news",
 		adapter: WordpressAdapter({
 			baseUrl: "https://seascout.org",
