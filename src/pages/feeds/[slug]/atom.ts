@@ -42,7 +42,7 @@ export const GET: APIRoute = async (context) => {
 			links: [
 				{
 					rel: "self",
-					href: feed.urls.atom,
+					href: feed.urls.atom, //todo this should be an absolute url
 					type: "text/xml",
 					title: feed.name,
 					hreflang: "en-us",
