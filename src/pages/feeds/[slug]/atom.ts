@@ -32,6 +32,9 @@ export const GET: APIRoute = async (context) => {
 		{
 			title: feed.name,
 			id: feed.urls.homepage,
+			generator: {
+				text: "scouting411",
+			},
 			updated: new Date(),
 
 			links: [
