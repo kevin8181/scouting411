@@ -237,7 +237,7 @@ export const feedConfigs = [
 			"https://ablescouts.org/wp-content/uploads/2022/04/cropped-sn-logo-only.png",
 		adapter: RssAdapter({
 			feedUrl: "https://ablescouts.org/feed",
-			//entire wordpress api is 404
+			//entire wordpress api is 404. /posts endpoint redirects to their post archive page (html)
 		}),
 		defaultVisible: true,
 	},
