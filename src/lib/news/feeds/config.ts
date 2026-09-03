@@ -12,7 +12,7 @@ export const feedConfigs = [
 		description:
 			"Information about changes and updates to the Scouts BSA program.",
 		coverImageSrc:
-			"https://www.scouting.org/wp-content/uploads/2025/05/Scouting-America-Prepared-For-Life-Logo-stacked-4c-BC.png",
+			"https://goldengatescouting.org/wp-content/uploads/2025/01/Scouts-BSA-Logo.png",
 		homepageUrl:
 			"https://www.scouting.org/topics/program-updates/program-updates-scouts-bsa",
 		adapter: WordpressAdapter({
