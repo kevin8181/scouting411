@@ -15,12 +15,16 @@ export const feedConfigs = [
 		homepageUrl: "https://www.scouting.org",
 		adapter: WordpressAdapter({
 			baseUrl: "https://www.scouting.org",
-			// everything not already covered by the international adventure and
-			// program update feeds below, minus the cub/scouts bsa/venturing
-			// "features" and outdoor locations categories - those posts are not
-			// articles, they all 301 to a generic landing page.
+			// a catchall for everything that does not belong to another feed here
 			categoryExcludeFilter: [
-				10763, 15052, 15053, 15054, 15546, 15552, 15558, 15738,
+				10763, // international adventure - has its own feed
+				15052, // sea scouts program updates - has its own feed
+				15053, // cub scouts program updates - has its own feed
+				15054, // scouts bsa program updates - has its own feed
+				15546, // cub features - not articles, 301 to a landing page
+				15552, // venturing features - not articles, 301 to a landing page
+				15558, // scouts bsa features - not articles, 301 to a landing page
+				15738, // outdoor locations - not articles, 301 to a landing page
 			],
 		}),
 		defaultVisible: true,
