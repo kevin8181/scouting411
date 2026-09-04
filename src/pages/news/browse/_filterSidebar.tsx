@@ -55,11 +55,17 @@ export function FilterSidebar({
 				<span className="text-sm">
 					{"Showing "}
 					<span className="font-bold">
-						{(results?.pagination.firstItemIndex ?? 0) + 1}-
-						{(results?.pagination.lastItemIndex ?? 0) + 1}
+						{Intl.NumberFormat("en-us").formatRange(
+							(results?.pagination.firstItemIndex ?? 0) + 1,
+							(results?.pagination.lastItemIndex ?? 0) + 1,
+						)}
 					</span>
 					{" of "}
-					<span className="font-bold">{results?.pagination.totalItems}</span>
+					<span className="font-bold">
+						{Intl.NumberFormat("en-us").format(
+							results?.pagination.totalItems ?? 0,
+						)}
+					</span>
 					{" results."}
 				</span>
 
