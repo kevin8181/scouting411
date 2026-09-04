@@ -1,8 +1,6 @@
 ## blogs feeds
 
 - https://www.scoutshop.org/blog //not wordpress. can't find rss feed
-- https://www.summitbsa.org/blog/
-- https://www.scouting.org/about/executive-communications/ //https://www.scouting.org/wp-json/wp/v2/ec-post
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
 // find new/edited pages at https://www.scouting.org/wp-json/wp/v2/pages
