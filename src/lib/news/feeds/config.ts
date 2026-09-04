@@ -288,9 +288,12 @@ export const feedConfigs = [
 		homepageUrl: "https://ablescouts.org",
 		coverImageSrc:
 			"https://ablescouts.org/wp-content/uploads/2022/04/cropped-sn-logo-only.png",
-		adapter: RssAdapter({
-			feedUrl: "https://ablescouts.org/feed",
-			//entire wordpress api is 404. /posts endpoint redirects to their post archive page (html)
+		// ablescouts.org is wordpress.com-hosted, so /wp-json is 404 on its own
+		// domain - the same wp/v2 routes are served through the public proxy
+		// instead, which exposes the regular wordpress api
+		adapter: WordpressAdapter({
+			baseUrl: "https://public-api.wordpress.com",
+			apiPath: "/wp/v2/sites/ablescouts.org",
 		}),
 		defaultVisible: true,
 	},

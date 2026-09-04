@@ -6,6 +6,14 @@ import { sleep } from "@/util/sleep";
 type WordpressAdapterOpts = {
 	/** the base url of the wordpress site */
 	baseUrl: string;
+	/**
+	 * the path to the REST API root, without a trailing slash. defaults to
+	 * "/wp-json/wp/v2", where a self-hosted site serves it. wordpress.com-hosted
+	 * sites don't expose the api on their own domain at all - they serve the same
+	 * `wp/v2` routes through a public proxy, reached by pointing `baseUrl` at
+	 * https://public-api.wordpress.com and this at `/wp/v2/sites/{domain}`.
+	 */
+	apiPath?: string;
 	/** the name of the wordpress object type. defaults to "posts" */
 	type?: string;
 	/** return only posts which have this category id */
@@ -54,6 +62,7 @@ async function fetchPage(
 	page: number,
 	{
 		baseUrl,
+		apiPath = "/wp-json/wp/v2",
 		type = "posts",
 		categoryFilter,
 		categoryExcludeFilter,
@@ -72,7 +81,7 @@ async function fetchPage(
 		params.set("categories_exclude", categoryExcludeFilter.join(","));
 
 	const url = new URL(
-		`/wp-json/wp/v2/${type}?${params.toString()}`,
+		`${apiPath}/${type}?${params.toString()}`,
 		baseUrl,
 	).toString();
 
