@@ -1,6 +1,13 @@
 ## blogs feeds
 
-- https://www.scoutshop.org/blog //not wordpress. can't find rss feed
+- https://www.scoutshop.org/blog
+  // magento 2 + hyva + amasty blog pro. no rss (probed ~13 routes, all 404) and no blog api
+  // (/graphql is open but has no blog fields). /blog is a widget page fixed at 20 posts, ?p=n ignored.
+  // /blog/search.html?query= works but has no pagination and no match-all.
+  // only viable source is crawling /blog/category/<key>.html?p=n - 15/page with real next links,
+  // ~20 categories, needs dedup. post pages have json-ld BlogPosting but the date is only in the
+  // amblog-dates markup. sitemap has all 251 urls + lastmod, but post pages are ~1mb each.
+  // => bespoke scraper like tta.ts, would be the most fragile adapter here.
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
 // find new/edited pages at https://www.scouting.org/wp-json/wp/v2/pages

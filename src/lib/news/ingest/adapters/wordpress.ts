@@ -93,6 +93,16 @@ async function fetchPage(
 			post.yoast_head_json?.og_description ?? post.excerpt?.rendered ?? "",
 		),
 		date: post.date_gmt,
+		// todo thumbnails come solely from yoast, so sites without the seo plugin
+		// installed get none at all - currently duty to god (0 of 78 posts) and
+		// sea scouts (0 of 30). both expose a `featured_media` attachment id
+		// instead, and appending `_embed=wp:featuredmedia` to the request inlines
+		// that attachment as `_embedded["wp:featuredmedia"][0].source_url`, so
+		// falling back to it would cost no extra requests. two caveats seen on
+		// seascout.org: an id can point at deleted media, which embeds as an empty
+		// object, and a restricted attachment embeds as a `rest_forbidden` error
+		// object rather than media - so the whole lookup has to be optional, not
+		// just the array index. that recovers 72 of 78 and 12 of 30 respectively.
 		thumbnail: post.yoast_head_json?.og_image?.[0]?.url,
 	}));
 
