@@ -7,6 +7,8 @@ import { queryPosts } from "@/lib/news/query/query";
 
 import { Page } from "@/pages/_index";
 
+export const prerender = false;
+
 const latestPosts = await queryPosts({
 	feeds: defaultVisibleFeeds,
 	filter: {},
@@ -22,5 +24,10 @@ const latestPosts = await queryPosts({
 ---
 
 <Layout title="Home">
-	<Page latestPosts={latestPosts} client:load />
+	<Page
+		latestPosts={latestPosts}
+		feedCount={defaultVisibleFeeds.length}
+		postCount={latestPosts.pagination.totalItems}
+		client:load
+	/>
 </Layout>

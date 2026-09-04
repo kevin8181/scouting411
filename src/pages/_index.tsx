@@ -16,8 +16,12 @@ const quickLinks = [
 
 export function Page({
 	latestPosts,
+	feedCount,
+	postCount,
 }: {
 	latestPosts: Awaited<ReturnType<typeof queryPosts>>;
+	feedCount: number;
+	postCount: number;
 }) {
 	const { setOpen } = useCommandPalette();
 
@@ -27,9 +31,14 @@ export function Page({
 				<h1 className="text-primary font-display text-5xl font-extrabold">
 					Scouting411
 				</h1>
-				<h2 className="text-secondary-foreground mb-3 text-xl">
+				<h2 className="text-secondary-foreground text-xl">
 					the unofficial front page of Scouting America
 				</h2>
+
+				<p className="text-muted-foreground mb-3 text-sm">
+					{Intl.NumberFormat().format(postCount)} posts from{" "}
+					{Intl.NumberFormat().format(feedCount)} sources
+				</p>
 
 				<Button
 					variant="outline"
