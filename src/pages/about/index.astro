@@ -1,0 +1,109 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+---
+
+<Layout title="About">
+	<div class="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
+		<h1 class="text-primary font-display text-4xl font-extrabold">
+			About Scouting411
+		</h1>
+
+		<p class="text-sm">
+			Scouting411 is the unofficial front page of Scouting America. It gathers
+			the news and resources that Scouting America publishes at the national
+			level and puts them in one place, so that you can see everything at once
+			instead of checking a dozen sites to find out what changed.
+		</p>
+
+		<p class="text-sm">
+			Official Scouting information is scattered. It lives across program blogs,
+			newsrooms, committee publications, and PDF libraries, each with its own
+			site, its own update schedule, and its own idea of how to notify you.
+			Plenty of it is genuinely useful and almost none of it is easy to find.
+			This site exists to fix that. It does not replace any of those sources; it
+			pulls everything together into a central hub and puts the data into one
+			accessible format.
+		</p>
+
+		<h2 class="mt-2 font-serif text-xl font-bold">Where the data comes from</h2>
+
+		<p class="text-sm">
+			Everything here is published by Scouting America. Scouting411 does not
+			write news or create resources of its own; it collects, organizes, and
+			links back to the original, which is always the national, authoritative
+			version.
+		</p>
+
+		<p class="text-sm">
+			News is pulled automatically from official feeds and refreshed once a day,
+			so an item may be up to 24 hours behind its source. You can see every feed
+			being tracked on the{" "}
+			<a
+				href="/news/sources"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+				>sources</a
+			> page, and how much has been collected from each on the{" "}
+			<a
+				href="/news/stats"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline">stats</a
+			> page. The{" "}
+			<a
+				href="/resources"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+				>resources</a
+			> directory works differently. It is a hand-curated list of official tools,
+			resources, and websites, chosen to surface the things you will find useful.
+		</p>
+
+		<p class="text-sm">
+			Inclusion is limited to official Scouting America publications at the
+			national level. Nothing from councils, districts, units, or third parties
+			is listed, however good it may be, because the goal of this site is to
+			give you official, canonical information. The full criteria are in the{
+				" "
+			}
+			<a
+				href="https://github.com/kevin8181/scouting411#adding-a-resource"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+				>project README</a
+			>. If something official is missing,{" "}
+			<a
+				href="https://github.com/kevin8181/scouting411/issues/new/choose"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+				>suggest it</a
+			>.
+		</p>
+
+		<h2 class="mt-2 font-serif text-xl font-bold">Who runs this</h2>
+
+		<p class="text-sm">
+			I'm a Scoutmaster. I built Scouting411 because I kept losing track of
+			announcements that mattered to my unit, and because the answer to "where
+			was that published?" was never the same place twice. It is a volunteer
+			project, and it is free.
+		</p>
+
+		<p class="text-sm">
+			The site is open source under the AGPL-3.0 license. You can read the code,
+			file an issue, or send a pull request on{" "}
+			<a
+				href="https://github.com/kevin8181/scouting411"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+				>GitHub</a
+			>.
+		</p>
+
+		<p class="text-sm">
+			Scouting411 is not affiliated with, endorsed by, or sponsored by Scouting
+			America. All trademarks and published content belong to their respective
+			owners. This is an independent project, and any mistake you find here is
+			mine rather than theirs. If you spot one, please report it.
+		</p>
+	</div>
+</Layout>

@@ -16,6 +16,7 @@ import {
 	faRssSquare,
 	faCode,
 	faArrowsRotate,
+	faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function AppSidebar({ url }: { url: URL }) {
@@ -79,7 +80,13 @@ export function AppSidebar({ url }: { url: URL }) {
 				</div>
 
 				<div>
-					<NavGroup label="about">
+					<NavGroup label="more">
+						<NavLink
+							href="/about"
+							label="About"
+							currentUrl={url}
+							icon={faCircleInfo}
+						/>
 						<NavLink
 							href="https://github.com/kevin8181/scouting411/issues/new/choose"
 							label="Give Feedback"
