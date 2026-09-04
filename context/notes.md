@@ -52,7 +52,6 @@
 - https://confluence.oa-scouting.org/
 - https://www.scouting.org/awards/awards-central/
 - https://www.scouting.org/resources/insignia-guide/
-- https://dutytogodbsa.org/
 
 ## tools
 

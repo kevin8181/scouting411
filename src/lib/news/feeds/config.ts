@@ -413,6 +413,25 @@ export const feedConfigs = [
 		}),
 		defaultVisible: true,
 	},
+	{
+		name: "Duty to God BSA",
+		slug: "duty-to-god",
+		description:
+			"The blog of the National Religious Relationships Committee, covering religious emblems, chaplaincy, and Duty to God resources.",
+		coverImageSrc:
+			"https://dutytogodbsa.org/wp-content/uploads/2019/02/duty-to-god-coin.png",
+		homepageUrl: "https://dutytogodbsa.org/blog-2/",
+		adapter: WordpressAdapter({
+			baseUrl: "https://dutytogodbsa.org",
+			// posts live in the jetpack portfolio custom post type, not "posts" -
+			// the regular posts endpoint and the site's advertised rss feed are both
+			// empty. https://dutytogodbsa.org/portfolio/feed/ carries the same
+			// content, but only 10 items per page (?paged=n for the rest), so the
+			// api is preferable - it returns all of them in one request.
+			type: "jetpack-portfolio",
+		}),
+		defaultVisible: true,
+	},
 ] as const satisfies FeedConfig[];
 
 /**
