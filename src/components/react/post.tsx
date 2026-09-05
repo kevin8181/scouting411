@@ -33,7 +33,7 @@ export function PostComponent({ post }: { post: Post }) {
 						{post.title}
 					</a>
 					<span className="line-clamp-3 text-sm wrap-anywhere hyphens-auto">
-						{post.description ?? "No excerpt available."}
+						{post.description || "No excerpt available."}
 					</span>
 				</div>
 			</div>
