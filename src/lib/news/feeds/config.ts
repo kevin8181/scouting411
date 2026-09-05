@@ -3,6 +3,7 @@ import type { FeedConfig } from "@/lib/news/feeds/types";
 import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
 import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
 import { PodcastArchiveAdapter } from "@/lib/news/ingest/adapters/podcast-archive";
+import { StatuspageAdapter } from "@/lib/news/ingest/adapters/statuspage";
 
 export const feedConfigs = [
 	{
@@ -359,7 +360,13 @@ export const feedConfigs = [
 		homepageUrl: "https://oa-scouting.org/news",
 		adapter: RssAdapter({
 			feedUrl: "https://oa-scouting.org/rss.xml",
-			//not wordpress. might be bespoke. find out about if there's an api or a way to source better data
+			// drupal 11. no jsonapi or rest module exposed, and this is core's stock
+			// frontpage feed — hard capped at 10 items, ignores page/items_per_page.
+			// worse, it filters on "promoted to front page" rather than listing every
+			// article, so it isn't even the latest 10: the items span 13 months and
+			// skip most posts, leaving the feed months behind what /news shows.
+			// todo: the /news view paginates ~143 pages of 9, server-rendered, with
+			// title, teaser, iso date and thumbnail per card. scrape that instead.
 		}),
 		defaultVisible: true,
 	},
@@ -371,9 +378,8 @@ export const feedConfigs = [
 		coverImageSrc:
 			"https://confluence.oa-scouting.org/download/attachments/655365/OALMLC",
 		homepageUrl: "https://status.oa-scouting.org/",
-		adapter: RssAdapter({
-			feedUrl: "https://status.oa-scouting.org/history.rss",
-			// atom feed, text, and email also available
+		adapter: StatuspageAdapter({
+			baseUrl: "https://status.oa-scouting.org",
 		}),
 		defaultVisible: true,
 	},
