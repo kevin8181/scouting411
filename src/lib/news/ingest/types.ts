@@ -1,5 +1,3 @@
-//todo collect OG images?
-
 /** a raw post data object returned by one of the feed adapters */
 export type PostData = {
 	/** the original url of the post */
