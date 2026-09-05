@@ -1,67 +1,57 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import { feeds } from "@/lib/news/feeds/feedManager";
+import {
+	formatPercentage,
+	getAggregatedFeedMetrics,
+	getFeedMetrics,
+} from "@/lib/news/metrics/feedMetrics";
 import { queryPosts } from "@/lib/news/query/query";
 
 export const prerender = false;
 
 const feedRows = await Promise.all(
-	feeds.map(async (feed) => ({
-		feed,
-		postCount: (
-			await queryPosts({
-				feeds: [feed.slug],
-				filter: {},
-				sort: {
-					direction: "desc",
-					mode: "date",
-				},
-				paginate: {
-					// todo we need a way to disable pagination
-					maxPageSize: 999999,
-					page: 1,
-				},
-			})
-		).posts.length,
-	})),
+	feeds.map(async (feed) => {
+		const { posts } = await queryPosts({
+			feeds: [feed.slug],
+			filter: {},
+			sort: {
+				direction: "desc",
+				mode: "date",
+			},
+			paginate: {
+				// todo we need a way to disable pagination
+				maxPageSize: 999999,
+				page: 1,
+			},
+		});
+
+		return { feed, metrics: getFeedMetrics(posts) };
+	}),
 );
 
-const totalPosts = feedRows.reduce((sum, { postCount }) => sum + postCount, 0);
+const totals = getAggregatedFeedMetrics(feedRows.map(({ metrics }) => metrics));
+
+const numberFormat = Intl.NumberFormat();
 ---
 
 <Layout title="Feed Statistics">
-	<div class="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
-		<div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
-			<div class="rounded-lg border p-4">
-				<div class="text-muted-foreground text-xs font-medium uppercase">
-					Feeds
-				</div>
-				<div class="font-serif text-2xl font-bold">
-					{Intl.NumberFormat().format(feedRows.length)}
-				</div>
-			</div>
-			<div class="rounded-lg border p-4">
-				<div class="text-muted-foreground text-xs font-medium uppercase">
-					Total posts
-				</div>
-				<div class="font-serif text-2xl font-bold">
-					{Intl.NumberFormat().format(totalPosts)}
-				</div>
-			</div>
-		</div>
-
-		<div class="overflow-hidden rounded-lg border">
+	<div class="mx-auto flex w-full max-w-6xl flex-col gap-6 p-8">
+		<div class="overflow-x-auto rounded-lg border">
 			<table class="w-full border-collapse text-sm">
 				<thead>
 					<tr class="border-b">
 						<th class="px-4 py-3 text-left font-medium">Feed</th>
 						<th class="px-4 py-3 text-right font-medium">Posts</th>
-						<th class="px-4 py-3 text-left font-medium"> Adapter </th>
+						<th class="px-4 py-3 text-right font-medium">Descriptions</th>
+						<th class="px-4 py-3 text-right font-medium">Thumbnails</th>
+						<th class="px-4 py-3 text-right font-medium">Unique thumbnails</th>
+						<th class="px-4 py-3 text-left font-medium">Adapter</th>
 					</tr>
 				</thead>
 				<tbody>
 					{
-						feedRows.map(({ feed, postCount }) => (
+						feedRows.map(({ feed, metrics }) => (
 							<tr class="hover:bg-muted border-b last:border-0">
 								<td class="px-4 py-3">
 									<a
@@ -72,7 +62,16 @@ const totalPosts = feedRows.reduce((sum, { postCount }) => sum + postCount, 0);
 									</a>
 								</td>
 								<td class="px-4 py-3 text-right tabular-nums">
-									{Intl.NumberFormat().format(postCount)}
+									{numberFormat.format(metrics.posts.count)}
+								</td>
+								<td class="px-4 py-3 text-right tabular-nums">
+									{formatPercentage(metrics.description.coverage)}
+								</td>
+								<td class="px-4 py-3 text-right tabular-nums">
+									{formatPercentage(metrics.thumbnail.coverage)}
+								</td>
+								<td class="px-4 py-3 text-right tabular-nums">
+									{formatPercentage(metrics.thumbnail.uniqueCoverage)}
 								</td>
 								<td class="px-4 py-3">{feed.type.human}</td>
 							</tr>
@@ -81,9 +80,20 @@ const totalPosts = feedRows.reduce((sum, { postCount }) => sum + postCount, 0);
 				</tbody>
 				<tfoot>
 					<tr class="border-t">
-						<td class="px-4 py-3 font-bold">Total</td>
+						<td class="px-4 py-3 font-bold"
+							>Total ({feedRows.length} sources):</td
+						>
 						<td class="px-4 py-3 text-right font-bold tabular-nums">
-							{Intl.NumberFormat().format(totalPosts)}
+							{numberFormat.format(totals.posts.count)}
+						</td>
+						<td class="px-4 py-3 text-right font-bold tabular-nums">
+							{formatPercentage(totals.description.coverage)}
+						</td>
+						<td class="px-4 py-3 text-right font-bold tabular-nums">
+							{formatPercentage(totals.thumbnail.coverage)}
+						</td>
+						<td class="px-4 py-3 text-right font-bold tabular-nums">
+							{formatPercentage(totals.thumbnail.uniqueCoverage)}
 						</td>
 						<td></td>
 					</tr>

@@ -2,6 +2,7 @@
 import Layout from "@/components/layout/Layout.astro";
 import { PostComponent } from "@/components/react/post";
 import { getFeedBySlug, isFeedSlug } from "@/lib/news/feeds/feedManager";
+import { getFeedMetrics } from "@/lib/news/metrics/feedMetrics";
 import { queryPosts } from "@/lib/news/query/query";
 
 import {
@@ -34,6 +35,8 @@ const { posts } = await queryPosts({
 	},
 });
 
+const metrics = getFeedMetrics(posts);
+
 const recentPosts = posts.slice(0, 10);
 const latestPost = posts.at(0);
 const oldestPost = posts.at(-1);
@@ -48,7 +51,7 @@ const formatDate = (date: Date) =>
 const stats = [
 	{
 		label: "Indexed posts",
-		value: Intl.NumberFormat().format(posts.length),
+		value: Intl.NumberFormat().format(metrics.posts.count),
 	},
 	{
 		label: "Latest post",
