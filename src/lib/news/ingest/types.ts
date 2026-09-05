@@ -16,7 +16,7 @@ export type PostData = {
 export type FeedAdapter = {
 	/** metadata about the feed adapter type */
 	type: {
-		/** machine id for the type of adapter (rss, wordpressApi, etc) */
+		/** machine id for the type of adapter (rss, wordpress-api, etc) */
 		id: string;
 		/** human-readable name for the type of feed adapter (RSS, Wordpress API, etc) */
 		human: string;

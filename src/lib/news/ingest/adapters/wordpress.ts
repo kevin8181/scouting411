@@ -49,7 +49,7 @@ export function WordpressAdapter(opts: WordpressAdapterOpts): FeedAdapter {
 
 	return {
 		type: {
-			id: "wordpressApi",
+			id: "wordpress-api",
 			human: "Wordpress",
 		},
 		execute,

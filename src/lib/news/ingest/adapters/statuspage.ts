@@ -35,7 +35,7 @@ export function StatuspageAdapter(opts: StatuspageAdapterOpts): FeedAdapter {
 
 	return {
 		type: {
-			id: "statuspage",
+			id: "atlassian-statuspage-api",
 			human: "Statuspage",
 		},
 		execute,
