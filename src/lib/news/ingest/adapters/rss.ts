@@ -1,6 +1,5 @@
 import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
 import { parseRssFeed } from "feedsmith";
-import { cleanHtmlString } from "@/util/cleanHtmlString";
 
 export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 	const execute = async () => {
@@ -34,10 +33,8 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 
 			return {
 				url: item.link ?? item.enclosures![0]!.url!,
-				title: cleanHtmlString(item.title),
-				description: item.description
-					? cleanHtmlString(item.description)
-					: undefined,
+				title: item.title,
+				description: item.description,
 				date: item.pubDate,
 				thumbnail: item.itunes?.image,
 			};

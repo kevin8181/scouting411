@@ -1,6 +1,7 @@
 import { feedConfigs } from "@/lib/news/feeds/config";
 import { writePosts } from "@/lib/news/posts/cache";
 import { type FeedSlug } from "@/lib/news/feeds/types";
+import { normalizePostData } from "@/lib/news/ingest/normalize";
 
 /** fetches the posts from an original feed source and updates the cache */
 async function updateFeed(slug: FeedSlug) {
@@ -13,12 +14,12 @@ async function updateFeed(slug: FeedSlug) {
 	const postData = await feedConfig.adapter.execute();
 
 	if (postData.length === 0) {
-		throw new Error(
-			`feed ${slug} fetched successfully but returned an empty array of posts; keeping existing cache`,
-		);
+		throw new Error(`zero posts returned from feed adapter`);
 	}
 
-	await writePosts({ feedSlug: feedConfig.slug, postData: postData });
+	const normalizedPostData = normalizePostData(postData);
+
+	await writePosts({ feedSlug: feedConfig.slug, postData: normalizedPostData });
 }
 
 /** fetches the upstream post data for all feeds and updates the cache */
@@ -37,6 +38,7 @@ export async function updateAllFeeds() {
 
 	for (const failure of failures) {
 		console.error(`failed to update feed ${failure.slug}`, failure.reason);
+		console.error("retaining old cache for this feed");
 	}
 
 	console.log(

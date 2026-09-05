@@ -1,5 +1,4 @@
 import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
-import { cleanHtmlString } from "@/util/cleanHtmlString";
 import { z } from "zod";
 import { sleep } from "@/util/sleep";
 
@@ -97,11 +96,11 @@ async function fetchPage(
 
 	const posts: PostData[] = rawData.map((post) => ({
 		url: post.link,
-		title: cleanHtmlString(post.title.rendered),
-		description: cleanHtmlString(
-			post.yoast_head_json?.og_description ?? post.excerpt?.rendered ?? "",
-		),
-		date: post.date_gmt,
+		title: post.title.rendered,
+		description: post.yoast_head_json?.og_description ?? post.excerpt?.rendered,
+
+		// date_gmt is gmt but carries no timezone designator, so it parses as local time without one
+		date: `${post.date_gmt}Z`,
 		// todo thumbnails come solely from yoast, so sites without the seo plugin
 		// installed get none at all - currently duty to god (0 of 78 posts) and
 		// sea scouts (0 of 30). both expose a `featured_media` attachment id

@@ -1,5 +1,4 @@
 import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
-import { cleanHtmlString } from "@/util/cleanHtmlString";
 import {
 	extractAudioUrl,
 	stripPodcastChrome,
@@ -32,11 +31,10 @@ export function PodcastArchiveAdapter(
 					throw new Error(`no audio url found for ${item.title.rendered}`);
 
 				return {
-					date: item.date_gmt,
-					description: cleanHtmlString(
-						stripPodcastChrome(item.excerpt.rendered),
-					),
-					title: cleanHtmlString(item.title.rendered),
+					// date_gmt is gmt but carries no timezone designator, so it parses as local time without one
+					date: `${item.date_gmt}Z`,
+					description: stripPodcastChrome(item.excerpt.rendered),
+					title: item.title.rendered,
 					url,
 					thumbnail: undefined,
 				};
