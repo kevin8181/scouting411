@@ -8,7 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const exampleGetUrl =
-	"/api/posts?feeds[]=cubchat&filter.keyword=camping&sort.mode=date&sort.direction=desc&paginate.page=1&paginate.maxPageSize=20";
+	"/api/post?feeds[]=cubchat&filter.keyword=camping&sort.mode=date&sort.direction=desc&paginate.page=1&paginate.maxPageSize=20";
 
 const examplePostBody = `{
 	"feeds": ["cubchat"],
@@ -100,12 +100,12 @@ const parameters = [
 const endpoints = [
 	{
 		method: "GET",
-		path: "/api/posts",
+		path: "/api/post",
 		description: "Query posts using the search parameters described below.",
 	},
 	{
 		method: "POST",
-		path: "/api/posts",
+		path: "/api/post",
 		description: "The same query, sent as a JSON body.",
 	},
 	{
@@ -132,7 +132,7 @@ export function Page({ feeds }: { feeds: Feed[] }) {
 				<p className="text-sm">
 					Scouting411 exposes its aggregated news index as a public JSON API. No
 					authentication, no API key, no rate limit — just{" "}
-					<Code>/api/posts</Code>. Posts are served from our cache, which is
+					<Code>/api/post</Code>. Posts are served from our cache, which is
 					refreshed once a day, so responses may be stale by up to 24 hours.
 				</p>
 
@@ -253,7 +253,7 @@ export function Page({ feeds }: { feeds: Feed[] }) {
 						>
 							<td className="px-4 py-3">
 								<a
-									href={feed.urls.overview}
+									href={feed.links.overview}
 									className="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
 								>
 									{feed.name}

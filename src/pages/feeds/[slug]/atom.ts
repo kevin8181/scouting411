@@ -31,7 +31,7 @@ export const GET: APIRoute = async (context) => {
 	const generated = generateAtomFeed(
 		{
 			title: feed.name,
-			id: feed.urls.homepage,
+			id: feed.links.homepage,
 			icon: feed.coverImageSrc,
 
 			updated: new Date(),
@@ -42,21 +42,21 @@ export const GET: APIRoute = async (context) => {
 			links: [
 				{
 					rel: "self",
-					href: feed.urls.atom, //todo this should be an absolute url
+					href: feed.links.atom, //todo this should be an absolute url
 					type: "text/xml",
 					title: feed.name,
 					hreflang: "en-us",
 				},
 				{
 					rel: "alternate",
-					href: feed.urls.rss,
+					href: feed.links.rss,
 					type: "application/rss+xml",
 					title: "RSS Feed",
 					hreflang: "en-us",
 				},
 				{
 					rel: "alternate",
-					href: feed.urls.homepage,
+					href: feed.links.homepage,
 					type: "text/html",
 					title: "Upstream Homepage",
 					hreflang: "en-us",

@@ -107,7 +107,7 @@ function CommandPaletteContent() {
 							key={feed.slug}
 							value={feed.slug}
 							keywords={[feed.name, feed.description]}
-							onSelect={handleSelection({ url: feed.urls.overview })}
+							onSelect={handleSelection({ url: feed.links.overview })}
 						>
 							{feed.name}
 						</CommandItem>

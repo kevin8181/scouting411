@@ -26,7 +26,7 @@ export type Feed = {
 	slug: FeedSlug;
 	description: string;
 	coverImageSrc: string;
-	urls: {
+	links: {
 		/** relative href to the detail page for this feed */
 		overview: string;
 		/** go to the post browser page and select just this feed */

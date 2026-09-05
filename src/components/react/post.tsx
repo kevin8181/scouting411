@@ -11,7 +11,7 @@ export function PostComponent({ post }: { post: Post }) {
 
 				<div className="flex min-w-0 flex-col items-start gap-2 @xl:gap-3">
 					<span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-						<a href={post.feed.urls.overview} className="hover:underline">
+						<a href={post.feed.links.overview} className="hover:underline">
 							{post.feed.name}
 						</a>
 
