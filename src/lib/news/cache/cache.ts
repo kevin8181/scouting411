@@ -1,4 +1,4 @@
-import { redis } from "@/util/redisClient";
+import { redis } from "@/lib/redis/client";
 import type { PostData } from "@/lib/news/ingest/types";
 import type { FeedSlug } from "@/lib/news/feeds/types";
 
