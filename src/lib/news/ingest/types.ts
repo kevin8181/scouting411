@@ -1,3 +1,5 @@
+import type { FeedSlug } from "@/lib/news/feeds/types";
+
 /** a raw post data object returned by one of the feed adapters */
 export type PostData = {
 	/** the original url of the post */
@@ -12,3 +14,8 @@ export type PostData = {
 	thumbnail: string | undefined;
 };
 
+/** an error that occurred during the upstream ingestion process */
+export type IngestError = {
+	feed: FeedSlug;
+	reason: string;
+};

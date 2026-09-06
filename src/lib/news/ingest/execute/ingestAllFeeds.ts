@@ -1,9 +1,7 @@
 import { feedConfigs } from "@/lib/news/feeds/config";
 import { writePosts } from "@/lib/news/cache/cache";
-import {
-	ingestFeed,
-	type IngestError,
-} from "@/lib/news/ingest/upstream/ingestFeed";
+import { ingestFeed } from "@/lib/news/ingest/upstream/ingestFeed";
+import type { IngestError } from "@/lib/news/ingest/types";
 
 /** fetches the upstream post data for all feeds and updates the cache */
 export async function ingestAllFeeds() {

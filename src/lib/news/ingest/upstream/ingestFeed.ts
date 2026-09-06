@@ -1,6 +1,6 @@
 import type { FeedSlug } from "@/lib/news/feeds/types";
 import { feedConfigs } from "@/lib/news/feeds/config";
-import type { PostData } from "@/lib/news/ingest/types";
+import type { PostData, IngestError } from "@/lib/news/ingest/types";
 import { normalizePostData } from "@/lib/news/ingest/upstream/normalize";
 
 export async function ingestFeed(
@@ -34,8 +34,3 @@ export async function ingestFeed(
 
 	return { data };
 }
-
-export type IngestError = {
-	feed: FeedSlug;
-	reason: string;
-};
