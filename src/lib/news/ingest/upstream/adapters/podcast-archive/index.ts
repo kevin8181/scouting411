@@ -1,8 +1,9 @@
-import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
+import type { FeedAdapter } from "@/lib/news/ingest/upstream/types";
+import type { PostData } from "@/lib/news/ingest/types";
 import {
 	extractAudioUrl,
 	stripPodcastChrome,
-} from "@/lib/news/ingest/adapters/podcast-archive/extractors";
+} from "@/lib/news/ingest/upstream/adapters/podcast-archive/extractors";
 import data from "./data.json";
 import { z } from "zod";
 

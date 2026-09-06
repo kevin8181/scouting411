@@ -1,4 +1,5 @@
-import type { FeedAdapter, PostData } from "@/lib/news/ingest/types";
+import type { FeedAdapter } from "@/lib/news/ingest/upstream/types";
+import type { PostData } from "@/lib/news/ingest/types";
 import { parseRssFeed } from "feedsmith";
 
 export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {

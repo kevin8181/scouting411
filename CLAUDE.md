@@ -31,7 +31,7 @@ The news system is deliberately split into two halves that meet only at the Redi
 **Write side (cron only):**
 
 - `src/lib/news/feeds/config.ts` — single source of truth for every feed. Each entry: `name`, `slug`, `description`, `homepageUrl`, `adapter`, `defaultVisible`. Many entries are commented out with `todo` notes explaining why the source is broken or unavailable — read here before assuming a feed exists. The exported array's literal type drives `FeedSlug` (a `z.enum` over the slugs), so adding a feed propagates types everywhere.
-- `src/lib/news/ingest/adapters/` — one adapter per upstream type: `rss.ts` (generic RSS/Atom via `feedsmith`), `wordpress.ts` (WordPress REST API), `tta.ts` (bespoke Trail to Adventure). Each implements `FeedAdapter` (`ingest/types.ts`) with `.execute(): Promise<PostData[]>`.
+- `src/lib/news/ingest/upstream/adapters/` — one adapter per upstream type: `rss.ts` (generic RSS/Atom via `feedsmith`), `wordpress.ts` (WordPress REST API), `tta.ts` (bespoke Trail to Adventure). Each implements `FeedAdapter` (`ingest/types.ts`) with `.execute(): Promise<PostData[]>`.
 - `src/lib/news/posts/update.ts` — `updateAllFeeds()` runs every adapter concurrently, isolating failures per feed so one bad source doesn't abort the run. A feed that returns zero posts is treated as a failure and its existing cache is kept.
 - `src/pages/api/updateAllFeeds.ts` — the only caller; a Vercel cron job (`vercel.json`, daily at midnight) guarded by a `Bearer ${CRON_SECRET}` auth header.
 

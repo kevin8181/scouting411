@@ -1,9 +1,9 @@
 import type { FeedConfig } from "@/lib/news/feeds/types";
 
-import { RssAdapter } from "@/lib/news/ingest/adapters/rss";
-import { WordpressAdapter } from "@/lib/news/ingest/adapters/wordpress";
-import { PodcastArchiveAdapter } from "@/lib/news/ingest/adapters/podcast-archive";
-import { StatuspageAdapter } from "@/lib/news/ingest/adapters/statuspage";
+import { RssAdapter } from "@/lib/news/ingest/upstream/adapters/rss";
+import { WordpressAdapter } from "@/lib/news/ingest/upstream/adapters/wordpress";
+import { PodcastArchiveAdapter } from "@/lib/news/ingest/upstream/adapters/podcast-archive";
+import { StatuspageAdapter } from "@/lib/news/ingest/upstream/adapters/statuspage";
 
 export const feedConfigs = [
 	{

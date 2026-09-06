@@ -1,7 +1,7 @@
 import { feedConfigs } from "@/lib/news/feeds/config";
 import { writePosts } from "@/lib/news/cache/cache";
 import { type FeedSlug } from "@/lib/news/feeds/types";
-import { normalizePostData } from "@/lib/news/ingest/normalize";
+import { normalizePostData } from "@/lib/news/ingest/upstream/normalize";
 
 /** fetches the posts from an original feed source and updates the cache */
 async function updateFeed(slug: FeedSlug) {
