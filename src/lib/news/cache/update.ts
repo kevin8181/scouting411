@@ -1,5 +1,5 @@
 import { feedConfigs } from "@/lib/news/feeds/config";
-import { writePosts } from "@/lib/news/posts/cache";
+import { writePosts } from "@/lib/news/cache/cache";
 import { type FeedSlug } from "@/lib/news/feeds/types";
 import { normalizePostData } from "@/lib/news/ingest/normalize";
 
