@@ -16,17 +16,14 @@
 
 ## periodicals
 
-- https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/advancement-news/
 - https://www.scouting.org/international/resources/
 - https://www.scouting.org/commissioners/news-for-commissioners/
-- https://www.scouting.org/commissioners/news-for-commissioners/monthly-all-commissioner-email/
 
 ## email newsletters
 
 - https://www.ntier.org/resources/newsletter-signup/
 - https://seascout.org/mailing-list/
-- https://scoutingamericafoundation.org/infinite-pathways-newsletterarchive/
-- https://scoutingalumni.org/resources/monthly-alumni-association-newsletters/
+- https://scoutingamericafoundation.org/newsletter-archive/ - these get pulled in as part of the existing Scouting America Foundation feed
 - https://t.email.scouting.org/lp/LP171 //for troopleader updates
 - https://ablescouts.org/subscribe/
 - https://t.email.scouting.org/lp/subscribeaquatics?_uuid=d01169b6-d353-489e-a0bc-4c383a5b16b0&_test=true
