@@ -16,7 +16,6 @@ export const GET: APIRoute = async (context) => {
 					title: feed.name,
 					description: feed.description,
 					htmlUrl: new URL(feed.links.overview, context.site).toString(),
-					//todo make an opml for atom feeds?
 					xmlUrl: new URL(feed.links.rss, context.site).toString(),
 					type: "rss",
 					language: "en-us",

@@ -210,7 +210,7 @@ export const feedConfigs = [
 		defaultVisible: false,
 	},
 
-	// todo this site has more episodes https://www.podchaser.com/podcasts/scoutcast-31182
+	// https://www.podchaser.com/podcasts/scoutcast-31182
 	{
 		name: "ScoutCast",
 		slug: "scoutcast",
@@ -224,7 +224,7 @@ export const feedConfigs = [
 		defaultVisible: true,
 	},
 
-	// todo this site has more old episodes available for download than I already have https://www.podchaser.com/podcasts/cubcast-3834
+	// https://www.podchaser.com/podcasts/cubcast-3834
 	{
 		name: "CubCast",
 		slug: "cubcast",
