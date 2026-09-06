@@ -1,4 +1,4 @@
-import type { Post } from "@/lib/news/posts/post";
+import type { Post } from "@/lib/news/feeds/post";
 
 export function PostComponent({ post }: { post: Post }) {
 	return (

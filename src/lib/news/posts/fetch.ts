@@ -1,6 +1,6 @@
 import type { Feed, FeedSlug } from "@/lib/news/feeds/types";
 import { readPosts } from "@/lib/news/posts/cache";
-import { hydratePost } from "@/lib/news/posts/post";
+import { hydratePost } from "@/lib/news/feeds/post";
 import { feeds } from "@/lib/news/feeds/feedManager";
 
 /** fetches a feed's posts from redis */

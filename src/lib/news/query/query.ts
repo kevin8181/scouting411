@@ -2,7 +2,7 @@ import { getMultipleFeedsPosts } from "@/lib/news/posts/fetch";
 import { sortPosts } from "@/lib/news/query/sort";
 import { paginateArray, type PaginatedResults } from "@/util/paginateArray";
 import { filterPosts } from "@/lib/news/query/filter";
-import type { Post } from "@/lib/news/posts/post";
+import type { Post } from "@/lib/news/feeds/post";
 import type { QueryOpts } from "@/lib/news/query/types";
 
 export async function queryPosts(

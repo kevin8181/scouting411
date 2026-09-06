@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Post } from "@/lib/news/posts/post";
+import type { Post } from "@/lib/news/feeds/post";
 
 export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {
 	let sortedPosts;

@@ -1,7 +1,7 @@
 import { faSquareUpRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { queryPosts } from "@/lib/news/query/query";
-import type { Post } from "@/lib/news/posts/post";
+import type { Post } from "@/lib/news/feeds/post";
 import relativeDate from "tiny-relative-date";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";

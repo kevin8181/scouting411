@@ -14,7 +14,7 @@ import { feeds } from "@/lib/news/feeds/feedManager";
 import { type QueryOpts, queryOptsSchema } from "@/lib/news/query/types";
 import { useForm } from "@tanstack/react-form";
 import type { PaginatedResults } from "@/util/paginateArray";
-import type { Post } from "@/lib/news/posts/post";
+import type { Post } from "@/lib/news/feeds/post";
 import { SidebarHeader, SidebarContent } from "@/components/ui/sidebar";
 import { PaginationControl } from "@/components/react/paginate";
 import { Button } from "@/components/ui/button";

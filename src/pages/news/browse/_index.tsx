@@ -1,6 +1,6 @@
 import { CardFeed } from "@/components/react/cardFeed";
 import { PostComponent } from "@/components/react/post";
-import type { Post } from "@/lib/news/posts/post";
+import type { Post } from "@/lib/news/feeds/post";
 import type { QueryOpts } from "@/lib/news/query/types";
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { useState, useEffect } from "react";
