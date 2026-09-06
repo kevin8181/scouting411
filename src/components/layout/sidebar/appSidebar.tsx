@@ -1,5 +1,6 @@
 import { NavLink } from "@/components/layout/sidebar/navLink";
 import { NavGroup } from "@/components/layout/sidebar/navGroup";
+import { Badge } from "@/components/ui/badge";
 import {
 	Sidebar,
 	SidebarHeader,
@@ -22,13 +23,14 @@ import {
 export function AppSidebar({ url }: { url: URL }) {
 	return (
 		<Sidebar className="border-r" aria-label="Main sidebar">
-			<SidebarHeader className="flex h-13 shrink-0 items-start justify-center border-b px-4">
+			<SidebarHeader className="flex h-13 shrink-0 flex-row items-center justify-start gap-2 border-b px-4">
 				<a
 					href="/"
 					className="font-display text-primary text-xl font-extrabold"
 				>
 					Scouting411
 				</a>
+				<Badge variant="secondary">alpha</Badge>
 			</SidebarHeader>
 
 			<SidebarContent className="flex h-full flex-col justify-between overflow-auto">

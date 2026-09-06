@@ -4,8 +4,7 @@ import type { Resource } from "@/lib/resources/types";
 // I think eventually it will make sense to store these in a database
 // there should be dimensions for the type of resource, as well as topic tags
 
-// eventually this could be fully searchable and filterable in the same way the new feeds are
-// it could also be part of an MCP or have some way of doing natural language search
+// eventually this could be fully searchable and filterable in the same way the feeds are
 
 export const resources: Resource[] = [
 	// marketing/landing pages
