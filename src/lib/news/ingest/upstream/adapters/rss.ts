@@ -7,6 +7,13 @@ export function RssAdapter(opts: RssAdapterOpts): FeedAdapter {
 		console.log(`fetching rss feed ${opts.feedUrl}`);
 
 		const response = await fetch(opts.feedUrl);
+
+		if (response.status !== 200) {
+			throw new Error(
+				`failed to fetch rss feed ${opts.feedUrl}: status code ${response.status}`,
+			);
+		}
+
 		const xml = await response.text();
 
 		const feed = parseRssFeed(xml);
