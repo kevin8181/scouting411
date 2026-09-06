@@ -1,0 +1,32 @@
+import { feedConfigs } from "@/lib/news/feeds/config";
+import { writePosts } from "@/lib/news/cache/cache";
+import {
+	ingestFeed,
+	type IngestError,
+} from "@/lib/news/ingest/upstream/ingestFeed";
+
+/** fetches the upstream post data for all feeds and updates the cache */
+export async function ingestAllFeeds() {
+	const errors: IngestError[] = [];
+
+	await Promise.all(
+		feedConfigs.map(async (feed) => {
+			const { data, error } = await ingestFeed(feed.slug);
+
+			if (error) {
+				errors.push(error);
+				return;
+			}
+
+			if (data) {
+				await writePosts({ feedSlug: feed.slug, postData: data });
+			}
+		}),
+	);
+
+	return {
+		errors,
+		succeeded: feedConfigs.length - errors.length,
+		total: feedConfigs.length,
+	};
+}

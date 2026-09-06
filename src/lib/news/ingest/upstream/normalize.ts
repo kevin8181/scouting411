@@ -4,8 +4,8 @@ import sanitizeHtml from "sanitize-html";
 import { z } from "zod";
 
 /** post-processor for feed adapters to validate and normalize their output */
-export function normalizePostData(postData: PostData[]): PostData[] {
-	return postData.map((post) => postDataSchema.parse(post));
+export function normalizePostData(postData: PostData[]) {
+	return z.array(postDataSchema).safeParse(postData);
 }
 
 /** clean up a string which may contain html tags and entities */
