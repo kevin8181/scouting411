@@ -18,7 +18,7 @@ import { useStore } from "@nanostores/react";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useIsMobile } from "@/util/hooks/use-mobile";
 
-import { feeds } from "@/lib/news/feeds/feedManager";
+import { feeds } from "@/lib/news/feeds/feed";
 import { resources } from "@/lib/resources/config";
 import { useTheme } from "@/components/react/darkModeControl";
 

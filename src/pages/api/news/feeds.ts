@@ -1,7 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
 
-import { feeds } from "@/lib/news/feeds/feedManager";
+import { feeds } from "@/lib/news/feeds/feed";
 import type { Feed } from "@/lib/news/feeds/types";
 import {
 	getAggregatedFeedMetrics,

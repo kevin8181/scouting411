@@ -10,7 +10,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
-import { feeds } from "@/lib/news/feeds/feedManager";
+import { feeds } from "@/lib/news/feeds/feed";
 import { type QueryOpts, queryOptsSchema } from "@/lib/news/query/types";
 import { useForm } from "@tanstack/react-form";
 import type { PaginatedResults } from "@/util/paginateArray";

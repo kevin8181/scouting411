@@ -1,9 +1,9 @@
 import type { APIRoute } from "astro";
 import { generateRssFeed } from "feedsmith";
 
-import { getFeedBySlug } from "@/lib/news/feeds/feedManager";
+import { getFeedBySlug } from "@/lib/news/feeds/feed";
 import { queryPosts } from "@/lib/news/query/query";
-import { isFeedSlug } from "@/lib/news/feeds/feedManager";
+import { isFeedSlug } from "@/lib/news/feeds/feed";
 
 // todo maybe this could just accept a full query as url params and return it as rss,
 // allowing users to make whatever query they want into an rss feed

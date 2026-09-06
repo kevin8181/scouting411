@@ -1,8 +1,15 @@
 import type { FeedConfigEntry, Feed } from "@/lib/news/feeds/types";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
+import { feedConfigs } from "@/lib/news/feeds/config";
+import { type FeedSlug, feedSlugSchema } from "@/lib/news/feeds/types";
+
+/** the list of all feeds, hydrated and alphabetized */
+export const feeds = feedConfigs
+	.map(hydrateFeed)
+	.sort((a, b) => a.name.localeCompare(b.name));
 
 /** create a hydrated feed object from a config */
-export function hydrateFeed(opts: FeedConfigEntry): Feed {
+function hydrateFeed(opts: FeedConfigEntry): Feed {
 	return {
 		name: opts.name,
 		slug: opts.slug,
@@ -29,4 +36,14 @@ export function hydrateFeed(opts: FeedConfigEntry): Feed {
 		type: opts.adapter.type,
 		defaultVisible: opts.defaultVisible,
 	};
+}
+
+/** type guard to check if a string is a feed slug */
+export function isFeedSlug(value: string): value is FeedSlug {
+	return feedSlugSchema.safeParse(value).success;
+}
+
+/** gets a feed by its slug */
+export function getFeedBySlug(slug: FeedSlug) {
+	return feeds.find((feed) => feed.slug === slug)!;
 }
