@@ -24,24 +24,24 @@ async function updateFeed(slug: FeedSlug) {
 
 /** fetches the upstream post data for all feeds and updates the cache */
 export async function updateAllFeeds() {
-	const failures: { slug: string; reason: unknown }[] = [];
+	const failures: { feedSlug: FeedSlug; reason: unknown }[] = [];
 
 	await Promise.all(
 		feedConfigs.map(async (feed) => {
 			try {
 				await updateFeed(feed.slug);
 			} catch (reason) {
-				failures.push({ slug: feed.slug, reason });
+				failures.push({ feedSlug: feed.slug, reason });
 			}
 		}),
 	);
 
-	for (const failure of failures) {
-		console.error(`failed to update feed ${failure.slug}`, failure.reason);
-		console.error("retaining old cache for this feed");
-	}
-
-	console.log(
-		`updated ${feedConfigs.length - failures.length}/${feedConfigs.length} feeds`,
-	);
+	return {
+		errors: failures.map((failure) => ({
+			feedSlug: failure.feedSlug,
+			reason: failure.reason,
+		})),
+		succeeded: feedConfigs.length - failures.length,
+		total: feedConfigs.length,
+	};
 }

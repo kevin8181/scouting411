@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { updateAllFeeds } from "@/lib/news/posts/update";
+import { updateAllFeeds } from "@/lib/news/cache/update";
 import { CRON_SECRET } from "astro:env/server";
 
 export const prerender = false;
@@ -11,7 +11,12 @@ export const GET: APIRoute = async (context) => {
 		return new Response("401 Unauthorized", { status: 401 });
 	}
 
-	await updateAllFeeds();
+	const result = await updateAllFeeds();
 
-	return new Response("200 OK", { status: 200 });
+	return new Response(JSON.stringify(result), {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		status: result.errors.length === 0 ? 200 : 500,
+	});
 };
