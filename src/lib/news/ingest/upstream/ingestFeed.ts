@@ -12,8 +12,18 @@ export async function ingestFeed(
 	//todo access the Feed instead of the FeedConfig?
 	const feedConfig = feedConfigs.find((feed) => feed.slug === slug)!;
 
-	/** this can throw */
-	const postData = await feedConfig.adapter.execute();
+	let postData: PostData[];
+
+	try {
+		postData = await feedConfig.adapter.execute();
+	} catch (reason) {
+		return {
+			error: {
+				feed: feedConfig.slug,
+				reason: reason instanceof Error ? reason.message : String(reason),
+			},
+		};
+	}
 
 	if (postData.length === 0) {
 		return {
