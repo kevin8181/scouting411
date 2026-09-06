@@ -16,9 +16,7 @@ export async function ingestAllFeeds() {
 				return;
 			}
 
-			if (data) {
-				await writePosts({ feedSlug: feed.slug, postData: data });
-			}
+			await writePosts({ feedSlug: feed.slug, postData: data });
 		}),
 	);
 
