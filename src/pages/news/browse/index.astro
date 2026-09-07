@@ -2,7 +2,6 @@
 import Layout from "@/components/layout/Layout.astro";
 import { Page } from "@/pages/news/browse/_index";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
-import { jsonPrettyPrint } from "@/util/jsonPrettyPrint";
 
 export const prerender = false;
 
@@ -11,7 +10,7 @@ const { searchParams } = Astro.url;
 const { error, data: query } = postsQueryParamsEncoder.decode(searchParams);
 
 if (error) {
-	return new Response(jsonPrettyPrint(error.issues), {
+	return new Response(JSON.stringify(error.issues), {
 		status: 400,
 		headers: {
 			"content-type": "application/json",
