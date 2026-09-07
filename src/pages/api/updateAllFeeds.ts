@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { ingestAllFeeds } from "@/lib/news/ingest/execute/ingestAllFeeds";
 import { CRON_SECRET } from "astro:env/server";
+import { sendDevDebugEmail } from "@/lib/email/templates/devDebug";
 
 export const prerender = false;
 
@@ -12,6 +13,13 @@ export const GET: APIRoute = async (context) => {
 	}
 
 	const result = await ingestAllFeeds();
+
+	if (result.errors.length > 0) {
+		await sendDevDebugEmail({
+			text: JSON.stringify(result.errors, null, "\t"),
+			subject: "Errors updating all feeds",
+		});
+	}
 
 	return new Response(JSON.stringify(result), {
 		headers: {
