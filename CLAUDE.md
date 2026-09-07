@@ -1,76 +1,76 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Scouting411 (scouting411.org) is an Astro + React site that aggregates official Scouting America news and resources. Two content systems: a **news aggregator** (a cron-refreshed cache of external Scouting feeds, browsable and filterable) and a **resources directory** (a hand-maintained list of official links).
 
-## Project
+## Working here
 
-Scouting411 (scouting411.org) is an Astro + React site that aggregates official Scouting America news and resources. Two content systems: a **news aggregator** (cron-refreshed cache of external Scouting feeds, browsable/filterable) and a **resources directory** (a hand-maintained list of official Scouting America links).
+Package manager is pnpm; scripts live in `package.json`.
 
-## Commands
+- `pnpm check` is the gate — `astro check`, prettier write, eslint, knip. A change is done when it passes, not before.
+- Knip runs with `--treat-config-hints-as-errors`: an unused export, file, or dependency fails the build. Remove dead exports as part of the refactor that orphans them.
+- `pnpm validateResourceLinks` fetches every URL in `src/lib/resources/config.ts`. Run it after touching resources; CI runs it too.
+- There is no unit test framework. Verify against `pnpm dev`, or drive the posts API by hand with the Bruno collection in `bruno/`.
 
-Package manager is pnpm (`packageManager` pinned; Node >= 22.13.0 enforced via `engineStrict`).
+## News: ingest, cache, query
 
-- `pnpm dev` — Astro dev server
-- `pnpm build` / `pnpm preview`
-- `pnpm check` — the local CI suite: `astro check` (typecheck) + `format` (prettier write) + `lint` + `knip`. Run before considering a change done.
-- `pnpm format:check` / `pnpm lint` / `pnpm knip` — individual checks
-- `pnpm validateResourceLinks` — hits every URL in `src/lib/resources/config.ts` to confirm it resolves. Run after touching resources; also runs in CI.
+Three layers that meet only at the Redis cache. **A page request never fetches upstream** — it only reads Redis.
 
-There is no unit test framework in this repo. CI (`.github/workflows/check.yaml`, on PRs) runs prettier check, `astro check`, eslint, `validateResourceLinks`, and knip.
+### Feed config is the source of truth
 
-`knip --treat-config-hints-as-errors` means unused exports/files/deps fail the build. Don't leave dead exports behind after a refactor.
+`src/lib/news/feeds/config.ts` holds every feed as a `const satisfies FeedConfig[]`, so the literal type drives `FeedSlug` (a `z.enum` in `feeds/types.ts`) and adding a feed propagates types everywhere. Entries carry `todo` notes explaining why a candidate source is broken, paginated badly, or unavailable — read them before concluding a feed is missing by oversight. `context/notes.md` is the scratchpad of candidate sources not yet built.
 
-The `bruno/` directory holds a [Bruno](https://usebruno.com) collection for hitting the posts API by hand.
+`feeds/feed.ts` hydrates configs into the alphabetized `feeds` array and assigns each feed its canonical `links` (overview, browsePosts, rss, atom). Link to `feed.links.*` rather than rebuilding those paths.
 
-## Architecture
+**The cycle trap:** `feed.ts` imports `query/queryParams.ts` to build `links.browsePosts`. So `query/types.ts` sources `defaultVisibleFeeds` from `feeds/config.ts`, not `feeds/feed.ts` — importing it from `feed.ts` closes a cycle back through `queryParams.ts` and breaks island hydration with a TDZ error at runtime, which typecheck will not catch. Keep the query layer importing from `feeds/config.ts` and `feeds/types.ts` only.
 
-### News: ingest vs. query
+### Ingest (cron only) — `src/lib/news/ingest/`
 
-The news system is deliberately split into two halves that meet only at the Redis cache. Keep that boundary — `context/news-feed-rearchitecture.md` records the design reasoning behind it.
+One adapter per upstream type in `upstream/adapters/` (`rss.ts` via feedsmith, `wordpress.ts` REST, `statuspage.ts`, `podcast-archive/`), each implementing `FeedAdapter` from `upstream/types.ts`. New upstream shape means a new adapter, not a special case inside an existing one.
 
-**Write side (cron only):**
+`upstream/ingestFeed.ts` runs one feed's adapter and pipes the output through `upstream/normalize.ts` — a zod schema that strips HTML, decodes entities, pins URLs to http(s), and coerces each upstream's date format to an ISO string. Adapters return raw-ish data; normalize enforces the invariants `PostData` claims.
 
-- `src/lib/news/feeds/config.ts` — single source of truth for every feed. Each entry: `name`, `slug`, `description`, `homepageUrl`, `adapter`, `defaultVisible`. Many entries are commented out with `todo` notes explaining why the source is broken or unavailable — read here before assuming a feed exists. The exported array's literal type drives `FeedSlug` (a `z.enum` over the slugs), so adding a feed propagates types everywhere.
-- `src/lib/news/ingest/upstream/adapters/` — one adapter per upstream type: `rss.ts` (generic RSS/Atom via `feedsmith`), `wordpress.ts` (WordPress REST API), `tta.ts` (bespoke Trail to Adventure). Each implements `FeedAdapter` (`ingest/types.ts`) with `.execute(): Promise<PostData[]>`.
-- `src/lib/news/posts/update.ts` — `updateAllFeeds()` runs every adapter concurrently, isolating failures per feed so one bad source doesn't abort the run. A feed that returns zero posts is treated as a failure and its existing cache is kept.
-- `src/pages/api/updateAllFeeds.ts` — the only caller; a Vercel cron job (`vercel.json`, daily at midnight) guarded by a `Bearer ${CRON_SECRET}` auth header.
+`execute/ingestAllFeeds.ts` runs every feed concurrently and isolates failures per feed, so one bad upstream cannot abort the run. **Zero posts counts as a failure** and the existing cache is left in place. Its only caller is `src/pages/api/updateAllFeeds.ts`, a daily Vercel cron (`vercel.json`) guarded by a `Bearer ${CRON_SECRET}` header.
 
-**Read side (every request):**
+### Cache — `src/lib/news/cache/`
 
-- `src/lib/news/posts/cache.ts` — Redis JSON get/set at key `posts:{slug}`. Feeds are **never** fetched live on a page request.
-- `src/lib/news/posts/fetch.ts` — `getMultipleFeedsPosts(slugs)` does one Redis read per selected feed and hydrates `PostData` into `Post` (`posts/post.ts`) with its `Feed` attached. There's a `todo` to make these internal — prefer routing new post access through the query layer.
-- `src/lib/news/query/` — `query.ts`'s `queryPosts(opts)` is the entry point: fetch selected feeds → `filter.ts` → `sort.ts` → `paginateArray`. `types.ts` defines `queryOptsSchema` (zod), whose defaults (`defaultVisibleFeeds`, date-desc, 20/page) are what an empty query resolves to. `queryParams.ts` encodes/decodes that shape to/from URL search params via `qs` — note the `allowEmptyArrays` comment there; dropping it silently resurrects all feeds when the user deselects every source.
+`cache.ts` is the whole Redis surface: JSON read/write at key `posts:{slug}`. `fetch.ts` reads one key per selected feed and hydrates `PostData` into `Post` with its `Feed` attached. Route new post access through the query layer rather than calling `fetch.ts` directly.
 
-**Feeds are data; config supplies the types.** `feeds/feedManager.ts` exposes the hydrated, alphabetized `feeds` array plus `getFeedBySlug` / `isFeedSlug`. `defaultVisibleFeeds` lives in `feeds/config.ts` instead, derived from the raw configs: hydration imports `query/queryParams.ts`, so sourcing it from `feedManager` made `query/types.ts` → `feedManager` → `feed` → `queryParams` → `query/types.ts` a cycle and blew up island hydration with a tdz error. Keep the query layer off `feedManager`. `feeds/feed.ts` hydration is what assigns each feed its canonical URLs (`/news/sources/{slug}`, `/feeds/{slug}/rss`, `/feeds/{slug}/atom`), so link to `feed.urls.*` rather than rebuilding paths.
+### Query — `src/lib/news/query/`
 
-Re-publishing routes: `src/pages/feeds/[slug]/rss.ts` and `atom.ts` serve a single source's cached posts; `src/pages/feeds/all/opml.ts` emits an OPML list of all feeds.
+`query.ts`'s `queryPosts(opts)` is the single entry point: fetch selected feeds → `filter.ts` → `sort.ts` → `paginateArray`. `types.ts` defines `queryOptsSchema`, whose defaults are what an empty query resolves to.
 
-### How the browse UI talks to the server
+`queryParams.ts` encodes that shape to and from URL search params via `qs`. Its header comment explains why `allowEmptyArrays` and `arrayFormat: "brackets"` are both load-bearing — read it before changing those options; either one silently resurrects every feed when the user deselects all sources.
 
-Three entry points into `queryPosts`, all sharing `queryOptsSchema`:
+### Three ways in
 
-1. **Astro action** (`src/actions/index.ts`) — what the browse island uses for interactive re-queries.
-2. **REST** (`src/pages/api/posts.ts`) — public GET (query params) / POST (JSON body), documented on the `/developers` page.
+All three share `queryOptsSchema`, so a change to the schema changes all of them at once:
+
+1. **Astro action** (`src/actions/index.ts`) — what the browse island calls for interactive re-queries.
+2. **REST** (`src/pages/api/news/posts.ts`, `feeds.ts`) — public, documented on the `/developers` page. Treat the shape as a published contract.
 3. **Direct call** — SSR pages (`index.astro`, `news/stats`) call `queryPosts` server-side.
 
-`src/pages/news/browse/index.astro` decodes URL params server-side into `initialQuery`, then hands off to the `client:load` React island `_index.tsx`, which owns query state in `useState`. That island's effect has a deliberate stale-response guard (narrow queries resolve faster than broad ones, so an in-flight broad query can otherwise land last and clobber a narrow one); preserve it when editing.
+Re-publishing routes: `src/pages/feeds/[slug]/rss.ts` and `atom.ts` serve one source's cached posts; `feeds/all/opml.ts` lists them all.
 
-### Resources
+### The browse island
 
-`src/lib/resources/config.ts` is a hand-maintained `Resource[]` (`url`, `title`, `description`). Inclusion criteria are in `README.md`: official Scouting America national-level publications only — no council/district/unit/third-party, not one item in a series, not a superseded version, not an individual document or form. Requests come in as GitHub issues (`.github/ISSUE_TEMPLATE/`).
+`src/pages/news/browse/index.astro` decodes URL params server-side into `initialQuery`, then hands off to the `client:load` React island `_index.tsx`, which owns query state in `useState` and pushes it back to the URL with `history.replaceState`.
 
-### Frontend conventions
+That island's effect holds a **stale-response guard**: a narrow query resolves faster than a broad one (one Redis read per selected feed), so an in-flight broad query can otherwise land last and clobber a narrow one. Preserve it when editing the effect.
 
-- Routes are `.astro` files under `src/pages/`. Files prefixed with `_` (e.g. `_index.tsx`, `_filterSidebar.tsx`) are **not routes** — they're that page's React island, colocated with it. Follow the convention for new page-specific components.
-- `Layout.astro` wraps `RootLayout.astro` + the `AppShell` island (sidebar chrome, command palette, dark mode); pages just supply `title` and children.
-- `src/components/ui/` is shadcn/ui — style `base-vega`, icons `lucide`, built on `@base-ui/react` (not Radix). Add components via the `shadcn` CLI so they match the configured style and aliases (`components.json`). Knip is configured to ignore unused exports in this directory.
-- Cross-page reusable islands live in `src/components/react/`; layout/sidebar pieces in `src/components/layout/`.
+## Resources
+
+`src/lib/resources/config.ts` is a hand-maintained `Resource[]`. Inclusion criteria are in `README.md` — apply them as written; they are stricter than they look (national-level official publications only, no single item from a series, no superseded versions, no individual forms). Requests arrive as GitHub issues via `.github/ISSUE_TEMPLATE/`.
+
+## Conventions
+
+- Routes are `.astro` files under `src/pages/`. Files prefixed with `_` (`_index.tsx`, `_filterSidebar.tsx`) are that page's React island, colocated with it — follow this for new page-specific components. Cross-page islands go in `src/components/react/`, chrome in `src/components/layout/`.
+- **Any page or route that reads Redis must `export const prerender = false`.**
+- `Layout.astro` wraps `RootLayout.astro` plus the `AppShell` island (sidebar, command palette, dark mode); pages supply `title` and children.
+- `src/components/ui/` is shadcn/ui, style `base-vega`, icons `lucide`, built on `@base-ui/react` (not Radix). Add components with the `shadcn` CLI so they match `components.json`. Knip ignores unused exports here.
 - Tailwind v4 via `@tailwindcss/vite` — there is no `tailwind.config`; the theme lives in `src/global.css`. Fonts are declared in `astro.config.ts` via Astro font providers, not imported in CSS.
-- Path alias `@/*` → `src/*`. Imports are written as full `@/`-prefixed paths even within the same directory — match that.
-- Prettier uses **tabs**, with the tailwind class-sorting plugin.
+- Path alias `@/*` → `src/*`. Write imports as full `@/` paths even within the same directory — match the surrounding files.
+- Prettier uses **tabs**, with the Tailwind class-sorting plugin.
 
-### Env / deployment
+## Env and deployment
 
-Server env vars are schema-validated in `astro.config.ts` and imported from `astro:env/server`: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `CRON_SECRET`. Local values live in `.env` (gitignored). Deployed to Vercel via `@astrojs/vercel` (`maxDuration: 300` for the feed-update function). `trailingSlash: "never"`. Sitemap uses a custom XSLT at `public/xslt/sitemap.xslt`.
-
-Pages and routes that read Redis must set `export const prerender = false`.
+Server env vars are schema-validated in `astro.config.ts` and imported from `astro:env/server`: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `CRON_SECRET`. Local values live in a gitignored `.env`. Deployed to Vercel via `@astrojs/vercel` (`maxDuration: 300` for the feed-update function). `trailingSlash: "never"`.
