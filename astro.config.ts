@@ -42,6 +42,18 @@ export default defineConfig({
 				context: "server",
 				access: "secret",
 			}),
+
+			RESEND_API_KEY: envField.string({
+				context: "server",
+				access: "secret",
+				startsWith: "re_",
+			}),
+
+			DEVELOPER_DEBUG_EMAIL: envField.string({
+				context: "server",
+				access: "secret",
+				includes: "@",
+			}),
 		},
 	},
 
