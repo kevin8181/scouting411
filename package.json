@@ -15,7 +15,7 @@
 		"astro": "astro",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
-		"lint": "pnpx eslint \"src/**/*\"",
+		"lint": "eslint \"src/**/*\"",
 		"check": "pnpm run astro check && pnpm run format && pnpm run lint && pnpm run knip && echo '✅ All checks passed.'",
 		"validateResourceLinks": "tsx scripts/validateResourceLinks.ts",
 		"knip": "knip --treat-config-hints-as-errors"
