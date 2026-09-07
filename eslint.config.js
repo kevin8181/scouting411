@@ -15,4 +15,18 @@ export default defineConfig([
 	},
 	tseslint.configs.recommended, // todo change to strict and fix errors
 	eslintPluginAstro.configs.recommended,
+	{
+		// eslint-plugin-astro sniffs for @typescript-eslint/parser via cwd-relative
+		// resolution, which only succeeds because pnpm's bin shim injects NODE_PATH.
+		// Editors and other runners bypass that shim, so astro-eslint-parser silently
+		// falls back to espree and fails on TS frontmatter. Set the parser explicitly.
+		files: ["**/*.astro"],
+		processor: "astro/client-side-ts",
+		languageOptions: {
+			parserOptions: {
+				parser: tseslint.parser,
+				extraFileExtensions: [".astro"],
+			},
+		},
+	},
 ]);
