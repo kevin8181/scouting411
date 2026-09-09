@@ -5,11 +5,7 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { DarkModeControl } from "@/components/react/darkModeControl";
-import {
-	CommandPalette,
-	CommandPaletteTrigger,
-} from "@/components/react/commandPalette";
+import { CommandPalette } from "@/components/react/commandPalette";
 
 import {
 	TooltipProvider,
@@ -28,21 +24,13 @@ export function AppShell({
 	children: ReactNode;
 }) {
 	return (
-		<SidebarProvider>
-			<AppSidebar url={url} />
-			<SidebarInset>
-				<header className="bg-sidebar sticky top-0 flex h-13 shrink-0 items-center justify-between border-b px-4">
-					<span className="font-serif font-bold">{title}</span>
-					<div className="flex items-center gap-2">
-						<CommandPalette />
-						<CommandPaletteTrigger />
-
+		<>
+			<CommandPalette />
+			<SidebarProvider>
+				<AppSidebar url={url} />
+				<SidebarInset>
+					<header className="bg-sidebar sticky top-0 flex h-13 shrink-0 items-center border-b px-4 gap-4">
 						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger render={<DarkModeControl />} />
-								<TooltipContent>Toggle dark mode</TooltipContent>
-							</Tooltip>
-
 							<Tooltip>
 								<TooltipTrigger
 									render={
@@ -52,10 +40,12 @@ export function AppShell({
 								<TooltipContent>Toggle sidebar</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
-					</div>
-				</header>
-				{children}
-			</SidebarInset>
-		</SidebarProvider>
+
+						<span className="font-serif font-bold">{title}</span>
+					</header>
+					{children}
+				</SidebarInset>
+			</SidebarProvider>
+		</>
 	);
 }

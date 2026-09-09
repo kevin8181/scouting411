@@ -30,7 +30,7 @@ export function NavGroup({
 	children: React.ReactNode;
 }) {
 	const menu = (
-		<SidebarMenu className="gap-0.75">
+		<SidebarMenu className="gap-0.5">
 			{React.Children.map(children, (child) => (
 				<SidebarMenuItem>{child}</SidebarMenuItem>
 			))}
@@ -39,7 +39,7 @@ export function NavGroup({
 
 	if (!label || !collapsible) {
 		return (
-			<SidebarGroup className="gap-1 p-0 px-3 pb-5">
+			<SidebarGroup className="gap-1 p-0 px-3">
 				{label && (
 					<SidebarGroupLabel className={labelClassName}>
 						{label}
@@ -52,7 +52,7 @@ export function NavGroup({
 
 	return (
 		<Collapsible defaultOpen={defaultOpen}>
-			<SidebarGroup className="gap-1 p-0 px-3 pb-5">
+			<SidebarGroup className="gap-1 p-0 px-3">
 				<SidebarGroupLabel
 					render={<CollapsibleTrigger />}
 					className={`${labelClassName} group/trigger hover:text-foreground flex w-full cursor-pointer items-center justify-start gap-2 pr-3`}

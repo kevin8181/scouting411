@@ -67,13 +67,13 @@ export function CommandPaletteTrigger() {
 			variant="outline"
 			onClick={() => setOpen(true)}
 			aria-label="Search"
-			className="h-8 w-8 items-center justify-center gap-2 sm:w-40 sm:justify-between sm:px-1.5"
+			className="items-center justify-between gap-2 px-1.5"
 		>
 			<span className="flex items-center gap-2">
 				<SearchIcon className="" />
-				<span className="text-muted-foreground hidden sm:block">Search...</span>
+				<span className="text-muted-foreground">Search...</span>
 			</span>
-			<KbdGroup className="hidden sm:inline-flex">
+			<KbdGroup className="inline-flex">
 				<Kbd>Ctrl K</Kbd>
 			</KbdGroup>
 		</Button>

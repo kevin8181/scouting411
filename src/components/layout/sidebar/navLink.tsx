@@ -23,7 +23,7 @@ export function NavLink({
 		<SidebarMenuButton
 			isActive={isActive}
 			className={cn(
-				"h-auto justify-between gap-2.5 rounded-md border-transparent px-3 py-2 text-sm font-normal outline-none",
+				"h-auto justify-between gap-2.5 rounded-md border-transparent px-2.5 py-1.5 text-sm font-normal outline-none",
 				"hover:bg-primary/8",
 				"data-active:bg-primary/12 data-active:text-primary data-active:font-bold",
 			)}
@@ -34,8 +34,7 @@ export function NavLink({
 					rel={newTab ? "noopener noreferrer" : undefined}
 				>
 					<div className="flex items-center gap-2">
-						<FontAwesomeIcon icon={icon} height={"1em"}></FontAwesomeIcon>{" "}
-						{label}
+						<FontAwesomeIcon icon={icon} /> {label}
 					</div>
 					{newTab && <FontAwesomeIcon icon={faSquareUpRight} height={"1em"} />}
 				</a>
