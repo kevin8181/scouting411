@@ -30,7 +30,7 @@ export function AppSidebar({ url }: { url: URL }) {
 				>
 					Scouting411
 				</a>
-				<Badge variant="secondary">alpha</Badge>
+				<Badge variant="secondary" className="font-mono text-muted-foreground">alpha</Badge>
 			</SidebarHeader>
 
 			<SidebarContent className="flex h-full flex-col justify-between overflow-auto">
