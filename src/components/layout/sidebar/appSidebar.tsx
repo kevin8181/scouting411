@@ -30,7 +30,9 @@ export function AppSidebar({ url }: { url: URL }) {
 				>
 					Scouting411
 				</a>
-				<Badge variant="secondary" className="font-mono text-muted-foreground">alpha</Badge>
+				<Badge variant="secondary" className="text-muted-foreground font-mono">
+					alpha
+				</Badge>
 			</SidebarHeader>
 
 			<SidebarContent className="flex h-full flex-col justify-between overflow-auto">
@@ -44,7 +46,7 @@ export function AppSidebar({ url }: { url: URL }) {
 						/>
 					</NavGroup>
 
-					<NavGroup label="news">
+					<NavGroup label="news" collapsible>
 						<NavLink
 							href="/news/browse"
 							label="Newsfeed"
@@ -71,7 +73,7 @@ export function AppSidebar({ url }: { url: URL }) {
 						/>
 					</NavGroup>
 
-					<NavGroup label="resources">
+					<NavGroup label="resources" collapsible>
 						<NavLink
 							href="/resources"
 							label="Resources"
@@ -82,7 +84,7 @@ export function AppSidebar({ url }: { url: URL }) {
 				</div>
 
 				<div>
-					<NavGroup label="more">
+					<NavGroup label="more" collapsible>
 						<NavLink
 							href="/about"
 							label="About"
