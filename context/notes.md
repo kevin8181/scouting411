@@ -18,6 +18,8 @@
 
 - https://www.scouting.org/international/resources/
 - https://www.scouting.org/commissioners/news-for-commissioners/
+- https://www.scouting.org/training/training-updates/
+- https://www.scouting.org/training/training-updates/archives/
 
 ## email newsletters
 
@@ -48,6 +50,7 @@
 - https://ar2019.scouting.org/
 - https://www.bsarestructuring.org/
 - https://www.scouting.org/international/
+- https://nylt-leadershipacademy.org/
 
 ## reference and guidance
 
