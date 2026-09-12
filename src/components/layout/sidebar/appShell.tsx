@@ -29,7 +29,7 @@ export function AppShell({
 			<SidebarProvider>
 				<AppSidebar url={url} />
 				<SidebarInset>
-					<header className="bg-sidebar sticky top-0 flex h-13 shrink-0 items-center border-b px-4 gap-4">
+					<header className="bg-sidebar sticky top-0 flex h-13 shrink-0 items-center gap-4 border-b px-4">
 						<TooltipProvider>
 							<Tooltip>
 								<TooltipTrigger

@@ -3,6 +3,11 @@ import { Moon, Sun, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -37,15 +42,22 @@ export function DarkModeControl() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger
-				render={
-					<Button variant="outline" size="icon-sm">
-						<Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-						<Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-						<span className="sr-only">Toggle theme</span>
-					</Button>
-				}
-			></DropdownMenuTrigger>
+			<Tooltip>
+				<TooltipTrigger
+					render={
+						<DropdownMenuTrigger
+							render={
+								<Button variant="outline" size="icon-sm">
+									<Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+									<Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+									<span className="sr-only">Toggle theme</span>
+								</Button>
+							}
+						/>
+					}
+				/>
+				<TooltipContent>Toggle theme</TooltipContent>
+			</Tooltip>
 			<DropdownMenuContent align="end">
 				<DropdownMenuItem
 					onClick={() => setTheme("light")}

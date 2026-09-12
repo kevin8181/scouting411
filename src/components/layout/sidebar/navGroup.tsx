@@ -59,7 +59,7 @@ export function NavGroup({
 				>
 					<FontAwesomeIcon
 						icon={faChevronRight}
-					
+
 						className="transition-transform duration-200 group-data-panel-open/trigger:rotate-90"
 					/>
 					{label}

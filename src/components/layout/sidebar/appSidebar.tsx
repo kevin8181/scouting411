@@ -22,6 +22,12 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DarkModeControl } from "@/components/react/darkModeControl";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { CommandPaletteTrigger } from "@/components/react/commandPalette";
 
@@ -40,7 +46,7 @@ export function AppSidebar({ url }: { url: URL }) {
 				</Badge>
 			</SidebarHeader>
 
-			<SidebarContent className="flex h-full flex-col overflow-auto py-3 gap-5">
+			<SidebarContent className="flex h-full flex-col gap-5 overflow-auto py-3">
 				<div className="flex flex-col px-3">
 					<CommandPaletteTrigger />
 				</div>
@@ -104,27 +110,62 @@ export function AppSidebar({ url }: { url: URL }) {
 				<span className="text-muted-foreground p-3 py-1 text-xs">
 					Not affiliated with Scouting America.
 				</span>
-				<div className="flex flex-row items-center justify-between gap-2 border-t p-4">
-					<a
-						href="/about"
-						className={buttonVariants({ size: "icon-sm", variant: "outline" })}
-					>
-						<FontAwesomeIcon icon={faCircleInfo} />
-					</a>
-					<a
-						href="https://github.com/kevin8181/scouting411/issues/new/choose"
-						className={buttonVariants({ size: "icon-sm", variant: "outline" })}
-					>
-						<FontAwesomeIcon icon={faCommentDots} />
-					</a>
-					<a
-						href="/developers"
-						className={buttonVariants({ size: "icon-sm", variant: "outline" })}
-					>
-						<FontAwesomeIcon icon={faCode} />
-					</a>
-					<DarkModeControl />
-				</div>
+				<TooltipProvider>
+					<div className="flex flex-row items-center justify-between gap-2 border-t p-4">
+						<Tooltip>
+							<TooltipTrigger
+								render={
+									<a
+										href="/about"
+										className={buttonVariants({
+											size: "icon-sm",
+											variant: "outline",
+										})}
+									>
+										<FontAwesomeIcon icon={faCircleInfo} />
+										<span className="sr-only">About</span>
+									</a>
+								}
+							/>
+							<TooltipContent>About</TooltipContent>
+						</Tooltip>
+						<Tooltip>
+							<TooltipTrigger
+								render={
+									<a
+										href="https://github.com/kevin8181/scouting411/issues/new/choose"
+										className={buttonVariants({
+											size: "icon-sm",
+											variant: "outline",
+										})}
+									>
+										<FontAwesomeIcon icon={faCommentDots} />
+										<span className="sr-only">Send feedback</span>
+									</a>
+								}
+							/>
+							<TooltipContent>Send feedback</TooltipContent>
+						</Tooltip>
+						<Tooltip>
+							<TooltipTrigger
+								render={
+									<a
+										href="/developers"
+										className={buttonVariants({
+											size: "icon-sm",
+											variant: "outline",
+										})}
+									>
+										<FontAwesomeIcon icon={faCode} />
+										<span className="sr-only">Developers</span>
+									</a>
+								}
+							/>
+							<TooltipContent>For developers</TooltipContent>
+						</Tooltip>
+						<DarkModeControl />
+					</div>
+				</TooltipProvider>
 			</SidebarFooter>
 		</Sidebar>
 	);
