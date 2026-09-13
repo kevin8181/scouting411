@@ -10,6 +10,8 @@ const handler = createMcpHandler(() => {
 		version: "1.0.0",
 	});
 
+	//todo add actual tools here
+
 	server.registerTool(
 		"say_hello",
 		{
