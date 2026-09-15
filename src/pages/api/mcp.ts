@@ -1,29 +1,6 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { createMcpHandler, McpServer } from "@modelcontextprotocol/server";
-import { z } from "zod";
+import { mcpHandler } from "@/lib/mcp/server";
 
-const handler = createMcpHandler(() => {
-	const server = new McpServer({
-		name: "Scouting411",
-		version: "1.0.0",
-	});
-
-	//todo add actual tools here
-
-	server.registerTool(
-		"say_hello",
-		{
-			inputSchema: z.object({ name: z.string().describe("Your name") }),
-			description: "Say hello to the world",
-		},
-		({ name }) => ({
-			content: [{ type: "text", text: `Hello world, I'm ${name}!` }],
-		}),
-	);
-
-	return server;
-});
-
-export const ALL: APIRoute = ({ request }) => handler.fetch(request);
+export const ALL: APIRoute = ({ request }) => mcpHandler.fetch(request);
