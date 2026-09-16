@@ -36,12 +36,5 @@ function decode(searchParams: URLSearchParams) {
 
 	const queryRawJson = parse(queryString, qsOpts);
 
-	return queryOptsSchema.safeParse(normalizeFeeds(queryRawJson));
-}
-
-/** keep urls shared before the switch to brackets working */
-function normalizeFeeds(query: ReturnType<typeof parse>) {
-	if (typeof query.feeds !== "string") return query;
-
-	return { ...query, feeds: query.feeds.split(",") };
+	return queryOptsSchema.safeParse(queryRawJson);
 }
