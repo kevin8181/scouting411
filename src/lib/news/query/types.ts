@@ -7,7 +7,7 @@ import { defaultVisibleFeeds } from "@/lib/news/feeds/config";
 
 export type QueryOpts = z.infer<typeof queryOptsSchema>;
 export const queryOptsSchema = z.object({
-	feeds: z.array(feedSlugSchema).default(defaultVisibleFeeds),
+	feeds: z.array(feedSlugSchema).default(defaultVisibleFeeds).describe("Include results only from these sources"),
 	filter: filterOptsSchema.default({}),
 	sort: sortOptsSchema.default({ mode: "date", direction: "desc" }),
 	paginate: paginateOptsSchema.default({ page: 1, maxPageSize: 20 }),

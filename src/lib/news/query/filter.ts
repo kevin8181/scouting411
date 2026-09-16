@@ -60,7 +60,7 @@ type PredicateFactories<F, T> = {
 type FilterOpts = z.infer<typeof filterOptsSchema>;
 export const filterOptsSchema = z
 	.object({
-		keyword: z.string().optional(),
+		keyword: z.string().optional().describe("Get only posts that contain this string in their title or description. Case insensitive."),
 		// dateAfter: z.coerce.date().optional(),
 		// dateBefore: z.coerce.date().optional(),
 	})

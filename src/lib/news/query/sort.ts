@@ -22,6 +22,6 @@ export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {
 }
 
 export const sortOptsSchema = z.object({
-	mode: z.enum(["date"]),
-	direction: z.enum(["asc", "desc"]),
+	mode: z.enum(["date"]).describe("The sort mode"),
+	direction: z.enum(["asc", "desc"]).describe("The sort direction"),
 });

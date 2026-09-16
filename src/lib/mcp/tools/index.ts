@@ -1,3 +1,3 @@
-import { sayHelloTool } from "@/lib/mcp/tools/sayHello";
+import { queryPostsTool } from "@/lib/mcp/tools/queryPosts";
 
-export const tools = [sayHelloTool];
+export const tools = [queryPostsTool];
