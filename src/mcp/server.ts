@@ -1,5 +1,5 @@
 import { createMcpHandler, McpServer } from "@modelcontextprotocol/server";
-import { tools } from "@/lib/mcp/tools";
+import { tools } from "@/mcp/tools";
 
 export const mcpHandler = createMcpHandler(() => {
 	const server = new McpServer(
