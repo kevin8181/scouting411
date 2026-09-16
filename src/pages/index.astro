@@ -1,8 +1,7 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 
-import { defaultVisibleFeeds } from "@/lib/news/feeds/config";
-
+import { feedSlugs } from "@/lib/news/feeds/types";
 import { queryPosts } from "@/lib/news/query/query";
 
 import { Page } from "@/pages/_index";
@@ -10,7 +9,7 @@ import { Page } from "@/pages/_index";
 export const prerender = false;
 
 const latestPosts = await queryPosts({
-	feeds: defaultVisibleFeeds,
+	feeds: feedSlugs,
 	filter: {},
 	sort: {
 		mode: "date",
@@ -26,7 +25,7 @@ const latestPosts = await queryPosts({
 <Layout title="Home">
 	<Page
 		latestPosts={latestPosts}
-		feedCount={defaultVisibleFeeds.length}
+		feedCount={feedSlugs.length}
 		postCount={latestPosts.pagination.totalItems}
 		client:load
 	/>
