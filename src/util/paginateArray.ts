@@ -30,7 +30,10 @@ export function paginateArray<T>(
 type PaginateOpts = z.infer<typeof paginateOptsSchema>;
 export const paginateOptsSchema = z.object({
 	/** the maximum page size */
-	maxPageSize: z.coerce.number().min(1).describe("The maximum number of items per page"),
+	maxPageSize: z.coerce
+		.number()
+		.min(1)
+		.describe("The number of items per page. This value has no maximum."),
 	/** the page number */
 	page: z.coerce.number().min(1).describe("The page number"),
 });

@@ -1,3 +1,4 @@
-import { queryPostsTool } from "@/lib/mcp/tools/queryPosts";
+import { queryPostsTool } from "@/lib/mcp/tools/news/posts";
+import { getFeedsTool } from "@/lib/mcp/tools/news/feeds";
 
-export const tools = [queryPostsTool];
+export const tools = [queryPostsTool, getFeedsTool];
