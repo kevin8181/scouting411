@@ -31,7 +31,6 @@ const exampleResponse = `{
 				"description": "The official video podcast of the Cub Scouts program.",
 				"urls": { "overview": "...", "browsePosts": "...", "rss": "...", "atom": "...", "homepage": "..." },
 				"type": { "id": "rss", "human": "RSS" },
-				"defaultVisible": true
 			}
 		}
 	],
@@ -245,7 +244,7 @@ export function Page({ feeds }: { feeds: Feed[] }) {
 					both take these slugs. Anything else is rejected.
 				</p>
 
-				<Table headers={["Source", "Slug", "Default"]}>
+				<Table headers={["Source", "Slug"]}>
 					{feeds.map((feed) => (
 						<tr
 							key={feed.slug}
@@ -261,9 +260,6 @@ export function Page({ feeds }: { feeds: Feed[] }) {
 							</td>
 							<td className="px-4 py-3 font-mono text-xs wrap-anywhere">
 								{feed.slug}
-							</td>
-							<td className="text-muted-foreground px-4 py-3">
-								{feed.defaultVisible ? "Visible" : "Hidden"}
 							</td>
 						</tr>
 					))}

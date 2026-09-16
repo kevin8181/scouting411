@@ -51,7 +51,6 @@ export async function getFeedConsumerOutput() {
 				description: feed.description,
 				coverImageSrc: feed.coverImageSrc,
 				type: feed.type,
-				defaultVisible: feed.defaultVisible,
 				links: absolutizeLinks(feed.links),
 				metrics: getFeedMetrics(posts),
 			};

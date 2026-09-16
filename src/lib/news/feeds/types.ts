@@ -11,7 +11,6 @@ export type FeedConfig = {
 	coverImageSrc: string;
 	homepageUrl: UrlShaped;
 	adapter: FeedAdapter;
-	defaultVisible: boolean;
 };
 
 export type FeedConfigEntry = (typeof feedConfigs)[number];
@@ -39,5 +38,4 @@ export type Feed = {
 		homepage: string;
 	};
 	type: FeedAdapter["type"];
-	defaultVisible: boolean;
 };

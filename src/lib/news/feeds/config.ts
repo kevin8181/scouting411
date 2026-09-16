@@ -28,7 +28,6 @@ export const feedConfigs = [
 				15738, // outdoor locations - not articles, 301 to a landing page
 			],
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "International Adventure",
@@ -43,7 +42,6 @@ export const feedConfigs = [
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 10763,
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Scouts BSA Program Updates",
@@ -58,7 +56,6 @@ export const feedConfigs = [
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15054,
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Sea Scouts Program Updates",
@@ -73,7 +70,6 @@ export const feedConfigs = [
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15052,
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Cub Scouts Program Updates",
@@ -88,7 +84,6 @@ export const feedConfigs = [
 			baseUrl: "https://www.scouting.org",
 			categoryFilter: 15053,
 		}),
-		defaultVisible: true,
 	},
 
 	{
@@ -101,7 +96,6 @@ export const feedConfigs = [
 		adapter: RssAdapter({
 			feedUrl: "https://anchor.fm/s/10fd33ec4/podcast/rss",
 		}),
-		defaultVisible: true,
 	},
 	// todo it says this is "on hiatus". could not locate an rss feed other than via youtube
 	// {
@@ -112,7 +106,6 @@ export const feedConfigs = [
 	// 	adapter: RssAdapter({
 	// 		feedUrl: "",
 	// 	}),
-	// 	defaultVisible: true,
 	// },
 
 	{
@@ -126,7 +119,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://onscouting.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Trail to Adventure",
@@ -140,7 +132,6 @@ export const feedConfigs = [
 			baseUrl: "https://scouting.org",
 			type: "tta-post",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Executive Communications",
@@ -154,7 +145,6 @@ export const feedConfigs = [
 			baseUrl: "https://scouting.org",
 			type: "ec-post",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Scouting Alumni",
@@ -167,7 +157,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingalumni.org",
 		}),
-		defaultVisible: false,
 	},
 	{
 		name: "Scouting Alumni - Ask the Chair",
@@ -181,7 +170,6 @@ export const feedConfigs = [
 			baseUrl: "https://scoutingalumni.org",
 			type: "ask_the_chair",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Scouting Alumni - Alumni Highlights",
@@ -195,7 +183,6 @@ export const feedConfigs = [
 			baseUrl: "https://scoutingalumni.org",
 			type: "alumni-highlight",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Scout Life",
@@ -207,7 +194,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutlife.org",
 		}),
-		defaultVisible: false,
 	},
 
 	// https://www.podchaser.com/podcasts/scoutcast-31182
@@ -221,7 +207,6 @@ export const feedConfigs = [
 		adapter: PodcastArchiveAdapter({
 			categoryId: 2,
 		}),
-		defaultVisible: true,
 	},
 
 	// https://www.podchaser.com/podcasts/cubcast-3834
@@ -235,7 +220,6 @@ export const feedConfigs = [
 		adapter: PodcastArchiveAdapter({
 			categoryId: 3,
 		}),
-		defaultVisible: true,
 	},
 
 	// todo it looks like this is about to be shut down. I downloaded the rss and and all the episodes. set up an archived version later
@@ -250,7 +234,6 @@ export const feedConfigs = [
 		adapter: RssAdapter({
 			feedUrl: "https://feeds.buzzsprout.com/983503.rss",
 		}),
-		defaultVisible: true,
 	},
 
 	{
@@ -265,7 +248,6 @@ export const feedConfigs = [
 			baseUrl: "https://scoutingwire.org",
 			//todo split by categories / tags?
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Scouting Newsroom",
@@ -279,7 +261,6 @@ export const feedConfigs = [
 			baseUrl: "https://scoutingnewsroom.org",
 			type: "press-releases",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Abilities Digest",
@@ -296,7 +277,6 @@ export const feedConfigs = [
 			baseUrl: "https://public-api.wordpress.com",
 			apiPath: "/wp/v2/sites/ablescouts.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Summit Blog",
@@ -308,7 +288,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://summitbsa.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "NESA News and Articles",
@@ -321,7 +300,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://nesa.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "NESA Events",
@@ -335,7 +313,6 @@ export const feedConfigs = [
 			baseUrl: "https://nesa.org",
 			type: "events",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Scouting America Foundation",
@@ -348,7 +325,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://scoutingamericafoundation.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "OA News",
@@ -368,7 +344,6 @@ export const feedConfigs = [
 			// todo: the /news view paginates ~143 pages of 9, server-rendered, with
 			// title, teaser, iso date and thumbnail per card. scrape that instead.
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "OA System Maintenance",
@@ -381,7 +356,6 @@ export const feedConfigs = [
 		adapter: StatuspageAdapter({
 			baseUrl: "https://status.oa-scouting.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "OA LodgeMaster Blog",
@@ -396,7 +370,6 @@ export const feedConfigs = [
 				"https://confluence.oa-scouting.org/spaces/createrssfeed.action?types=blogpost&spaces=OALMLC&sort=created&maxResults=1000&timeSpan=3650&showContent=true&publicFeed=true&rssType=rss2&title=OA+LodgeMaster+Support+Center+Blog",
 			// atom feed also available
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Sea Scouts News",
@@ -408,7 +381,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://seascout.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Troop Leader Resource Updates",
@@ -420,7 +392,6 @@ export const feedConfigs = [
 		adapter: WordpressAdapter({
 			baseUrl: "https://troopleader.scouting.org",
 		}),
-		defaultVisible: true,
 	},
 	{
 		name: "Duty to God BSA",
@@ -439,11 +410,5 @@ export const feedConfigs = [
 			// api is preferable - it returns all of them in one request.
 			type: "jetpack-portfolio",
 		}),
-		defaultVisible: true,
 	},
 ] as const satisfies FeedConfig[];
-
-/** the slugs of the feeds that should be included in the default query */
-export const defaultVisibleFeeds = feedConfigs
-	.filter((feed) => feed.defaultVisible)
-	.map((feed) => feed.slug);
