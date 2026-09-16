@@ -58,6 +58,9 @@ export const GET: APIRoute = async (context) => {
 		status: 200,
 		headers: {
 			"Content-Type": "application/json",
+			"Access-Control-Allow-Origin": "*",
+			// the cron refreshes the cache daily, so an hour of edge cache is free
+			"Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
 		},
 	});
 };
