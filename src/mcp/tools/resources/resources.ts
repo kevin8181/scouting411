@@ -1,9 +1,9 @@
 import { queryResources } from "@/lib/resources/query";
 import type { McpServer } from "@modelcontextprotocol/server";
 
-export function getResourcesTool(server: McpServer) {
+export function queryResourcesTool(server: McpServer) {
 	server.registerTool(
-		"get_resources",
+		"query_resources",
 		{
 			description: `A list of all resources on Scouting411. Resources are external links to
 websites, tools, reference documents, and other items items of interest.`,
