@@ -1,6 +1,6 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { mcpHandler } from "@/lib/mcp/server";
+import { mcpHandler } from "@/mcp/server";
 
 export const ALL: APIRoute = ({ request }) => mcpHandler.fetch(request);
