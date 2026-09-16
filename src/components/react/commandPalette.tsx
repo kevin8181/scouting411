@@ -19,7 +19,7 @@ import { useHotkey } from "@tanstack/react-hotkeys";
 import { useIsMobile } from "@/util/hooks/use-mobile";
 
 import { feeds } from "@/lib/news/feeds/feed";
-import { resources } from "@/lib/resources/config";
+import { queryResources } from "@/lib/resources/query";
 import { useTheme } from "@/components/react/darkModeControl";
 
 /** global store for whether the command palette is open */
@@ -82,6 +82,7 @@ export function CommandPaletteTrigger() {
 
 function CommandPaletteContent() {
 	const { setTheme } = useTheme();
+	const resources = queryResources();
 
 	return (
 		<Command>
