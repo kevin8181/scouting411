@@ -55,7 +55,7 @@ export function NavGroup({
 			<SidebarGroup className="gap-1 p-0 px-3">
 				<SidebarGroupLabel
 					render={<CollapsibleTrigger />}
-					className={`${labelClassName} group/trigger hover:text-foreground flex w-full cursor-pointer items-center justify-start gap-2 pr-3`}
+					className={`${labelClassName} group/trigger hover:text-foreground flex w-full cursor-pointer items-center justify-start gap-2.5 pr-3`}
 				>
 					<FontAwesomeIcon
 						icon={faChevronRight}
