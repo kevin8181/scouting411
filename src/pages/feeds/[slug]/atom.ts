@@ -31,7 +31,7 @@ export const GET: APIRoute = async (context) => {
 
 	const generated = generateAtomFeed(
 		{
-			title: feed.name,
+			title: { value: feed.name },
 			id: feed.links.homepage,
 			icon: feed.coverImageSrc,
 
@@ -64,10 +64,10 @@ export const GET: APIRoute = async (context) => {
 				},
 			],
 			entries: posts.map((post) => ({
-				title: post.title,
+				title: { value: post.title },
 				id: post.url,
 				updated: post.date,
-				...(post.description && { description: post.description }),
+				...(post.description && { summary: { value: post.description } }),
 				published: post.date,
 
 				links: [
