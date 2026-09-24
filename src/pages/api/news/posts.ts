@@ -2,7 +2,6 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { queryPosts } from "@/lib/news/query/query";
 import { queryOptsSchema } from "@/lib/news/query/types";
-import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 
 export const POST: APIRoute = async (context) => {
 	const body = await context.request.json();
@@ -29,38 +28,6 @@ export const POST: APIRoute = async (context) => {
 		status: 200,
 		headers: {
 			"Content-Type": "application/json",
-		},
-	});
-};
-
-export const GET: APIRoute = async (context) => {
-	const { error, data: query } = postsQueryParamsEncoder.decode(
-		context.url.searchParams,
-	);
-
-	if (error) {
-		return new Response(
-			JSON.stringify({
-				errors: error.issues,
-			}),
-			{
-				status: 400,
-				headers: {
-					"Content-Type": "application/json",
-				},
-			},
-		);
-	}
-
-	const posts = await queryPosts(query);
-
-	return new Response(JSON.stringify(posts), {
-		status: 200,
-		headers: {
-			"Content-Type": "application/json",
-			"Access-Control-Allow-Origin": "*",
-			// the cron refreshes the cache daily, so an hour of edge cache is free
-			"Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
 		},
 	});
 };
