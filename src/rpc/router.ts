@@ -1,6 +1,6 @@
 import { queryPostsProcedure } from "@/rpc/procedures/news/posts";
 import { listFeedsProcedure } from "@/rpc/procedures/news/feeds";
-import { listResourcesProcedure } from "@/rpc/procedures/resources/resources";
+import { queryResourcesProcedure } from "@/rpc/procedures/resources/resources";
 
 export const router = {
 	news: {
@@ -12,6 +12,6 @@ export const router = {
 		},
 	},
 	resources: {
-		list: listResourcesProcedure,
+		query: queryResourcesProcedure,
 	},
 };
