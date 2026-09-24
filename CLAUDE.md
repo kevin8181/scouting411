@@ -41,13 +41,7 @@ One adapter per upstream type in `upstream/adapters/` (`rss.ts` via feedsmith, `
 
 `queryParams.ts` encodes that shape to and from URL search params via `qs`. Its header comment explains why `allowEmptyArrays` and `arrayFormat: "brackets"` are both load-bearing — read it before changing those options; either one silently resurrects every feed when the user deselects all sources.
 
-### Three ways in
-
-All three share `queryOptsSchema`, so a change to the schema changes all of them at once:
-
-1. **Astro action** (`src/actions/index.ts`) — what the browse island calls for interactive re-queries.
-2. **REST** (`src/pages/api/news/posts.ts`, `feeds.ts`) — public, documented on the `/developers` page. Treat the shape as a published contract.
-3. **Direct call** — SSR pages (`index.astro`, `news/stats`) call `queryPosts` server-side.
+Callers reach `queryPosts` through the `news.posts.query` procedure (see **API** below). Two exceptions call it directly: `src/lib/news/feeds/consumerOutput.ts`, because lib code sits below the router, and the MCP tools in `src/mcp/tools/`.
 
 Re-publishing routes: `src/pages/feeds/[slug]/rss.ts` and `atom.ts` serve one source's cached posts; `feeds/all/opml.ts` lists them all.
 
@@ -60,6 +54,23 @@ That island's effect holds a **stale-response guard**: a narrow query resolves f
 ## Resources
 
 `src/lib/resources/config.ts` is a hand-maintained `Resource[]`. Inclusion criteria are in `README.md` — apply them as written; they are stricter than they look (national-level official publications only, no single item from a series, no superseded versions, no individual forms). Requests arrive as GitHub issues via `.github/ISSUE_TEMPLATE/`.
+
+## API — `src/rpc/`
+
+One oRPC router is the backend boundary for islands, SSR pages, and the public REST API. oRPC is on the **v2 beta** (exact-pinned); v1 docs and examples do not match its API.
+
+- `router.ts` assembles the procedures in `procedures/`. A procedure is a thin wrapper over `src/lib`; logic lives in lib. Lib code imports nothing from `src/rpc/` — it would close a cycle (router → procedure → lib → client → `ssrClient.ts` → router).
+- **Callers** import `rpc` from `@/rpc/client`, on server and client alike. Under `import.meta.env.SSR` it loads `ssrClient.ts`, which registers an in-process router client on `globalThis.$client`, so SSR never makes HTTP calls; in the browser that import is stripped and calls go to `/rpc`. Keep the router import in `client.ts` type-only — a value import bundles the router, and Redis with it, into every island.
+- `$client` is shared across requests, so procedures get no per-request context. Astro has no request-scoped store: when a procedure needs one (auth), pass context per call or build a client per request in middleware on `Astro.locals`.
+
+Two handlers serve the same router:
+
+1. `src/pages/rpc/[...path].ts` — the RPC protocol, for islands only.
+2. `src/pages/api/[...path].ts` — REST, public, CORS `*`. Treat its shape as a published contract. Also serves the spec at `/api/spec.json` and Scalar docs at `/api`, which `/developers` links to.
+
+REST paths come from `.meta(openapi({ method, path }))` on each procedure; `method` defaults to POST, and a procedure without a path gets one derived from its router key. A specific file under `src/pages/api/` outranks the catch-all, so it silently shadows any procedure at the same path — `updateAllFeeds.ts` is the only one that belongs there.
+
+The feed re-publishing routes are plain Astro routes, documented by hand in `openapi/feedPaths.ts` (merged into the spec as `base.paths`, with a per-path `servers` override so they resolve at the site root). Update it when those routes change.
 
 ## Conventions
 

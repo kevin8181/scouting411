@@ -1,5 +1,3 @@
-import type { Feed } from "@/lib/news/feeds/types";
-
 import {
 	faSquareUpRight,
 	faTriangleExclamation,
@@ -7,25 +5,7 @@ import {
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const feedEndpoints = [
-	{
-		method: "GET",
-		path: "/feeds/{slug}/rss",
-		description: "One source's cached posts, re-published as RSS.",
-	},
-	{
-		method: "GET",
-		path: "/feeds/{slug}/atom",
-		description: "One source's cached posts, re-published as Atom.",
-	},
-	{
-		method: "GET",
-		path: "/feeds/all/opml",
-		description: "Every Scouting411 feed as an OPML subscription list.",
-	},
-];
-
-export function Page({ feeds }: { feeds: Feed[] }) {
+export function Page() {
 	return (
 		<div className="mx-auto flex w-full max-w-4xl flex-col gap-8 p-8">
 			<section className="flex flex-col gap-3">
@@ -38,7 +18,9 @@ export function Page({ feeds }: { feeds: Feed[] }) {
 
 				<p className="text-sm">
 					The API reference lists every endpoint with its parameters and
-					responses, and lets you try requests from the browser.
+					responses, and lets you try requests from the browser. It also covers
+					the RSS, Atom, and OPML feeds, which re-publish each source's cached
+					posts for any feed reader.
 				</p>
 
 				<a
@@ -62,58 +44,6 @@ export function Page({ feeds }: { feeds: Feed[] }) {
 					</span>
 				</div>
 			</section>
-
-			<Section title="Feeds">
-				<p className="text-sm">
-					Each source's cached posts are also re-published as RSS and Atom, so
-					you can follow them in any feed reader.
-				</p>
-
-				<Table headers={["Method", "Path", "Description"]}>
-					{feedEndpoints.map((endpoint) => (
-						<tr
-							key={endpoint.method + endpoint.path}
-							className="border-b last:border-0"
-						>
-							<td className="px-4 py-3 font-mono text-xs font-medium">
-								{endpoint.method}
-							</td>
-							<td className="px-4 py-3 font-mono text-xs wrap-anywhere">
-								{endpoint.path}
-							</td>
-							<td className="px-4 py-3">{endpoint.description}</td>
-						</tr>
-					))}
-				</Table>
-			</Section>
-
-			<Section title="Feed slugs">
-				<p className="text-sm">
-					The <Code>/feeds/</Code> routes take these slugs. Anything else is
-					rejected.
-				</p>
-
-				<Table headers={["Source", "Slug"]}>
-					{feeds.map((feed) => (
-						<tr
-							key={feed.slug}
-							className="hover:bg-muted border-b last:border-0"
-						>
-							<td className="px-4 py-3">
-								<a
-									href={feed.links.overview}
-									className="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
-								>
-									{feed.name}
-								</a>
-							</td>
-							<td className="px-4 py-3 font-mono text-xs wrap-anywhere">
-								{feed.slug}
-							</td>
-						</tr>
-					))}
-				</Table>
-			</Section>
 
 			<Section title="Open source">
 				<p className="text-sm">
@@ -146,38 +76,5 @@ function Section({
 			<h2 className="font-serif text-xl font-bold">{title}</h2>
 			{children}
 		</section>
-	);
-}
-
-function Table({
-	headers,
-	children,
-}: {
-	headers: string[];
-	children: React.ReactNode;
-}) {
-	return (
-		<div className="overflow-hidden rounded-lg border">
-			<table className="w-full border-collapse text-sm">
-				<thead>
-					<tr className="border-b">
-						{headers.map((header) => (
-							<th key={header} className="px-4 py-3 text-left font-medium">
-								{header}
-							</th>
-						))}
-					</tr>
-				</thead>
-				<tbody>{children}</tbody>
-			</table>
-		</div>
-	);
-}
-
-function Code({ children }: { children: React.ReactNode }) {
-	return (
-		<code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs wrap-anywhere">
-			{children}
-		</code>
 	);
 }
