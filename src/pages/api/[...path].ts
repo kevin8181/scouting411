@@ -8,6 +8,7 @@ import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { OpenAPIReferenceHandlerPlugin } from "@orpc/openapi/plugins";
 import { ZodToJsonSchemaConverter } from "@orpc/zod";
 import { router } from "@/rpc/router";
+import { feedPaths } from "@/rpc/openapi/feedPaths";
 
 const generator = new OpenAPIGenerator({
 	converters: [new ZodToJsonSchemaConverter()],
@@ -25,6 +26,7 @@ const handler = new OpenAPIHandler(router, {
 					base: {
 						info: { title: "Scouting411 API", version: "1.0.0" },
 						servers: [{ url: "/api" }],
+						paths: feedPaths,
 					},
 				}),
 		}),

@@ -10,6 +10,7 @@ import { isFeedSlug } from "@/lib/news/feeds/feed";
 
 export const prerender = false;
 
+// documented by hand in the openapi spec — update `src/rpc/openapi/feedPaths.ts` when this route changes
 export const GET: APIRoute = async (context) => {
 	const slug = context.params.slug!;
 	if (!isFeedSlug(slug)) {

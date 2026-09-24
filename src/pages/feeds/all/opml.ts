@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { generateOpml } from "feedsmith";
 import { feeds } from "@/lib/news/feeds/feed";
 
+// documented by hand in the openapi spec — update `src/rpc/openapi/feedPaths.ts` when this route changes
 export const GET: APIRoute = async (context) => {
 	const opml = generateOpml(
 		{
