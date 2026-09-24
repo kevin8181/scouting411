@@ -28,13 +28,12 @@ export function Page() {
 					className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 self-start rounded-md px-4 py-2 text-sm font-semibold"
 				>
 					API Reference
-					<FontAwesomeIcon icon={faSquareUpRight} height="0.9em" />
+					<FontAwesomeIcon icon={faSquareUpRight} />
 				</a>
 
 				<div className="border-primary/30 bg-primary/5 flex gap-3 rounded-lg border p-4 text-sm">
 					<FontAwesomeIcon
 						icon={faTriangleExclamation}
-						height="0.9em"
 						className="mt-1 shrink-0"
 					/>
 					<span>
@@ -56,7 +55,7 @@ export function Page() {
 					target="_blank"
 					className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 self-start rounded-md px-4 py-2 text-sm font-semibold"
 				>
-					<FontAwesomeIcon icon={faGithub} height="0.9em" />
+					<FontAwesomeIcon icon={faGithub} />
 					GitHub Repo
 				</a>
 			</Section>

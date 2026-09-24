@@ -118,7 +118,7 @@ export function AppSidebar({ url }: { url: URL }) {
 									<a
 										href="/about"
 										className={buttonVariants({
-											size: "icon-sm",
+											size: "icon",
 											variant: "outline",
 										})}
 									>
@@ -135,7 +135,7 @@ export function AppSidebar({ url }: { url: URL }) {
 									<a
 										href="https://github.com/kevin8181/scouting411/issues/new/choose"
 										className={buttonVariants({
-											size: "icon-sm",
+											size: "icon",
 											variant: "outline",
 										})}
 									>
@@ -152,7 +152,7 @@ export function AppSidebar({ url }: { url: URL }) {
 									<a
 										href="/developers"
 										className={buttonVariants({
-											size: "icon-sm",
+											size: "icon",
 											variant: "outline",
 										})}
 									>

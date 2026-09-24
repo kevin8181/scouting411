@@ -100,7 +100,7 @@ export function Page({
 									className="hover:border-primary hover:text-primary flex items-center justify-between gap-2 rounded-md border px-3 py-2 font-medium transition-colors"
 								>
 									{link.label}
-									<FontAwesomeIcon icon={faSquareUpRight} height="1em" />
+									<FontAwesomeIcon icon={faSquareUpRight} />
 								</a>
 							</li>
 						))}

@@ -33,10 +33,10 @@ export function NavLink({
 					target={newTab ? "_blank" : undefined}
 					rel={newTab ? "noopener noreferrer" : undefined}
 				>
-					<div className="flex items-center gap-2.5">
-						<FontAwesomeIcon icon={icon} /> {label}
+					<div className="flex items-center gap-2">
+						<FontAwesomeIcon icon={icon} size="sm"/> {label}
 					</div>
-					{newTab && <FontAwesomeIcon icon={faSquareUpRight} height={"1em"} />}
+					{newTab && <FontAwesomeIcon icon={faSquareUpRight} size="sm" />}
 				</a>
 			}
 		/>
