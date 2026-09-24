@@ -1,7 +1,8 @@
-import type { UrlShaped } from "@/util/utilTypes";
+import { z } from "zod";
 
-export interface Resource {
-	url: UrlShaped;
-	title: string;
-	description: string;
-}
+export type Resource = z.infer<typeof resourceSchema>;
+export const resourceSchema = z.object({
+	url: z.url(),
+	title: z.string(),
+	description: z.string(),
+});
