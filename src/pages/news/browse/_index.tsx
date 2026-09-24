@@ -4,7 +4,8 @@ import type { Post } from "@/lib/news/feeds/post";
 import type { QueryOpts } from "@/lib/news/query/types";
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { useState, useEffect } from "react";
-import { actions } from "astro:actions";
+import { safe } from "@orpc/client";
+import { rpc } from "@/rpc/client";
 import { FilterSidebar } from "@/pages/news/browse/_filterSidebar";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import type { PaginatedResults } from "@/util/paginateArray";
@@ -27,16 +28,16 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 		updateUrlQuery(query);
 
 		(async () => {
-			const response = await actions.queryPosts(query);
+			const { error, data } = await safe(rpc.news.posts.query(query));
 
 			if (stale) return;
 
-			if (response.error) {
-				alert(response.error);
+			if (error) {
+				alert(error);
 				return;
 			}
 
-			setResults(response.data);
+			setResults(data);
 		})();
 
 		return () => {

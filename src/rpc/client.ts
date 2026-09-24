@@ -25,5 +25,5 @@ const link = new RPCLink({
 /**
  * Fall back to a browser client when no SSR client is registered.
  */
-export const client: RouterClient<typeof router> =
+export const rpc: RouterClient<typeof router> =
 	globalThis.$client ?? createORPCClient(link);
