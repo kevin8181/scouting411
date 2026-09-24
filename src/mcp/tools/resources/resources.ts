@@ -1,4 +1,4 @@
-import { queryResources } from "@/lib/resources/query";
+import { rpc } from "@/rpc/client";
 import type { McpServer } from "@modelcontextprotocol/server";
 
 export function queryResourcesTool(server: McpServer) {
@@ -13,7 +13,7 @@ websites, tools, reference documents, and other items of interest.`,
 			},
 		},
 		async () => {
-			const resources = queryResources();
+			const resources = await rpc.resources.query();
 
 			return {
 				content: [

@@ -41,7 +41,7 @@ One adapter per upstream type in `upstream/adapters/` (`rss.ts` via feedsmith, `
 
 `queryParams.ts` encodes that shape to and from URL search params via `qs`. Its header comment explains why `allowEmptyArrays` and `arrayFormat: "brackets"` are both load-bearing — read it before changing those options; either one silently resurrects every feed when the user deselects all sources.
 
-Callers reach `queryPosts` through the `news.posts.query` procedure (see **API** below). Two exceptions call it directly: `src/lib/news/feeds/consumerOutput.ts`, because lib code sits below the router, and the MCP tools in `src/mcp/tools/`.
+Callers reach `queryPosts` through the `news.posts.query` procedure (see **API** below). The one exception is `src/lib/news/feeds/consumerOutput.ts`, which calls it directly because lib code sits below the router.
 
 Re-publishing routes: `src/pages/feeds/[slug]/rss.ts` and `atom.ts` serve one source's cached posts; `feeds/all/opml.ts` lists them all.
 
@@ -57,7 +57,7 @@ That island's effect holds a **stale-response guard**: a narrow query resolves f
 
 ## API — `src/rpc/`
 
-One oRPC router is the backend boundary for islands, SSR pages, and the public REST API. oRPC is on the **v2 beta** (exact-pinned); v1 docs and examples do not match its API.
+One oRPC router is the backend boundary for islands, SSR pages, the MCP tools in `src/mcp/tools/`, and the public REST API. oRPC is on the **v2 beta** (exact-pinned); v1 docs and examples do not match its API.
 
 - `router.ts` assembles the procedures in `procedures/`. A procedure is a thin wrapper over `src/lib`; logic lives in lib. Lib code imports nothing from `src/rpc/` — it would close a cycle (router → procedure → lib → client → `ssrClient.ts` → router).
 - **Callers** import `rpc` from `@/rpc/client`, on server and client alike. Under `import.meta.env.SSR` it loads `ssrClient.ts`, which registers an in-process router client on `globalThis.$client`, so SSR never makes HTTP calls; in the browser that import is stripped and calls go to `/rpc`. Keep the router import in `client.ts` type-only — a value import bundles the router, and Redis with it, into every island.

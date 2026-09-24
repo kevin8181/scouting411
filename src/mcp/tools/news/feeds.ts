@@ -1,5 +1,5 @@
 import type { McpServer } from "@modelcontextprotocol/server";
-import { getFeedConsumerOutput } from "@/lib/news/feeds/consumerOutput";
+import { rpc } from "@/rpc/client";
 
 /**
  * metadata and content-quality stats for every feed. returns no posts — use
@@ -20,7 +20,7 @@ Call it to find out more about the feeds on offer, what they're about, how much 
 			},
 		},
 		async () => {
-			const body = await getFeedConsumerOutput();
+			const body = await rpc.news.feeds.list();
 
 			return {
 				content: [

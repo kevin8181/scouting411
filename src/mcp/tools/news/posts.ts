@@ -1,6 +1,6 @@
 import type { McpServer } from "@modelcontextprotocol/server";
 import { queryOptsSchema } from "@/lib/news/query/types";
-import { queryPosts } from "@/lib/news/query/query";
+import { rpc } from "@/rpc/client";
 
 export const queryPostsTool = (server: McpServer) => {
 	server.registerTool(
@@ -15,7 +15,7 @@ export const queryPostsTool = (server: McpServer) => {
 			},
 		},
 		async (query) => {
-			const results = await queryPosts(query);
+			const results = await rpc.news.posts.query(query);
 
 			return {
 				content: [
