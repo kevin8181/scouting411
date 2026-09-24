@@ -2,6 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { onError } from "@orpc/server";
+import { CORSHandlerPlugin } from "@orpc/server/plugins";
 import { OpenAPIGenerator } from "@orpc/openapi";
 import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { OpenAPIReferenceHandlerPlugin } from "@orpc/openapi/plugins";
@@ -14,6 +15,7 @@ const generator = new OpenAPIGenerator({
 
 const handler = new OpenAPIHandler(router, {
 	plugins: [
+		new CORSHandlerPlugin(),
 		new OpenAPIReferenceHandlerPlugin({
 			providerConfig: {
 				telemetry: false,
