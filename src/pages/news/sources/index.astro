@@ -5,27 +5,23 @@ import { feeds } from "@/lib/news/feeds/feed";
 
 <Layout title="News Sources">
 	<div class="p-8">
-		<div
-			class="grid auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5"
-		>
-			{
-				feeds.map(async (feed) => (
-					<div class="flex flex-col items-start gap-1.5 rounded-lg border p-5">
-						<img
-							src={feed.coverImageSrc}
-							alt={`${feed.name} logo`}
-							class="bg-card mb-2 h-28 w-full rounded-lg border object-contain p-3"
-						/>
-						<a
-							href={feed.links.overview}
-							class="text-primary font-serif text-xl font-bold hover:underline"
-						>
-							{feed.name}
-						</a>
-						<p class="text-sm">{feed.description}</p>
-					</div>
-				))
-			}
+		<div class="grid auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+			{feeds.map(async (feed) => (
+				<div class="flex flex-col items-start gap-1.5 rounded-lg border p-5">
+					<img
+						src={feed.coverImageSrc}
+						alt={`${feed.name} logo`}
+						class="bg-card mb-2 h-28 w-full rounded-lg border object-contain p-3"
+					/>
+					<a
+						href={feed.links.overview}
+						class="text-primary font-serif text-xl font-bold hover:underline"
+					>
+						{feed.name}
+					</a>
+					<p class="text-sm">{feed.description}</p>
+				</div>
+			))}
 		</div>
 	</div>
 </Layout>

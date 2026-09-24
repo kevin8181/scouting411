@@ -95,21 +95,17 @@ const stats = [
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-			{
-				stats.map((stat) => (
-					<div class="rounded-lg border p-4">
-						<div class="text-muted-foreground text-xs font-medium uppercase">
-							{stat.label}
-						</div>
-						<div class="font-serif text-lg font-bold">{stat.value}</div>
+			{stats.map((stat) => (
+				<div class="rounded-lg border p-4">
+					<div class="text-muted-foreground text-xs font-medium uppercase">
+						{stat.label}
 					</div>
-				))
-			}
+					<div class="font-serif text-lg font-bold">{stat.value}</div>
+				</div>
+			))}
 		</div>
 
-		<div
-			class="border-primary/30 bg-primary/5 flex flex-col items-start gap-3 rounded-lg border p-4 px-5 sm:flex-row sm:items-center sm:justify-between"
-		>
+		<div class="border-primary/30 bg-primary/5 flex flex-col items-start gap-3 rounded-lg border p-4 px-5 sm:flex-row sm:items-center sm:justify-between">
 			<div>
 				<div class="mb-2 font-serif font-bold">Subscribe to this source</div>
 				<p class="text-muted-foreground text-sm">
@@ -150,15 +146,13 @@ const stats = [
 				</a>
 			</div>
 
-			{
-				recentPosts.length === 0 ? (
-					<div class="text-muted-foreground rounded-lg border p-6 text-sm">
-						No posts have been indexed from this source yet.
-					</div>
-				) : (
-					recentPosts.map((post) => <PostComponent post={post} />)
-				)
-			}
+			{recentPosts.length === 0 ? (
+				<div class="text-muted-foreground rounded-lg border p-6 text-sm">
+					No posts have been indexed from this source yet.
+				</div>
+			) : (
+				recentPosts.map((post) => <PostComponent post={post} />)
+			)}
 		</div>
 	</div>
 </Layout>

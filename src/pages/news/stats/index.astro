@@ -50,39 +50,37 @@ const numberFormat = Intl.NumberFormat();
 					</tr>
 				</thead>
 				<tbody>
-					{
-						feedRows.map(({ feed, metrics }) => (
-							<tr class="hover:bg-muted border-b last:border-0">
-								<td class="px-4 py-3">
-									<a
-										href={feed.links.overview}
-										class="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
-									>
-										{feed.name}
-									</a>
-								</td>
-								<td class="px-4 py-3 text-right tabular-nums">
-									{numberFormat.format(metrics.posts.count)}
-								</td>
-								<td class="px-4 py-3 text-right tabular-nums">
-									{formatPercentage(metrics.description.coverage)}
-								</td>
-								<td class="px-4 py-3 text-right tabular-nums">
-									{formatPercentage(metrics.thumbnail.coverage)}
-								</td>
-								<td class="px-4 py-3 text-right tabular-nums">
-									{formatPercentage(metrics.thumbnail.uniqueCoverage)}
-								</td>
-								<td class="px-4 py-3">{feed.type.human}</td>
-							</tr>
-						))
-					}
+					{feedRows.map(({ feed, metrics }) => (
+						<tr class="hover:bg-muted border-b last:border-0">
+							<td class="px-4 py-3">
+								<a
+									href={feed.links.overview}
+									class="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
+								>
+									{feed.name}
+								</a>
+							</td>
+							<td class="px-4 py-3 text-right tabular-nums">
+								{numberFormat.format(metrics.posts.count)}
+							</td>
+							<td class="px-4 py-3 text-right tabular-nums">
+								{formatPercentage(metrics.description.coverage)}
+							</td>
+							<td class="px-4 py-3 text-right tabular-nums">
+								{formatPercentage(metrics.thumbnail.coverage)}
+							</td>
+							<td class="px-4 py-3 text-right tabular-nums">
+								{formatPercentage(metrics.thumbnail.uniqueCoverage)}
+							</td>
+							<td class="px-4 py-3">{feed.type.human}</td>
+						</tr>
+					))}
 				</tbody>
 				<tfoot>
 					<tr class="border-t">
-						<td class="px-4 py-3 font-bold"
-							>Total ({feedRows.length} sources):</td
-						>
+						<td class="px-4 py-3 font-bold">
+							Total ({feedRows.length} sources):
+						</td>
 						<td class="px-4 py-3 text-right font-bold tabular-nums">
 							{numberFormat.format(totals.posts.count)}
 						</td>

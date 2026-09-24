@@ -31,16 +31,14 @@ import { feeds } from "@/lib/news/feeds/feed";
 
 	<!-- FEEDS -->
 	<link rel="outline" type="text/x-opml" href="/feeds/all/opml" />
-	{
-		feeds.map((feed) => (
-			<link
-				rel="alternate"
-				type="application/rss+xml"
-				title={feed.name}
-				href={feed.links.rss}
-			/>
-		))
-	}
+	{feeds.map((feed) => (
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={feed.name}
+			href={feed.links.rss}
+		/>
+	))}
 
 	<!--STYLES-->
 	<Font cssVariable="--font-roboto-slab" preload />
@@ -52,5 +50,6 @@ import { feeds } from "@/lib/news/feeds/feed";
 		defer
 		is:inline
 		src="https://umami-ten-beryl.vercel.app/script.js"
-		data-website-id="54605b66-3b44-49ff-8334-18f5620b2c2b"></script>
+		data-website-id="54605b66-3b44-49ff-8334-18f5620b2c2b"
+	></script>
 </head>

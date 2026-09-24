@@ -19,8 +19,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 				rel="noopener noreferrer"
 				target="_blank"
 				class="text-primary wrap-anywhere hyphens-auto hover:underline"
-				>aboutfeeds.com</a
-			>.
+			>
+				aboutfeeds.com
+			</a>
+			.
 		</p>
 
 		<div class="rounded-lg border p-4">
@@ -30,26 +32,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 			<ul class="flex flex-col gap-1.5 text-sm">
 				<li class="flex gap-2">
 					<span class="text-muted-foreground">&bull;</span>
-					The feeds are not continuously updated. They may be stale by up to 24 hours
-					at a given time.
+					The feeds are not continuously updated. They may be stale by up to 24
+					hours at a given time.
 				</li>
 				<li class="flex gap-2">
 					<span class="text-muted-foreground">&bull;</span>
-					We have not added support for media enclosures; these feeds will not work
-					with a podcast app.
+					We have not added support for media enclosures; these feeds will not
+					work with a podcast app.
 				</li>
 				<li class="flex gap-2">
 					<span class="text-muted-foreground">&bull;</span>
-					While we have attempted to faithfully represent the original content, the
-					metadata and formatting of these feeds is not identical to the upstream
-					sources.
+					While we have attempted to faithfully represent the original content,
+					the metadata and formatting of these feeds is not identical to the
+					upstream sources.
 				</li>
 			</ul>
 		</div>
 
-		<div
-			class="border-primary/30 bg-primary/5 flex flex-col items-start gap-2 rounded-lg border p-4 px-5 sm:flex-row sm:items-center sm:justify-between"
-		>
+		<div class="border-primary/30 bg-primary/5 flex flex-col items-start gap-2 rounded-lg border p-4 px-5 sm:flex-row sm:items-center sm:justify-between">
 			<div>
 				<div class="mb-2 font-serif font-bold">Import All Feeds</div>
 				<p class="text-muted-foreground text-sm">
@@ -76,40 +76,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 					</tr>
 				</thead>
 				<tbody>
-					{
-						feeds.map((feed) => (
-							<tr class="hover:bg-muted border-b last:border-0">
-								<td class="px-4 py-3">
+					{feeds.map((feed) => (
+						<tr class="hover:bg-muted border-b last:border-0">
+							<td class="px-4 py-3">
+								<a
+									class="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
+									href={feed.links.overview}
+								>
+									{feed.name}
+								</a>
+							</td>
+							<td class="px-4 py-3">
+								<div class="flex gap-2">
 									<a
-										class="text-primary font-medium wrap-anywhere hyphens-auto hover:underline"
-										href={feed.links.overview}
+										href={feed.links.rss}
+										rel="noopener noreferrer"
+										target="_blank"
+										class="hover:border-primary hover:text-primary rounded-md border px-2.5 py-1 text-xs font-medium transition-colors"
 									>
-										{feed.name}
+										RSS
 									</a>
-								</td>
-								<td class="px-4 py-3">
-									<div class="flex gap-2">
-										<a
-											href={feed.links.rss}
-											rel="noopener noreferrer"
-											target="_blank"
-											class="hover:border-primary hover:text-primary rounded-md border px-2.5 py-1 text-xs font-medium transition-colors"
-										>
-											RSS
-										</a>
-										<a
-											href={feed.links.atom}
-											rel="noopener noreferrer"
-											target="_blank"
-											class="hover:border-primary hover:text-primary rounded-md border px-2.5 py-1 text-xs font-medium transition-colors"
-										>
-											Atom
-										</a>
-									</div>
-								</td>
-							</tr>
-						))
-					}
+									<a
+										href={feed.links.atom}
+										rel="noopener noreferrer"
+										target="_blank"
+										class="hover:border-primary hover:text-primary rounded-md border px-2.5 py-1 text-xs font-medium transition-colors"
+									>
+										Atom
+									</a>
+								</div>
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>
