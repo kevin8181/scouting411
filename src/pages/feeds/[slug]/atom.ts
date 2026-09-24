@@ -92,6 +92,7 @@ export const GET: APIRoute = async (context) => {
 			})),
 		},
 		{
+			strict: true,
 			stylesheets: [
 				// todo this stylesheet doesn't seem to play nice with atom
 				// {

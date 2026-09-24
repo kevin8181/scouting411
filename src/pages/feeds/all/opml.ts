@@ -24,6 +24,7 @@ export const GET: APIRoute = async (context) => {
 			},
 		},
 		{
+			strict: true,
 			stylesheets: [
 				{
 					title: "OPML Stylesheet",
