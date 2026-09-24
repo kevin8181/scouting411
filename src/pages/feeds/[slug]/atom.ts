@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getFeedBySlug } from "@/lib/news/feeds/feed";
 import { generateAtomFeed } from "feedsmith";
-import { queryPosts } from "@/lib/news/query/query";
+import { rpc } from "@/rpc/client";
 import { isFeedSlug } from "@/lib/news/feeds/feed";
 
 export const prerender = false;
@@ -14,7 +14,7 @@ export const GET: APIRoute = async (context) => {
 
 	const feed = getFeedBySlug(slug);
 
-	const { posts } = await queryPosts({
+	const { posts } = await rpc.news.posts.query({
 		feeds: [slug],
 		filter: {},
 		sort: {

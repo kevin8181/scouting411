@@ -6,13 +6,13 @@ import {
 	getAggregatedFeedMetrics,
 	getFeedMetrics,
 } from "@/lib/news/metrics/feedMetrics";
-import { queryPosts } from "@/lib/news/query/query";
+import { rpc } from "@/rpc/client";
 
 export const prerender = false;
 
 const feedRows = await Promise.all(
 	feeds.map(async (feed) => {
-		const { posts } = await queryPosts({
+		const { posts } = await rpc.news.posts.query({
 			feeds: [feed.slug],
 			filter: {},
 			sort: {

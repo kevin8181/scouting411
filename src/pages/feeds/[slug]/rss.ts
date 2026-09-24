@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { generateRssFeed } from "feedsmith";
 
 import { getFeedBySlug } from "@/lib/news/feeds/feed";
-import { queryPosts } from "@/lib/news/query/query";
+import { rpc } from "@/rpc/client";
 import { isFeedSlug } from "@/lib/news/feeds/feed";
 
 // todo maybe this could just accept a full query as url params and return it as rss,
@@ -16,7 +16,7 @@ export const GET: APIRoute = async (context) => {
 		throw new Response("Not found", { status: 404 });
 	}
 	const feed = getFeedBySlug(slug);
-	const { posts } = await queryPosts({
+	const { posts } = await rpc.news.posts.query({
 		feeds: [slug],
 		filter: {},
 		sort: {

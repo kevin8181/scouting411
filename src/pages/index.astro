@@ -2,13 +2,13 @@
 import Layout from "@/components/layout/Layout.astro";
 
 import { feedSlugs } from "@/lib/news/feeds/types";
-import { queryPosts } from "@/lib/news/query/query";
+import { rpc } from "@/rpc/client";
 
 import { Page } from "@/pages/_index";
 
 export const prerender = false;
 
-const latestPosts = await queryPosts({
+const latestPosts = await rpc.news.posts.query({
 	feeds: feedSlugs,
 	filter: {},
 	sort: {
