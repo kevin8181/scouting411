@@ -10,12 +10,15 @@ export function NavLink({
 	newTab,
 	currentUrl,
 	icon,
+	color,
 }: {
 	href: string;
 	label: string;
 	newTab?: boolean;
 	currentUrl: URL;
-	icon: FontAwesomeIconProps["icon"];
+	/** Pass either an icon or a color swatch. */
+	icon?: FontAwesomeIconProps["icon"];
+	color?: string;
 }) {
 	const isActive = currentUrl.pathname === href;
 
@@ -34,7 +37,14 @@ export function NavLink({
 					rel={newTab ? "noopener noreferrer" : undefined}
 				>
 					<div className="flex items-center gap-2">
-						<FontAwesomeIcon icon={icon} size="sm"/> {label}
+						{icon && <FontAwesomeIcon icon={icon} size="sm" />}
+						{color && (
+							<span
+								className="size-2.5 shrink-0 rounded-xs"
+								style={{ backgroundColor: color }}
+							/>
+						)}
+						{label}
 					</div>
 					{newTab && <FontAwesomeIcon icon={faSquareUpRight} size="sm" />}
 				</a>

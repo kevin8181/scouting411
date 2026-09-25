@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/tooltip";
 
 import { CommandPaletteTrigger } from "@/components/react/commandPalette";
+import { hubs } from "@/lib/hubs/hub";
 
 export function AppSidebar({ url }: { url: URL }) {
 	return (
@@ -58,6 +59,18 @@ export function AppSidebar({ url }: { url: URL }) {
 						currentUrl={url}
 						icon={faHouseChimney}
 					/>
+				</NavGroup>
+
+				<NavGroup label="hubs" collapsible>
+					{hubs.map((hub) => (
+						<NavLink
+							key={hub.slug}
+							href={hub.links.page}
+							label={hub.name}
+							currentUrl={url}
+							color={hub.color}
+						/>
+					))}
 				</NavGroup>
 
 				<NavGroup label="news" collapsible>

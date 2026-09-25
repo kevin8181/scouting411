@@ -1,0 +1,129 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import { PostComponent } from "@/components/react/post";
+import { getHubBySlug } from "@/lib/hubs/hub";
+import { rpc } from "@/rpc/client";
+
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const hub = slug ? getHubBySlug(slug) : undefined;
+
+if (!hub) {
+	throw new Response("Not found", { status: 404 });
+}
+
+const { posts, pagination } = await rpc.news.posts.query({
+	feeds: hub.newsSources,
+	filter: {},
+	sort: {
+		direction: "desc",
+		mode: "date",
+	},
+	paginate: {
+		maxPageSize: 6,
+		page: 1,
+	},
+});
+
+const [featuredPost, ...recentPosts] = posts;
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+---
+
+<Layout title={hub.name}>
+	<div
+		class="px-8 py-12 lg:pt-16 lg:pb-20"
+		style={{
+			backgroundColor: `color-mix(in oklab, ${hub.color} 20%, transparent)`,
+		}}
+	>
+		<div class="mx-auto flex max-w-6xl flex-col gap-3">
+			<h1 class="font-serif text-4xl font-bold wrap-anywhere hyphens-auto">
+				{hub.name} Hub
+			</h1>
+			<p class="text-muted-foreground max-w-2xl">{hub.description}</p>
+		</div>
+	</div>
+
+	<div class="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 p-8 lg:grid-cols-[1fr_20rem]">
+		<div class="flex min-w-0 flex-col gap-5">
+			<div class="flex items-center justify-between gap-4 border-b pb-2">
+				<h2 class="font-serif text-xl font-bold">Latest news</h2>
+				<a
+					href={hub.links.browsePosts}
+					class="text-primary flex items-center gap-2 text-sm font-medium whitespace-nowrap hover:underline"
+				>
+					All {Intl.NumberFormat().format(pagination.totalItems)} in Browse
+					<FontAwesomeIcon icon={faArrowRight} />
+				</a>
+			</div>
+
+			{featuredPost ? (
+				<div
+					class="@container mb-3 rounded-xl border p-5 shadow-sm @xl:p-7"
+					style={{
+						backgroundColor: `color-mix(in oklab, ${hub.color} 8%, transparent)`,
+						borderColor: `color-mix(in oklab, ${hub.color} 35%, transparent)`,
+					}}
+				>
+					<div class="flex flex-col gap-5 @xl:flex-row @xl:items-center @xl:gap-8">
+						<img
+							class="aspect-video w-full rounded-lg border object-cover @xl:aspect-4/3 @xl:w-1/3 @xl:shrink-0"
+							src={featuredPost.thumbnail ?? featuredPost.feed.coverImageSrc}
+						/>
+						<div class="flex min-w-0 flex-col items-start gap-4">
+							<span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+								<a
+									href={featuredPost.feed.links.overview}
+									class="hover:underline"
+								>
+									{featuredPost.feed.name}
+								</a>
+								<span class="font-bold">&middot;</span>
+								<span class="whitespace-nowrap">
+									{formatDate(featuredPost.date)}
+								</span>
+							</span>
+							<a
+								href={featuredPost.url}
+								rel="noopener noreferrer"
+								target="_blank"
+								class="text-primary font-serif text-2xl font-bold wrap-anywhere @xl:text-3xl hyphens-auto hover:underline"
+							>
+								{featuredPost.title}
+							</a>
+							<p class="line-clamp-4 wrap-anywhere hyphens-auto">
+								{featuredPost.description || "No excerpt available."}
+							</p>
+						</div>
+					</div>
+				</div>
+			) : (
+				<div class="text-muted-foreground rounded-lg border p-6 text-sm">
+					No posts have been indexed for this hub yet.
+				</div>
+			)}
+
+			{recentPosts.map((post) => (
+				<PostComponent post={post} />
+			))}
+		</div>
+
+		<aside class="lg:-mt-20">
+			<div class="bg-card flex flex-col gap-3 rounded-lg border p-5 shadow-sm lg:sticky lg:top-17">
+				<h2 class="font-serif text-xl font-bold">Resources</h2>
+				<!-- todo list the hub's resources once hubs can query them -->
+				<p class="text-muted-foreground text-sm">Coming soon.</p>
+			</div>
+		</aside>
+	</div>
+</Layout>

@@ -19,6 +19,7 @@ import { useHotkey } from "@tanstack/react-hotkeys";
 import { useIsMobile } from "@/util/hooks/use-mobile";
 
 import { feeds } from "@/lib/news/feeds/feed";
+import { hubs } from "@/lib/hubs/hub";
 import { queryResources } from "@/lib/resources/query";
 import { useTheme } from "@/components/react/darkModeControl";
 
@@ -98,6 +99,23 @@ function CommandPaletteContent() {
 							onSelect={handleSelection({ url: item.href })}
 						>
 							{item.label}
+						</CommandItem>
+					))}
+				</CommandGroup>
+				<CommandSeparator />
+				<CommandGroup heading="Hubs">
+					{hubs.map((hub) => (
+						<CommandItem
+							key={hub.slug}
+							value={hub.links.page}
+							keywords={[hub.name, `${hub.name} Hub`, hub.description]}
+							onSelect={handleSelection({ url: hub.links.page })}
+						>
+							<span
+								className="size-2.5 shrink-0 rounded-xs"
+								style={{ backgroundColor: hub.color }}
+							/>
+							{hub.name}
 						</CommandItem>
 					))}
 				</CommandGroup>
