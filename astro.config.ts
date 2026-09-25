@@ -12,12 +12,6 @@ export default defineConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
-		ssr: {
-			// feedsmith 3 ships trousse vendored at dist/node_modules/trousse with no package.json.
-			// node stops the package-type lookup at a node_modules segment, so that ESM file only loads
-			// via syntax detection, which the vercel runtime doesn't do. bundling sidesteps node resolution.
-			noExternal: ["feedsmith"],
-		},
 	},
 	integrations: [
 		sitemap({
