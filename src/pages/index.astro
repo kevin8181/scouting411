@@ -1,6 +1,7 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 
+import { hubs } from "@/lib/hubs/hub";
 import { feedSlugs } from "@/lib/news/feeds/types";
 import { rpc } from "@/rpc/client";
 
@@ -8,23 +9,43 @@ import { Page } from "@/pages/_index";
 
 export const prerender = false;
 
-const latestPosts = await rpc.news.posts.query({
-	feeds: feedSlugs,
-	filter: {},
-	sort: {
-		mode: "date",
-		direction: "desc",
-	},
-	paginate: {
-		page: 1,
-		maxPageSize: 3,
-	},
-});
+const [latestPosts, hubPosts] = await Promise.all([
+	rpc.news.posts.query({
+		feeds: feedSlugs,
+		filter: {},
+		sort: {
+			mode: "date",
+			direction: "desc",
+		},
+		paginate: {
+			page: 1,
+			maxPageSize: 6,
+		},
+	}),
+	Promise.all(
+		hubs.map(async (hub) => {
+			const { posts } = await rpc.news.posts.query({
+				feeds: hub.newsSources,
+				filter: {},
+				sort: {
+					mode: "date",
+					direction: "desc",
+				},
+				paginate: {
+					page: 1,
+					maxPageSize: 1,
+				},
+			});
+			return { hub, latestPost: posts[0] };
+		}),
+	),
+]);
 ---
 
 <Layout title="Home">
 	<Page
 		latestPosts={latestPosts}
+		hubPosts={hubPosts}
 		feedCount={feedSlugs.length}
 		postCount={latestPosts.pagination.totalItems}
 		client:load

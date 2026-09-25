@@ -25,6 +25,13 @@
 	--font-serif: var(--font-roboto-slab);
 	--font-sans: var(--font-roboto);
 	--font-display: var(--font-montserrat);
+
+	--animate-marquee: marquee 120s linear infinite;
+	@keyframes marquee {
+		to {
+			transform: translateX(-50%);
+		}
+	}
 }
 
 /* SHADCN STUFF */
