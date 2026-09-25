@@ -83,6 +83,9 @@
 - https://open.spotify.com/show/57YZ4Fu74WkSHE5qyVkQS2
 - https://filestore.scouting.org/filestore ... figure out how to list everything or see updates?
 - https://scouting-oec.org/news/
+- https://hrgateway.intranet.mybsa.org/
+  // bsa hr intranet, wordpress. site needs a login to browse, but the rest api is public:
+  // /wp-json/wp/v2/posts (53) and /pages (138) as of 2026-09-24. could work with the wordpress adapter.
 
 give.scouting.org
 reservations.scouting.org
