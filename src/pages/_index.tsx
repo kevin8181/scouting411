@@ -35,7 +35,7 @@ export function Page({
 	const { setOpen } = useCommandPalette();
 
 	return (
-		<div className="flex w-full flex-col items-center gap-14 p-8 pt-16 pb-20">
+		<div className="flex w-full flex-col items-center gap-20 p-8 pt-16 pb-20">
 			<div className="flex w-full flex-col items-center gap-4 py-8">
 				<h1 className="text-primary font-display text-center text-4xl font-extrabold min-[380px]:text-5xl">
 					Scouting411
@@ -134,7 +134,7 @@ function SectionHeader({
 	link?: { href: string; label: string };
 }) {
 	return (
-		<div className="flex flex-col items-start gap-x-6 gap-y-1 lg:flex-row lg:items-center lg:justify-between">
+		<div className="mb-2 flex flex-col items-start gap-x-6 gap-y-1 lg:flex-row lg:items-center lg:justify-between">
 			<div className="flex min-w-0 flex-col gap-x-3 gap-y-1 lg:flex-1 lg:flex-row lg:items-center">
 				<h2 className="text-primary font-serif text-2xl font-bold">{title}</h2>
 				<span aria-hidden className="text-muted-foreground hidden lg:inline">

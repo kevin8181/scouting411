@@ -5,8 +5,6 @@ import { feeds } from "@/lib/news/feeds/feed";
 
 /** fetches a feed's posts from redis */
 async function getFeedPosts(feed: Feed) {
-	console.log(`reading cached posts for ${feed.name}`);
-
 	const postData = await readPosts(feed.slug);
 
 	return postData.map((postData) => {
