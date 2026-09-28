@@ -229,6 +229,12 @@ export const resources: Resource[] = [
 		description: "Take your official online training courses",
 	},
 	{
+		url: "https://scouting.org/outdoor-programs/tap",
+		title: "The Adventure Plan",
+		description:
+			"A step-by-step tool for planning safe and successful outdoor and high adventure trips, for units in every Scouting program",
+	},
+	{
 		url: "https://status.scouting.org/",
 		title: "System Status",
 		description: "Uptime monitoring for Scouting America systems",
