@@ -3,16 +3,19 @@ import { sortPosts } from "@/lib/news/query/sort";
 import { paginateArray, type PaginatedResults } from "@/util/paginateArray";
 import { filterPosts } from "@/lib/news/query/filter";
 import type { Post } from "@/lib/news/feeds/post";
-import type { QueryOpts } from "@/lib/news/query/types";
+import type { QueryInput } from "@/lib/news/query/types";
+import { resolveQuery } from "@/lib/news/query/resolve";
 
 export async function queryPosts(
-	opts: QueryOpts,
+	input: QueryInput,
 ): Promise<PaginatedResults<Post>> {
-	const posts = await getMultipleFeedsPosts(opts.feeds);
+	const query = resolveQuery(input);
 
-	const filteredPosts = filterPosts(posts, opts.filter);
+	const posts = await getMultipleFeedsPosts(query.feeds);
 
-	const sortedPosts = sortPosts(filteredPosts, opts.sort);
+	const filteredPosts = filterPosts(posts, query.filter);
 
-	return paginateArray(sortedPosts, opts.paginate);
+	const sortedPosts = sortPosts(filteredPosts, query.sort);
+
+	return paginateArray(sortedPosts, query.paginate);
 }

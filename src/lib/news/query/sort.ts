@@ -1,7 +1,8 @@
 import { z } from "zod";
 import type { Post } from "@/lib/news/feeds/post";
+import type { ResolvedQuery } from "@/lib/news/query/resolve";
 
-export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {
+export function sortPosts(posts: Post[], opts: ResolvedQuery["sort"]) {
 	let sortedPosts;
 
 	switch (opts.mode) {
@@ -22,6 +23,12 @@ export function sortPosts(posts: Post[], opts: z.infer<typeof sortOptsSchema>) {
 }
 
 export const sortOptsSchema = z.object({
-	mode: z.enum(["date"]).describe("The sort mode"),
-	direction: z.enum(["asc", "desc"]).describe("The sort direction"),
+	mode: z
+		.enum(["date"])
+		.optional()
+		.describe("The sort mode. Defaults to date."),
+	direction: z
+		.enum(["asc", "desc"])
+		.optional()
+		.describe("The sort direction. Defaults to desc."),
 });

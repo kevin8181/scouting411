@@ -1,23 +1,26 @@
 import { z } from "zod";
 
-/** paginate an array of items */
+/** paginate an array of items. `false` returns every item as a single page */
 export function paginateArray<T>(
 	data: T[],
-	opts: PaginateOpts,
+	opts: PaginateOpts | false,
 ): PaginatedResults<T> {
-	const firstItemIndex = (opts.page - 1) * opts.maxPageSize;
-	const lastItemIndex = firstItemIndex + opts.maxPageSize - 1;
+	const { page, maxPageSize } =
+		opts === false ? { page: 1, maxPageSize: Math.max(data.length, 1) } : opts;
+
+	const firstItemIndex = (page - 1) * maxPageSize;
+	const lastItemIndex = firstItemIndex + maxPageSize - 1;
 	/** if the last item would be greater than the length of the array, set it to the last index */
 	const realLastItemIndex = Math.min(lastItemIndex, data.length - 1);
-	const totalPages = Math.ceil(data.length / opts.maxPageSize);
+	const totalPages = Math.ceil(data.length / maxPageSize);
 
 	const items = data.slice(firstItemIndex, lastItemIndex + 1);
 
 	return {
 		posts: items,
 		pagination: {
-			page: opts.page,
-			maxPageSize: opts.maxPageSize,
+			page,
+			maxPageSize,
 			pageSize: items.length,
 			firstItemIndex,
 			lastItemIndex: realLastItemIndex,
@@ -27,7 +30,7 @@ export function paginateArray<T>(
 	};
 }
 
-type PaginateOpts = z.infer<typeof paginateOptsSchema>;
+export type PaginateOpts = z.infer<typeof paginateOptsSchema>;
 export const paginateOptsSchema = z.object({
 	/** the maximum page size */
 	maxPageSize: z.coerce

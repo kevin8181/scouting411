@@ -11,7 +11,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { FilterSidebarItem } from "@/components/react/filterSidebarItem";
 import { feeds } from "@/lib/news/feeds/feed";
-import { type QueryOpts, queryOptsSchema } from "@/lib/news/query/types";
+import { type QueryInput, queryInputSchema } from "@/lib/news/query/types";
+import { type ResolvedQuery, resolveQuery } from "@/lib/news/query/resolve";
 import { useForm } from "@tanstack/react-form";
 import type { PaginatedResults } from "@/util/paginateArray";
 import type { Post } from "@/lib/news/feeds/post";
@@ -23,23 +24,35 @@ import { Button } from "@/components/ui/button";
 const sortDirectionItems = [
 	{ value: "desc", label: "Newest first" },
 	{ value: "asc", label: "Oldest first" },
-] satisfies { value: QueryOpts["sort"]["direction"]; label: string }[];
+] satisfies { value: ResolvedQuery["sort"]["direction"]; label: string }[];
 
+/**
+ * the form holds the sparse query, so the url records only what the user
+ * touched. a field the user hasn't touched is undefined, and displays what it
+ * resolves to instead
+ */
 export function FilterSidebar({
 	query,
 	setQuery,
 	results,
 }: {
-	query: QueryOpts;
-	setQuery: React.Dispatch<React.SetStateAction<QueryOpts>>;
+	query: QueryInput;
+	setQuery: React.Dispatch<React.SetStateAction<QueryInput>>;
 	results: PaginatedResults<Post> | undefined;
 }) {
+	const { sort, paginate } = resolveQuery(query);
+
+	// a url can't express `paginate: false`, so browse always pages
+	if (paginate === false) {
+		throw new Error("the browse page cannot show unpaginated results");
+	}
+
 	const form = useForm({
 		defaultValues: query,
 		listeners: {
 			/** push the form values up to the page query whenever they are valid */
 			onChange: ({ formApi }) => {
-				const parsed = queryOptsSchema.safeParse(formApi.state.values);
+				const parsed = queryInputSchema.safeParse(formApi.state.values);
 
 				if (parsed.success) {
 					setQuery(parsed.data);
@@ -72,7 +85,7 @@ export function FilterSidebar({
 				<form.Field name="paginate.page">
 					{(field) => (
 						<PaginationControl
-							page={query.paginate.page}
+							page={field.state.value ?? paginate.page}
 							maxPage={results?.pagination.totalPages ?? 1}
 							onPageChange={(page) => field.handleChange(page)}
 						/>
@@ -87,7 +100,7 @@ export function FilterSidebar({
 								{(field) => (
 									<Select
 										items={sortDirectionItems}
-										value={field.state.value}
+										value={field.state.value ?? sort.direction}
 										onValueChange={(value: "asc" | "desc" | null) => {
 											if (value) field.handleChange(value);
 										}}
@@ -116,7 +129,7 @@ export function FilterSidebar({
 										type="number"
 										min={1}
 										placeholder="Items"
-										value={field.state.value}
+										value={field.state.value ?? paginate.maxPageSize}
 										onBlur={field.handleBlur}
 										onChange={(e) => field.handleChange(e.target.valueAsNumber)}
 									/>
@@ -131,7 +144,39 @@ export function FilterSidebar({
 										placeholder="Search..."
 										value={field.state.value ?? ""}
 										onBlur={field.handleBlur}
-										onChange={(e) => field.handleChange(e.target.value)}
+										onChange={(e) =>
+											field.handleChange(e.target.value || undefined)
+										}
+									/>
+								)}
+							</form.Field>
+						</FilterSidebarItem>
+
+						<FilterSidebarItem label="published from">
+							<form.Field name="filter.from">
+								{(field) => (
+									<Input
+										type="date"
+										value={field.state.value ?? ""}
+										onBlur={field.handleBlur}
+										onChange={(e) =>
+											field.handleChange(e.target.value || undefined)
+										}
+									/>
+								)}
+							</form.Field>
+						</FilterSidebarItem>
+
+						<FilterSidebarItem label="published to">
+							<form.Field name="filter.to">
+								{(field) => (
+									<Input
+										type="date"
+										value={field.state.value ?? ""}
+										onBlur={field.handleBlur}
+										onChange={(e) =>
+											field.handleChange(e.target.value || undefined)
+										}
 									/>
 								)}
 							</form.Field>
@@ -149,7 +194,7 @@ export function FilterSidebar({
 											onClick={() =>
 												field.handleChange(
 													feeds.flatMap((feed) =>
-														field.state.value.length < feeds.length
+														(field.state.value?.length ?? 0) < feeds.length
 															? feed.slug
 															: [],
 													),
@@ -177,7 +222,7 @@ export function FilterSidebar({
 																	.filter((candidate) =>
 																		candidate.slug === feed.slug
 																			? checked
-																			: field.state.value.includes(
+																			: !!field.state.value?.includes(
 																					candidate.slug,
 																				),
 																	)

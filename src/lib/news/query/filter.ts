@@ -41,17 +41,19 @@ const predicateFactories: PredicateFactories<FilterOpts, Post> = {
 			return titleMatch || descriptionMatch;
 		};
 	},
-	// todo this does not agree with typescript
-	// dateAfter: (value: Date): Predicate<Post> => {
-	// 	return (post) => {
-	// 		return post.date > value;
-	// 	};
-	// },
-	// dateBefore: (value: Date): Predicate<Post> => {
-	// 	return (post) => {
-	// 		return post.date < value;
-	// 	};
-	// },
+	from: (value: string): Predicate<Post> => {
+		// a date-only iso string parses as utc midnight
+		const start = new Date(value);
+
+		return (post) => post.date >= start;
+	},
+	to: (value: string): Predicate<Post> => {
+		// inclusive of the whole day, so stop at the start of the next one
+		const end = new Date(value);
+		end.setUTCDate(end.getUTCDate() + 1);
+
+		return (post) => post.date < end;
+	},
 };
 type PredicateFactories<F, T> = {
 	[K in keyof F]-?: (value: NonNullable<F[K]>) => Predicate<T>;
@@ -66,7 +68,17 @@ export const filterOptsSchema = z
 			.describe(
 				"Get only posts that contain this string in their title or description. Case insensitive.",
 			),
-		// dateAfter: z.coerce.date().optional(),
-		// dateBefore: z.coerce.date().optional(),
+		from: z.iso
+			.date()
+			.optional()
+			.describe(
+				"Get only posts published on or after this date (YYYY-MM-DD, UTC).",
+			),
+		to: z.iso
+			.date()
+			.optional()
+			.describe(
+				"Get only posts published on or before this date (YYYY-MM-DD, UTC).",
+			),
 	})
 	.strict();
