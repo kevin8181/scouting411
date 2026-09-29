@@ -15,7 +15,7 @@ export default defineConfig({
 	},
 	integrations: [
 		sitemap({
-			xslURL: "/xslt/sitemap.xslt",
+			// xslURL: "/xslt/sitemap.xslt",
 		}),
 		react(),
 	],
