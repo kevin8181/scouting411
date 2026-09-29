@@ -33,16 +33,7 @@ export async function getFeedConsumerOutput() {
 		feeds.map(async (feed) => {
 			const { posts } = await queryPosts({
 				feeds: [feed.slug],
-				filter: {},
-				sort: {
-					direction: "desc",
-					mode: "date",
-				},
-				paginate: {
-					// todo we need a way to disable pagination
-					maxPageSize: 999999,
-					page: 1,
-				},
+				paginate: false,
 			});
 
 			return {

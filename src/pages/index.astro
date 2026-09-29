@@ -11,12 +11,6 @@ export const prerender = false;
 
 const [latestPosts, hubPosts] = await Promise.all([
 	rpc.news.posts.query({
-		feeds: feedSlugs,
-		filter: {},
-		sort: {
-			mode: "date",
-			direction: "desc",
-		},
 		paginate: {
 			page: 1,
 			maxPageSize: 6,
@@ -26,11 +20,6 @@ const [latestPosts, hubPosts] = await Promise.all([
 		hubs.map(async (hub) => {
 			const { posts } = await rpc.news.posts.query({
 				feeds: hub.newsSources,
-				filter: {},
-				sort: {
-					mode: "date",
-					direction: "desc",
-				},
 				paginate: {
 					page: 1,
 					maxPageSize: 1,

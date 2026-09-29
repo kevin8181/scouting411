@@ -17,16 +17,7 @@ export const GET: APIRoute = async (context) => {
 
 	const { posts } = await rpc.news.posts.query({
 		feeds: [slug],
-		filter: {},
-		sort: {
-			direction: "desc",
-			mode: "date",
-		},
-		paginate: {
-			// todo we need a way to disable pagination
-			maxPageSize: 999999,
-			page: 1,
-		},
+		paginate: false,
 	});
 
 	const generated = generateAtomFeed(

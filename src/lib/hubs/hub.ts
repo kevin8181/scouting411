@@ -9,15 +9,6 @@ export const hubs: Hub[] = hubsConfig.map((config) => ({
 		page: `/hubs/${config.slug}`,
 		browsePosts: `/news/browse?${postsQueryParamsEncoder.encode({
 			feeds: config.newsSources,
-			filter: {},
-			sort: {
-				direction: "desc",
-				mode: "date",
-			},
-			paginate: {
-				maxPageSize: 20,
-				page: 1,
-			},
 		})}`,
 	},
 }));

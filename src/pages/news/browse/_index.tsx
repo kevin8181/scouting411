@@ -1,7 +1,7 @@
 import { CardFeed } from "@/components/react/cardFeed";
 import { PostComponent } from "@/components/react/post";
 import type { Post } from "@/lib/news/feeds/post";
-import type { QueryOpts } from "@/lib/news/query/types";
+import type { QueryInput } from "@/lib/news/query/types";
 import { SecondarySidebar } from "@/components/layout/sidebar/secondarySidebar";
 import { useState, useEffect } from "react";
 import { safe } from "@orpc/client";
@@ -10,7 +10,7 @@ import { FilterSidebar } from "@/pages/news/browse/_filterSidebar";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
 import type { PaginatedResults } from "@/util/paginateArray";
 
-export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
+export function Page({ initialQuery }: { initialQuery: QueryInput }) {
 	const [query, setQuery] = useState(initialQuery);
 	const [results, setResults] = useState<PaginatedResults<Post> | undefined>(
 		undefined,
@@ -79,7 +79,7 @@ export function Page({ initialQuery }: { initialQuery: QueryOpts }) {
 	);
 }
 
-function updateUrlQuery(query: QueryOpts) {
+function updateUrlQuery(query: QueryInput) {
 	const queryString = postsQueryParamsEncoder.encode(query);
 
 	const url = new URL(document.location.href);

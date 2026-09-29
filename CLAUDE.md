@@ -21,7 +21,7 @@ Three layers that meet only at the Redis cache. **A page request never fetches u
 
 `feeds/feed.ts` hydrates configs into the alphabetized `feeds` array and assigns each feed its canonical `links` (overview, browsePosts, rss, atom). Link to `feed.links.*` rather than rebuilding those paths.
 
-**The cycle trap:** `feed.ts` imports `query/queryParams.ts` to build `links.browsePosts`. So `query/types.ts` sources `defaultVisibleFeeds` from `feeds/config.ts`, not `feeds/feed.ts` — importing it from `feed.ts` closes a cycle back through `queryParams.ts` and breaks island hydration with a TDZ error at runtime, which typecheck will not catch. Keep the query layer importing from `feeds/config.ts` and `feeds/types.ts` only.
+**The cycle trap:** `feed.ts` imports `query/queryParams.ts` to build `links.browsePosts`. So the query layer takes `feedSlugs` from `feeds/types.ts`, not `feeds/feed.ts` — importing it from `feed.ts` closes a cycle back through `queryParams.ts` and breaks island hydration with a TDZ error at runtime, which typecheck will not catch. Keep the query layer importing from `feeds/config.ts` and `feeds/types.ts` only.
 
 ### Ingest (cron only) — `src/lib/news/ingest/`
 
@@ -37,9 +37,9 @@ One adapter per upstream type in `upstream/adapters/` (`rss.ts` via feedsmith, `
 
 ### Query — `src/lib/news/query/`
 
-`query.ts`'s `queryPosts(opts)` is the single entry point: fetch selected feeds → `filter.ts` → `sort.ts` → `paginateArray`. `types.ts` defines `queryOptsSchema`, whose defaults are what an empty query resolves to.
+`query.ts`'s `queryPosts(input)` is the single entry point: resolve → fetch selected feeds → `filter.ts` → `sort.ts` → `paginateArray`. Input is **sparse**: `types.ts`'s `queryInputSchema` makes every field optional and fills in nothing. Defaults live only in `resolve.ts`'s `resolvedQuerySchema`, which `queryPosts` applies internally — callers pass just what they care about, and never spell out defaults. Absent and empty `feeds` both mean every feed. `paginate: false` returns every match as one page.
 
-`queryParams.ts` encodes that shape to and from URL search params via `qs`. Its header comment explains why `allowEmptyArrays` and `arrayFormat: "brackets"` are both load-bearing — read it before changing those options; either one silently resurrects every feed when the user deselects all sources.
+`queryParams.ts` encodes the sparse input to and from URL search params via `qs`, so browse URLs record only what the user touched. Its header comment explains why `arrayFormat: "brackets"` and `arrayLimit` are load-bearing — read it before changing those options.
 
 Callers reach `queryPosts` through the `news.posts.query` procedure (see **API** below). The one exception is `src/lib/news/feeds/consumerOutput.ts`, which calls it directly because lib code sits below the router.
 
@@ -47,7 +47,7 @@ Re-publishing routes: `src/pages/feeds/[slug]/rss.ts` and `atom.ts` serve one so
 
 ### The browse island
 
-`src/pages/news/browse/index.astro` decodes URL params server-side into `initialQuery`, then hands off to the `client:load` React island `_index.tsx`, which owns query state in `useState` and pushes it back to the URL with `history.replaceState`.
+`src/pages/news/browse/index.astro` decodes URL params server-side into `initialQuery`, then hands off to the `client:load` React island `_index.tsx`, which owns the sparse query in `useState` and pushes it back to the URL with `history.replaceState`. The sidebar form holds that same sparse input; an untouched field is `undefined` and displays its resolved value.
 
 That island's effect holds a **stale-response guard**: a narrow query resolves faster than a broad one (one Redis read per selected feed), so an in-flight broad query can otherwise land last and clobber a narrow one. Preserve it when editing the effect.
 
