@@ -5,9 +5,14 @@ import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
 
+import { feeds } from "./src/lib/news/feeds/feed";
+import { hubs } from "./src/lib/hubs/hub";
+
+const site = "https://scouting411.org";
+
 // https://astro.build/config
 export default defineConfig({
-	site: "https://scouting411.org",
+	site,
 	trailingSlash: "never",
 
 	vite: {
@@ -16,6 +21,11 @@ export default defineConfig({
 	integrations: [
 		sitemap({
 			// xslURL: "/xslt/sitemap.xslt",
+			// SSR [slug] routes can't be discovered by the integration, so list them here
+			customPages: [
+				...feeds.map((feed) => feed.links.overview),
+				...hubs.map((hub) => hub.links.page),
+			].map((path) => new URL(path, site).href),
 		}),
 		react(),
 	],
