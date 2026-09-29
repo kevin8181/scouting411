@@ -4,6 +4,7 @@ import { RssAdapter } from "@/lib/news/ingest/upstream/adapters/rss";
 import { WordpressAdapter } from "@/lib/news/ingest/upstream/adapters/wordpress";
 import { PodcastArchiveAdapter } from "@/lib/news/ingest/upstream/adapters/podcast-archive";
 import { StatuspageAdapter } from "@/lib/news/ingest/upstream/adapters/statuspage";
+import { OaNewsAdapter } from "@/lib/news/ingest/upstream/adapters/oaNews";
 
 export const feedConfigs = [
 	{
@@ -334,16 +335,7 @@ export const feedConfigs = [
 		coverImageSrc:
 			"https://confluence.oa-scouting.org/download/attachments/655365/OALMLC",
 		homepageUrl: "https://oa-scouting.org/news",
-		adapter: RssAdapter({
-			feedUrl: "https://oa-scouting.org/rss.xml",
-			// drupal 11. no jsonapi or rest module exposed, and this is core's stock
-			// frontpage feed — hard capped at 10 items, ignores page/items_per_page.
-			// worse, it filters on "promoted to front page" rather than listing every
-			// article, so it isn't even the latest 10: the items span 13 months and
-			// skip most posts, leaving the feed months behind what /news shows.
-			// todo: the /news view paginates ~143 pages of 9, server-rendered, with
-			// title, teaser, iso date and thumbnail per card. scrape that instead.
-		}),
+		adapter: OaNewsAdapter(),
 	},
 	{
 		name: "OA System Maintenance",
