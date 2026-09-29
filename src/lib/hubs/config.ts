@@ -2,6 +2,19 @@ import type { HubConfig } from "@/lib/hubs/types";
 
 export const hubsConfig: HubConfig[] = [
 	{
+		slug: "national",
+		name: "National",
+		description:
+			"Official announcements, leadership communications, and governance from Scouting America's national organization.",
+		color: "#003F87",
+		newsSources: [
+			"scouting-newsroom",
+			"executive-communications",
+			"scouting-america-news",
+			"scouting-wire",
+		],
+	},
+	{
 		slug: "scouts-bsa",
 		name: "Scouts BSA",
 		description: "Scouting's troop program for ages 11 through 17.",
@@ -42,7 +55,7 @@ export const hubsConfig: HubConfig[] = [
 		name: "Alumni & NESA",
 		description:
 			"Scouting's alumni network and the National Eagle Scout Association.",
-		color: "#003F87",
+		color: "#5C2D91",
 		newsSources: [
 			"nesa",
 			"nesa-events",
