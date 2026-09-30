@@ -3,7 +3,6 @@ import {
 	CommandDialog,
 	CommandInput,
 	CommandList,
-	CommandEmpty,
 	CommandGroup,
 	CommandItem,
 	CommandSeparator,
@@ -205,36 +204,43 @@ function CommandPaletteContent() {
 				icon={ZapIcon}
 				onValueChange={handleSearchChange}
 			/>
-			<CommandList ref={listRef}>
-				<CommandEmpty>No results found.</CommandEmpty>
+			{/* search results have no group heading under the input, so space them off it */}
+			<CommandList ref={listRef} className={search.trim() ? "pt-1" : undefined}>
 				{search.trim() ? (
 					// while searching, drop the groups and list every match by rank; each
-					// item labels its own type instead
+					// item labels its own type instead. the search page link always shows, so
+					// the list is never empty and needs no empty state
+					// they sit in headingless groups for the same padding as the grouped layout
 					<>
-						{results.map((result) => (
-							<PaletteItem
-								key={result.id}
-								entry={result}
-								section={result.section}
-								showType
-							/>
-						))}
 						{results.length > 0 && (
 							<>
-								<CommandSeparator />
-								<CommandItem
-									value="search:all"
-									onSelect={handleSelection({
-										url: `/search?${new URLSearchParams({ q: search.trim() })}`,
-									})}
-								>
-									<span className="text-muted-foreground flex size-5 shrink-0 items-center justify-center">
-										<SearchIcon />
-									</span>
-									See all results for “{search.trim()}”
-								</CommandItem>
+								<CommandGroup>
+									{results.map((result) => (
+										<PaletteItem
+											key={result.id}
+											entry={result}
+											section={result.section}
+											showType
+										/>
+									))}
+								</CommandGroup>
+								{/* cmdk hides separators while there's a search unless told otherwise */}
+								<CommandSeparator alwaysRender />
 							</>
 						)}
+						<CommandGroup>
+							<CommandItem
+								value="search:all"
+								onSelect={handleSelection({
+									url: `/search?${new URLSearchParams({ q: search.trim() })}`,
+								})}
+							>
+								<span className="text-muted-foreground flex size-5 shrink-0 items-center justify-center">
+									<SearchIcon />
+								</span>
+								See all results for “{search.trim()}”
+							</CommandItem>
+						</CommandGroup>
 					</>
 				) : (
 					groupedList
