@@ -7,12 +7,7 @@ import type { Resource } from "@/lib/resources/types";
 import { feeds } from "@/lib/news/feeds/feed";
 import { resources } from "@/lib/resources/config";
 import relativeDate from "tiny-relative-date";
-import {
-	ArrowUpRightIcon,
-	BotIcon,
-	RssIcon,
-	SearchIcon,
-} from "lucide-react";
+import { ArrowUpRightIcon, BotIcon, RssIcon, SearchIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { SearchForm } from "@/components/react/searchForm";
 import { cn } from "@/util/cn";

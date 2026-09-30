@@ -1,37 +1,51 @@
 import { ExternalLinkIcon, NewspaperIcon } from "lucide-react";
 import { SearchForm } from "@/components/react/searchForm";
 import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
+import relativeDate from "tiny-relative-date";
 import { cn } from "@/util/cn";
 import {
 	searchItemMedia,
 	searchItemTypes,
 } from "@/components/react/searchItem";
 import type { SearchItem } from "@/lib/search/types";
+import type { Post } from "@/lib/news/feeds/post";
 
 export function Page({
 	query,
 	results,
+	news,
+	newsTotal,
 	origin,
 }: {
 	query: string;
 	results: SearchItem[];
+	/** the latest news posts matching the query */
+	news: Post[];
+	/** how many news posts match in all, of which `news` is the first few */
+	newsTotal: number;
 	/** the site's origin, to resolve internal urls for display */
 	origin: string;
 }) {
 	// on wide screens the news card sits in its own column beside everything else; on
-	// narrow ones it falls between the result count and the results
+	// narrow ones it falls between the result count and the results. it spans the three
+	// rows beside it, so when it's the taller side the results row takes the extra height,
+	// rather than it spreading across every row and opening gaps above the results
 	return (
-		<div className="grid w-full max-w-6xl grid-cols-1 gap-x-12 gap-y-6 p-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+		<div className="grid w-full max-w-6xl grid-cols-1 gap-x-12 gap-y-6 p-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:grid-rows-[auto_auto_1fr]">
 			<SearchForm query={query} className="lg:col-start-1" />
 
 			<p className="text-muted-foreground text-sm lg:col-start-1">
-				{results.length === 0
-					? `No results for “${query}”. Try a shorter or different search.`
-					: `${results.length} ${results.length === 1 ? "result" : "results"} for “${query}”`}
+				{results.length > 0
+					? `${results.length} ${results.length === 1 ? "result" : "results"} for “${query}”`
+					: newsTotal > 0
+						? `No results for “${query}”, but it turns up in the news.`
+						: `No results for “${query}”. Try a shorter or different search.`}
 			</p>
 
 			<NewsCard
 				query={query}
+				posts={news}
+				total={newsTotal}
 				className="self-start lg:sticky lg:top-17 lg:col-start-2 lg:row-span-3 lg:row-start-1"
 			/>
 
@@ -44,8 +58,21 @@ export function Page({
 	);
 }
 
-/** search results don't cover news, so point to the newsfeed with the same keyword */
-function NewsCard({ query, className }: { query: string; className?: string }) {
+/**
+ * search results don't cover news, so the latest matching posts sit beside them, with a
+ * link to the newsfeed filtered to the same keyword for the rest
+ */
+function NewsCard({
+	query,
+	posts,
+	total,
+	className,
+}: {
+	query: string;
+	posts: Post[];
+	total: number;
+	className?: string;
+}) {
 	const href = `/news/browse?${postsQueryParamsEncoder.encode({
 		filter: { keyword: query },
 	})}`;
@@ -53,23 +80,49 @@ function NewsCard({ query, className }: { query: string; className?: string }) {
 	return (
 		<aside
 			className={cn(
-				"bg-card flex flex-col gap-2 rounded-lg border p-4 text-sm",
+				"bg-card flex flex-col gap-3 rounded-lg border p-4 text-sm",
 				className,
 			)}
 		>
 			<h2 className="flex items-center gap-2 font-serif font-bold">
 				<NewspaperIcon className="text-muted-foreground size-4" />
-				Looking for news?
+				News
 			</h2>
-			<p className="text-muted-foreground">
-				Search results don't include news posts.
-			</p>
-			<a
-				href={href}
-				className="text-primary w-fit font-medium hover:underline"
-			>
-				Search news for “{query}” →
-			</a>
+
+			{posts.length === 0 ? (
+				<p className="text-muted-foreground">
+					No news posts mention “{query}”.
+				</p>
+			) : (
+				<>
+					<ol className="flex flex-col gap-3">
+						{posts.map((post) => (
+							<li key={post.url} className="flex flex-col gap-0.5">
+								<span className="text-muted-foreground text-xs">
+									{post.feed.name} &middot; {relativeDate(post.date)}
+								</span>
+								<a
+									href={post.url}
+									rel="noopener noreferrer"
+									target="_blank"
+									className="line-clamp-2 font-medium wrap-anywhere hover:underline"
+								>
+									{post.title}
+								</a>
+							</li>
+						))}
+					</ol>
+
+					<a
+						href={href}
+						className="text-primary w-fit font-medium hover:underline"
+					>
+						{total > posts.length
+							? `See all ${total} news posts →`
+							: `Browse in the newsfeed →`}
+					</a>
+				</>
+			)}
 		</aside>
 	);
 }

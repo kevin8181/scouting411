@@ -69,13 +69,9 @@ const clients = [
 				serves the same first-party data as this site, refreshed daily.
 			</p>
 
-			<div
-				class="border-primary/30 bg-primary/5 flex flex-col gap-2 rounded-lg border p-4 px-5"
-			>
+			<div class="border-primary/30 bg-primary/5 flex flex-col gap-2 rounded-lg border p-4 px-5">
 				<div class="font-serif font-bold">Server URL</div>
-				<code
-					class="bg-background w-fit rounded border px-2 py-1 font-mono text-sm wrap-anywhere select-all"
-				>
+				<code class="bg-background w-fit rounded border px-2 py-1 font-mono text-sm wrap-anywhere select-all">
 					{mcpUrl}
 				</code>
 				<p class="text-muted-foreground text-sm">
@@ -88,16 +84,14 @@ const clients = [
 		<section class="flex flex-col gap-4">
 			<h2 class="font-serif text-xl font-bold">What it can do</h2>
 			<ul class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-				{
-					capabilities.map((capability) => (
-						<li class="bg-card flex flex-col gap-1 rounded-lg border p-4">
-							<span class="font-serif font-bold">{capability.title}</span>
-							<span class="text-muted-foreground text-sm">
-								{capability.description}
-							</span>
-						</li>
-					))
-				}
+				{capabilities.map((capability) => (
+					<li class="bg-card flex flex-col gap-1 rounded-lg border p-4">
+						<span class="font-serif font-bold">{capability.title}</span>
+						<span class="text-muted-foreground text-sm">
+							{capability.description}
+						</span>
+					</li>
+				))}
 			</ul>
 			<p class="text-muted-foreground text-sm">
 				It covers national, first-party material only — not council or unit
@@ -108,17 +102,13 @@ const clients = [
 		<section class="flex flex-col gap-4">
 			<h2 class="font-serif text-xl font-bold">Setup</h2>
 			<div class="flex flex-col gap-5">
-				{
-					clients.map((client) => (
-						<div class="flex flex-col gap-2">
-							<h3 class="font-semibold">{client.name}</h3>
-							{client.steps && <p class="text-sm">{client.steps}</p>}
-							{client.code && (
-								<pre class="bg-muted overflow-x-auto rounded-md p-3 font-mono text-xs"><code>{client.code}</code></pre>
-							)}
-						</div>
-					))
-				}
+				{clients.map((client) => (
+					<div class="flex flex-col gap-2">
+						<h3 class="font-semibold">{client.name}</h3>
+						{client.steps && <p class="text-sm">{client.steps}</p>}
+						{client.code && <pre class="bg-muted overflow-x-auto rounded-md p-3 font-mono text-xs"><code>{client.code}</code></pre>}
+					</div>
+				))}
 			</div>
 			<p class="text-muted-foreground text-sm">
 				Client menus change often; if these steps are out of date, check your

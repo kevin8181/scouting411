@@ -14,13 +14,28 @@ const query = (launch ? input.slice(1) : input).trim();
 // there's nothing to show without a query, and the homepage is where a search starts
 if (!query) return Astro.redirect("/");
 
-const results = await rpc.search.query({ q: query });
+// search items don't cover news, so the latest matching posts come from the news query
+// alongside them
+const [results, news] = await Promise.all([
+	rpc.search.query({ q: query }),
+	rpc.news.posts.query({
+		filter: { keyword: query },
+		paginate: { maxPageSize: 5 },
+	}),
+]);
 
-// with no match to launch, fall through to the results page, which says so
+// with no match to launch, fall through to the results page, which says so. only
+// search results launch: a news post isn't what a "!" search is looking for
 const [topResult] = results;
 if (launch && topResult) return Astro.redirect(topResult.url);
 ---
 
 <Layout title="Search">
-	<Page query={query} results={results} origin={Astro.url.origin} />
+	<Page
+		query={query}
+		results={results}
+		news={news.posts}
+		newsTotal={news.pagination.totalItems}
+		origin={Astro.url.origin}
+	/>
 </Layout>

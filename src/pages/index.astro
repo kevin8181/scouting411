@@ -9,29 +9,30 @@ import { Page } from "@/pages/_index";
 
 export const prerender = false;
 
-const [latestPosts, hubPosts, ranks, meritBadges, adventures] = await Promise.all([
-	rpc.news.posts.query({
-		paginate: {
-			page: 1,
-			maxPageSize: 6,
-		},
-	}),
-	Promise.all(
-		hubs.map(async (hub) => {
-			const { posts } = await rpc.news.posts.query({
-				feeds: hub.newsSources,
-				paginate: {
-					page: 1,
-					maxPageSize: 1,
-				},
-			});
-			return { hub, latestPost: posts[0] };
+const [latestPosts, hubPosts, ranks, meritBadges, adventures] =
+	await Promise.all([
+		rpc.news.posts.query({
+			paginate: {
+				page: 1,
+				maxPageSize: 6,
+			},
 		}),
-	),
-	rpc.advancement.ranks.list(),
-	rpc.advancement.meritBadges.list(),
-	rpc.advancement.adventures.list({}),
-]);
+		Promise.all(
+			hubs.map(async (hub) => {
+				const { posts } = await rpc.news.posts.query({
+					feeds: hub.newsSources,
+					paginate: {
+						page: 1,
+						maxPageSize: 1,
+					},
+				});
+				return { hub, latestPost: posts[0] };
+			}),
+		),
+		rpc.advancement.ranks.list(),
+		rpc.advancement.meritBadges.list(),
+		rpc.advancement.adventures.list({}),
+	]);
 
 const eagleRequiredBadges = meritBadges.filter((badge) => badge.eagleRequired);
 
