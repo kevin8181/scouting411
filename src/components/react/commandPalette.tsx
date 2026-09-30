@@ -163,7 +163,7 @@ function CommandPaletteContent() {
 							onSelect={handleSelection({ url: rankPath(rank.slug) })}
 						>
 							<img
-								src={rank.images.small}
+								src={rank.images.medium}
 								alt=""
 								className="size-5 object-contain"
 							/>
