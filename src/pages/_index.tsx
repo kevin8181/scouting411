@@ -8,15 +8,20 @@ import { feeds } from "@/lib/news/feeds/feed";
 import { resources } from "@/lib/resources/config";
 import relativeDate from "tiny-relative-date";
 import { ArrowUpRightIcon, BotIcon, RssIcon, SearchIcon } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { SearchForm } from "@/components/react/searchForm";
 import { cn } from "@/util/cn";
+import { rpc } from "@/rpc/client";
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },
 	{ href: "https://advancements.scouting.org", label: "Scoutbook Plus" },
 	{ href: "https://scoutbook.scouting.org", label: "Scoutbook" },
-	{ href: "https://status.scouting.org", label: "System Status" },
+	{
+		href: "https://status.scouting.org",
+		label: "System Status",
+		indicator: <SystemStatusDot />,
+	},
 ];
 
 // todo replace with a curated list of featured resources
@@ -65,6 +70,7 @@ export function Page({
 								target="_blank"
 								className="hover:border-primary hover:text-primary bg-card flex items-center gap-2 rounded-full border px-3 py-1 text-sm"
 							>
+								{link.indicator}
 								{link.label}
 								<ArrowUpRightIcon className="size-3.5" />
 							</a>
@@ -196,6 +202,41 @@ export function Page({
 				</div>
 			</section>
 		</div>
+	);
+}
+
+/**
+ * green if every monitor on status.scouting.org is up, red if any is down. fetched after
+ * the page loads, so a slow status page can't hold up the homepage; gray until then, or
+ * if the check fails
+ */
+function SystemStatusDot() {
+	const [operational, setOperational] = useState<boolean>();
+
+	useEffect(() => {
+		rpc.status
+			.get()
+			.then((status) => setOperational(status.operational))
+			.catch(console.error);
+	}, []);
+
+	return (
+		<span
+			role="img"
+			aria-label={
+				operational === undefined
+					? "Status unknown"
+					: operational
+						? "All systems operational"
+						: "Some systems are down"
+			}
+			className={cn(
+				"size-2 shrink-0 rounded-full",
+				operational === undefined && "bg-muted-foreground/40",
+				operational === true && "bg-success",
+				operational === false && "bg-destructive",
+			)}
+		/>
 	);
 }
 

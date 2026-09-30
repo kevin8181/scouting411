@@ -61,6 +61,10 @@ A reference of official advancement data from the Scouting America API (`api.sco
 - `adventures/` — same shape, keys `advancement:adventures` and `advancement:adventures:{slug}`. Upstream mixes retired programs into the list with no expiry date, so `upstream.ts` keeps only `programVersion` (2024) — bump it when a new program ships. Unlike the other types, adventures return real numbers and nulls, which `upstream.ts` converts to the strings `parseRequirement` expects. The list procedure takes an optional rank slug.
 - The cron route is `src/pages/api/updateAdvancement.ts`, which ingests every type in parallel, alongside `updateAllFeeds.ts` in `vercel.json`.
 
+## System status — `src/lib/status/`
+
+`status.ts` reads the Uptime Kuma instance behind status.scouting.org (not Statuspage, so the news adapter doesn't apply). It is the one deliberate exception to "pages never fetch upstream": a day-old status is useless, so it's read live and memoized for a minute per instance. Exposed as `status.get` (REST `GET /api/status`) and the MCP `get_system_status` tool; the homepage fetches it after mount for the dot in the System Status chip, so a slow status page never blocks the render.
+
 ## Resources
 
 `src/lib/resources/config.ts` is a hand-maintained `Resource[]`. Inclusion criteria are in `README.md` — apply them as written; they are stricter than they look (national-level official publications only, no single item from a series, no superseded versions, no individual forms). Requests arrive as GitHub issues via `.github/ISSUE_TEMPLATE/`.

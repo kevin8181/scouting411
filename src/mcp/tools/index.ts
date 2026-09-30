@@ -11,6 +11,7 @@ import {
 	listAdventuresTool,
 } from "@/mcp/tools/advancement/adventures";
 import { searchTool } from "@/mcp/tools/search/search";
+import { getSystemStatusTool } from "@/mcp/tools/status/status";
 
 export const tools = [
 	searchTool,
@@ -23,4 +24,5 @@ export const tools = [
 	getRankTool,
 	listAdventuresTool,
 	getAdventureTool,
+	getSystemStatusTool,
 ];

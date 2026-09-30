@@ -17,6 +17,7 @@ import {
 	listSearchItemsProcedure,
 	searchProcedure,
 } from "@/rpc/procedures/search/search";
+import { getSystemStatusProcedure } from "@/rpc/procedures/status/status";
 
 export const router = {
 	news: {
@@ -47,5 +48,8 @@ export const router = {
 	search: {
 		query: searchProcedure,
 		items: listSearchItemsProcedure,
+	},
+	status: {
+		get: getSystemStatusProcedure,
 	},
 };

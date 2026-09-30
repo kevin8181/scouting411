@@ -77,6 +77,7 @@
 	--color-border: var(--border);
 
 	--color-destructive: var(--destructive);
+	--color-success: var(--success);
 
 	--color-accent-foreground: var(--accent-foreground);
 
@@ -137,6 +138,7 @@
 	--accent: oklch(0.97 0 0);
 	--accent-foreground: oklch(0.205 0 0);
 	--destructive: oklch(0.577 0.245 27.325);
+	--success: #039b03; /* the green status.scouting.org uses */
 	--border: var(--color-gray-3);
 	--input: var(--border);
 	--ring: var(--color-blue);
@@ -172,6 +174,7 @@
 	--accent: oklch(0.269 0 0);
 	--accent-foreground: oklch(0.985 0 0);
 	--destructive: oklch(0.704 0.191 22.216);
+	--success: oklch(0.723 0.219 149.579);
 	--border: var(--color-gray-9);
 	--input: var(--border);
 	--ring: var(--color-blue-light);

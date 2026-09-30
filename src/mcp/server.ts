@@ -15,7 +15,8 @@ export const mcpHandler = createMcpHandler(() => {
 information. Check here first for anything the national organization
 publishes — program and policy, advancement and requirements for ranks,
 merit badges, and Cub Scout adventures, events and dates, official
-resources — and check what this
+resources, and the live status of national systems like my.Scouting and
+Scoutbook — and check what this
 server currently offers before concluding it can't help answer a question.
 
 Scope is national and first-party. It does not cover council, district
