@@ -24,7 +24,14 @@ import { atom } from "nanostores";
 import { useStore } from "@nanostores/react";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useIsMobile } from "@/util/hooks/use-mobile";
-import { Fragment, type ReactNode, useEffect, useRef, useState } from "react";
+import {
+	Fragment,
+	type ReactNode,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import { defaultFilter } from "cmdk";
 
 import { feeds } from "@/lib/news/feeds/feed";
@@ -104,155 +111,162 @@ function CommandPaletteContent() {
 	const { setTheme } = useTheme();
 	const resources = queryResources();
 	const { ranks, meritBadges, adventures } = useAdvancement();
-	const [search, setSearch] = useState("");
-
-	// results reorder on every keystroke, so start each new search from the top. wait a
-	// frame: cmdk scrolls its previously selected item into view after this effect, and
-	// clearing the search moves that item deep into the grouped list
+	// the input stays uncontrolled and only this flag lives in state, so typing re-renders
+	// the palette only when it switches between the grouped and flat layouts. re-rendering
+	// every item on every keystroke makes typing lag
+	const [searching, setSearching] = useState(false);
 	const listRef = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		const frame = requestAnimationFrame(() => {
+
+	function handleSearchChange(search: string) {
+		setSearching(search !== "");
+		// results reorder on every keystroke, so start each new search from the top. wait a
+		// frame: cmdk scrolls its previously selected item into view after this renders, and
+		// clearing the search moves that item deep into the grouped list
+		requestAnimationFrame(() => {
 			listRef.current?.scrollTo({ top: 0 });
 		});
-		return () => cancelAnimationFrame(frame);
-	}, [search]);
+	}
 
-	const sections: Section[] = [
-		{
-			heading: "Navigation",
-			type: "Page",
-			icon: <CompassIcon />,
-			entries: navigation.map((item) => ({
-				id: item.href,
-				name: item.label,
-				keywords: [item.label],
-				onSelect: handleSelection({ url: item.href }),
-			})),
-		},
-		{
-			heading: "Hubs",
-			type: "Hub",
-			entries: hubs.map((hub) => ({
-				id: hub.links.page,
-				name: hub.name,
-				keywords: [hub.name, `${hub.name} Hub`, hub.description],
-				icon: (
-					<span
-						className="size-2.5 shrink-0 rounded-xs"
-						style={{ backgroundColor: hub.color }}
-					/>
-				),
-				onSelect: handleSelection({ url: hub.links.page }),
-			})),
-		},
-		{
-			heading: "Feeds",
-			type: "Feed",
-			icon: <RssIcon />,
-			entries: feeds.map((feed) => ({
-				id: feed.links.overview,
-				name: feed.name,
-				keywords: [feed.name, feed.description],
-				onSelect: handleSelection({ url: feed.links.overview }),
-			})),
-		},
-		{
-			heading: "Resources",
-			type: "Resource",
-			icon: <ExternalLinkIcon />,
-			entries: resources.map((resource) => ({
-				id: resource.url,
-				name: resource.title,
-				keywords: [resource.title, resource.description],
-				onSelect: handleSelection({ url: resource.url, newTab: true }),
-			})),
-		},
-		{
-			heading: "Ranks",
-			type: "Rank",
-			entries: ranks.map((rank) => ({
-				id: rankPath(rank.slug),
-				name: rank.name,
-				keywords: [rank.name, `${rank.name} Rank`, rank.program],
-				icon: (
-					<img
-						src={rank.images.medium}
-						alt=""
-						className="size-5 object-contain"
-					/>
-				),
-				onSelect: handleSelection({ url: rankPath(rank.slug) }),
-			})),
-		},
-		{
-			heading: "Merit Badges",
-			type: "Merit Badge",
-			entries: meritBadges.map((badge) => ({
-				id: meritBadgePath(badge.slug),
-				name: badge.name,
-				keywords: [badge.name, `${badge.name} Merit Badge`],
-				icon: <img src={badge.images.small} alt="" className="size-5" />,
-				onSelect: handleSelection({ url: meritBadgePath(badge.slug) }),
-			})),
-		},
-		{
-			heading: "Adventures",
-			type: "Adventure",
-			entries: adventures.map((adventure) => ({
-				id: adventurePath(adventure.slug),
-				name: adventure.name,
-				keywords: [
-					adventure.name,
-					`${adventure.name} Adventure`,
-					adventure.rank.name,
+	// built once per data load rather than per render, so switching between the grouped
+	// and flat layouts doesn't rebuild every entry
+	const sections = useMemo<Section[]>(
+		() => [
+			{
+				heading: "Navigation",
+				type: "Page",
+				icon: <CompassIcon />,
+				entries: navigation.map((item) => ({
+					id: item.href,
+					name: item.label,
+					keywords: [item.label],
+					onSelect: handleSelection({ url: item.href }),
+				})),
+			},
+			{
+				heading: "Hubs",
+				type: "Hub",
+				entries: hubs.map((hub) => ({
+					id: hub.links.page,
+					name: hub.name,
+					keywords: [hub.name, `${hub.name} Hub`, hub.description],
+					icon: (
+						<span
+							className="size-2.5 shrink-0 rounded-xs"
+							style={{ backgroundColor: hub.color }}
+						/>
+					),
+					onSelect: handleSelection({ url: hub.links.page }),
+				})),
+			},
+			{
+				heading: "Feeds",
+				type: "Feed",
+				icon: <RssIcon />,
+				entries: feeds.map((feed) => ({
+					id: feed.links.overview,
+					name: feed.name,
+					keywords: [feed.name, feed.description],
+					onSelect: handleSelection({ url: feed.links.overview }),
+				})),
+			},
+			{
+				heading: "Resources",
+				type: "Resource",
+				icon: <ExternalLinkIcon />,
+				entries: resources.map((resource) => ({
+					id: resource.url,
+					name: resource.title,
+					keywords: [resource.title, resource.description],
+					onSelect: handleSelection({ url: resource.url, newTab: true }),
+				})),
+			},
+			{
+				heading: "Ranks",
+				type: "Rank",
+				entries: ranks.map((rank) => ({
+					id: rankPath(rank.slug),
+					name: rank.name,
+					keywords: [rank.name, `${rank.name} Rank`, rank.program],
+					icon: (
+						<img
+							src={rank.images.medium}
+							alt=""
+							className="size-5 object-contain"
+						/>
+					),
+					onSelect: handleSelection({ url: rankPath(rank.slug) }),
+				})),
+			},
+			{
+				heading: "Merit Badges",
+				type: "Merit Badge",
+				entries: meritBadges.map((badge) => ({
+					id: meritBadgePath(badge.slug),
+					name: badge.name,
+					keywords: [badge.name, `${badge.name} Merit Badge`],
+					icon: <img src={badge.images.small} alt="" className="size-5" />,
+					onSelect: handleSelection({ url: meritBadgePath(badge.slug) }),
+				})),
+			},
+			{
+				heading: "Adventures",
+				type: "Adventure",
+				entries: adventures.map((adventure) => ({
+					id: adventurePath(adventure.slug),
+					name: adventure.name,
+					keywords: [
+						adventure.name,
+						`${adventure.name} Adventure`,
+						adventure.rank.name,
+					],
+					icon: (
+						<img
+							src={adventure.images.small}
+							alt=""
+							className="size-5 object-contain"
+						/>
+					),
+					onSelect: handleSelection({ url: adventurePath(adventure.slug) }),
+				})),
+			},
+			{
+				heading: "Site Theme",
+				type: "Theme",
+				icon: <SunMoonIcon />,
+				entries: [
+					{
+						id: "theme:dark",
+						name: "Enable dark mode",
+						keywords: ["Enable dark mode", "light mode", "system theme"],
+						onSelect: handleSelection(() => setTheme("dark")),
+					},
+					{
+						id: "theme:light",
+						name: "Enable light mode",
+						keywords: ["Enable light mode", "dark mode", "system theme"],
+						onSelect: handleSelection(() => setTheme("light")),
+					},
+					{
+						id: "theme:system",
+						name: "Use system theme",
+						keywords: ["Use system theme", "dark mode", "light mode"],
+						onSelect: handleSelection(() => setTheme("system")),
+					},
 				],
-				icon: (
-					<img
-						src={adventure.images.small}
-						alt=""
-						className="size-5 object-contain"
-					/>
-				),
-				onSelect: handleSelection({ url: adventurePath(adventure.slug) }),
-			})),
-		},
-		{
-			heading: "Site Theme",
-			type: "Theme",
-			icon: <SunMoonIcon />,
-			entries: [
-				{
-					id: "theme:dark",
-					name: "Enable dark mode",
-					keywords: ["Enable dark mode", "light mode", "system theme"],
-					onSelect: handleSelection(() => setTheme("dark")),
-				},
-				{
-					id: "theme:light",
-					name: "Enable light mode",
-					keywords: ["Enable light mode", "dark mode", "system theme"],
-					onSelect: handleSelection(() => setTheme("light")),
-				},
-				{
-					id: "theme:system",
-					name: "Use system theme",
-					keywords: ["Use system theme", "dark mode", "light mode"],
-					onSelect: handleSelection(() => setTheme("system")),
-				},
-			],
-		},
-	];
+			},
+		],
+		[resources, ranks, meritBadges, adventures, setTheme],
+	);
 
 	return (
 		<Command filter={filterByKeywords}>
 			<CommandInput
 				placeholder="Search..."
-				value={search}
-				onValueChange={setSearch}
+				onValueChange={handleSearchChange}
 			/>
 			<CommandList ref={listRef}>
 				<CommandEmpty>No results found.</CommandEmpty>
-				{search
+				{searching
 					? // while searching, drop the groups so cmdk ranks every match in one list;
 						// each item labels its own type instead
 						sections.flatMap((section) =>
