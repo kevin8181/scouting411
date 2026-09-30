@@ -51,6 +51,14 @@ Re-publishing routes: `src/pages/feeds/[slug]/rss.ts` and `atom.ts` serve one so
 
 That island's effect holds a **stale-response guard**: a narrow query resolves faster than a broad one (one Redis read per selected feed), so an in-flight broad query can otherwise land last and clobber a narrow one. Preserve it when editing the effect.
 
+## Advancement — `src/lib/advancement/`
+
+A reference of official advancement data from the Scouting America API (`api.scouting.org/advancements`). Merit badges are built; ranks, awards, and adventures (#110) will follow the same shape. Same rule as news: the cron ingests into Redis, pages only read it.
+
+- `upstream.ts` and `requirements.ts` are shared across advancement types. Requirements come upstream as a flat list; `orderRequirements` sorts siblings by `sortOrder` **as a decimal** ("1.05" < "1.1", "3.09" < "3.1") because upstream array order is unreliable. Requirement text is hand-written HTML, run through `sanitizeRequirementHtml` and rendered with `set:html`.
+- `meritBadges/` — `upstream.ts` fetches and normalizes, `ingest.ts` writes the list to `advancement:meritBadges` and each badge's requirements to `advancement:meritBadges:{slug}`, isolating failures per badge. Callers reach them through the procedures under `advancement.meritBadges` in the router.
+- The cron route is `src/pages/api/updateAdvancement.ts`, alongside `updateAllFeeds.ts` in `vercel.json`.
+
 ## Resources
 
 `src/lib/resources/config.ts` is a hand-maintained `Resource[]`. Inclusion criteria are in `README.md` — apply them as written; they are stricter than they look (national-level official publications only, no single item from a series, no superseded versions, no individual forms). Requests arrive as GitHub issues via `.github/ISSUE_TEMPLATE/`.
@@ -68,7 +76,7 @@ Two handlers serve the same router:
 1. `src/pages/rpc/[...path].ts` — the RPC protocol, for islands only.
 2. `src/pages/api/[...path].ts` — REST, public, CORS `*`. Treat its shape as a published contract. Also serves the spec at `/api/spec.json` and Scalar docs at `/api`, which `/developers` links to.
 
-REST paths come from `.meta(openapi({ method, path }))` on each procedure; `method` defaults to POST, and a procedure without a path gets one derived from its router key. A specific file under `src/pages/api/` outranks the catch-all, so it silently shadows any procedure at the same path — `updateAllFeeds.ts` is the only one that belongs there.
+REST paths come from `.meta(openapi({ method, path }))` on each procedure; `method` defaults to POST, and a procedure without a path gets one derived from its router key. A specific file under `src/pages/api/` outranks the catch-all, so it silently shadows any procedure at the same path — the cron routes `updateAllFeeds.ts` and `updateAdvancement.ts` are the only ones that belong there.
 
 The feed re-publishing routes are plain Astro routes, documented by hand in `openapi/feedPaths.ts` (merged into the spec as `base.paths`, with a per-path `servers` override so they resolve at the site root). Update it when those routes change.
 

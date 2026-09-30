@@ -18,6 +18,7 @@ import {
 	faCode,
 	faArrowsRotate,
 	faCircleInfo,
+	faAward,
 } from "@fortawesome/free-solid-svg-icons";
 import { buttonVariants } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -102,6 +103,24 @@ export function AppSidebar({ url }: { url: URL }) {
 						<NavLink
 							href="/api/updateAllFeeds"
 							label="Update All Feeds"
+							currentUrl={url}
+							icon={faArrowsRotate}
+							newTab
+						/>
+					)}
+				</NavGroup>
+
+				<NavGroup label="advancement" collapsible>
+					<NavLink
+						href="/advancement/merit-badges"
+						label="Merit Badges"
+						currentUrl={url}
+						icon={faAward}
+					/>
+					{import.meta.env.DEV && (
+						<NavLink
+							href="/api/updateAdvancement"
+							label="Update Advancement"
 							currentUrl={url}
 							icon={faArrowsRotate}
 							newTab

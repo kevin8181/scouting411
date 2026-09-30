@@ -1,0 +1,119 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import { rpc } from "@/rpc/client";
+import { safe } from "@orpc/client";
+
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export const prerender = false;
+
+const { slug = "" } = Astro.params;
+
+const { data: meritBadge } = await safe(
+	rpc.advancement.meritBadges.get({ slug }),
+);
+
+if (!meritBadge) {
+	return new Response(null, { status: 404 });
+}
+
+const versionEffective = meritBadge.versionEffective
+	? new Date(`${meritBadge.versionEffective}T00:00:00`).toLocaleDateString(
+			"en-US",
+			{ year: "numeric", month: "long", day: "numeric" },
+		)
+	: undefined;
+
+/** styles for the upstream html in requirement text */
+const requirementHtml =
+	"[&_a]:text-primary [&_a]:underline [&_details]:text-muted-foreground [&_details]:mt-1 [&_details]:text-sm [&_summary]:cursor-pointer [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5";
+---
+
+<Layout title={`${meritBadge.name} Merit Badge`}>
+	<div class="mx-auto flex w-full max-w-4xl flex-col gap-8 p-8">
+		<a
+			href="/advancement/merit-badges"
+			class="text-primary flex items-center gap-2 self-start text-sm font-medium hover:underline"
+		>
+			<FontAwesomeIcon icon={faArrowLeft} />
+			All merit badges
+		</a>
+
+		<div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+			<img
+				src={meritBadge.images.large}
+				alt={`${meritBadge.name} merit badge`}
+				width="200"
+				height="200"
+				class="size-32 shrink-0"
+			/>
+
+			<div class="flex min-w-0 flex-col items-start gap-2">
+				<h1 class="font-serif text-3xl font-bold wrap-anywhere hyphens-auto">
+					{meritBadge.name}
+				</h1>
+				<div class="text-muted-foreground text-sm">
+					{meritBadge.category}
+					{meritBadge.eagleRequired && " · Required for Eagle"}
+				</div>
+				<div class="text-muted-foreground text-sm">
+					{versionEffective
+						? `${meritBadge.version} requirements, effective ${versionEffective}`
+						: `${meritBadge.version} requirements`}
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-3">
+			<h2 class="border-b pb-2 font-serif text-xl font-bold">Requirements</h2>
+
+			{meritBadge.requirements.map((requirement) =>
+				requirement.depth === 0 && !requirement.label ? (
+					<div
+						class:list={[
+							"bg-muted/50 rounded-lg border p-4 text-sm",
+							requirementHtml,
+						]}
+						set:html={requirement.html}
+					/>
+				) : (
+					<div
+						class="flex flex-col gap-1"
+						style={{ marginLeft: `${requirement.depth * 1.75}rem` }}
+					>
+						<div class="flex gap-2">
+							{requirement.label && (
+								<span class="shrink-0 font-bold">{requirement.label}</span>
+							)}
+							<div class="flex min-w-0 flex-col gap-1">
+								<div class={requirementHtml} set:html={requirement.html} />
+								{(requirement.choose !== undefined ||
+									requirement.counselorApproval) && (
+									<div class="flex flex-wrap gap-2 text-xs font-medium">
+										{requirement.choose !== undefined && (
+											<span class="bg-primary/10 text-primary rounded px-2 py-0.5">
+												Complete {requirement.choose} of the following
+											</span>
+										)}
+										{requirement.counselorApproval && (
+											<span class="bg-muted rounded px-2 py-0.5">
+												Counselor approval required
+											</span>
+										)}
+									</div>
+								)}
+							</div>
+						</div>
+						{requirement.footerHtml && (
+							<div
+								class:list={["text-muted-foreground text-sm", requirementHtml]}
+								set:html={requirement.footerHtml}
+							/>
+						)}
+					</div>
+				),
+			)}
+		</div>
+	</div>
+</Layout>

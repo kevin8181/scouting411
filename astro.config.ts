@@ -21,8 +21,9 @@ export default defineConfig({
 	integrations: [
 		sitemap({
 			// xslURL: "/xslt/sitemap.xslt",
-			// SSR [slug] routes can't be discovered by the integration, so list them here
+			// SSR routes can't be discovered by the integration, so list them here
 			customPages: [
+				"/advancement/merit-badges",
 				...feeds.map((feed) => feed.links.overview),
 				...hubs.map((hub) => hub.links.page),
 			].map((path) => new URL(path, site).href),

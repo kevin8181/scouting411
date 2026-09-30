@@ -4,6 +4,10 @@
 		{
 			"path": "/api/updateAllFeeds",
 			"schedule": "0 0 * * *"
+		},
+		{
+			"path": "/api/updateAdvancement",
+			"schedule": "0 1 * * *"
 		}
 	]
 }

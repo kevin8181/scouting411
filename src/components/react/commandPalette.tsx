@@ -17,11 +17,17 @@ import { atom } from "nanostores";
 import { useStore } from "@nanostores/react";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useIsMobile } from "@/util/hooks/use-mobile";
+import { useEffect, useState } from "react";
 
 import { feeds } from "@/lib/news/feeds/feed";
 import { hubs } from "@/lib/hubs/hub";
 import { queryResources } from "@/lib/resources/query";
 import { useTheme } from "@/components/react/darkModeControl";
+import {
+	type MeritBadge,
+	meritBadgePath,
+} from "@/lib/advancement/meritBadges/types";
+import { rpc } from "@/rpc/client";
 
 /** global store for whether the command palette is open */
 const $commandPaletteOpen = atom(false);
@@ -84,6 +90,7 @@ export function CommandPaletteTrigger() {
 function CommandPaletteContent() {
 	const { setTheme } = useTheme();
 	const resources = queryResources();
+	const meritBadges = useMeritBadges();
 
 	return (
 		<Command>
@@ -146,6 +153,20 @@ function CommandPaletteContent() {
 					))}
 				</CommandGroup>
 				<CommandSeparator />
+				<CommandGroup heading="Merit Badges">
+					{meritBadges.map((badge) => (
+						<CommandItem
+							key={badge.slug}
+							value={meritBadgePath(badge.slug)}
+							keywords={[badge.name, `${badge.name} Merit Badge`]}
+							onSelect={handleSelection({ url: meritBadgePath(badge.slug) })}
+						>
+							<img src={badge.images.small} alt="" className="size-5" />
+							{badge.name}
+						</CommandItem>
+					))}
+				</CommandGroup>
+				<CommandSeparator />
 
 				<CommandGroup heading="Site Theme">
 					<CommandItem
@@ -178,6 +199,31 @@ function CommandPaletteContent() {
 	);
 }
 
+/**
+ * merit badges live in redis rather than in config, so fetch them once the
+ * palette opens. the group is empty until they arrive
+ */
+function useMeritBadges() {
+	const [meritBadges, setMeritBadges] = useState<MeritBadge[]>([]);
+
+	useEffect(() => {
+		let stale = false;
+
+		rpc.advancement.meritBadges
+			.list()
+			.then((data) => {
+				if (!stale) setMeritBadges(data);
+			})
+			.catch(console.error);
+
+		return () => {
+			stale = true;
+		};
+	}, []);
+
+	return meritBadges;
+}
+
 /** run when a command palette item is selected */
 function handleSelection(
 	opts: { url: string; newTab?: boolean } | (() => void),
@@ -205,6 +251,7 @@ const navigation = [
 	{ href: "/news/sources", label: "Sources" },
 	{ href: "/news/subscribe", label: "Subscribe" },
 	{ href: "/news/stats", label: "Stats" },
+	{ href: "/advancement/merit-badges", label: "Merit Badges" },
 	{ href: "/resources", label: "Resources" },
 	{ href: "/developers", label: "Developers" },
 ];
