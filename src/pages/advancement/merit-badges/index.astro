@@ -8,54 +8,71 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const prerender = false;
 
-const meritBadges = await rpc.advancement.meritBadges.list();
-
-const categories = [
-	...Map.groupBy(meritBadges, (badge) => badge.category),
-].toSorted(([a], [b]) => a.localeCompare(b));
+const meritBadges = (await rpc.advancement.meritBadges.list()).toSorted(
+	(a, b) => a.name.localeCompare(b.name),
+);
 ---
 
 <Layout title="Merit Badges">
 	<div class="mx-auto flex w-full max-w-6xl flex-col gap-10 p-8">
+		<p class="border-primary/30 bg-primary/5 rounded-lg border p-4 px-5 text-sm">
+			These requirements are pulled daily from Scouting America's national
+			advancement data, but the official source can always be browsed directly
+			at{" "}
+			<a
+				href="https://www.scouting.org/skills/merit-badges/all/"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+			>
+				scouting.org
+			</a>
+			. If something looks wrong here,{" "}
+			<a
+				href="https://github.com/kevin8181/scouting411/issues/new/choose"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+			>
+				report an issue
+			</a>
+			.
+		</p>
+
 		{meritBadges.length === 0 && (
 			<div class="text-muted-foreground rounded-lg border p-6 text-sm">
 				No merit badges have been indexed yet.
 			</div>
 		)}
 
-		{categories.map(([category, badges]) => (
-			<section class="flex flex-col gap-4">
-				<h2 class="border-b pb-2 font-serif text-xl font-bold">{category}</h2>
-				<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-					{badges.map((badge) => (
-						<a
-							href={meritBadgePath(badge.slug)}
-							class:list={[
-								"hover:border-primary group flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors",
-								badge.eagleRequired && "border-primary/40 bg-primary/5",
-							]}
-						>
-							<img
-								src={badge.images.medium}
-								alt=""
-								width="100"
-								height="100"
-								loading="lazy"
-								class="size-20"
-							/>
-							<span class="group-hover:text-primary font-serif text-sm font-bold">
-								{badge.name}
-							</span>
-							{badge.eagleRequired && (
-								<span class="bg-primary text-primary-foreground flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold whitespace-nowrap">
-									<FontAwesomeIcon icon={faStar} />
-									Eagle required
-								</span>
-							)}
-						</a>
-					))}
-				</div>
-			</section>
-		))}
+		<div class="grid auto-rows-fr grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+			{meritBadges.map((badge) => (
+				<a
+					href={meritBadgePath(badge.slug)}
+					class:list={[
+						"hover:border-primary group flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors",
+						badge.eagleRequired && "border-primary/40 bg-primary/5",
+					]}
+				>
+					<img
+						src={badge.images.medium}
+						alt=""
+						width="100"
+						height="100"
+						loading="lazy"
+						class="size-20"
+					/>
+					<span class="group-hover:text-primary font-serif text-sm font-bold">
+						{badge.eagleRequired && (
+							<>
+								<FontAwesomeIcon icon={faStar} className="text-primary mr-1" />
+								<span class="sr-only">Eagle required:</span>
+							</>
+						)}
+						{badge.name}
+					</span>
+				</a>
+			))}
+		</div>
 	</div>
 </Layout>

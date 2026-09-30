@@ -13,6 +13,30 @@ const programs = [...Map.groupBy(ranks, (rank) => rank.program)];
 
 <Layout title="Ranks">
 	<div class="mx-auto flex w-full max-w-6xl flex-col gap-10 p-8">
+		<p class="border-primary/30 bg-primary/5 rounded-lg border p-4 px-5 text-sm">
+			These requirements are pulled daily from Scouting America's national
+			advancement data, but the official source can always be browsed directly
+			in{" "}
+			<a
+				href="https://advancements.scouting.org/"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+			>
+				Scoutbook Plus
+			</a>
+			. If something looks wrong here,{" "}
+			<a
+				href="https://github.com/kevin8181/scouting411/issues/new/choose"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+			>
+				report an issue
+			</a>
+			.
+		</p>
+
 		{ranks.length === 0 && (
 			<div class="text-muted-foreground rounded-lg border p-6 text-sm">
 				No ranks have been indexed yet.
