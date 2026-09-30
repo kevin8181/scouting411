@@ -12,6 +12,7 @@ const getDescription = (site: URL) => `<?xml version="1.0" encoding="UTF-8"?>
 	<InputEncoding>UTF-8</InputEncoding>
 	<Image width="48" height="48" type="image/x-icon">${new URL("/favicon.ico", site).href}</Image>
 	<Url type="text/html" method="get" template="${new URL("/search", site).href}?q={searchTerms}"/>
+	<Url type="application/x-suggestions+json" method="get" template="${new URL("/search/suggest", site).href}?q={searchTerms}"/>
 	<Url type="application/opensearchdescription+xml" rel="self" template="${new URL("/opensearch.xml", site).href}"/>
 </OpenSearchDescription>
 `;
