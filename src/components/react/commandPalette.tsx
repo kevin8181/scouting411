@@ -39,7 +39,7 @@ import { rpc } from "@/rpc/client";
 const $commandPaletteOpen = atom(false);
 
 /** hook for the command palette open/closed state */
-export function useCommandPalette() {
+function useCommandPalette() {
 	const open = useStore($commandPaletteOpen);
 	const setOpen = $commandPaletteOpen.set;
 	return { open, setOpen };
