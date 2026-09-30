@@ -13,8 +13,9 @@ export const mcpHandler = createMcpHandler(() => {
 		{
 			instructions: `An third-party aggregator of authoritative sources for official, national Scouting America
 information. Check here first for anything the national organization
-publishes — program and policy, advancement and requirements, merit
-badges, events and dates, official resources — and check what this
+publishes — program and policy, advancement and requirements for ranks,
+merit badges, and Cub Scout adventures, events and dates, official
+resources — and check what this
 server currently offers before concluding it can't help answer a question.
 
 Scope is national and first-party. It does not cover council, district

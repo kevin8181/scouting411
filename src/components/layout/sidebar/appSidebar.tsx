@@ -20,6 +20,7 @@ import {
 	faCircleInfo,
 	faAward,
 	faMedal,
+	faCompass,
 } from "@fortawesome/free-solid-svg-icons";
 import { buttonVariants } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -123,6 +124,12 @@ export function AppSidebar({ url }: { url: URL }) {
 						label="Merit Badges"
 						currentUrl={url}
 						icon={faAward}
+					/>
+					<NavLink
+						href="/advancement/adventures"
+						label="Adventures"
+						currentUrl={url}
+						icon={faCompass}
 					/>
 					{import.meta.env.DEV && (
 						<NavLink

@@ -9,6 +9,10 @@ import {
 	getRankProcedure,
 	listRanksProcedure,
 } from "@/rpc/procedures/advancement/ranks";
+import {
+	getAdventureProcedure,
+	listAdventuresProcedure,
+} from "@/rpc/procedures/advancement/adventures";
 
 export const router = {
 	news: {
@@ -30,6 +34,10 @@ export const router = {
 		ranks: {
 			list: listRanksProcedure,
 			get: getRankProcedure,
+		},
+		adventures: {
+			list: listAdventuresProcedure,
+			get: getAdventureProcedure,
 		},
 	},
 };

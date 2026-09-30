@@ -28,6 +28,10 @@ import {
 	meritBadgePath,
 } from "@/lib/advancement/meritBadges/types";
 import { type Rank, rankPath } from "@/lib/advancement/ranks/types";
+import {
+	type Adventure,
+	adventurePath,
+} from "@/lib/advancement/adventures/types";
 import { rpc } from "@/rpc/client";
 
 /** global store for whether the command palette is open */
@@ -91,7 +95,7 @@ export function CommandPaletteTrigger() {
 function CommandPaletteContent() {
 	const { setTheme } = useTheme();
 	const resources = queryResources();
-	const { ranks, meritBadges } = useAdvancement();
+	const { ranks, meritBadges, adventures } = useAdvancement();
 
 	return (
 		<Command>
@@ -186,6 +190,28 @@ function CommandPaletteContent() {
 					))}
 				</CommandGroup>
 				<CommandSeparator />
+				<CommandGroup heading="Adventures">
+					{adventures.map((adventure) => (
+						<CommandItem
+							key={adventure.slug}
+							value={adventurePath(adventure.slug)}
+							keywords={[
+								adventure.name,
+								`${adventure.name} Adventure`,
+								adventure.rank.name,
+							]}
+							onSelect={handleSelection({ url: adventurePath(adventure.slug) })}
+						>
+							<img
+								src={adventure.images.small}
+								alt=""
+								className="size-5 object-contain"
+							/>
+							{adventure.name}
+						</CommandItem>
+					))}
+				</CommandGroup>
+				<CommandSeparator />
 
 				<CommandGroup heading="Site Theme">
 					<CommandItem
@@ -219,12 +245,13 @@ function CommandPaletteContent() {
 }
 
 /**
- * ranks and merit badges live in redis rather than in config, so fetch them
+ * ranks, merit badges, and adventures live in redis rather than in config, so fetch them
  * once the palette opens. their groups are empty until they arrive
  */
 function useAdvancement() {
 	const [ranks, setRanks] = useState<Rank[]>([]);
 	const [meritBadges, setMeritBadges] = useState<MeritBadge[]>([]);
+	const [adventures, setAdventures] = useState<Adventure[]>([]);
 
 	useEffect(() => {
 		let stale = false;
@@ -243,12 +270,19 @@ function useAdvancement() {
 			})
 			.catch(console.error);
 
+		rpc.advancement.adventures
+			.list({})
+			.then((data) => {
+				if (!stale) setAdventures(data);
+			})
+			.catch(console.error);
+
 		return () => {
 			stale = true;
 		};
 	}, []);
 
-	return { ranks, meritBadges };
+	return { ranks, meritBadges, adventures };
 }
 
 /** run when a command palette item is selected */
@@ -280,6 +314,7 @@ const navigation = [
 	{ href: "/news/stats", label: "Stats" },
 	{ href: "/advancement/ranks", label: "Ranks" },
 	{ href: "/advancement/merit-badges", label: "Merit Badges" },
+	{ href: "/advancement/adventures", label: "Adventures" },
 	{ href: "/resources", label: "Resources" },
 	{ href: "/developers", label: "Developers" },
 ];

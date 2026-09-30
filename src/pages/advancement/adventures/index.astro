@@ -1,0 +1,112 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import { adventurePath } from "@/lib/advancement/adventures/types";
+import { rankPath } from "@/lib/advancement/ranks/types";
+import { rpc } from "@/rpc/client";
+
+export const prerender = false;
+
+const adventures = await rpc.advancement.adventures.list({});
+
+// adventures arrive in rank order, which Map.groupBy keeps
+const ranks = [...Map.groupBy(adventures, (adventure) => adventure.rank.slug)]
+	// groupBy never makes an empty group
+	.map(([slug, rankAdventures]) => ({
+		slug,
+		name: rankAdventures[0]!.rank.name,
+		groups: [
+			{
+				heading: "Required",
+				adventures: rankAdventures.filter((adventure) => adventure.required),
+			},
+			{
+				heading: "Elective",
+				adventures: rankAdventures.filter((adventure) => !adventure.required),
+			},
+		],
+	}));
+---
+
+<Layout title="Adventures">
+	<div class="mx-auto flex w-full max-w-6xl flex-col gap-10 p-8">
+		<p class="border-primary/30 bg-primary/5 rounded-lg border p-4 px-5 text-sm">
+			These requirements are pulled daily from Scouting America's national
+			advancement data, but the official source can always be browsed directly
+			at{" "}
+			<a
+				href="https://www.scouting.org/programs/cub-scouts/adventures/"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+			>
+				scouting.org
+			</a>
+			. If something looks wrong here,{" "}
+			<a
+				href="https://github.com/kevin8181/scouting411/issues/new/choose"
+				rel="noopener noreferrer"
+				target="_blank"
+				class="text-primary wrap-anywhere hyphens-auto hover:underline"
+			>
+				report an issue
+			</a>
+			.
+		</p>
+
+		{adventures.length === 0 && (
+			<div class="text-muted-foreground rounded-lg border p-6 text-sm">
+				No adventures have been indexed yet.
+			</div>
+		)}
+
+		{ranks.length > 0 && (
+			<nav class="flex flex-wrap gap-2 text-sm" aria-label="Ranks">
+				{ranks.map((rank) => (
+					<a
+						href={`#${rank.slug}`}
+						class="hover:border-primary hover:text-primary rounded-full border px-3 py-1 font-medium transition-colors"
+					>
+						{rank.name}
+					</a>
+				))}
+			</nav>
+		)}
+
+		{ranks.map((rank) => (
+			<section id={rank.slug} class="flex scroll-mt-8 flex-col gap-4">
+				<h2 class="border-b pb-2 font-serif text-xl font-bold">
+					<a href={rankPath(rank.slug)} class="hover:text-primary">
+						{rank.name}
+					</a>
+				</h2>
+				{rank.groups.map((group) => (
+					<div class="flex flex-col gap-3">
+						<h3 class="text-muted-foreground text-sm font-medium">
+							{group.heading}
+						</h3>
+						<div class="grid auto-rows-fr grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+							{group.adventures.map((adventure) => (
+								<a
+									href={adventurePath(adventure.slug)}
+									class="hover:border-primary group flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors"
+								>
+									<img
+										src={adventure.images.small}
+										alt=""
+										width="100"
+										height="100"
+										loading="lazy"
+										class="size-20 object-contain"
+									/>
+									<span class="group-hover:text-primary font-serif text-sm font-bold">
+										{adventure.name}
+									</span>
+								</a>
+							))}
+						</div>
+					</div>
+				))}
+			</section>
+		))}
+	</div>
+</Layout>

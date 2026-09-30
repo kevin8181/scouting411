@@ -1,0 +1,73 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import Requirements from "@/components/advancement/Requirements.astro";
+import { rankPath } from "@/lib/advancement/ranks/types";
+import { rpc } from "@/rpc/client";
+import { safe } from "@orpc/client";
+
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export const prerender = false;
+
+const { slug = "" } = Astro.params;
+
+const { data: adventure } = await safe(
+	rpc.advancement.adventures.get({ slug }),
+);
+
+if (!adventure) {
+	return new Response(null, { status: 404 });
+}
+
+const versionEffective = adventure.versionEffective
+	? new Date(`${adventure.versionEffective}T00:00:00`).toLocaleDateString(
+			"en-US",
+			{ year: "numeric", month: "long", day: "numeric" },
+		)
+	: undefined;
+---
+
+<Layout title={`${adventure.name} Adventure`}>
+	<div class="mx-auto flex w-full max-w-4xl flex-col gap-8 p-8">
+		<a
+			href={`/advancement/adventures#${adventure.rank.slug}`}
+			class="text-primary flex items-center gap-2 self-start text-sm font-medium hover:underline"
+		>
+			<FontAwesomeIcon icon={faArrowLeft} />
+			All adventures
+		</a>
+
+		<div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+			<img
+				src={adventure.images.medium}
+				alt={`${adventure.name} adventure`}
+				width="200"
+				height="200"
+				class="size-32 shrink-0 object-contain"
+			/>
+
+			<div class="flex min-w-0 flex-col items-start gap-2">
+				<h1 class="font-serif text-3xl font-bold wrap-anywhere hyphens-auto">
+					{adventure.name}
+				</h1>
+				<div class="text-muted-foreground text-sm">
+					{adventure.required ? "Required" : "Elective"} adventure for{" "}
+					<a
+						href={rankPath(adventure.rank.slug)}
+						class="text-primary hover:underline"
+					>
+						{adventure.rank.name}
+					</a>
+				</div>
+				<div class="text-muted-foreground text-sm">
+					{versionEffective
+						? `${adventure.version} requirements, effective ${versionEffective}`
+						: `${adventure.version} requirements`}
+				</div>
+			</div>
+		</div>
+
+		<Requirements requirements={adventure.requirements} />
+	</div>
+</Layout>

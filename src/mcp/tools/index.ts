@@ -6,6 +6,10 @@ import {
 	listMeritBadgesTool,
 } from "@/mcp/tools/advancement/meritBadges";
 import { getRankTool, listRanksTool } from "@/mcp/tools/advancement/ranks";
+import {
+	getAdventureTool,
+	listAdventuresTool,
+} from "@/mcp/tools/advancement/adventures";
 
 export const tools = [
 	queryPostsTool,
@@ -15,4 +19,6 @@ export const tools = [
 	getMeritBadgeTool,
 	listRanksTool,
 	getRankTool,
+	listAdventuresTool,
+	getAdventureTool,
 ];
