@@ -119,13 +119,13 @@ export function Page({
 					<AdvancementCard
 						href="/advancement/ranks"
 						title="Ranks"
-						detail={`${advancement.ranks.count} ranks across Cub Scouting, Scouts BSA, and Sea Scouting`}
+						detail={`The ${advancement.ranks.count} ranks from across every Scouting program`}
 						image={advancement.ranks.image}
 					/>
 					<AdvancementCard
 						href="/advancement/merit-badges"
 						title="Merit Badges"
-						detail={`${advancement.meritBadges.count} badges, ${advancement.meritBadges.eagleRequiredCount} required for Eagle`}
+						detail={`${advancement.meritBadges.count} badges, ${advancement.meritBadges.eagleRequiredCount} Eagle-required`}
 						image={advancement.meritBadges.image}
 					/>
 					<AdvancementCard
