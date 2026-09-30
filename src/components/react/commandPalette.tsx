@@ -32,21 +32,9 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { defaultFilter } from "cmdk";
-
-import { feeds } from "@/lib/news/feeds/feed";
-import { hubs } from "@/lib/hubs/hub";
-import { queryResources } from "@/lib/resources/query";
 import { useTheme } from "@/components/react/darkModeControl";
-import {
-	type MeritBadge,
-	meritBadgePath,
-} from "@/lib/advancement/meritBadges/types";
-import { type Rank, rankPath } from "@/lib/advancement/ranks/types";
-import {
-	type Adventure,
-	adventurePath,
-} from "@/lib/advancement/adventures/types";
+import { searchItems } from "@/lib/search/search";
+import type { SearchItem } from "@/lib/search/types";
 import { rpc } from "@/rpc/client";
 
 /** global store for whether the command palette is open */
@@ -69,6 +57,12 @@ export function CommandPalette() {
 
 	useHotkey("/", () => setOpen(true));
 	useHotkey("Mod+K", () => setOpen(true));
+
+	// start fetching the items as soon as the page loads, so they're ready by the time
+	// the palette opens
+	useEffect(() => {
+		loadSearchItems().catch(console.error);
+	}, []);
 
 	return (
 		<>
@@ -109,16 +103,15 @@ export function CommandPaletteTrigger() {
 
 function CommandPaletteContent() {
 	const { setTheme } = useTheme();
-	const resources = queryResources();
-	const { ranks, meritBadges, adventures } = useAdvancement();
-	// the input stays uncontrolled and only this flag lives in state, so typing re-renders
-	// the palette only when it switches between the grouped and flat layouts. re-rendering
-	// every item on every keystroke makes typing lag
-	const [searching, setSearching] = useState(false);
+	const items = useSearchItems();
+	// the input stays uncontrolled; only the query lives in state. searching renders at
+	// most `resultLimit` items, and the full grouped list is memoized, so a keystroke
+	// never re-renders every entry
+	const [search, setSearch] = useState("");
 	const listRef = useRef<HTMLDivElement>(null);
 
-	function handleSearchChange(search: string) {
-		setSearching(search !== "");
+	function handleSearchChange(value: string) {
+		setSearch(value);
 		// results reorder on every keystroke, so start each new search from the top. wait a
 		// frame: cmdk scrolls its previously selected item into view after this renders, and
 		// clearing the search moves that item deep into the grouped list
@@ -131,104 +124,22 @@ function CommandPaletteContent() {
 	// and flat layouts doesn't rebuild every entry
 	const sections = useMemo<Section[]>(
 		() => [
-			{
-				heading: "Navigation",
-				type: "Page",
-				icon: <CompassIcon />,
-				entries: navigation.map((item) => ({
-					id: item.href,
-					name: item.label,
-					keywords: [item.label],
-					onSelect: handleSelection({ url: item.href }),
-				})),
-			},
-			{
-				heading: "Hubs",
-				type: "Hub",
-				entries: hubs.map((hub) => ({
-					id: hub.links.page,
-					name: hub.name,
-					keywords: [hub.name, `${hub.name} Hub`, hub.description],
-					icon: (
-						<span
-							className="size-2.5 shrink-0 rounded-xs"
-							style={{ backgroundColor: hub.color }}
-						/>
-					),
-					onSelect: handleSelection({ url: hub.links.page }),
-				})),
-			},
-			{
-				heading: "Feeds",
-				type: "Feed",
-				icon: <RssIcon />,
-				entries: feeds.map((feed) => ({
-					id: feed.links.overview,
-					name: feed.name,
-					keywords: [feed.name, feed.description],
-					onSelect: handleSelection({ url: feed.links.overview }),
-				})),
-			},
-			{
-				heading: "Resources",
-				type: "Resource",
-				icon: <ExternalLinkIcon />,
-				entries: resources.map((resource) => ({
-					id: resource.url,
-					name: resource.title,
-					keywords: [resource.title, resource.description],
-					onSelect: handleSelection({ url: resource.url, newTab: true }),
-				})),
-			},
-			{
-				heading: "Ranks",
-				type: "Rank",
-				entries: ranks.map((rank) => ({
-					id: rankPath(rank.slug),
-					name: rank.name,
-					keywords: [rank.name, `${rank.name} Rank`, rank.program],
-					icon: (
-						<img
-							src={rank.images.medium}
-							alt=""
-							className="size-5 object-contain"
-						/>
-					),
-					onSelect: handleSelection({ url: rankPath(rank.slug) }),
-				})),
-			},
-			{
-				heading: "Merit Badges",
-				type: "Merit Badge",
-				entries: meritBadges.map((badge) => ({
-					id: meritBadgePath(badge.slug),
-					name: badge.name,
-					keywords: [badge.name, `${badge.name} Merit Badge`],
-					icon: <img src={badge.images.small} alt="" className="size-5" />,
-					onSelect: handleSelection({ url: meritBadgePath(badge.slug) }),
-				})),
-			},
-			{
-				heading: "Adventures",
-				type: "Adventure",
-				entries: adventures.map((adventure) => ({
-					id: adventurePath(adventure.slug),
-					name: adventure.name,
-					keywords: [
-						adventure.name,
-						`${adventure.name} Adventure`,
-						adventure.rank.name,
-					],
-					icon: (
-						<img
-							src={adventure.images.small}
-							alt=""
-							className="size-5 object-contain"
-						/>
-					),
-					onSelect: handleSelection({ url: adventurePath(adventure.slug) }),
-				})),
-			},
+			...Object.entries(sectionsByType).map(([type, section]) => ({
+				...section,
+				entries: items
+					.filter((item) => item.type === type)
+					.map((item) => ({
+						id: item.id,
+						name: item.name,
+						keywords: item.keywords,
+						description: item.description,
+						icon: itemIcon(item),
+						onSelect: handleSelection({
+							url: item.url,
+							newTab: item.external,
+						}),
+					})),
+			})),
 			{
 				heading: "Site Theme",
 				type: "Theme",
@@ -237,74 +148,94 @@ function CommandPaletteContent() {
 					{
 						id: "theme:dark",
 						name: "Enable dark mode",
-						keywords: ["Enable dark mode", "light mode", "system theme"],
+						keywords: ["light mode", "system theme"],
 						onSelect: handleSelection(() => setTheme("dark")),
 					},
 					{
 						id: "theme:light",
 						name: "Enable light mode",
-						keywords: ["Enable light mode", "dark mode", "system theme"],
+						keywords: ["dark mode", "system theme"],
 						onSelect: handleSelection(() => setTheme("light")),
 					},
 					{
 						id: "theme:system",
 						name: "Use system theme",
-						keywords: ["Use system theme", "dark mode", "light mode"],
+						keywords: ["dark mode", "light mode"],
 						onSelect: handleSelection(() => setTheme("system")),
 					},
 				],
 			},
 		],
-		[resources, ranks, meritBadges, adventures, setTheme],
+		[items, setTheme],
+	);
+
+	// every entry paired with its section, for ranking in one flat list
+	const entries = useMemo(
+		() =>
+			sections.flatMap((section) =>
+				section.entries.map((entry) => ({ ...entry, section })),
+			),
+		[sections],
+	);
+
+	const results = useMemo(
+		() => searchItems(entries, search, { limit: resultLimit }),
+		[entries, search],
+	);
+
+	// the same element across renders, so react skips re-rendering it while typing
+	const groupedList = useMemo(
+		() =>
+			sections.map((section, i) => (
+				<Fragment key={section.heading}>
+					{i > 0 && <CommandSeparator />}
+					<CommandGroup heading={section.heading}>
+						{section.entries.map((entry) => (
+							<PaletteItem key={entry.id} entry={entry} section={section} />
+						))}
+					</CommandGroup>
+				</Fragment>
+			)),
+		[sections],
 	);
 
 	return (
-		<Command filter={filterByKeywords}>
+		// search.ts ranks the results, so cmdk only renders and navigates them
+		<Command shouldFilter={false}>
 			<CommandInput
 				placeholder="Search..."
 				onValueChange={handleSearchChange}
 			/>
 			<CommandList ref={listRef}>
 				<CommandEmpty>No results found.</CommandEmpty>
-				{searching
-					? // while searching, drop the groups so cmdk ranks every match in one list;
-						// each item labels its own type instead
-						sections.flatMap((section) =>
-							section.entries.map((entry) => (
-								<PaletteItem
-									key={entry.id}
-									entry={entry}
-									section={section}
-									showType
-								/>
-							)),
-						)
-					: sections.map((section, i) => (
-							<Fragment key={section.heading}>
-								{i > 0 && <CommandSeparator />}
-								<CommandGroup heading={section.heading}>
-									{section.entries.map((entry) => (
-										<PaletteItem
-											key={entry.id}
-											entry={entry}
-											section={section}
-										/>
-									))}
-								</CommandGroup>
-							</Fragment>
-						))}
+				{search.trim()
+					? // while searching, drop the groups and list every match by rank; each
+						// item labels its own type instead
+						results.map((result) => (
+							<PaletteItem
+								key={result.id}
+								entry={result}
+								section={result.section}
+								showType
+							/>
+						))
+					: groupedList}
 			</CommandList>
 		</Command>
 	);
 }
+
+/** the most results shown while searching */
+const resultLimit = 50;
 
 /** one palette entry, grouped under a heading or, while searching, ranked in a flat list */
 type Entry = {
 	/** unique across the whole palette; cmdk uses it as the item's identity */
 	id: string;
 	name: string;
-	/** matched against the search, name first */
+	/** matched against the search after the name */
 	keywords: string[];
+	description?: string | undefined;
 	icon?: ReactNode;
 	onSelect: () => void;
 };
@@ -318,6 +249,39 @@ type Section = {
 	entries: Entry[];
 };
 
+/** how each type of search item is grouped in the palette, in display order */
+const sectionsByType: Record<SearchItem["type"], Omit<Section, "entries">> = {
+	page: { heading: "Navigation", type: "Page", icon: <CompassIcon /> },
+	hub: { heading: "Hubs", type: "Hub" },
+	feed: { heading: "Feeds", type: "Feed", icon: <RssIcon /> },
+	resource: {
+		heading: "Resources",
+		type: "Resource",
+		icon: <ExternalLinkIcon />,
+	},
+	rank: { heading: "Ranks", type: "Rank" },
+	meritBadge: { heading: "Merit Badges", type: "Merit Badge" },
+	adventure: { heading: "Adventures", type: "Adventure" },
+};
+
+/** an item's own media, if it has any; otherwise its section's icon is shown */
+function itemIcon(item: SearchItem): ReactNode {
+	if (item.image) {
+		return <img src={item.image} alt="" className="size-5 object-contain" />;
+	}
+
+	if (item.color) {
+		return (
+			<span
+				className="size-2.5 shrink-0 rounded-xs"
+				style={{ backgroundColor: item.color }}
+			/>
+		);
+	}
+
+	return undefined;
+}
+
 function PaletteItem({
 	entry,
 	section,
@@ -328,11 +292,7 @@ function PaletteItem({
 	showType?: boolean;
 }) {
 	return (
-		<CommandItem
-			value={entry.id}
-			keywords={entry.keywords}
-			onSelect={entry.onSelect}
-		>
+		<CommandItem value={entry.id} onSelect={entry.onSelect}>
 			{entry.icon ?? (
 				// same footprint as the size-5 images, so names line up across types
 				<span className="text-muted-foreground flex size-5 shrink-0 items-center justify-center">
@@ -350,45 +310,36 @@ function PaletteItem({
 }
 
 /**
- * score only the keywords. an item's value is a unique id (usually its url), and cmdk's
- * default filter would otherwise match against that too and blur the ranking
+ * the palette's items, fetched once per page load when the palette mounts and kept for
+ * every open. every group but the theme is empty until they arrive
  */
-const filterByKeywords: typeof defaultFilter = (
-	_value,
-	search,
-	keywords = [],
-) => defaultFilter(keywords.join(" "), search);
+let loadedItems: SearchItem[] | undefined;
+let itemsRequest: Promise<SearchItem[]> | undefined;
 
-/**
- * ranks, merit badges, and adventures live in redis rather than in config, so fetch them
- * once the palette opens. their groups are empty until they arrive
- */
-function useAdvancement() {
-	const [ranks, setRanks] = useState<Rank[]>([]);
-	const [meritBadges, setMeritBadges] = useState<MeritBadge[]>([]);
-	const [adventures, setAdventures] = useState<Adventure[]>([]);
+/** fetch the items, or join the fetch already in flight */
+function loadSearchItems() {
+	itemsRequest ??= rpc.search.items().then(
+		(data) => (loadedItems = data),
+		(error: unknown) => {
+			// let the next open try again
+			itemsRequest = undefined;
+			throw error;
+		},
+	);
+
+	return itemsRequest;
+}
+
+function useSearchItems() {
+	const [items, setItems] = useState<SearchItem[]>(() => loadedItems ?? []);
 
 	useEffect(() => {
+		if (loadedItems) return;
 		let stale = false;
 
-		rpc.advancement.ranks
-			.list()
+		loadSearchItems()
 			.then((data) => {
-				if (!stale) setRanks(data);
-			})
-			.catch(console.error);
-
-		rpc.advancement.meritBadges
-			.list()
-			.then((data) => {
-				if (!stale) setMeritBadges(data);
-			})
-			.catch(console.error);
-
-		rpc.advancement.adventures
-			.list({})
-			.then((data) => {
-				if (!stale) setAdventures(data);
+				if (!stale) setItems(data);
 			})
 			.catch(console.error);
 
@@ -397,7 +348,7 @@ function useAdvancement() {
 		};
 	}, []);
 
-	return { ranks, meritBadges, adventures };
+	return items;
 }
 
 /** run when a command palette item is selected */
@@ -419,17 +370,3 @@ function handleSelection(
 		}
 	};
 }
-
-/** site navigation links to include in the palette */
-const navigation = [
-	{ href: "/", label: "Home" },
-	{ href: "/news/browse", label: "Newsfeed" },
-	{ href: "/news/sources", label: "Sources" },
-	{ href: "/news/subscribe", label: "Subscribe" },
-	{ href: "/news/stats", label: "Stats" },
-	{ href: "/advancement/ranks", label: "Ranks" },
-	{ href: "/advancement/merit-badges", label: "Merit Badges" },
-	{ href: "/advancement/adventures", label: "Adventures" },
-	{ href: "/resources", label: "Resources" },
-	{ href: "/developers", label: "Developers" },
-];

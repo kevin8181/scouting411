@@ -38,7 +38,6 @@ export const searchItemSchema = z
 	})
 	.describe("A searchable item on Scouting411.");
 
-export type SearchResult = z.infer<typeof searchResultSchema>;
 export const searchResultSchema = searchItemSchema
 	.extend({
 		score: z
