@@ -5,6 +5,10 @@ import {
 	getMeritBadgeProcedure,
 	listMeritBadgesProcedure,
 } from "@/rpc/procedures/advancement/meritBadges";
+import {
+	getRankProcedure,
+	listRanksProcedure,
+} from "@/rpc/procedures/advancement/ranks";
 
 export const router = {
 	news: {
@@ -22,6 +26,10 @@ export const router = {
 		meritBadges: {
 			list: listMeritBadgesProcedure,
 			get: getMeritBadgeProcedure,
+		},
+		ranks: {
+			list: listRanksProcedure,
+			get: getRankProcedure,
 		},
 	},
 };

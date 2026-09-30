@@ -1,3 +1,4 @@
+import he from "he";
 import { z } from "zod";
 
 const baseUrl = "https://api.scouting.org/advancements";
@@ -24,3 +25,16 @@ export async function fetchUpstream<T extends z.ZodType>(
 export const upstreamBool = z
 	.enum(["True", "False"])
 	.transform((value) => value === "True");
+
+/** decode upstream's html entities in a plain-text field */
+export function plainText(value: string) {
+	return he.decode(value).trim();
+}
+
+/** "Signs, Signals, and Codes" -> "signs-signals-and-codes" */
+export function slugify(name: string) {
+	return name
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/^-|-$/g, "");
+}

@@ -46,7 +46,15 @@ export const meritBadgeDetailSchema = meritBadgeSchema
 			.optional()
 			.describe("The date this version of the requirements took effect."),
 		requirements: z
-			.array(requirementSchema)
+			.array(
+				requirementSchema.extend({
+					counselorApproval: z
+						.boolean()
+						.describe(
+							"Whether the Scout needs their merit badge counselor's approval before starting this requirement.",
+						),
+				}),
+			)
 			.describe(
 				"The current official requirements, as a flat list in display order.",
 			),

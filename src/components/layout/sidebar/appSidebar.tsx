@@ -19,6 +19,7 @@ import {
 	faArrowsRotate,
 	faCircleInfo,
 	faAward,
+	faMedal,
 } from "@fortawesome/free-solid-svg-icons";
 import { buttonVariants } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -111,6 +112,12 @@ export function AppSidebar({ url }: { url: URL }) {
 				</NavGroup>
 
 				<NavGroup label="advancement" collapsible>
+					<NavLink
+						href="/advancement/ranks"
+						label="Ranks"
+						currentUrl={url}
+						icon={faMedal}
+					/>
 					<NavLink
 						href="/advancement/merit-badges"
 						label="Merit Badges"

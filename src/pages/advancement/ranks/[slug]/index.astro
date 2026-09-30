@@ -1,0 +1,91 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import Requirements from "@/components/advancement/Requirements.astro";
+import { rankPath } from "@/lib/advancement/ranks/types";
+import { rpc } from "@/rpc/client";
+import { safe } from "@orpc/client";
+
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export const prerender = false;
+
+const { slug = "" } = Astro.params;
+
+const { data: rank } = await safe(rpc.advancement.ranks.get({ slug }));
+
+if (!rank) {
+	return new Response(null, { status: 404 });
+}
+
+// versions are newest first, and the newest is shown unless another is asked for
+const newest = rank.versions[0]!;
+const requestedVersion = Astro.url.searchParams.get("version");
+const version =
+	rank.versions.find((version) => version.version === requestedVersion) ??
+	newest;
+---
+
+<Layout title={`${rank.name} Rank`}>
+	<div class="mx-auto flex w-full max-w-4xl flex-col gap-8 p-8">
+		<a
+			href="/advancement/ranks"
+			class="text-primary flex items-center gap-2 self-start text-sm font-medium hover:underline"
+		>
+			<FontAwesomeIcon icon={faArrowLeft} />
+			All ranks
+		</a>
+
+		<div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+			<img
+				src={rank.images.large}
+				alt={`${rank.name} rank`}
+				width="200"
+				height="200"
+				class="size-32 shrink-0 object-contain"
+			/>
+
+			<div class="flex min-w-0 flex-col items-start gap-2">
+				<h1 class="font-serif text-3xl font-bold wrap-anywhere hyphens-auto">
+					{rank.name}
+				</h1>
+				<div class="text-muted-foreground text-sm">{rank.program}</div>
+				<div class="text-muted-foreground text-sm">
+					{version.version} requirements
+				</div>
+			</div>
+		</div>
+
+		{rank.versions.length > 1 && (
+			<div class="flex flex-col gap-3 rounded-lg border p-4 text-sm">
+				<p>More than one version of these requirements is currently in use.</p>
+				<div class="flex flex-wrap gap-2">
+					{rank.versions.map((option) => (
+						<a
+							href={rankPath(
+								rank.slug,
+								option === newest ? undefined : option.version,
+							)}
+							aria-current={option === version ? "page" : undefined}
+							class:list={[
+								"rounded-full border px-3 py-1 font-medium transition-colors",
+								option === version
+									? "bg-primary text-primary-foreground border-primary"
+									: "hover:border-primary hover:text-primary",
+							]}
+						>
+							{option.version}
+							{option === newest && " (newest)"}
+						</a>
+					))}
+				</div>
+			</div>
+		)}
+
+		<Requirements
+			requirements={version.requirements}
+			headerHtml={version.headerHtml}
+			footerHtml={version.footerHtml}
+		/>
+	</div>
+</Layout>

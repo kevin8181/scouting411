@@ -1,9 +1,14 @@
-import he from "he";
 import { z } from "zod";
-import { fetchUpstream, upstreamBool } from "@/lib/advancement/upstream";
+import {
+	fetchUpstream,
+	plainText,
+	slugify,
+	upstreamBool,
+} from "@/lib/advancement/upstream";
 import {
 	orderRequirements,
-	sanitizeRequirementHtml,
+	parseRequirement,
+	upstreamRequirementSchema,
 } from "@/lib/advancement/requirements";
 import type {
 	MeritBadge,
@@ -50,32 +55,11 @@ export async function fetchMeritBadgeDetail(
 		versionEffective: data.versionEffectiveDt || undefined,
 		requirements: orderRequirements(
 			data.requirements.map((requirement) => ({
-				id: requirement.id,
-				parentId: requirement.parentRequirementId || undefined,
-				// blank sorts first, alongside the other notes
-				sortOrder: Number(requirement.sortOrder) || 0,
-				label: requirement.listNumber || undefined,
-				html: sanitizeRequirementHtml(requirement.name),
-				footerHtml: sanitizeRequirementHtml(requirement.footer) || undefined,
-				childrenRequired: requirement.childrenRequired
-					? Number(requirement.childrenRequired)
-					: undefined,
+				...parseRequirement(requirement),
 				counselorApproval: requirement.counselorApproval,
 			})),
 		),
 	};
-}
-
-function plainText(value: string) {
-	return he.decode(value).trim();
-}
-
-/** "Signs, Signals, and Codes" -> "signs-signals-and-codes" */
-function slugify(name: string) {
-	return name
-		.toLowerCase()
-		.replace(/[^a-z0-9]+/g, "-")
-		.replace(/^-|-$/g, "");
 }
 
 /** the fields used from https://api.scouting.org/advancements/meritBadges */
@@ -98,15 +82,6 @@ const upstreamRequirementsSchema = z.object({
 	version: z.string(),
 	versionEffectiveDt: z.union([z.iso.date(), z.literal("")]),
 	requirements: z.array(
-		z.object({
-			id: z.string(),
-			name: z.string(),
-			listNumber: z.string(),
-			sortOrder: z.string(),
-			childrenRequired: z.string(),
-			parentRequirementId: z.string(),
-			counselorApproval: upstreamBool,
-			footer: z.string(),
-		}),
+		upstreamRequirementSchema.extend({ counselorApproval: upstreamBool }),
 	),
 });
