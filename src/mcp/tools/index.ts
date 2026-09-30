@@ -10,8 +10,10 @@ import {
 	getAdventureTool,
 	listAdventuresTool,
 } from "@/mcp/tools/advancement/adventures";
+import { searchTool } from "@/mcp/tools/search/search";
 
 export const tools = [
+	searchTool,
 	queryPostsTool,
 	getFeedsTool,
 	queryResourcesTool,
