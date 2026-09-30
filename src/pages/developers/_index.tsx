@@ -4,6 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SparklesIcon } from "lucide-react";
 
 export function Page() {
 	return (
@@ -43,6 +44,20 @@ export function Page() {
 					</span>
 				</div>
 			</section>
+
+			<Section title="MCP server">
+				<p className="text-sm">
+					The same data is available to AI assistants through a remote MCP
+					server: search, news, advancement requirements, and resources.
+				</p>
+				<a
+					href="/mcp-server"
+					className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 self-start rounded-md px-4 py-2 text-sm font-semibold"
+				>
+					<SparklesIcon className="size-4" />
+					MCP Setup
+				</a>
+			</Section>
 
 			<Section title="Open source">
 				<p className="text-sm">

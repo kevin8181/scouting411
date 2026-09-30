@@ -7,8 +7,15 @@ import type { Resource } from "@/lib/resources/types";
 import { feeds } from "@/lib/news/feeds/feed";
 import { resources } from "@/lib/resources/config";
 import relativeDate from "tiny-relative-date";
-import { ArrowUpRightIcon } from "lucide-react";
+import {
+	ArrowUpRightIcon,
+	BotIcon,
+	RssIcon,
+	SearchIcon,
+} from "lucide-react";
+import type { ReactNode } from "react";
 import { SearchForm } from "@/components/react/searchForm";
+import { cn } from "@/util/cn";
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },
@@ -25,11 +32,22 @@ export function Page({
 	hubPosts,
 	feedCount,
 	postCount,
+	advancement,
 }: {
 	latestPosts: Awaited<ReturnType<typeof queryPosts>>;
 	hubPosts: { hub: Hub; latestPost: Post | undefined }[];
 	feedCount: number;
 	postCount: number;
+	/** counts and a few images per list, not the lists: they're serialized into the html */
+	advancement: {
+		ranks: { count: number; image: string | undefined };
+		meritBadges: {
+			count: number;
+			eagleRequiredCount: number;
+			image: string | undefined;
+		};
+		adventures: { count: number; image: string | undefined };
+	};
 }) {
 	return (
 		<div className="flex w-full flex-col items-center gap-20 p-8 pt-16 pb-20">
@@ -93,6 +111,34 @@ export function Page({
 
 			<section className="flex w-full max-w-5xl flex-col gap-3">
 				<SectionHeader
+					title="Advancement"
+					description="Official requirements for every rank, merit badge, and Cub Scout adventure, refreshed daily."
+				/>
+
+				<div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+					<AdvancementCard
+						href="/advancement/ranks"
+						title="Ranks"
+						detail={`${advancement.ranks.count} ranks across Cub Scouting, Scouts BSA, and Sea Scouting`}
+						image={advancement.ranks.image}
+					/>
+					<AdvancementCard
+						href="/advancement/merit-badges"
+						title="Merit Badges"
+						detail={`${advancement.meritBadges.count} badges, ${advancement.meritBadges.eagleRequiredCount} required for Eagle`}
+						image={advancement.meritBadges.image}
+					/>
+					<AdvancementCard
+						href="/advancement/adventures"
+						title="Adventures"
+						detail={`${advancement.adventures.count} Cub Scout adventures, Lion through Arrow of Light`}
+						image={advancement.adventures.image}
+					/>
+				</div>
+			</section>
+
+			<section className="flex w-full max-w-5xl flex-col gap-3">
+				<SectionHeader
 					title="All Resources"
 					description="Handbooks, forms, and tools, in one place."
 					link={{ href: "/resources", label: "Browse all resources" }}
@@ -106,7 +152,138 @@ export function Page({
 					))}
 				</ul>
 			</section>
+
+			<section className="flex w-full max-w-5xl flex-col gap-3">
+				<SectionHeader
+					title="Use It Anywhere"
+					description="Search from your address bar, follow the news in your feed reader, or plug it into an AI assistant."
+				/>
+
+				<div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+					<IntegrationCard icon={<SearchIcon />} title="Browser search">
+						<p>
+							Add Scouting411 as a search engine: in Chrome, type
+							scouting411.org and press Tab; in Firefox, use the address bar
+							menu.
+						</p>
+						<p>
+							Start a search with <Code>!</Code> to jump straight to the top
+							result.
+						</p>
+					</IntegrationCard>
+
+					<IntegrationCard icon={<RssIcon />} title="RSS feeds">
+						<p>
+							Every official source, re-published as RSS and Atom feeds for any
+							feed reader, or all at once via OPML.
+						</p>
+						<a
+							href="/news/subscribe"
+							className="text-primary w-fit font-semibold underline"
+						>
+							Subscribe <FontAwesomeIcon icon={faArrowRight} />
+						</a>
+					</IntegrationCard>
+
+					<IntegrationCard icon={<BotIcon />} title="MCP server">
+						<p>
+							Give an AI assistant first-party Scouting news, advancement, and
+							resources. Add this URL as a remote MCP server:
+						</p>
+						<Code className="block w-fit select-all">{mcpUrl}</Code>
+						<a
+							href="/mcp-server"
+							className="text-primary w-fit font-semibold underline"
+						>
+							Setup guide <FontAwesomeIcon icon={faArrowRight} />
+						</a>
+					</IntegrationCard>
+				</div>
+			</section>
 		</div>
+	);
+}
+
+function AdvancementCard({
+	href,
+	title,
+	detail,
+	image,
+}: {
+	href: string;
+	title: string;
+	detail: string;
+	/** missing only if the list is empty, before advancement is first ingested */
+	image: string | undefined;
+}) {
+	return (
+		<a
+			href={href}
+			className="hover:border-primary bg-card group flex items-center gap-4 rounded-lg border p-5"
+		>
+			{image && (
+				<img
+					src={image}
+					alt=""
+					loading="lazy"
+					className="size-16 shrink-0 object-contain"
+				/>
+			)}
+			<div className="flex min-w-0 flex-1 flex-col gap-1">
+				<h3 className="flex items-center justify-between gap-2 font-serif text-base font-bold">
+					{title}
+					<FontAwesomeIcon
+						icon={faArrowRight}
+						className="text-primary transition-transform group-hover:translate-x-0.5"
+					/>
+				</h3>
+				<p className="text-muted-foreground text-sm">{detail}</p>
+			</div>
+		</a>
+	);
+}
+
+/** the public url of the mcp server, served by `src/pages/mcp.ts` */
+const mcpUrl = new URL("/mcp", import.meta.env.SITE).href;
+
+function IntegrationCard({
+	icon,
+	title,
+	children,
+}: {
+	icon: ReactNode;
+	title: string;
+	children: ReactNode;
+}) {
+	return (
+		<div className="bg-card flex flex-col gap-3 rounded-lg border p-5">
+			<h3 className="flex items-center gap-2 font-serif text-base font-bold">
+				<span className="text-primary [&_svg]:size-4">{icon}</span>
+				{title}
+			</h3>
+			<div className="text-muted-foreground flex flex-col gap-2 text-sm">
+				{children}
+			</div>
+		</div>
+	);
+}
+
+function Code({
+	className,
+	children,
+}: {
+	className?: string;
+	children: ReactNode;
+}) {
+	return (
+		<code
+			className={cn(
+				"bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-xs",
+				className,
+			)}
+		>
+			{children}
+		</code>
 	);
 }
 

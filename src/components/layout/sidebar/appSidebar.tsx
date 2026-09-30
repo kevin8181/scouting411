@@ -22,6 +22,7 @@ import {
 	faMedal,
 	faCompass,
 } from "@fortawesome/free-solid-svg-icons";
+import { SparklesIcon } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DarkModeControl } from "@/components/react/darkModeControl";
@@ -208,6 +209,23 @@ export function AppSidebar({ url }: { url: URL }) {
 								}
 							/>
 							<TooltipContent>For developers</TooltipContent>
+						</Tooltip>
+						<Tooltip>
+							<TooltipTrigger
+								render={
+									<a
+										href="/mcp-server"
+										className={buttonVariants({
+											size: "icon",
+											variant: "outline",
+										})}
+									>
+										<SparklesIcon />
+										<span className="sr-only">Use with AI</span>
+									</a>
+								}
+							/>
+							<TooltipContent>Use with AI</TooltipContent>
 						</Tooltip>
 						<DarkModeControl />
 					</div>
