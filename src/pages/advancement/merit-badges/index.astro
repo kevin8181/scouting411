@@ -11,6 +11,20 @@ export const prerender = false;
 const meritBadges = (await rpc.advancement.meritBadges.list()).toSorted(
 	(a, b) => a.name.localeCompare(b.name),
 );
+
+// every badge is shown unless the eagle-required tab is asked for
+const tabs = [
+	{ label: "All badges", href: "/advancement/merit-badges", eagleOnly: false },
+	{
+		label: "Eagle required",
+		href: "/advancement/merit-badges?filter=eagle-required",
+		eagleOnly: true,
+	},
+];
+const eagleOnly = Astro.url.searchParams.get("filter") === "eagle-required";
+const shownBadges = eagleOnly
+	? meritBadges.filter((badge) => badge.eagleRequired)
+	: meritBadges;
 ---
 
 <Layout title="Merit Badges">
@@ -45,8 +59,27 @@ const meritBadges = (await rpc.advancement.meritBadges.list()).toSorted(
 			</div>
 		)}
 
+		{meritBadges.length > 0 && (
+			<nav class="flex flex-wrap gap-2 text-sm" aria-label="Filter">
+				{tabs.map((tab) => (
+					<a
+						href={tab.href}
+						aria-current={tab.eagleOnly === eagleOnly ? "page" : undefined}
+						class:list={[
+							"rounded-full border px-3 py-1 font-medium transition-colors",
+							tab.eagleOnly === eagleOnly
+								? "bg-primary text-primary-foreground border-primary"
+								: "hover:border-primary hover:text-primary",
+						]}
+					>
+						{tab.label}
+					</a>
+				))}
+			</nav>
+		)}
+
 		<div class="grid auto-rows-fr grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-			{meritBadges.map((badge) => (
+			{shownBadges.map((badge) => (
 				<a
 					href={meritBadgePath(badge.slug)}
 					class:list={[
