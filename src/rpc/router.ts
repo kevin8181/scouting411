@@ -13,6 +13,10 @@ import {
 	getAdventureProcedure,
 	listAdventuresProcedure,
 } from "@/rpc/procedures/advancement/adventures";
+import {
+	listSearchItemsProcedure,
+	searchProcedure,
+} from "@/rpc/procedures/search/search";
 
 export const router = {
 	news: {
@@ -39,5 +43,9 @@ export const router = {
 			list: listAdventuresProcedure,
 			get: getAdventureProcedure,
 		},
+	},
+	search: {
+		query: searchProcedure,
+		items: listSearchItemsProcedure,
 	},
 };
