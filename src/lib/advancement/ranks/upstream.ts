@@ -10,7 +10,7 @@ import {
 	parseRequirement,
 	sanitizeRequirementHtml,
 	upstreamRequirementSchema,
-} from "@/lib/advancement/requirements";
+} from "@/lib/advancement/parseRequirements";
 import type { Rank, RankDetail } from "@/lib/advancement/ranks/types";
 
 /** a rank, and the upstream ids of the requirement versions it has in use */

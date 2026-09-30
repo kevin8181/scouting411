@@ -9,7 +9,7 @@ import {
 	orderRequirements,
 	parseRequirement,
 	upstreamRequirementSchema,
-} from "@/lib/advancement/requirements";
+} from "@/lib/advancement/parseRequirements";
 import type {
 	MeritBadge,
 	MeritBadgeDetail,

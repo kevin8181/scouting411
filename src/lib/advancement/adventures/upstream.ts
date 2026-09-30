@@ -3,7 +3,7 @@ import { fetchUpstream, plainText, slugify } from "@/lib/advancement/upstream";
 import {
 	orderRequirements,
 	parseRequirement,
-} from "@/lib/advancement/requirements";
+} from "@/lib/advancement/parseRequirements";
 import type {
 	Adventure,
 	AdventureDetail,
