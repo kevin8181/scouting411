@@ -1,5 +1,7 @@
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, NewspaperIcon } from "lucide-react";
 import { SearchForm } from "@/components/react/searchForm";
+import { postsQueryParamsEncoder } from "@/lib/news/query/queryParams";
+import { cn } from "@/util/cn";
 import {
 	searchItemMedia,
 	searchItemTypes,
@@ -16,22 +18,59 @@ export function Page({
 	/** the site's origin, to resolve internal urls for display */
 	origin: string;
 }) {
+	// on wide screens the news card sits in its own column beside everything else; on
+	// narrow ones it falls between the result count and the results
 	return (
-		<div className="flex w-full max-w-3xl flex-col gap-6 p-8">
-			<SearchForm query={query} />
+		<div className="grid w-full max-w-6xl grid-cols-1 gap-x-12 gap-y-6 p-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+			<SearchForm query={query} className="lg:col-start-1" />
 
-			<p className="text-muted-foreground text-sm">
+			<p className="text-muted-foreground text-sm lg:col-start-1">
 				{results.length === 0
 					? `No results for “${query}”. Try a shorter or different search.`
 					: `${results.length} ${results.length === 1 ? "result" : "results"} for “${query}”`}
 			</p>
 
-			<ol className="flex flex-col gap-7">
+			<NewsCard
+				query={query}
+				className="self-start lg:sticky lg:top-17 lg:col-start-2 lg:row-span-3 lg:row-start-1"
+			/>
+
+			<ol className="flex flex-col gap-7 lg:col-start-1">
 				{results.map((result) => (
 					<SearchResult key={result.id} item={result} origin={origin} />
 				))}
 			</ol>
 		</div>
+	);
+}
+
+/** search results don't cover news, so point to the newsfeed with the same keyword */
+function NewsCard({ query, className }: { query: string; className?: string }) {
+	const href = `/news/browse?${postsQueryParamsEncoder.encode({
+		filter: { keyword: query },
+	})}`;
+
+	return (
+		<aside
+			className={cn(
+				"bg-card flex flex-col gap-2 rounded-lg border p-4 text-sm",
+				className,
+			)}
+		>
+			<h2 className="flex items-center gap-2 font-serif font-bold">
+				<NewspaperIcon className="text-muted-foreground size-4" />
+				Looking for news?
+			</h2>
+			<p className="text-muted-foreground">
+				Search results don't include news posts.
+			</p>
+			<a
+				href={href}
+				className="text-primary w-fit font-medium hover:underline"
+			>
+				Search news for “{query}” →
+			</a>
+		</aside>
 	);
 }
 
