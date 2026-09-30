@@ -1,0 +1,23 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+---
+
+<Layout title="Page not found">
+	<div class="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
+		<div class="text-primary font-display text-8xl font-extrabold sm:text-9xl">
+			404
+		</div>
+
+		<h1 class="font-serif text-2xl font-bold sm:text-3xl">
+			You’ve wandered off the trail.
+		</h1>
+
+		<p class="text-muted-foreground text-sm">
+			The page you’re looking for moved or never existed.
+		</p>
+
+		<a href="/" class="text-primary mt-4 text-sm font-medium underline">
+			← Back to Home
+		</a>
+	</div>
+</Layout>
