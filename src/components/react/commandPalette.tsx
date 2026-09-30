@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
-import { SearchIcon, SunMoonIcon } from "lucide-react";
+import { SearchIcon, SunMoonIcon, ZapIcon } from "lucide-react";
 
 import { atom } from "nanostores";
 import { useStore } from "@nanostores/react";
@@ -85,12 +85,12 @@ export function CommandPaletteTrigger() {
 		<Button
 			variant="outline"
 			onClick={() => setOpen(true)}
-			aria-label="Search"
+			aria-label="Launch"
 			className="items-center justify-between gap-2 px-1.5"
 		>
 			<span className="flex items-center gap-2">
-				<SearchIcon className="" />
-				<span className="text-muted-foreground">Search...</span>
+				<ZapIcon className="text-muted-foreground" />
+				<span className="text-muted-foreground">Launch...</span>
 			</span>
 			<KbdGroup className="inline-flex">
 				<Kbd>Ctrl K</Kbd>
@@ -201,7 +201,8 @@ function CommandPaletteContent() {
 		// search.ts ranks the results, so cmdk only renders and navigates them
 		<Command shouldFilter={false}>
 			<CommandInput
-				placeholder="Search..."
+				placeholder="Launch..."
+				icon={ZapIcon}
 				onValueChange={handleSearchChange}
 			/>
 			<CommandList ref={listRef}>
