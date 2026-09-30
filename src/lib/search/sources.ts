@@ -87,8 +87,8 @@ const sources: (() => SearchItem[] | Promise<SearchItem[]>)[] = [
 		(await listMeritBadges()).map((badge) => ({
 			id: meritBadgePath(badge.slug),
 			type: "meritBadge",
-			name: badge.name,
-			keywords: [`${badge.name} Merit Badge`, badge.category],
+			name: `${badge.name} Merit Badge`,
+			keywords: [badge.category],
 			url: meritBadgePath(badge.slug),
 			external: false,
 			image: badge.images.small,

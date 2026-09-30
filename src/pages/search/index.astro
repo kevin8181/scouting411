@@ -1,0 +1,17 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import { Page } from "@/pages/search/_index";
+import { rpc } from "@/rpc/client";
+
+export const prerender = false;
+
+// there's nothing to show without a query, and the homepage is where a search starts
+const query = Astro.url.searchParams.get("q")?.trim();
+if (!query) return Astro.redirect("/");
+
+const results = await rpc.search.query({ q: query });
+---
+
+<Layout title="Search">
+	<Page query={query} results={results} origin={Astro.url.origin} />
+</Layout>

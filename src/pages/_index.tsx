@@ -7,9 +7,8 @@ import type { Resource } from "@/lib/resources/types";
 import { feeds } from "@/lib/news/feeds/feed";
 import { resources } from "@/lib/resources/config";
 import relativeDate from "tiny-relative-date";
-import { Button } from "@/components/ui/button";
-import { ArrowUpRightIcon, SearchIcon } from "lucide-react";
-import { useCommandPalette } from "@/components/react/commandPalette";
+import { ArrowUpRightIcon } from "lucide-react";
+import { SearchForm } from "@/components/react/searchForm";
 
 const quickLinks = [
 	{ href: "https://my.scouting.org", label: "my.Scouting" },
@@ -32,8 +31,6 @@ export function Page({
 	feedCount: number;
 	postCount: number;
 }) {
-	const { setOpen } = useCommandPalette();
-
 	return (
 		<div className="flex w-full flex-col items-center gap-20 p-8 pt-16 pb-20">
 			<div className="flex w-full flex-col items-center gap-4 py-8">
@@ -44,18 +41,7 @@ export function Page({
 					the unofficial front page of Scouting America
 				</h2>
 
-				<Button
-					variant="outline"
-					size="lg"
-					onClick={() => setOpen(true)}
-					aria-label="Search"
-					className="text-md mt-3 h-10 w-full max-w-lg items-center justify-between gap-2 px-3"
-				>
-					<span className="flex items-center gap-2">
-						<SearchIcon />
-						<span className="text-muted-foreground">Search...</span>
-					</span>
-				</Button>
+				<SearchForm className="mt-3 max-w-lg" />
 
 				<ul className="mt-3 flex flex-wrap justify-center gap-2">
 					{quickLinks.map((link) => (

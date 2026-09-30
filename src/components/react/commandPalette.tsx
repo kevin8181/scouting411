@@ -12,13 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
-import {
-	CompassIcon,
-	ExternalLinkIcon,
-	RssIcon,
-	SearchIcon,
-	SunMoonIcon,
-} from "lucide-react";
+import { SearchIcon, SunMoonIcon } from "lucide-react";
 
 import { atom } from "nanostores";
 import { useStore } from "@nanostores/react";
@@ -35,6 +29,10 @@ import {
 import { useTheme } from "@/components/react/darkModeControl";
 import { searchItems } from "@/lib/search/search";
 import type { SearchItem } from "@/lib/search/types";
+import {
+	searchItemMedia,
+	searchItemTypes,
+} from "@/components/react/searchItem";
 import { rpc } from "@/rpc/client";
 
 /** global store for whether the command palette is open */
@@ -124,7 +122,7 @@ function CommandPaletteContent() {
 	// and flat layouts doesn't rebuild every entry
 	const sections = useMemo<Section[]>(
 		() => [
-			...Object.entries(sectionsByType).map(([type, section]) => ({
+			...Object.entries(searchItemTypes).map(([type, section]) => ({
 				...section,
 				entries: items
 					.filter((item) => item.type === type)
@@ -133,7 +131,7 @@ function CommandPaletteContent() {
 						name: item.name,
 						keywords: item.keywords,
 						description: item.description,
-						icon: itemIcon(item),
+						icon: searchItemMedia(item),
 						onSelect: handleSelection({
 							url: item.url,
 							newTab: item.external,
@@ -142,7 +140,7 @@ function CommandPaletteContent() {
 			})),
 			{
 				heading: "Site Theme",
-				type: "Theme",
+				label: "Theme",
 				icon: <SunMoonIcon />,
 				entries: [
 					{
@@ -208,18 +206,38 @@ function CommandPaletteContent() {
 			/>
 			<CommandList ref={listRef}>
 				<CommandEmpty>No results found.</CommandEmpty>
-				{search.trim()
-					? // while searching, drop the groups and list every match by rank; each
-						// item labels its own type instead
-						results.map((result) => (
+				{search.trim() ? (
+					// while searching, drop the groups and list every match by rank; each
+					// item labels its own type instead
+					<>
+						{results.map((result) => (
 							<PaletteItem
 								key={result.id}
 								entry={result}
 								section={result.section}
 								showType
 							/>
-						))
-					: groupedList}
+						))}
+						{results.length > 0 && (
+							<>
+								<CommandSeparator />
+								<CommandItem
+									value="search:all"
+									onSelect={handleSelection({
+										url: `/search?${new URLSearchParams({ q: search.trim() })}`,
+									})}
+								>
+									<span className="text-muted-foreground flex size-5 shrink-0 items-center justify-center">
+										<SearchIcon />
+									</span>
+									See all results for “{search.trim()}”
+								</CommandItem>
+							</>
+						)}
+					</>
+				) : (
+					groupedList
+				)}
 			</CommandList>
 		</Command>
 	);
@@ -243,44 +261,11 @@ type Entry = {
 type Section = {
 	heading: string;
 	/** singular label shown on each entry in the flat search results */
-	type: string;
+	label: string;
 	/** shown on every entry that has no media of its own */
 	icon?: ReactNode;
 	entries: Entry[];
 };
-
-/** how each type of search item is grouped in the palette, in display order */
-const sectionsByType: Record<SearchItem["type"], Omit<Section, "entries">> = {
-	page: { heading: "Navigation", type: "Page", icon: <CompassIcon /> },
-	hub: { heading: "Hubs", type: "Hub" },
-	feed: { heading: "Feeds", type: "Feed", icon: <RssIcon /> },
-	resource: {
-		heading: "Resources",
-		type: "Resource",
-		icon: <ExternalLinkIcon />,
-	},
-	rank: { heading: "Ranks", type: "Rank" },
-	meritBadge: { heading: "Merit Badges", type: "Merit Badge" },
-	adventure: { heading: "Adventures", type: "Adventure" },
-};
-
-/** an item's own media, if it has any; otherwise its section's icon is shown */
-function itemIcon(item: SearchItem): ReactNode {
-	if (item.image) {
-		return <img src={item.image} alt="" className="size-5 object-contain" />;
-	}
-
-	if (item.color) {
-		return (
-			<span
-				className="size-2.5 shrink-0 rounded-xs"
-				style={{ backgroundColor: item.color }}
-			/>
-		);
-	}
-
-	return undefined;
-}
 
 function PaletteItem({
 	entry,
@@ -302,7 +287,7 @@ function PaletteItem({
 			{entry.name}
 			{showType && (
 				<CommandShortcut className="shrink-0 tracking-normal">
-					{section.type}
+					{section.label}
 				</CommandShortcut>
 			)}
 		</CommandItem>
