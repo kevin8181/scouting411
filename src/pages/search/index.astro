@@ -5,11 +5,20 @@ import { rpc } from "@/rpc/client";
 
 export const prerender = false;
 
+// a leading "!" asks for the top result itself rather than the results page, the way
+// "\" does on duckduckgo. mostly for searches typed into the browser's address bar
+const input = Astro.url.searchParams.get("q")?.trim() ?? "";
+const launch = input.startsWith("!");
+const query = (launch ? input.slice(1) : input).trim();
+
 // there's nothing to show without a query, and the homepage is where a search starts
-const query = Astro.url.searchParams.get("q")?.trim();
 if (!query) return Astro.redirect("/");
 
 const results = await rpc.search.query({ q: query });
+
+// with no match to launch, fall through to the results page, which says so
+const [topResult] = results;
+if (launch && topResult) return Astro.redirect(topResult.url);
 ---
 
 <Layout title="Search">
