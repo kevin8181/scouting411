@@ -1,0 +1,48 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import { rankPath } from "@/lib/advancement/ranks/types";
+import { rpc } from "@/rpc/client";
+
+export const prerender = false;
+
+const ranks = await rpc.advancement.ranks.list();
+
+// ranks arrive in program order, which Map.groupBy keeps
+const programs = [...Map.groupBy(ranks, (rank) => rank.program)];
+---
+
+<Layout title="Ranks">
+	<div class="mx-auto flex w-full max-w-6xl flex-col gap-10 p-8">
+		{ranks.length === 0 && (
+			<div class="text-muted-foreground rounded-lg border p-6 text-sm">
+				No ranks have been indexed yet.
+			</div>
+		)}
+
+		{programs.map(([program, programRanks]) => (
+			<section class="flex flex-col gap-4">
+				<h2 class="border-b pb-2 font-serif text-xl font-bold">{program}</h2>
+				<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+					{programRanks.map((rank) => (
+						<a
+							href={rankPath(rank.slug)}
+							class="hover:border-primary group flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors"
+						>
+							<img
+								src={rank.images.medium}
+								alt=""
+								width="100"
+								height="100"
+								loading="lazy"
+								class="size-20 object-contain"
+							/>
+							<span class="group-hover:text-primary font-serif text-sm font-bold">
+								{rank.name}
+							</span>
+						</a>
+					))}
+				</div>
+			</section>
+		))}
+	</div>
+</Layout>

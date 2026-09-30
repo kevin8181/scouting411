@@ -41,15 +41,21 @@ export const requirementSchema = z
 			.describe(
 				'Set when only this many of the requirement\'s sub-requirements need to be completed, e.g. 2 for "Do TWO of the following". Absent when all of them are required.',
 			),
-		counselorApproval: z
-			.boolean()
-			.describe(
-				"Whether the Scout needs their merit badge counselor's approval before starting this requirement.",
-			),
 	})
 	.describe(
 		"One requirement. Requirements come as a flat list in display order; `parentId` and `depth` carry the hierarchy.",
 	);
+
+/** the requirement fields every advancement type's requirements endpoint shares */
+export const upstreamRequirementSchema = z.object({
+	id: z.string(),
+	name: z.string(),
+	listNumber: z.string(),
+	sortOrder: z.string(),
+	childrenRequired: z.string(),
+	parentRequirementId: z.string(),
+	footer: z.string(),
+});
 
 /** a requirement as parsed from upstream, before it is ordered */
 type UnorderedRequirement = Omit<
@@ -63,15 +69,41 @@ type UnorderedRequirement = Omit<
 	childrenRequired: number | undefined;
 };
 
+/** an ordered requirement, keeping any fields beyond the shared ones */
+type OrderedRequirement<T extends UnorderedRequirement> = Requirement &
+	Omit<T, keyof UnorderedRequirement>;
+
+/** normalize one of upstream's requirements, ready for `orderRequirements` */
+export function parseRequirement(
+	requirement: z.infer<typeof upstreamRequirementSchema>,
+): UnorderedRequirement {
+	return {
+		id: requirement.id,
+		parentId: requirement.parentRequirementId || undefined,
+		// blank sorts first, alongside the other notes. siblings that are all
+		// blank keep upstream's order, which is right in that case
+		sortOrder: Number(requirement.sortOrder) || 0,
+		label: requirement.listNumber || undefined,
+		html: sanitizeRequirementHtml(requirement.name),
+		footerHtml: sanitizeRequirementHtml(requirement.footer) || undefined,
+		childrenRequired: requirement.childrenRequired
+			? Number(requirement.childrenRequired)
+			: undefined,
+	};
+}
+
 /**
  * order upstream's flat requirement list depth-first, with siblings sorted by
  * `sortOrder`. upstream's array order is not reliable, and neither is sorting
  * `sortOrder` segment by segment - it is a decimal ("1.05" comes before "1.1",
- * "3.1" after "3.09")
+ * "3.1" after "3.09").
+ *
+ * fields beyond the shared ones, like a merit badge's `counselorApproval`,
+ * are passed through
  */
-export function orderRequirements(
-	requirements: UnorderedRequirement[],
-): Requirement[] {
+export function orderRequirements<T extends UnorderedRequirement>(
+	requirements: T[],
+): OrderedRequirement<T>[] {
 	const ids = new Set(requirements.map((requirement) => requirement.id));
 
 	const childrenOf = Map.groupBy(requirements, (requirement) =>
@@ -81,7 +113,7 @@ export function orderRequirements(
 			: undefined,
 	);
 
-	const ordered: Requirement[] = [];
+	const ordered: OrderedRequirement<T>[] = [];
 
 	const visit = (parentId: string | undefined, depth: number) => {
 		const children = (childrenOf.get(parentId) ?? []).toSorted(
@@ -89,22 +121,20 @@ export function orderRequirements(
 		);
 
 		for (const requirement of children) {
-			const { childrenRequired } = requirement;
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const { sortOrder, childrenRequired, ...rest } = requirement;
 			const childCount = childrenOf.get(requirement.id)?.length ?? 0;
 
+			// typescript can't follow the spread of a generic through Omit
 			ordered.push({
-				id: requirement.id,
+				...rest,
 				parentId,
 				depth,
-				label: requirement.label,
-				html: requirement.html,
-				footerHtml: requirement.footerHtml,
 				choose:
 					childrenRequired !== undefined && childrenRequired < childCount
 						? childrenRequired
 						: undefined,
-				counselorApproval: requirement.counselorApproval,
-			});
+			} as OrderedRequirement<T>);
 
 			visit(requirement.id, depth + 1);
 		}

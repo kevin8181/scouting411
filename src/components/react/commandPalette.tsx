@@ -27,6 +27,7 @@ import {
 	type MeritBadge,
 	meritBadgePath,
 } from "@/lib/advancement/meritBadges/types";
+import { type Rank, rankPath } from "@/lib/advancement/ranks/types";
 import { rpc } from "@/rpc/client";
 
 /** global store for whether the command palette is open */
@@ -90,7 +91,7 @@ export function CommandPaletteTrigger() {
 function CommandPaletteContent() {
 	const { setTheme } = useTheme();
 	const resources = queryResources();
-	const meritBadges = useMeritBadges();
+	const { ranks, meritBadges } = useAdvancement();
 
 	return (
 		<Command>
@@ -153,6 +154,24 @@ function CommandPaletteContent() {
 					))}
 				</CommandGroup>
 				<CommandSeparator />
+				<CommandGroup heading="Ranks">
+					{ranks.map((rank) => (
+						<CommandItem
+							key={rank.slug}
+							value={rankPath(rank.slug)}
+							keywords={[rank.name, `${rank.name} Rank`, rank.program]}
+							onSelect={handleSelection({ url: rankPath(rank.slug) })}
+						>
+							<img
+								src={rank.images.small}
+								alt=""
+								className="size-5 object-contain"
+							/>
+							{rank.name}
+						</CommandItem>
+					))}
+				</CommandGroup>
+				<CommandSeparator />
 				<CommandGroup heading="Merit Badges">
 					{meritBadges.map((badge) => (
 						<CommandItem
@@ -200,14 +219,22 @@ function CommandPaletteContent() {
 }
 
 /**
- * merit badges live in redis rather than in config, so fetch them once the
- * palette opens. the group is empty until they arrive
+ * ranks and merit badges live in redis rather than in config, so fetch them
+ * once the palette opens. their groups are empty until they arrive
  */
-function useMeritBadges() {
+function useAdvancement() {
+	const [ranks, setRanks] = useState<Rank[]>([]);
 	const [meritBadges, setMeritBadges] = useState<MeritBadge[]>([]);
 
 	useEffect(() => {
 		let stale = false;
+
+		rpc.advancement.ranks
+			.list()
+			.then((data) => {
+				if (!stale) setRanks(data);
+			})
+			.catch(console.error);
 
 		rpc.advancement.meritBadges
 			.list()
@@ -221,7 +248,7 @@ function useMeritBadges() {
 		};
 	}, []);
 
-	return meritBadges;
+	return { ranks, meritBadges };
 }
 
 /** run when a command palette item is selected */
@@ -251,6 +278,7 @@ const navigation = [
 	{ href: "/news/sources", label: "Sources" },
 	{ href: "/news/subscribe", label: "Subscribe" },
 	{ href: "/news/stats", label: "Stats" },
+	{ href: "/advancement/ranks", label: "Ranks" },
 	{ href: "/advancement/merit-badges", label: "Merit Badges" },
 	{ href: "/resources", label: "Resources" },
 	{ href: "/developers", label: "Developers" },

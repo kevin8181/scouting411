@@ -1,5 +1,6 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
+import Requirements from "@/components/advancement/Requirements.astro";
 import { rpc } from "@/rpc/client";
 import { safe } from "@orpc/client";
 
@@ -24,10 +25,6 @@ const versionEffective = meritBadge.versionEffective
 			{ year: "numeric", month: "long", day: "numeric" },
 		)
 	: undefined;
-
-/** styles for the upstream html in requirement text */
-const requirementHtml =
-	"[&_a]:text-primary [&_a]:underline [&_details]:text-muted-foreground [&_details]:mt-1 [&_details]:text-sm [&_summary]:cursor-pointer [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5";
 ---
 
 <Layout title={`${meritBadge.name} Merit Badge`}>
@@ -65,55 +62,6 @@ const requirementHtml =
 			</div>
 		</div>
 
-		<div class="flex flex-col gap-3">
-			<h2 class="border-b pb-2 font-serif text-xl font-bold">Requirements</h2>
-
-			{meritBadge.requirements.map((requirement) =>
-				requirement.depth === 0 && !requirement.label ? (
-					<div
-						class:list={[
-							"bg-muted/50 rounded-lg border p-4 text-sm",
-							requirementHtml,
-						]}
-						set:html={requirement.html}
-					/>
-				) : (
-					<div
-						class="flex flex-col gap-1"
-						style={{ marginLeft: `${requirement.depth * 1.75}rem` }}
-					>
-						<div class="flex gap-2">
-							{requirement.label && (
-								<span class="shrink-0 font-bold">{requirement.label}</span>
-							)}
-							<div class="flex min-w-0 flex-col gap-1">
-								<div class={requirementHtml} set:html={requirement.html} />
-								{(requirement.choose !== undefined ||
-									requirement.counselorApproval) && (
-									<div class="flex flex-wrap gap-2 text-xs font-medium">
-										{requirement.choose !== undefined && (
-											<span class="bg-primary/10 text-primary rounded px-2 py-0.5">
-												Complete {requirement.choose} of the following
-											</span>
-										)}
-										{requirement.counselorApproval && (
-											<span class="bg-muted rounded px-2 py-0.5">
-												Counselor approval required
-											</span>
-										)}
-									</div>
-								)}
-							</div>
-						</div>
-						{requirement.footerHtml && (
-							<div
-								class:list={["text-muted-foreground text-sm", requirementHtml]}
-								set:html={requirement.footerHtml}
-							/>
-						)}
-					</div>
-				),
-			)}
-		</div>
+		<Requirements requirements={meritBadge.requirements} />
 	</div>
 </Layout>
