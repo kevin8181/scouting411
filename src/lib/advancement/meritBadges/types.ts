@@ -13,15 +13,28 @@ export const meritBadgeSchema = z
 		name: z
 			.string()
 			.describe('The official name, without "Merit Badge", e.g. "First Aid".'),
-		category: z
-			.string()
+		categories: z
+			.array(
+				z.object({
+					slug: z
+						.string()
+						.describe('A URL-safe identifier, e.g. "public-service".'),
+					name: z.string().describe('The display name, e.g. "Public Service".'),
+				}),
+			)
+			.min(1)
 			.describe(
-				'The official category the badge is grouped under, e.g. "Public Service".',
+				"The categories the badge is filed under, e.g. Public Service or STEM: its category in the official advancement data first, then the topic groups on scouting.org, with duplicates removed.",
 			),
 		eagleRequired: z
 			.boolean()
 			.describe(
 				"Whether the badge is on the list required for the rank of Eagle Scout.",
+			),
+		url: z
+			.url()
+			.describe(
+				"The badge's official page on scouting.org, with an overview, resources, and the pamphlet.",
 			),
 		images: z
 			.object({

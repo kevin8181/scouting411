@@ -10,6 +10,7 @@ import {
 	parseRequirement,
 	upstreamRequirementSchema,
 } from "@/lib/advancement/parseRequirements";
+import { fetchMeritBadgePages } from "@/lib/advancement/meritBadges/scoutingOrg";
 import type {
 	MeritBadge,
 	MeritBadgeDetail,
@@ -22,15 +23,24 @@ export async function fetchMeritBadges(): Promise<MeritBadge[]> {
 		upstreamListSchema,
 	);
 
-	return meritBadges.map((badge) => {
+	const named = meritBadges.map((badge) => {
 		const name = plainText(badge.name);
+
+		return { badge, name, slug: slugify(name) };
+	});
+
+	const pages = await fetchMeritBadgePages(named.map(({ slug }) => slug));
+
+	return named.map(({ badge, name, slug }) => {
+		const page = pages.get(slug)!;
 
 		return {
 			id: badge.id,
-			slug: slugify(name),
+			slug,
 			name,
-			category: plainText(badge.category),
+			categories: mergeCategories([plainText(badge.category), ...page.groups]),
 			eagleRequired: badge.eagleRequired,
+			url: page.url,
 			images: {
 				small: badge.imageUrl50,
 				medium: badge.imageUrl100,
@@ -38,6 +48,22 @@ export async function fetchMeritBadges(): Promise<MeritBadge[]> {
 			},
 		};
 	});
+}
+
+/**
+ * the api's category and scouting.org's topic groups overlap ("Sports" is
+ * both), so names that slugify alike are kept once, first one wins
+ */
+function mergeCategories(names: string[]) {
+	const bySlug = new Map<string, string>();
+
+	for (const name of names) {
+		const slug = slugify(name);
+
+		if (!bySlug.has(slug)) bySlug.set(slug, name);
+	}
+
+	return [...bySlug].map(([slug, name]) => ({ slug, name }));
 }
 
 /** fetch the current requirements for a merit badge */

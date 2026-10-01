@@ -89,7 +89,7 @@ const sources: (() => SearchItem[] | Promise<SearchItem[]>)[] = [
 			id: meritBadgePath(badge.slug),
 			type: "meritBadge",
 			name: `${badge.name} Merit Badge`,
-			keywords: [badge.category],
+			keywords: badge.categories.map((category) => category.name),
 			url: meritBadgePath(badge.slug),
 			external: false,
 			image: badge.images.small,

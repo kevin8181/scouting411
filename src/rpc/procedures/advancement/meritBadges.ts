@@ -19,7 +19,7 @@ export const listMeritBadgesProcedure = os
 			path: "/advancement/merit-badges",
 			tags: ["Advancement"],
 			description:
-				"Every current Scouting America merit badge, with its category, whether it is required for Eagle, and badge art. Sourced from the official Scouting America advancement API and refreshed daily. Use a badge's slug to fetch its requirements.",
+				"Every current Scouting America merit badge, with its categories, whether it is required for Eagle, and badge art. Sourced from the official Scouting America advancement API and refreshed daily. Use a badge's slug to fetch its requirements.",
 		}),
 	)
 	.output(z.array(meritBadgeSchema))
