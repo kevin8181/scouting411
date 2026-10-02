@@ -51,7 +51,7 @@ export function AppSidebar({ url }: { url: URL }) {
 				</Badge>
 			</SidebarHeader>
 
-			<SidebarContent className="flex h-full flex-col gap-5 overflow-auto py-3">
+			<SidebarContent className="flex h-full flex-col gap-6 overflow-auto py-3">
 				<div className="flex flex-col px-3">
 					<CommandPaletteTrigger />
 				</div>
@@ -65,7 +65,7 @@ export function AppSidebar({ url }: { url: URL }) {
 					/>
 				</NavGroup>
 
-				<NavGroup label="hubs" collapsible>
+				<NavGroup label="hubs">
 					{hubs.map((hub) => (
 						<NavLink
 							key={hub.slug}
@@ -77,7 +77,7 @@ export function AppSidebar({ url }: { url: URL }) {
 					))}
 				</NavGroup>
 
-				<NavGroup label="news" collapsible>
+				<NavGroup label="news">
 					<NavLink
 						href="/news/browse"
 						label="Newsfeed"
@@ -113,7 +113,7 @@ export function AppSidebar({ url }: { url: URL }) {
 					)}
 				</NavGroup>
 
-				<NavGroup label="advancement" collapsible>
+				<NavGroup label="advancement">
 					<NavLink
 						href="/advancement/ranks"
 						label="Ranks"
@@ -143,7 +143,7 @@ export function AppSidebar({ url }: { url: URL }) {
 					)}
 				</NavGroup>
 
-				<NavGroup label="resources" collapsible>
+				<NavGroup label="resources">
 					<NavLink
 						href="/resources"
 						label="Resources"
@@ -180,7 +180,7 @@ export function AppSidebar({ url }: { url: URL }) {
 							<TooltipTrigger
 								render={
 									<a
-										href="https://github.com/kevin8181/scouting411/issues/new/choose"
+										href="https://github.com/scouting-commons/scouting411/issues/new/choose"
 										className={buttonVariants({
 											size: "icon",
 											variant: "outline",
