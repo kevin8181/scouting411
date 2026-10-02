@@ -65,7 +65,7 @@ export function Page() {
 					AGPLv3. Stars, issues, and pull requests are all very appreciated!
 				</p>
 				<a
-					href="https://github.com/kevin8181/scouting411"
+					href="https://github.com/scouting-commons/scouting411"
 					rel="noopener noreferrer"
 					target="_blank"
 					className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 self-start rounded-md px-4 py-2 text-sm font-semibold"
