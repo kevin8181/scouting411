@@ -8,6 +8,20 @@
   // ~20 categories, needs dedup. post pages have json-ld BlogPosting but the date is only in the
   // amblog-dates markup. sitemap has all 251 urls + lastmod, but post pages are ~1mb each.
   // => bespoke scraper like tta.ts, would be the most fragile adapter here.
+- https://api.scouting.org/events/communications/organizations?communicationType=Announcement&everyChildOrganization=false&fromDate=2026-10-02T22%3A43%3A20&organizationGuid=3008EA8A-9822-454E-8F62-0DF19DF8100F&status=active&toDate=2026-10-02T22%3A44%3A20&perPage=20&page=1
+  // the announcements shown on the my.scouting.org homepage. scouting api, requires auth
+  // (bearer jwt from a my.scouting login, ~8h expiry, so a cron needs a refresh story).
+  // all of communicationType, organizationGuid, fromDate, toDate, status, perPage are required.
+  // full history (153 as of 2026-10-02, back to 2022-01) in one request:
+  // ?communicationType=Announcement&everyChildOrganization=true&organizationGuid=3008EA8A-9822-454E-8F62-0DF19DF8100F
+  //   &status=all&fromDate=2000-01-01T00%3A00%3A00&toDate=2035-01-01T00%3A00%3A00&perPage=1000&page=1
+  // - homepage uses a 1-minute date window around now, so it only gets what's live. widen it for history.
+  // - status=active filters; any other value (all, inactive, deleted, junk) seems to disable the filter.
+  //   unfiltered results include deleted: "true" items, mostly dupes/corrected reposts.
+  // - perPage=1000 works; page paginates normally.
+  // - org 3008EA8A is "Information Delivery 5002" (50 items, recent ones). everyChildOrganization=true
+  //   adds "National Council, BSA 000" (F3A77C78-EE20-474E-9219-D53400753B29, 103 items, last 2026-06).
+  // - communicationType is an enum: Announcement, Calendar (Calendar returns 0 for both orgs).
 
 // find new post types on scouting.org at https://www.scouting.org/wp-json/wp/v2/types
 // find new/edited pages at https://www.scouting.org/wp-json/wp/v2/pages

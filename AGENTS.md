@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 Scouting411 (scouting411.org) is an Astro + React site that aggregates official Scouting America news and resources. Two content systems: a **news aggregator** (a cron-refreshed cache of external Scouting feeds, browsable and filterable) and a **resources directory** (a hand-maintained list of official links).
 
